@@ -7,7 +7,7 @@ await import("./src/env.mjs")
 /** @type {import('next').NextConfig} */
 const config = {
   images: {
-    domains: ["uploadthing.com"],
+    domains: ["uploadthing.com", "source.unsplash.com"],
   },
   experimental: {
     serverActions: true,
