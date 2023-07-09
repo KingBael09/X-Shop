@@ -39,4 +39,4 @@ next-env.d.ts
 # for now ignoring drizzle migrations
 /.drizzle/
 
-.local.db
+local.db
