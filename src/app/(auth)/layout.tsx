@@ -3,11 +3,10 @@ import Link from "next/link"
 import type { LayoutProps } from "@/types"
 
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/util/icons"
-
-import { cn } from "../../lib/utils"
 
 export default function AuthLayout({ children }: LayoutProps) {
   return (

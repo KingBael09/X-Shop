@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { authMiddleware, clerkClient } from "@clerk/nextjs"
 
 export default authMiddleware({
-  publicRoutes: ["/", "/signin(.*)", "/signup(.*)"],
+  publicRoutes: ["/", "/signin(.*)", "/signup(.*)", "/sso-callback(.*)"],
   apiRoutes: [],
   afterAuth: async (auth, req) => {
     if (auth.isPublicRoute) {

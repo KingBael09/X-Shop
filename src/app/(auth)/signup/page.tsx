@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { OAuthSignIn } from "@/components/auth/oauth-signin"
+import { SignUpForm } from "@/components/forms/sign-up-form"
 import { Shell } from "@/components/shell"
 
 export default function SignUpPage() {
@@ -35,7 +36,7 @@ export default function SignUpPage() {
               </span>
             </div>
           </div>
-          {/* <SignUpForm /> */}
+          <SignUpForm />
         </CardContent>
         <CardFooter>
           <div className="text-sm text-muted-foreground">

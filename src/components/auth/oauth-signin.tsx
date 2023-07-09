@@ -16,7 +16,7 @@ interface OAuthProviders {
 
 const oauthProviders = [
   { name: "Google", strategy: "oauth_google", icon: "google" },
-  { name: "Facebook", strategy: "oauth_facebook", icon: "facebook" },
+  { name: "GitHub", strategy: "oauth_github", icon: "gitHub" },
   { name: "Discord", strategy: "oauth_discord", icon: "discord" },
 ] satisfies OAuthProviders[]
 

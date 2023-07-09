@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { OAuthSignIn } from "@/components/auth/oauth-signin"
+import { SignInForm } from "@/components/forms/sign-in-form"
 import { Shell } from "@/components/shell"
 
 export default function SignInPage() {
@@ -35,7 +36,7 @@ export default function SignInPage() {
               </span>
             </div>
           </div>
-          {/* <SignInForm /> */}
+          <SignInForm />
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-sm text-muted-foreground">
