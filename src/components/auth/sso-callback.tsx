@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useClerk } from "@clerk/nextjs"
 
-import { type SSOCallbackPageProps } from "@/app/(auth)/sso-callback/page"
+import { type SSOCallbackPageProps } from "@/app/(auth)/(new-user)/sso-callback/page"
 
 import { Icons } from "../util/icons"
 

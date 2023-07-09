@@ -5,6 +5,7 @@ import { Toaster as RadToaster } from "sonner"
 export function Toaster() {
   return (
     <RadToaster
+      closeButton
       position="bottom-right"
       toastOptions={{
         style: {

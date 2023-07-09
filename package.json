@@ -45,7 +45,7 @@
     "react-hook-form": "^7.45.1",
     "resend": "^0.16.0",
     "sharp": "^0.32.1",
-    "sonner": "^0.5.0",
+    "sonner": "^0.6.0",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6",
     "uploadthing": "^5.1.0",
