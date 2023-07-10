@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-import { siteConfig } from "@/config/site"
+import { footerNav, siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Shell } from "@/components/shell"
 import { Icons } from "@/components/util/icons"
@@ -30,16 +30,16 @@ export function SiteFooter() {
               <span className="font-bold">{siteConfig.name}</span>
             </Link>
           </section>
-          {/* <section
+          <section
             id="footer-links"
             aria-labelledby="footer-links-heading"
-            className="grid flex-1 grid-cols-2 gap-10 sm:grid-cols-4"
+            className="grid flex-1 grid-cols-2 gap-10 sm:grid-cols-3"
           >
-            {siteConfig.footerNav.map((item) => (
-              <div key={item.title} className="space-y-3">
-                <h4 className="text-base font-medium">{item.title}</h4>
+            {footerNav.map((section) => (
+              <div key={section.heading} className="space-y-3">
+                <h4 className="text-base font-medium">{section.heading}</h4>
                 <ul className="space-y-3">
-                  {item.items.map((link) => (
+                  {section.items.map((link) => (
                     <li key={link.title}>
                       <Link
                         href={link.href}
@@ -55,7 +55,27 @@ export function SiteFooter() {
                 </ul>
               </div>
             ))}
-          </section> */}
+            {/* {siteConfig.footerNav.map((item) => (
+                <div key={item.title} className="space-y-3">
+                  <h4 className="text-base font-medium">{item.title}</h4>
+                  <ul className="space-y-3">
+                    {item.items.map((link) => (
+                      <li key={link.title}>
+                        <Link
+                          href={link.href}
+                          target={link?.external ? "_blank" : undefined}
+                          rel={link?.external ? "noreferrer" : undefined}
+                          className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          {link.title}
+                          <span className="sr-only">{link.title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))} */}
+          </section>
           {/* <section
             id="newsletter"
             aria-labelledby="newsletter-heading"
@@ -73,32 +93,17 @@ export function SiteFooter() {
           className="flex items-center space-x-4"
         >
           <div className="flex-1 text-left text-sm leading-loose text-muted-foreground">
-            <div>
-              Built by{" "}
-              <a
-                aria-label="Kickflip tutorial on YouTube"
-                href={siteConfig.links.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold transition-colors hover:text-foreground"
-              >
-                KingBael
-              </a>
-              .
-            </div>
-            <div>
-              Inspiration from{" "}
-              <a
-                aria-label="Kickflip tutorial on YouTube"
-                href="https://twitter.com/sadmann17"
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold transition-colors hover:text-foreground"
-              >
-                Sadman
-              </a>
-              .
-            </div>
+            Built by{" "}
+            <a
+              aria-label="Kickflip tutorial on YouTube"
+              href={siteConfig.links.twitter}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold transition-colors hover:text-foreground"
+            >
+              KingBael
+            </a>
+            .
           </div>
           <div className="flex items-center space-x-1">
             <Link

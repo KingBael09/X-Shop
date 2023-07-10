@@ -1,7 +1,8 @@
 import Link from "next/link"
 import type { User } from "@clerk/nextjs/dist/types/server"
 
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { CartSheet } from "../cart/cart-sheet"
+import { ComboBox } from "../combo-box"
 import { Button, buttonVariants } from "../ui/button"
 import {
   DropdownMenu,
@@ -13,16 +14,15 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
+import UserAvatar from "../user-avatar"
 import { Icons } from "../util/icons"
+import { MainNav, MobileNav } from "./nav"
 
 interface SiteHeaderProps {
   user: User | null
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
-  const initials = `${user?.firstName?.charAt(0) ?? ""} ${
-    user?.lastName?.charAt(0) ?? ""
-  }`
   const email =
     user?.emailAddresses?.find((e) => e.id === user.primaryEmailAddressId)
       ?.emailAddress ?? ""
@@ -30,15 +30,12 @@ export function SiteHeader({ user }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-16 items-center">
-        {/* <MainNav items={siteConfig.mainNav} />
-        <MobileNav
-          mainNavItems={siteConfig.mainNav}
-          sidebarNavItems={dashboardConfig.sidebarNav}
-        /> */}
+        <MainNav />
+        <MobileNav />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
-            {/* <Combobox /> */}
-            {/* <CartSheet /> */}
+            <ComboBox />
+            <CartSheet />
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -46,16 +43,15 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                     variant="secondary"
                     className="relative h-8 w-8 rounded-full"
                   >
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src={user.imageUrl}
-                        alt={user.username ?? ""}
-                      />
-                      <AvatarFallback>{initials}</AvatarFallback>
-                    </Avatar>
+                    <UserAvatar user={user} />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuContent
+                  sideOffset={10}
+                  className="w-56"
+                  align="end"
+                  forceMount
+                >
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium leading-none">

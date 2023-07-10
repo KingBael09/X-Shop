@@ -1,0 +1,67 @@
+import Link from "next/link"
+
+import { cn } from "@/lib/utils"
+
+import { buttonVariants } from "./ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card"
+import { Icons } from "./util/icons"
+
+interface ErrorCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  icon?: keyof typeof Icons
+  title: string
+  description: string
+  routeLink?: string
+  routeName?: string
+  fullscreen?: boolean
+}
+
+export function ErrorCard({
+  icon,
+  title,
+  description,
+  className,
+  routeLink,
+  routeName,
+  fullscreen = true,
+  ...props
+}: ErrorCardProps) {
+  const Icon = Icons[icon ?? "warning"]
+  return (
+    <Card
+      className={cn(
+        "grid place-items-center",
+        fullscreen ? "border-none" : null,
+        className
+      )}
+      {...props}
+    >
+      <CardHeader>
+        <div className="grid place-items-center rounded-full bg-muted">
+          <Icon className="h-10 w-10" aria-hidden />
+        </div>
+      </CardHeader>
+      <CardContent className="grid place-items-center space-y-3">
+        <CardTitle className="text-2xl">{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardContent>
+      {routeLink && routeName ? (
+        <CardFooter>
+          <Link
+            className={buttonVariants({ variant: "secondary" })}
+            href={routeLink}
+          >
+            {routeName}
+            <span className="sr-only">{routeName}</span>
+          </Link>
+        </CardFooter>
+      ) : null}
+    </Card>
+  )
+}
