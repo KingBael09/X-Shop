@@ -29,7 +29,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-[var(--navbar-height)] items-center">
         <MainNav />
         <MobileNav />
         <div className="flex flex-1 items-center justify-end space-x-4">
