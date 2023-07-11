@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 
+import type { Metadata } from "next"
 import { ClerkProvider } from "@clerk/nextjs"
 
 import { siteConfig } from "@/config/site"
@@ -9,7 +10,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { TailwindIndicator } from "@/components/util/tailwind-indicator"
 import { ThemeProvider } from "@/components/util/theme-provider"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
     template: `%s -${siteConfig.name}`,

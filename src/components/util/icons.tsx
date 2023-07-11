@@ -33,6 +33,7 @@ import {
   Moon,
   MoreHorizontal,
   MoreVertical,
+  Mouse,
   Package,
   Plus,
   PlusCircle,
@@ -120,6 +121,7 @@ export const Icons = {
   shoes: Footprints,
   accessories: HardHat,
   logo: Snowflake,
+  scroll: Mouse,
   // logo: (props: LucideProps) => (
   //   <svg
   //     xmlns="http://www.w3.org/2000/svg"
