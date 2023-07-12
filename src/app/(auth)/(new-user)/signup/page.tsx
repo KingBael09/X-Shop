@@ -1,4 +1,6 @@
+import type { Metadata } from "next"
 import Link from "next/link"
+import { env } from "@/env.mjs"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -12,6 +14,12 @@ import {
 } from "@/components/ui/card"
 import { OAuthSignIn } from "@/components/auth/oauth-signin"
 import { SignUpForm } from "@/components/forms/sign-up-form"
+
+export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  title: "Sign Up",
+  description: "Sign up for an account",
+}
 
 export default function SignUpPage() {
   return (

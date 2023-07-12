@@ -1,8 +1,11 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 
-import { buttonVariants } from "./ui/button"
+import { Button, buttonVariants } from "./ui/button"
 import {
   Card,
   CardContent,
@@ -32,6 +35,9 @@ export function ErrorCard({
   fullscreen = true,
   ...props
 }: ErrorCardProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const isHome = pathname === "/"
   const Icon = Icons[icon ?? "warning"]
   return (
     <Card
@@ -52,7 +58,17 @@ export function ErrorCard({
         <CardDescription>{description}</CardDescription>
       </CardContent>
       {routeLink && routeName ? (
-        <CardFooter>
+        <CardFooter className="gap-4">
+          {!isHome && (
+            <Button
+              onClick={() => {
+                router.back()
+              }}
+            >
+              <Icons.chevronLeft className="h-4 w-4" />
+              Back
+            </Button>
+          )}
           <Link
             className={buttonVariants({ variant: "secondary" })}
             href={routeLink}

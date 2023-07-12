@@ -11,6 +11,7 @@ const config = {
   },
   experimental: {
     serverActions: true,
+    serverComponentsExternalPackages: ["better-sqlite3"],
   },
 }
 

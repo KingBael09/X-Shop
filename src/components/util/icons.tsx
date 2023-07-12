@@ -25,6 +25,7 @@ import {
   Footprints,
   HardHat,
   Image,
+  LayoutDashboard,
   Loader2,
   LogOut,
   Menu,
@@ -122,6 +123,7 @@ export const Icons = {
   accessories: HardHat,
   logo: Snowflake,
   scroll: Mouse,
+  dashboard: LayoutDashboard,
   // logo: (props: LucideProps) => (
   //   <svg
   //     xmlns="http://www.w3.org/2000/svg"

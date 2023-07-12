@@ -1,3 +1,5 @@
+import { env } from "@/env.mjs"
+
 export interface FooterItem {
   heading: string
   items: {
@@ -16,7 +18,7 @@ const links = {
 export const siteConfig = {
   name: "X-Shop",
   description: "X-Shop, One shop for all your needs!",
-  url: "https://example.com",
+  url: env.NEXT_PUBLIC_APP_URL,
   ogImage: "https://example.com/opengraph-image.png",
   links,
   keywords: ["Next.js", "React", "Tailwind CSS", "Server Components"],
@@ -101,3 +103,5 @@ export const footerNav = [
     ],
   },
 ] satisfies FooterItem[]
+
+export const FreeTierStoreLimit = 3
