@@ -12,7 +12,10 @@ export function BackButton({ className, ...props }: ButtonProps) {
 
   return (
     <Button
-      onClick={() => router.back()}
+      onClick={() => {
+        router.back()
+        // router.refresh()
+      }}
       className={cn(className)}
       variant="ghost"
       size="icon"

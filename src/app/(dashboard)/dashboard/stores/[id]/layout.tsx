@@ -3,16 +3,16 @@ import type { LayoutProps } from "@/types"
 import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
+import { tabs } from "@/config/store"
 import { db } from "@/lib/db"
 import { stores } from "@/lib/db/schema"
-import { cn } from "@/lib/utils"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { BackButton } from "@/components/back-button"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shell"
 import StorePager from "@/components/store-pager"
 
-interface StoreLayoutProps extends LayoutProps {
+export interface StoreLayoutProps extends LayoutProps {
   params: {
     id: string
   }
@@ -42,44 +42,26 @@ export default async function StoreLayout(props: StoreLayoutProps) {
 
   if (!store) return notFound()
 
-  const tabs = [
-    {
-      title: "Store",
-      value: "children" as const,
-    },
-    {
-      title: "Products",
-      value: "products" as const,
-    },
-    {
-      title: "Orders",
-      value: "orders" as const,
-    },
-    {
-      title: "Payments",
-      value: "payments" as const,
-    },
-  ]
-
   return (
     <Shell variant="sidebar" className="gap-4">
       <div className="flex items-center space-x-4">
+        <BackButton />
         <Header title={store.name} size="sm" className="flex-1" />
         {allStores.length > 1 ? (
           <StorePager stores={allStores} current={store} />
         ) : null}
       </div>
       <div className="overflow-x-hidden">
-        <Tabs className="w-full" defaultValue="children">
+        <Tabs className="w-full" defaultValue="store">
           <TabsList className="w-full">
             {tabs.map((tab) => (
-              <TabsTrigger className="px-4" key={tab.title} value={tab.value}>
+              <TabsTrigger className="px-4" key={tab.title} value={tab.param}>
                 {tab.title}
               </TabsTrigger>
             ))}
           </TabsList>
           {tabs.map((tab) => (
-            <TabsContent key={tab.title} value={tab.value}>
+            <TabsContent key={tab.title} value={tab.param}>
               {props[tab.value]}
             </TabsContent>
           ))}

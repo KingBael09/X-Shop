@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs"
 import { and, eq, not } from "drizzle-orm"
 
 import { db } from "../db"
-import { stores } from "../db/schema"
+import { products, stores } from "../db/schema"
 import { slugify } from "../utils"
 import type { ZStoreSchema } from "../validations/store"
 
@@ -59,8 +59,30 @@ export async function updateStoreAction(input: UpdateStoreActionInterface) {
     .set({
       name: input.name,
       description: input.description,
+      slug: slugify(input.name),
     })
+    .where(eq(stores.id, input.storeId))
     .run()
 
-  revalidatePath(`/dashboard/stores/${input.storeId}`)
+  revalidatePath("/dashboard/stores")
+}
+
+export async function deleteStoreAction(storeId: number) {
+  const isStoreExist = await db.query.stores.findFirst({
+    where: eq(stores.id, storeId),
+    columns: {
+      id: true,
+    },
+  })
+
+  if (!isStoreExist) {
+    throw new Error("Store not found")
+  }
+
+  await db.delete(stores).where(eq(stores.id, storeId)).run()
+
+  //? Delete all products of the store
+  await db.delete(products).where(eq(products.storeId, storeId)).run()
+
+  revalidatePath("/dashboard/stores")
 }

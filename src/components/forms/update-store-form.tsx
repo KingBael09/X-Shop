@@ -1,10 +1,12 @@
 "use client"
 
 import { useTransition } from "react"
+import { redirect, useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
-import { updateStoreAction } from "@/lib/actions/store"
+import { deleteStoreAction, updateStoreAction } from "@/lib/actions/store"
 import type { Store } from "@/lib/db/schema"
 import { catchError } from "@/lib/utils"
 import { storeSchema, type ZStoreSchema } from "@/lib/validations/store"
@@ -28,7 +30,7 @@ interface UpdateStoreProps {
 
 export function UpdateStoreForm({ store }: UpdateStoreProps) {
   const [isPending, startTransition] = useTransition()
-
+  const router = useRouter()
   const form = useForm<ZStoreSchema>({
     resolver: zodResolver(storeSchema),
     defaultValues: {
@@ -42,7 +44,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
     startTransition(async () => {
       try {
         await updateStoreAction({ ...values, storeId: store.id })
-        // form.reset()
+        toast.success("Store updated successfullly!")
       } catch (error) {
         catchError(error)
       }
@@ -52,6 +54,19 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
   const updateCondition =
     JSON.stringify(form.getValues()) ===
     JSON.stringify({ name: store.name, description: store.description })
+
+  function handleDeleteStore() {
+    startTransition(async () => {
+      try {
+        await deleteStoreAction(store.id)
+        toast.success("Store deleted successfullly!")
+        router.push("/dashboard/stores")
+      } catch (error) {
+        console.log(error)
+        catchError(error)
+      }
+    })
+  }
 
   return (
     <Form {...form}>
@@ -111,6 +126,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
           type="button"
           variant="destructive"
           disabled={isPending}
+          onClick={handleDeleteStore}
         >
           {isPending && (
             <Icons.spinner

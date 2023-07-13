@@ -63,6 +63,7 @@ export function ErrorCard({
             <Button
               onClick={() => {
                 router.back()
+                router.refresh()
               }}
             >
               <Icons.chevronLeft className="h-4 w-4" />
