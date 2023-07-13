@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shell"
 import { Icons } from "@/components/util/icons"
@@ -37,8 +38,6 @@ export default async function StoresPage() {
     where: eq(stores.userId, user.id),
   })
 
-  const wtf = await db.query.stores.findMany()
-
   return (
     <Shell variant="sidebar">
       <Header title="Stores" description="Manage your stores" size="sm" />
@@ -49,8 +48,46 @@ export default async function StoresPage() {
           Currently one user can create only {FreeTierStoreLimit} stores
         </AlertDescription>
       </Alert>
+      <Card className="flex h-full items-center">
+        <CardHeader className="flex-1">
+          <CardTitle>
+            {userStores.length >= FreeTierStoreLimit
+              ? "Upgrade Subscription"
+              : "Create a new store"}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-0 pr-6">
+          <Link
+            href={
+              userStores.length >= FreeTierStoreLimit
+                ? "/dashboard/billing"
+                : "/dashboard/stores/create"
+            }
+            className={cn(
+              buttonVariants({
+                size: "sm",
+                // className: "h-8 w-full",
+              })
+            )}
+          >
+            {userStores.length >= FreeTierStoreLimit
+              ? "Upgrade Subscription"
+              : "Create a store"}
+            <span className="sr-only">
+              {userStores.length >= FreeTierStoreLimit
+                ? "Upgrade Subscription"
+                : "Create a store"}
+            </span>
+          </Link>
+        </CardContent>
+      </Card>
+      <Separator className="bg-border/50" />
+      {userStores.length === 0 && (
+        <div className="text-center text-sm text-muted-foreground">
+          Add stores to view here
+        </div>
+      )}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
-        {userStores.length > 0}
         {userStores.map((store) => (
           <Card key={store.id} className="flex h-full flex-col">
             <CardHeader className="flex-1">
@@ -76,32 +113,6 @@ export default async function StoresPage() {
             </CardContent>
           </Card>
         ))}
-        <Card className="flex h-full flex-col">
-          <CardHeader className="flex-1">
-            <CardTitle className="line-clamp-1">Create a new store</CardTitle>
-            <CardDescription className="line-clamp-2">
-              Create a new store to start selling your products.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Link
-              href={
-                userStores.length >= FreeTierStoreLimit
-                  ? "/dashboard/billing"
-                  : "/dashboard/stores/create"
-              }
-              className={cn(
-                buttonVariants({
-                  size: "sm",
-                  className: "h-8 w-full",
-                })
-              )}
-            >
-              Create a store
-              <span className="sr-only">Create a new store</span>
-            </Link>
-          </CardContent>
-        </Card>
       </div>
     </Shell>
   )

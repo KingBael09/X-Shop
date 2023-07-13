@@ -5,7 +5,7 @@ import { blob, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 export const stores = sqliteTable("stores", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   userId: text("userId").notNull(),
-  name: text("name").notNull(),
+  name: text("name").notNull(), // TODO: enforce unique in future but i don't know how to update it
   description: text("description"),
   slug: text("slug"),
   active: integer("active", { mode: "boolean" }).notNull().default(true),

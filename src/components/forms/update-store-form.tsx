@@ -1,12 +1,11 @@
 "use client"
 
 import { useTransition } from "react"
-import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { toast } from "sonner"
 
-import { addStoreAction } from "@/lib/actions/store"
+import { updateStoreAction } from "@/lib/actions/store"
+import type { Store } from "@/lib/db/schema"
 import { catchError } from "@/lib/utils"
 import { storeSchema, type ZStoreSchema } from "@/lib/validations/store"
 
@@ -23,35 +22,41 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Icons } from "../util/icons"
 
-export function AddStoreForm() {
-  const router = useRouter()
+interface UpdateStoreProps {
+  store: Pick<Store, "id" | "name" | "description">
+}
+
+export function UpdateStoreForm({ store }: UpdateStoreProps) {
   const [isPending, startTransition] = useTransition()
 
   const form = useForm<ZStoreSchema>({
     resolver: zodResolver(storeSchema),
     defaultValues: {
-      name: "",
-      description: "",
+      name: store.name,
+      description: store.description ?? "",
     },
   })
 
   function onSubmit(values: ZStoreSchema) {
+    // console.log(values)
     startTransition(async () => {
       try {
-        await addStoreAction(values)
-        form.reset()
-        toast.success("Store added successfully!")
-        router.push("/dashboard/stores")
-        router.refresh() // TODO: Workaround for the inconsistency of cache revalidation
+        await updateStoreAction({ ...values, storeId: store.id })
+        // form.reset()
       } catch (error) {
         catchError(error)
       }
     })
   }
 
+  const updateCondition =
+    JSON.stringify(form.getValues()) ===
+    JSON.stringify({ name: store.name, description: store.description })
+
   return (
     <Form {...form}>
       <form
+        id="update-store-form"
         className="grid w-full max-w-xl gap-5"
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
@@ -84,17 +89,39 @@ export function AddStoreForm() {
             </FormItem>
           )}
         />
-        <Button className="w-fit" disabled={isPending}>
+      </form>
+      <div className="mt-6 flex gap-4">
+        <Button
+          className="w-fit"
+          type="submit"
+          form="update-store-form"
+          disabled={isPending || updateCondition}
+        >
           {isPending && (
             <Icons.spinner
               className="mr-2 h-4 w-4 animate-spin"
               aria-hidden="true"
             />
           )}
-          Add Store
+          Update Store
           <span className="sr-only">Add Store</span>
         </Button>
-      </form>
+        <Button
+          className="w-fit"
+          type="button"
+          variant="destructive"
+          disabled={isPending}
+        >
+          {isPending && (
+            <Icons.spinner
+              className="mr-2 h-4 w-4 animate-spin"
+              aria-hidden="true"
+            />
+          )}
+          Delete Store
+          <span className="sr-only">Add Store</span>
+        </Button>
+      </div>
     </Form>
   )
 }

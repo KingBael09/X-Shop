@@ -14,11 +14,8 @@ import { AddStoreForm } from "@/components/forms/add-store-form"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shell"
 
-export default async function CreateStorePage() {
-  const user = await currentUser()
-
-  if (!user) redirect("/signin")
-
+export default function CreateStorePage() {
+  // TODO: This should mostly work because middleware will not allow to visit the page
   return (
     <Shell variant="sidebar">
       <div className="flex items-center gap-4">
@@ -35,7 +32,7 @@ export default async function CreateStorePage() {
           <CardDescription>Add a new store to your account</CardDescription>
         </CardHeader>
         <CardContent>
-          <AddStoreForm userId={user.id} />
+          <AddStoreForm />
         </CardContent>
       </Card>
     </Shell>

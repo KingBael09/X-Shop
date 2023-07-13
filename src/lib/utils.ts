@@ -1,8 +1,11 @@
 import { env } from "@/env.mjs"
+import { isClerkAPIResponseError } from "@clerk/nextjs"
 import { clsx, type ClassValue } from "clsx"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { toast } from "sonner"
 import { twMerge } from "tailwind-merge"
+import { z } from "zod"
 
 dayjs.extend(relativeTime)
 
@@ -67,4 +70,26 @@ export function isArrayOfFile(files: unknown): files is File[] {
 
 export function absoluteUrl(path: string) {
   return `${env.NEXT_PUBLIC_APP_URL}${path}`
+}
+
+export function catchError(err: unknown) {
+  if (err instanceof z.ZodError) {
+    const errors = err.issues.map((issue) => {
+      return issue.message
+    })
+    toast(errors.join("\n"))
+  } else if (err instanceof Error) {
+    toast(err.message)
+  } else {
+    toast("Something went wrong, please try again later.")
+  }
+}
+
+export function catchClerkError(err: unknown) {
+  const unknownErr = "Something went wrong, please try again later."
+  if (isClerkAPIResponseError(err)) {
+    toast.error(err.errors[0]?.longMessage ?? unknownErr)
+  } else {
+    toast.error(unknownErr)
+  }
 }
