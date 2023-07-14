@@ -5,7 +5,7 @@ import { blob, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 export const stores = sqliteTable("stores", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   userId: text("userId").notNull(),
-  name: text("name").notNull().unique(), // TODO: enforce unique in future but i don't know how to update it
+  name: text("name").notNull().unique(),
   description: text("description"),
   slug: text("slug"),
   active: integer("active", { mode: "boolean" }).notNull().default(true),
@@ -28,7 +28,9 @@ export const products = sqliteTable("products", {
   price: real("price").notNull().default(0),
   rating: integer("rating").$type<Rating>().notNull().default(0),
   tags: blob("tags", { mode: "json" }).$type<string[] | null>().default(null),
-  categoryId: integer("categoryId").notNull(),
+  categoryId: integer("categoryId")
+    .notNull()
+    .references(() => categories.id),
   //   subcategory: text("subcategory"),
   inventory: integer("inventory").notNull().default(0),
   storeId: integer("storeId").notNull(),
@@ -48,7 +50,10 @@ export const productRelations = relations(products, ({ one }) => ({
 export const categories = sqliteTable("categories", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
+  subcategoryId: text("subcategoryId"),
 })
+
+export type Category = InferModel<typeof categories>
 
 export const categoryRelations = relations(categories, ({ many }) => ({
   products: many(products),

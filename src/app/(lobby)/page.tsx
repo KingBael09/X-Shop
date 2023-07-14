@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { buttonVariants } from "@/components/ui/button"
 import { Scrollable } from "@/components/scrollable"
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 
 function HeroSection() {
   return (

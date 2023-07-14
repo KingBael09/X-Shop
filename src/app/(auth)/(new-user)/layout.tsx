@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import type { LayoutProps } from "@/types"
 import { currentUser } from "@clerk/nextjs"
 
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 
 export default async function NewUserLayout({ children }: LayoutProps) {
   const user = await currentUser()

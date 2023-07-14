@@ -1,4 +1,4 @@
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 
 import { ErrorCard } from "../components/error-card"
 

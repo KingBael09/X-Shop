@@ -4,6 +4,7 @@ import { and, asc, desc, eq, gte, like, lte, sql } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { Product, products, stores } from "@/lib/db/schema"
+import { ProductsTableShell } from "@/components/shells/products-table-shell"
 
 interface ProductsPageProps {
   params: {
@@ -60,35 +61,63 @@ export default async function ProductsPage({
 
   // Using transaction to ensure that both queries are executed in single transaction
   const { storeProducts, totalProducts } = await db.transaction(async (tx) => {
-    const storeProducts = await tx
-      .select()
-      .from(products)
-      .limit(limit)
-      .offset(offset)
-      .where(
-        and(
-          eq(products.storeId, storeId),
-          // Filter by name
-          typeof name === "string"
-            ? like(products.name, `%${name}%`)
-            : undefined,
-          // Filter by created date
-          start_date && end_date
-            ? and(
-                gte(products.createdAt, start_date),
-                lte(products.createdAt, end_date)
-              )
-            : undefined
-        )
-      )
-      .orderBy(
+    // const storeProducts = await tx
+    //   .select()
+    //   .from(products)
+    //   .limit(limit)
+    //   .offset(offset)
+    //   .where(
+    //     and(
+    //       eq(products.storeId, storeId),
+    //       // Filter by name
+    //       typeof name === "string"
+    //         ? like(products.name, `%${name}%`)
+    //         : undefined,
+    //       // Filter by created date
+    //       start_date && end_date
+    //         ? and(
+    //             gte(products.createdAt, start_date),
+    //             lte(products.createdAt, end_date)
+    //           )
+    //         : undefined
+    //     )
+    //   )
+    //   .orderBy(
+    //     column && column in products
+    //       ? order === "asc"
+    //         ? asc(products[column])
+    //         : desc(products[column])
+    //       : desc(products.createdAt)
+    //   )
+    //   .all()
+
+    const storeProducts = await tx.query.products.findMany({
+      limit,
+      offset,
+      where: and(
+        eq(products.storeId, storeId),
+        // Filter by name
+        typeof name === "string" ? like(products.name, `%${name}%`) : undefined,
+        // Filter by created date
+        start_date && end_date
+          ? and(
+              gte(products.createdAt, start_date),
+              lte(products.createdAt, end_date)
+            )
+          : undefined
+      ),
+      with: {
+        category: {
+          columns: { name: true },
+        },
+      },
+      orderBy:
         column && column in products
           ? order === "asc"
             ? asc(products[column])
             : desc(products[column])
-          : desc(products.createdAt)
-      )
-      .all()
+          : desc(products.createdAt),
+    })
 
     const totalProducts = await tx
       .select({
@@ -119,5 +148,7 @@ export default async function ProductsPage({
 
   const pageCount = Math.ceil(totalProducts / limit)
 
-  return <div>ProductsPage</div>
+  return (
+    <ProductsTableShell data={storeProducts} count={pageCount} id={storeId} />
+  )
 }

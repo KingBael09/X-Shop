@@ -9,7 +9,7 @@ import { stores } from "@/lib/db/schema"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BackButton } from "@/components/back-button"
 import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 import StorePager from "@/components/store-pager"
 
 export interface StoreLayoutProps extends LayoutProps {

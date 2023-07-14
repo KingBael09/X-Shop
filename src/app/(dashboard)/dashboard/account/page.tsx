@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { env } from "@/env.mjs"
 
 import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 import { UserProfile } from "@/components/user-profile"
 
 export const metadata: Metadata = {

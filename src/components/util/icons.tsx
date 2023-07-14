@@ -1,6 +1,8 @@
 import {
   AlarmClock,
   AlertTriangle,
+  ArrowDown,
+  ArrowUp,
   BarChart3,
   CalendarDays,
   Check,
@@ -78,6 +80,8 @@ export const Icons = {
   chevronUp: ChevronUp,
   chevronDown: ChevronDown,
   chevronUpDown: ChevronsUpDown,
+  arrowUp: ArrowUp,
+  arrowDown: ArrowDown,
   menu: Menu,
   verticalThreeDots: MoreVertical,
   horizontalThreeDots: MoreHorizontal,

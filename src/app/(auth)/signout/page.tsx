@@ -3,7 +3,7 @@ import { env } from "@/env.mjs"
 
 import { LogOutButtons } from "@/components/auth/logout-buttons"
 import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),

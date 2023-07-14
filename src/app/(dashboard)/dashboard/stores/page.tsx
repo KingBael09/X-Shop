@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 import { Icons } from "@/components/util/icons"
 
 export const metadata: Metadata = {

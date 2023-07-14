@@ -12,7 +12,7 @@ import {
 import { BackButton } from "@/components/back-button"
 import { AddStoreForm } from "@/components/forms/add-store-form"
 import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
+import { Shell } from "@/components/shells/shell"
 
 export default function CreateStorePage() {
   // TODO: This should mostly work because middleware will not allow to visit the page
