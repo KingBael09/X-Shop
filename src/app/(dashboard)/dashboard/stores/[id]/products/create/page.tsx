@@ -1,3 +1,4 @@
+import { db } from "@/lib/db"
 import {
   Card,
   CardContent,
@@ -12,8 +13,14 @@ interface NewProductPageProps {
     id: string
   }
 }
-export default function CreateProductPage({ params }: NewProductPageProps) {
+export default async function CreateProductPage({
+  params,
+}: NewProductPageProps) {
   const storeId = Number(params.id)
+
+  // TODO: UKW this shit can be cached
+  const categories = await db.query.categories.findMany()
+
   return (
     <Card>
       <CardHeader className="space-y-1">
@@ -21,7 +28,7 @@ export default function CreateProductPage({ params }: NewProductPageProps) {
         <CardDescription>Add a new product to your store</CardDescription>
       </CardHeader>
       <CardContent>
-        <AddProductForm storeId={storeId} />
+        <AddProductForm storeId={storeId} categories={categories} />
       </CardContent>
     </Card>
   )

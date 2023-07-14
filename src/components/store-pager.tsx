@@ -1,9 +1,12 @@
 "use client"
 
+import Link, { LinkProps } from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 
+import { cn } from "@/lib/utils"
+
 import type { Store } from "../lib/db/schema"
-import { Button } from "./ui/button"
+import { Button, buttonVariants } from "./ui/button"
 import { Icons } from "./util/icons"
 
 interface StorePagerProps {
@@ -13,8 +16,6 @@ interface StorePagerProps {
 
 export default function StorePager({ current, stores }: StorePagerProps) {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const param = searchParams.get("table") ?? "store"
 
   const currentIndex = stores.findIndex((store) => store.id === current.id)
 
@@ -51,3 +52,5 @@ export default function StorePager({ current, stores }: StorePagerProps) {
     </div>
   )
 }
+
+// TODO: Maybe just maybe I could make do with Link and make this server side but gotta work with disabled

@@ -1,7 +1,7 @@
 "use client"
 
 import { useTransition } from "react"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -29,7 +29,9 @@ interface UpdateStoreProps {
 }
 
 export function UpdateStoreForm({ store }: UpdateStoreProps) {
-  const [isPending, startTransition] = useTransition()
+  const [isDeleting, startDeleting] = useTransition()
+  const [isUpdating, startUpdating] = useTransition()
+  // ikr why two usertransition, cuz if either button is loading both go into loading state
   const router = useRouter()
   const form = useForm<ZStoreSchema>({
     resolver: zodResolver(storeSchema),
@@ -41,7 +43,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
 
   function onSubmit(values: ZStoreSchema) {
     // console.log(values)
-    startTransition(async () => {
+    startUpdating(async () => {
       try {
         await updateStoreAction({ ...values, storeId: store.id })
         toast.success("Store updated successfullly!")
@@ -56,7 +58,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
     JSON.stringify({ name: store.name, description: store.description })
 
   function handleDeleteStore() {
-    startTransition(async () => {
+    startDeleting(async () => {
       try {
         await deleteStoreAction(store.id)
         toast.success("Store deleted successfullly!")
@@ -110,32 +112,32 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
           className="w-fit"
           type="submit"
           form="update-store-form"
-          disabled={isPending || updateCondition}
+          disabled={isUpdating || updateCondition || isDeleting}
         >
-          {isPending && (
+          {isUpdating && (
             <Icons.spinner
               className="mr-2 h-4 w-4 animate-spin"
               aria-hidden="true"
             />
           )}
           Update Store
-          <span className="sr-only">Add Store</span>
+          <span className="sr-only">Update Store</span>
         </Button>
         <Button
           className="w-fit"
           type="button"
           variant="destructive"
-          disabled={isPending}
+          disabled={isDeleting || isUpdating}
           onClick={handleDeleteStore}
         >
-          {isPending && (
+          {isDeleting && (
             <Icons.spinner
               className="mr-2 h-4 w-4 animate-spin"
               aria-hidden="true"
             />
           )}
           Delete Store
-          <span className="sr-only">Add Store</span>
+          <span className="sr-only">Delete Store</span>
         </Button>
       </div>
     </Form>

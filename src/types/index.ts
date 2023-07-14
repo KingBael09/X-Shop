@@ -1,3 +1,5 @@
+import { FileWithPath } from "react-dropzone"
+
 export interface LayoutProps {
   children: React.ReactNode
 }
@@ -14,4 +16,8 @@ export interface CartItem {
   productId: string
   quantity: number
   productSubCatagory?: string | null
+}
+
+export type FileWithPreview = FileWithPath & {
+  preview: string
 }

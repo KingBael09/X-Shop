@@ -3,14 +3,13 @@ import type { LayoutProps } from "@/types"
 import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
-import { tabs } from "@/config/store"
 import { db } from "@/lib/db"
 import { stores } from "@/lib/db/schema"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BackButton } from "@/components/back-button"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
 import StorePager from "@/components/store-pager"
+import { StoreTabs } from "@/components/store-tabs"
 
 export interface StoreLayoutProps extends LayoutProps {
   params: {
@@ -51,8 +50,8 @@ export default async function StoreLayout(props: StoreLayoutProps) {
           <StorePager stores={allStores} current={store} />
         ) : null}
       </div>
-      <div className="overflow-x-hidden">
-        <Tabs className="w-full" defaultValue="store">
+      <div className="space-y-4 overflow-hidden">
+        {/* <Tabs className="w-full" defaultValue="store">
           <TabsList className="w-full">
             {tabs.map((tab) => (
               <TabsTrigger className="px-4" key={tab.title} value={tab.param}>
@@ -65,7 +64,9 @@ export default async function StoreLayout(props: StoreLayoutProps) {
               {props[tab.value]}
             </TabsContent>
           ))}
-        </Tabs>
+        </Tabs> */}
+        <StoreTabs className="w-full" storeId={storeId} />
+        {props.children}
       </div>
     </Shell>
   )
