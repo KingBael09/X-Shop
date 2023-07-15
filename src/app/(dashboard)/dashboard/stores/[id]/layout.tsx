@@ -15,14 +15,12 @@ export interface StoreLayoutProps extends LayoutProps {
   params: {
     id: string
   }
-  orders: React.ReactNode
-  payments: React.ReactNode
-  products: React.ReactNode
 }
 
-export default async function StoreLayout(props: StoreLayoutProps) {
-  const { params } = props
-
+export default async function StoreLayout({
+  children,
+  params,
+}: StoreLayoutProps) {
   const storeId = Number(params.id)
 
   const user = await currentUser()
@@ -51,22 +49,8 @@ export default async function StoreLayout(props: StoreLayoutProps) {
         ) : null}
       </div>
       <div className="space-y-4 overflow-hidden">
-        {/* <Tabs className="w-full" defaultValue="store">
-          <TabsList className="w-full">
-            {tabs.map((tab) => (
-              <TabsTrigger className="px-4" key={tab.title} value={tab.param}>
-                {tab.title}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          {tabs.map((tab) => (
-            <TabsContent key={tab.title} value={tab.param}>
-              {props[tab.value]}
-            </TabsContent>
-          ))}
-        </Tabs> */}
         <StoreTabs className="w-full" storeId={storeId} />
-        {props.children}
+        {children}
       </div>
     </Shell>
   )

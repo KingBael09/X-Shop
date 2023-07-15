@@ -1,7 +1,4 @@
-"use client"
-
-import Link, { LinkProps } from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import Link, { type LinkProps } from "next/link"
 
 import { cn } from "@/lib/utils"
 
@@ -14,43 +11,57 @@ interface StorePagerProps {
   stores: Pick<Store, "id" | "name">[]
 }
 
-export default function StorePager({ current, stores }: StorePagerProps) {
-  const router = useRouter()
+interface ModLinkProps extends LinkProps {
+  disabled: boolean
+  children: React.ReactNode
+  className?: string
+}
 
+function ModLink({ disabled, children, className, ...props }: ModLinkProps) {
+  if (disabled)
+    return (
+      <Button variant="secondary" size="sm" disabled>
+        {children}
+      </Button>
+    )
+
+  return (
+    <Link
+      className={cn(
+        buttonVariants({ variant: "secondary", size: "sm" }),
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </Link>
+  )
+}
+
+export default function StorePager({ current, stores }: StorePagerProps) {
   const currentIndex = stores.findIndex((store) => store.id === current.id)
 
   const lowerFail = 0 > currentIndex - 1
   const upperFail = currentIndex + 1 >= stores.length
 
-  function handleIncrease() {
-    router.replace(`/dashboard/stores/${stores[currentIndex + 1]!.id}`)
-  }
-  function handleDecrease() {
-    router.replace(`/dashboard/stores/${stores[currentIndex - 1]!.id}`)
-  }
-
   return (
     <div className="flex gap-2 pr-1">
-      <Button
-        variant="secondary"
-        size="sm"
-        onClick={handleDecrease}
+      <ModLink
         disabled={lowerFail}
+        replace
+        href={`/dashboard/stores/${stores[currentIndex - 1]?.id as number}`}
       >
         <Icons.chevronLeft className="h-5 w-5" aria-hidden="true" />
         <span className="sr-only">Previous store</span>
-      </Button>
-      <Button
-        variant="secondary"
-        size="sm"
-        onClick={handleIncrease}
+      </ModLink>
+      <ModLink
         disabled={upperFail}
+        replace
+        href={`/dashboard/stores/${stores[currentIndex + 1]?.id as number}`}
       >
         <Icons.chevronRight className="h-5 w-5" aria-hidden="true" />
         <span className="sr-only">Next store</span>
-      </Button>
+      </ModLink>
     </div>
   )
 }
-
-// TODO: Maybe just maybe I could make do with Link and make this server side but gotta work with disabled

@@ -9,7 +9,7 @@ const config = {
   // driver: "turso",
   // dbCredentials: {
   //   url: process.env.DATABASE_URL ?? "",
-  //   // authToken: process.env.DATABASE_AUTH_TOKEN,
+  //   authToken: process.env.DATABASE_AUTH_TOKEN,
   // },
   ...(process.env.DATABASE_AUTH_TOKEN && process.env.NODE_ENV == "production"
     ? {

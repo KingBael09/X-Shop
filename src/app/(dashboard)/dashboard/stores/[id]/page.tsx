@@ -10,8 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
-import { UpdateStoreForm } from "../../../../../components/forms/update-store-form"
+import { UpdateStoreForm } from "@/components/forms/update-store-form"
 
 interface StorePageProps {
   params: {

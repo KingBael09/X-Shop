@@ -49,7 +49,7 @@ export const productRelations = relations(products, ({ one }) => ({
 
 export const categories = sqliteTable("categories", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
+  name: text("name").notNull().unique(),
   subcategories: blob("subcategories", { mode: "json" })
     .$type<string[] | null>()
     .default(null),

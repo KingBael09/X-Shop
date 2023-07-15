@@ -60,7 +60,7 @@ import {
   VolumeX,
   Wallet,
   X,
-  type Icon as LucideIcon,
+  type LucideIcon,
   type LucideProps,
 } from "lucide-react"
 
@@ -195,3 +195,19 @@ export const Icons = {
     </svg>
   ),
 }
+
+// ! This is experemental
+
+// import dynamic from "next/dynamic"
+// import { dynamicIconImports } from 'lucide-react'
+
+// interface IconProps extends Omit<LucideProps, "ref"> {
+//   //current work around to ignore ref
+//   name: keyof typeof dynamicIconImports
+// }
+
+// export function Icon({ name, ...props }: IconProps) {
+//   const LucideIcon = dynamic(dynamicIconImports[name])
+
+//   return <LucideIcon {...props} />
+// }

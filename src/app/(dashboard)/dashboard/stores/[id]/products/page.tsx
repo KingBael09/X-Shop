@@ -3,7 +3,7 @@ import dayjs from "dayjs"
 import { and, asc, desc, eq, gte, like, lte, sql } from "drizzle-orm"
 
 import { db } from "@/lib/db"
-import { Product, products, stores } from "@/lib/db/schema"
+import { type Product, products, stores } from "@/lib/db/schema"
 import { ProductsTableShell } from "@/components/shells/products-table-shell"
 
 interface ProductsPageProps {

@@ -3,7 +3,7 @@ import { z } from "zod"
 export const productSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Product name must be atlease 2 characters long" })
+    .min(2, { message: "Product name must be atleast 2 characters long" })
     .max(50, {
       message: "Product name should be no more than 50 characters long",
     }),
@@ -20,9 +20,13 @@ export const productSchema = z.object({
   price: z.string().regex(/^\d+(\.\d{1,2})?$/, {
     message: "Must be a valid price",
   }),
-  inventory: z.number({
-    required_error: "Please define the number of items available",
-  }),
+  inventory: z
+    .string({
+      required_error: "Enter available quantity",
+    })
+    .regex(/^\d+(\.\d{1,2})?$/, {
+      message: "Must be a quantity",
+    }),
   images: z
     .unknown()
     .refine((val) => {
