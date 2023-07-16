@@ -27,7 +27,7 @@ export default function DashboardPage() {
         {dashboardConfig.sidebarNav.map((item) => {
           const Icon = Icons[item.icon ?? "chevronLeft"]
           return (
-            <Link key={item.title} href={item.href!}>
+            <Link key={item.title} href={item.href}>
               <Card className="hover:bg-accent">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">

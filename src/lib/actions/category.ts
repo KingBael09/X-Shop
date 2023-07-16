@@ -4,10 +4,7 @@ import { eq } from "drizzle-orm"
 
 import { db } from "../db"
 import { categories } from "../db/schema"
-import type {
-  ZCategorySchema,
-  ZSubCategorySchema,
-} from "../validations/category"
+import type { ZCategorySchema } from "../validations/category"
 
 export async function AddCategoryAction(input: ZCategorySchema) {
   const sameName = await db.query.categories.findFirst({

@@ -3,7 +3,7 @@ import dayjs from "dayjs"
 import { and, asc, desc, eq, gte, like, lte, sql } from "drizzle-orm"
 
 import { db } from "@/lib/db"
-import { type Product, products, stores } from "@/lib/db/schema"
+import { products, stores, type Product } from "@/lib/db/schema"
 import { ProductsTableShell } from "@/components/shells/products-table-shell"
 
 interface ProductsPageProps {
@@ -50,7 +50,7 @@ export default async function ProductsPage({
     typeof sort === "string"
       ? (sort.split(".") as [
           keyof Product | undefined,
-          "asc" | "desc" | undefined
+          "asc" | "desc" | undefined,
         ])
       : []
   // Date range for created date
@@ -61,36 +61,6 @@ export default async function ProductsPage({
 
   // Using transaction to ensure that both queries are executed in single transaction
   const { storeProducts, totalProducts } = await db.transaction(async (tx) => {
-    // const storeProducts = await tx
-    //   .select()
-    //   .from(products)
-    //   .limit(limit)
-    //   .offset(offset)
-    //   .where(
-    //     and(
-    //       eq(products.storeId, storeId),
-    //       // Filter by name
-    //       typeof name === "string"
-    //         ? like(products.name, `%${name}%`)
-    //         : undefined,
-    //       // Filter by created date
-    //       start_date && end_date
-    //         ? and(
-    //             gte(products.createdAt, start_date),
-    //             lte(products.createdAt, end_date)
-    //           )
-    //         : undefined
-    //     )
-    //   )
-    //   .orderBy(
-    //     column && column in products
-    //       ? order === "asc"
-    //         ? asc(products[column])
-    //         : desc(products[column])
-    //       : desc(products.createdAt)
-    //   )
-    //   .all()
-
     const storeProducts = await tx.query.products.findMany({
       limit,
       offset,

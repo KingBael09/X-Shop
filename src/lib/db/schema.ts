@@ -20,7 +20,7 @@ export type Store = InferModel<typeof stores>
 
 export const products = sqliteTable("products", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
+  name: text("name").notNull().unique(),
   description: text("description"),
   images: blob("images", { mode: "json" })
     .$type<StoredFile[] | null>()
@@ -31,7 +31,7 @@ export const products = sqliteTable("products", {
   categoryId: integer("categoryId")
     .notNull()
     .references(() => categories.id),
-  //   subcategory: text("subcategory"),
+  subcategory: text("subcategory"),
   inventory: integer("inventory").notNull().default(0),
   storeId: integer("storeId").notNull(),
   createdAt: integer("createdAt", { mode: "timestamp" }),

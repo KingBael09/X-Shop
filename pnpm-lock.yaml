@@ -72,8 +72,8 @@ dependencies:
     specifier: ^8.9.3
     version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
   '@uploadthing/react':
-    specifier: ^5.1.0
-    version: 5.1.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.1.0)(zod@3.21.4)
+    specifier: ^5.2.0
+    version: 5.2.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.2.0)(zod@3.21.4)
   '@vercel/analytics':
     specifier: ^1.0.1
     version: 1.0.1
@@ -84,8 +84,8 @@ dependencies:
     specifier: ^0.6.1
     version: 0.6.1
   clsx:
-    specifier: ^1.2.1
-    version: 1.2.1
+    specifier: ^2.0.0
+    version: 2.0.0
   cmdk:
     specifier: ^0.2.0
     version: 0.2.0(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -138,8 +138,8 @@ dependencies:
     specifier: ^1.0.6
     version: 1.0.6(tailwindcss@3.3.3)
   uploadthing:
-    specifier: ^5.1.0
-    version: 5.1.0(zod@3.21.4)
+    specifier: ^5.2.0
+    version: 5.2.0(zod@3.21.4)
   zod:
     specifier: ^3.21.4
     version: 3.21.4
@@ -2713,24 +2713,24 @@ packages:
     resolution: {integrity: sha512-nRcdyM622+GYT9SdaJIVLknqoc8i7krItinfuBPtvmPc+UNGDJ+pMkr4AatYp88cEc4iYtPlN8flJvZ3dNtgrg==}
     dev: false
 
-  /@uploadthing/react@5.1.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.1.0)(zod@3.21.4):
-    resolution: {integrity: sha512-gBcw7A6I3/1APqSB2tRk81JNRYdopurt5cHrTdlrLQakH2XnCTs+1Ptl+Tx6MP/zVPajJHdW5B3JB8iQc4SHoQ==}
+  /@uploadthing/react@5.2.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.2.0)(zod@3.21.4):
+    resolution: {integrity: sha512-kVM/3JZJhMgk2QGvyhyqPA5Zycq9TaqgCg/MNWvWDSgzw5MKeMyiXsEAJEQ7jO1BBjAfZ0O0NCM0VXCXuMLkPQ==}
     peerDependencies:
       react: ^17.0.2 || ^18.0.0
       react-dropzone: ^14.2.3
       uploadthing: ^5.0.0
     dependencies:
-      '@uploadthing/shared': 5.0.1(@uploadthing/mime-types@0.2.0)(zod@3.21.4)
+      '@uploadthing/shared': 5.1.0(@uploadthing/mime-types@0.2.0)(zod@3.21.4)
       react: 18.2.0
       react-dropzone: 14.2.3(react@18.2.0)
-      uploadthing: 5.1.0(zod@3.21.4)
+      uploadthing: 5.2.0(zod@3.21.4)
     transitivePeerDependencies:
       - '@uploadthing/mime-types'
       - zod
     dev: false
 
-  /@uploadthing/shared@5.0.1(@uploadthing/mime-types@0.2.0)(zod@3.21.4):
-    resolution: {integrity: sha512-SMIM9Dyxu/LuKZCM0w/yCXL/wrZedUHKiEK022y5LXhbG7uApVFBPChC2+CCY7ZRU3O9sCCNsDj6OjdygIOEQw==}
+  /@uploadthing/shared@5.1.0(@uploadthing/mime-types@0.2.0)(zod@3.21.4):
+    resolution: {integrity: sha512-3pt9PFN0QuAvCv2LZyC66Bcn+zDUbh8Ws3noYHIlr2BFIvsH0zs2oVG+WXhb+9Nunu8+DER6iol7frza5rldIA==}
     peerDependencies:
       '@uploadthing/mime-types': ^0.2.0
       zod: ^3.21.4
@@ -3139,6 +3139,11 @@ packages:
 
   /clsx@1.2.1:
     resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
+
+  /clsx@2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
     engines: {node: '>=6'}
     dev: false
 
@@ -6375,11 +6380,11 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
 
-  /uploadthing@5.1.0(zod@3.21.4):
-    resolution: {integrity: sha512-adWd3D0/r25EspS1s+p2RLvSpDPLOQC+AM+mH1JomsTdEDiderjxMeo6juZUWnq96O/Dsumh97SeFJXDLWI+Qw==}
+  /uploadthing@5.2.0(zod@3.21.4):
+    resolution: {integrity: sha512-KE5G459EItoD4XKPib8DyknC5CvJKvM+6/cpaXzxUko3ZRByQo17qexZoUZURQFqYnpcjlvD+RCHu8M/rYpe5Q==}
     dependencies:
       '@uploadthing/mime-types': 0.2.0
-      '@uploadthing/shared': 5.0.1(@uploadthing/mime-types@0.2.0)(zod@3.21.4)
+      '@uploadthing/shared': 5.1.0(@uploadthing/mime-types@0.2.0)(zod@3.21.4)
     transitivePeerDependencies:
       - zod
     dev: false

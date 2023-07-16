@@ -1,7 +1,3 @@
-import { redirect } from "next/navigation"
-import { currentUser } from "@clerk/nextjs"
-
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,

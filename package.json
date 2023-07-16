@@ -42,11 +42,11 @@
     "@t3-oss/env-nextjs": "^0.6.0",
     "@tanstack/match-sorter-utils": "^8.8.4",
     "@tanstack/react-table": "^8.9.3",
-    "@uploadthing/react": "^5.1.0",
+    "@uploadthing/react": "^5.2.0",
     "@vercel/analytics": "^1.0.1",
     "better-sqlite3": "^8.4.0",
     "class-variance-authority": "^0.6.1",
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "dayjs": "^1.11.9",
     "drizzle-orm": "^0.27.2",
@@ -64,7 +64,7 @@
     "sonner": "^0.6.2",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6",
-    "uploadthing": "^5.1.0",
+    "uploadthing": "^5.2.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

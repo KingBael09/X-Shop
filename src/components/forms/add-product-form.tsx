@@ -9,8 +9,9 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { AddCategoryAction, AddSubCategoryAction } from "@/lib/actions/category"
+import { addProductAction, checkProductAction } from "@/lib/actions/product"
 import type { Category } from "@/lib/db/schema"
-import { catchError, cn } from "@/lib/utils"
+import { catchError, cn, isArrayOfFile } from "@/lib/utils"
 import {
   categorySchema,
   subCategorySchema,
@@ -72,7 +73,32 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
   })
 
   function onSubmit(values: ZProductSchema) {
-    console.log(values)
+    startTransition(async () => {
+      try {
+        // checking if product is available already so that we don't upload the image to server
+        await checkProductAction({ name: values.name })
+
+        const images = isArrayOfFile(values.images)
+          ? await startUpload(values.images).then(
+              (res) =>
+                res?.map((image) => ({
+                  id: image.fileKey,
+                  name: image.fileKey.split("_")[1] ?? image.fileKey,
+                  url: image.fileUrl,
+                }))
+            )
+          : null
+
+        await addProductAction({ ...values, storeId, images })
+        toast.success("Product added successfully!")
+
+        // reseting form and other files
+        form.reset()
+        setFiles(null)
+      } catch (error) {
+        catchError(error)
+      }
+    })
   }
 
   const subcategories =
@@ -238,7 +264,6 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                 {subcategory}
                               </CommandItem>
                             ))}
-                            {/* //TODO: Currently unavailable */}
                           </CommandGroup>
                         </Command>
                       </PopoverContent>
@@ -292,7 +317,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
         <FormField
           control={form.control}
           name="images"
-          render={({ field }) => {
+          render={(_) => {
             return (
               <FormItem>
                 <FormLabel>Images</FormLabel>

@@ -35,7 +35,7 @@ export function MainNav() {
 }
 
 export function MobileNav() {
-  const pathname = usePathname()
+  // const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -74,7 +74,7 @@ export function MobileNav() {
 
 export interface NavItem {
   title: string
-  href?: string
+  href: string
   disabled?: boolean
   external?: boolean
   icon?: keyof typeof Icons

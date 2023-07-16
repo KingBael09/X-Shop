@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import type { Table } from "@tanstack/react-table"
 
 import { cn } from "@/lib/utils"
 
-import { Button, buttonVariants } from "../ui/button"
+import { buttonVariants } from "../ui/button"
 import { Input } from "../ui/input"
 import { Icons } from "../util/icons"
 import { DataTabelViewOptions } from "./data-table-view-options"
@@ -16,7 +16,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const router = useRouter()
+  // const router = useRouter()
   const pathname = usePathname()
   return (
     <div className="flex w-full items-center justify-between space-x-2 overflow-auto p-1">

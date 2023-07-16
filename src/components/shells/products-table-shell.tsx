@@ -6,7 +6,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import { toast } from "sonner"
 
 import { deleteProductAction } from "@/lib/actions/product"
-import type { Category, Product } from "@/lib/db/schema"
+import type { Product } from "@/lib/db/schema"
 import { formatDate, formatPrice } from "@/lib/utils"
 
 import { DataTable } from "../data-table/data-table"
@@ -82,13 +82,7 @@ export function ProductsTableShell({
         header: ({ column }) => (
           <DataTableColumnHeader column={column} title="Category" />
         ),
-        cell: ({ cell, row }) => {
-          // const categories = Object.values(products.category.enumValues)
-          // const category = cell.getValue() as Product["category"]
-
-          // if (!categories.includes(category)) return null
-
-          console.log({ row, cell })
+        cell: ({ row }) => {
           const category = row.original.category.name
           return (
             <Badge variant="outline" className="capitalize">
