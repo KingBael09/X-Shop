@@ -23,12 +23,6 @@ import {
 } from "../ui/dropdown-menu"
 import { Icons } from "../util/icons"
 
-// interface CustomData extends Product {
-//   category: {
-//     name: string
-//   }
-// }
-
 type Data = Product & { category: { name: string } }
 
 interface ProductTableShellProps {
@@ -160,6 +154,7 @@ export function ProductsTableShell({
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
+                  disabled={isPending}
                   onClick={() => {
                     startTransition(async () => {
                       await deleteProductAction({
@@ -182,7 +177,7 @@ export function ProductsTableShell({
         },
       },
     ],
-    [id]
+    [id] // idk maybe isPending should be added but...
   )
 
   return <DataTable columns={columns} data={data} count={count} />
