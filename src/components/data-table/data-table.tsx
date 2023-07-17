@@ -160,7 +160,7 @@ export function DataTable<TData, TValue>({
   useEffect(() => {
     for (const column of debouncedSearchableColumnFilters) {
       if (typeof column.value === "string") {
-        router.push(
+        router.replace(
           `${pathname}?${createQueryString({
             page: 1,
             [column.id]: typeof column.value === "string" ? column.value : null,
@@ -174,7 +174,7 @@ export function DataTable<TData, TValue>({
         searchableColumns.find((column) => column.id === key) &&
         !debouncedSearchableColumnFilters.find((column) => column.id === key)
       ) {
-        router.push(
+        router.replace(
           `${pathname}?${createQueryString({
             page: 1,
             [key]: null,
@@ -188,7 +188,7 @@ export function DataTable<TData, TValue>({
   useEffect(() => {
     for (const column of filterableColumnFilters) {
       if (typeof column.value === "object" && Array.isArray(column.value)) {
-        router.push(
+        router.replace(
           `${pathname}?${createQueryString({
             page: 1,
             [column.id]: column.value.join("."),
@@ -202,7 +202,7 @@ export function DataTable<TData, TValue>({
         filterableColumns.find((column) => column.id === key) &&
         !filterableColumnFilters.find((column) => column.id === key)
       ) {
-        router.push(
+        router.replace(
           `${pathname}?${createQueryString({
             page: 1,
             [key]: null,
