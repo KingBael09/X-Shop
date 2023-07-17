@@ -92,19 +92,25 @@ export function catchError(err: unknown) {
     const errors = err.issues.map((issue) => {
       return issue.message
     })
-    toast(errors.join("\n"))
+    return toast(errors.join("\n"))
   } else if (err instanceof Error) {
-    toast(err.message)
+    return toast(err.message)
   } else {
-    toast("Something went wrong, please try again later.")
+    return toast("Something went wrong, please try again later.")
   }
 }
 
 export function catchClerkError(err: unknown) {
   const unknownErr = "Something went wrong, please try again later."
-  if (isClerkAPIResponseError(err)) {
-    toast.error(err.errors[0]?.longMessage ?? unknownErr)
+
+  if (err instanceof z.ZodError) {
+    const errors = err.issues.map((issue) => {
+      return issue.message
+    })
+    return toast(errors.join("\n"))
+  } else if (isClerkAPIResponseError(err)) {
+    return toast.error(err.errors[0]?.longMessage ?? unknownErr)
   } else {
-    toast.error(unknownErr)
+    return toast.error(unknownErr)
   }
 }

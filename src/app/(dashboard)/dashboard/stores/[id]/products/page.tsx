@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
-import dayjs from "dayjs"
-import { and, asc, desc, eq, gte, like, lte, sql } from "drizzle-orm"
+import { and, asc, desc, eq, inArray, like, sql } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { products, stores, type Product } from "@/lib/db/schema"
@@ -21,7 +20,7 @@ export default async function ProductsPage({
 }: ProductsPageProps) {
   const storeId = Number(params.id)
 
-  const { page, per_page, sort, name, date_range } = searchParams
+  const { page, per_page, sort, name, category } = searchParams
 
   const store = await db.query.stores.findFirst({
     where: eq(stores.id, storeId),
@@ -53,11 +52,24 @@ export default async function ProductsPage({
           "asc" | "desc" | undefined,
         ])
       : []
-  // Date range for created date
-  const [start_date, end_date] =
-    typeof date_range === "string"
-      ? date_range.split("to").map((date) => dayjs(date).toDate())
-      : []
+
+  // getting all categories
+  const categoryList = await db.query.categories.findMany({
+    columns: {
+      id: true,
+      name: true,
+    },
+  })
+
+  const categories = typeof category === "string" ? category.split(".") : []
+
+  const categoriesIds: number[] = []
+
+  categoryList.forEach((item) => {
+    if (categories.includes(item.name)) {
+      categoriesIds.push(item.id)
+    }
+  })
 
   // Using transaction to ensure that both queries are executed in single transaction
   const { storeProducts, totalProducts } = await db.transaction(async (tx) => {
@@ -68,17 +80,14 @@ export default async function ProductsPage({
         eq(products.storeId, storeId),
         // Filter by name
         typeof name === "string" ? like(products.name, `%${name}%`) : undefined,
-        // Filter by created date
-        start_date && end_date
-          ? and(
-              gte(products.createdAt, start_date),
-              lte(products.createdAt, end_date)
-            )
+        // Filter by category
+        categoriesIds.length > 0
+          ? inArray(products.categoryId, categoriesIds)
           : undefined
       ),
       with: {
         category: {
-          columns: { name: true },
+          columns: { name: true, id: true },
         },
       },
       orderBy:
@@ -100,11 +109,9 @@ export default async function ProductsPage({
           typeof name === "string"
             ? like(products.name, `%${name}%`)
             : undefined,
-          start_date && end_date
-            ? and(
-                gte(products.createdAt, start_date),
-                lte(products.createdAt, end_date)
-              )
+
+          categoriesIds.length > 0
+            ? inArray(products.categoryId, categoriesIds)
             : undefined
         )
       )
@@ -119,6 +126,11 @@ export default async function ProductsPage({
   const pageCount = Math.ceil(totalProducts / limit)
 
   return (
-    <ProductsTableShell data={storeProducts} count={pageCount} id={storeId} />
+    <ProductsTableShell
+      data={storeProducts}
+      count={pageCount}
+      storeId={storeId}
+      categories={categoryList}
+    />
   )
 }

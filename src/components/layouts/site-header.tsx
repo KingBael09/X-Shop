@@ -65,7 +65,10 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard/account">
+                      <Link
+                        href="/dashboard/account"
+                        className="cursor-pointer"
+                      >
                         <Icons.user
                           className="mr-2 h-4 w-4"
                           aria-hidden="true"
@@ -75,7 +78,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard/stores">
+                      <Link href="/dashboard/stores" className="cursor-pointer">
                         <Icons.terminal
                           className="mr-2 h-4 w-4"
                           aria-hidden="true"
@@ -85,7 +88,10 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild disabled>
-                      <Link href="/dashboard/settings">
+                      <Link
+                        href="/dashboard/settings"
+                        className="cursor-pointer"
+                      >
                         <Icons.settings
                           className="mr-2 h-4 w-4"
                           aria-hidden="true"
@@ -97,7 +103,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link href="/signout">
+                    <Link href="/signout" className="cursor-pointer">
                       <Icons.logout
                         className="mr-2 h-4 w-4"
                         aria-hidden="true"

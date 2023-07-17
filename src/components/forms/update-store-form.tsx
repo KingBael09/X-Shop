@@ -42,7 +42,6 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
   })
 
   function onSubmit(values: ZStoreSchema) {
-    // console.log(values)
     startUpdating(async () => {
       try {
         await updateStoreAction({ ...values, storeId: store.id })
@@ -73,7 +72,6 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
   return (
     <Form {...form}>
       <form
-        id="update-store-form"
         className="grid w-full max-w-xl gap-5"
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
@@ -106,40 +104,39 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
             </FormItem>
           )}
         />
+        <div className="flex gap-4">
+          <Button
+            className="w-fit"
+            type="submit"
+            disabled={isUpdating || updateCondition || isDeleting}
+          >
+            {isUpdating && (
+              <Icons.spinner
+                className="mr-2 h-4 w-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
+            Update Store
+            <span className="sr-only">Update Store</span>
+          </Button>
+          <Button
+            className="w-fit"
+            type="button"
+            variant="destructive"
+            disabled={isDeleting || isUpdating}
+            onClick={handleDeleteStore}
+          >
+            {isDeleting && (
+              <Icons.spinner
+                className="mr-2 h-4 w-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
+            Delete Store
+            <span className="sr-only">Delete Store</span>
+          </Button>
+        </div>
       </form>
-      <div className="mt-6 flex gap-4">
-        <Button
-          className="w-fit"
-          type="submit"
-          form="update-store-form"
-          disabled={isUpdating || updateCondition || isDeleting}
-        >
-          {isUpdating && (
-            <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
-          )}
-          Update Store
-          <span className="sr-only">Update Store</span>
-        </Button>
-        <Button
-          className="w-fit"
-          type="button"
-          variant="destructive"
-          disabled={isDeleting || isUpdating}
-          onClick={handleDeleteStore}
-        >
-          {isDeleting && (
-            <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
-          )}
-          Delete Store
-          <span className="sr-only">Delete Store</span>
-        </Button>
-      </div>
     </Form>
   )
 }

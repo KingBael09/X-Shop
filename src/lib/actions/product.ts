@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import type { StoredFile } from "@/types"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { utapi } from "uploadthing/server"
 
 import { db } from "../db"
@@ -18,21 +18,13 @@ export async function deleteProductAction({
   id,
   storeId,
 }: DeleteProductionActionInterface) {
-  const productExists = await db.query.products.findFirst({
-    columns: {
-      id: true,
-      images: true,
-    },
-    where: eq(products.id, id),
-  })
+  const deletedProducts = await db
+    .delete(products)
+    .where(and(eq(products.id, id), eq(products.storeId, storeId)))
+    .returning()
+    .all()
 
-  if (!productExists) {
-    throw new Error("Product doesn't exists")
-  }
-
-  await db.delete(products).where(eq(products.id, id)).run()
-
-  const imageList = productExists.images?.map((image) => {
+  const imageList = deletedProducts[0]?.images?.map((image) => {
     return image.id
   })
 

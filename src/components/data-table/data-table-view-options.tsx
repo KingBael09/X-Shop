@@ -1,3 +1,5 @@
+"use client"
+
 import type { Table } from "@tanstack/react-table"
 
 import { Button } from "../ui/button"
@@ -15,7 +17,7 @@ interface DataTableViewOptions<TData> {
   table: Table<TData>
 }
 
-export function DataTabelViewOptions<TData>({
+export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptions<TData>) {
   return (
@@ -25,7 +27,7 @@ export function DataTabelViewOptions<TData>({
           aria-label="Toggle columns"
           variant="outline"
           size="sm"
-          className="ml-auto h-8"
+          className="ml-auto hidden h-8 lg:flex"
         >
           <Icons.horizontalSliders
             className="mr-2 h-4 w-4"

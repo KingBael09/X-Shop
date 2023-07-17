@@ -2,7 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { rankItem } from "@tanstack/match-sorter-utils"
+import type {
+  DataTableFilterableColumn,
+  DataTableSearchableColumn,
+} from "@/types"
 import {
   flexRender,
   getCoreRowModel,
@@ -14,7 +17,6 @@ import {
   useReactTable,
   type ColumnDef,
   type ColumnFiltersState,
-  type FilterFn,
   type PaginationState,
   type SortingState,
   type VisibilityState,
@@ -37,27 +39,22 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   count: number
+  filterableColumns?: DataTableFilterableColumn<TData>[]
+  searchableColumns?: DataTableSearchableColumn<TData>[]
+  newRowLink?: string
+  deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 type QueryParams = Record<string, string | number | null>
-
-const fuzzyFilter: FilterFn<unknown> = (row, columnId, value, addMeta) => {
-  // Rank the item
-  const itemRank = rankItem(row.getValue(columnId), value as string)
-
-  // Store the itemRank info
-  addMeta({
-    itemRank,
-  })
-
-  // Return if the item should be filtered in/out
-  return itemRank.passed
-}
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   count,
+  filterableColumns = [],
+  searchableColumns = [],
+  deleteRowsAction,
+  newRowLink,
 }: DataTableProps<TData, TValue>) {
   const router = useRouter()
   const pathname = usePathname()
@@ -105,6 +102,13 @@ export function DataTable<TData, TValue>({
     [pageIndex, pageSize]
   )
 
+  useEffect(() => {
+    setPagination({
+      pageIndex: Number(page) - 1,
+      pageSize: Number(per_page),
+    })
+  }, [page, per_page])
+
   // Update route if pageindex or pagesize changes
   useEffect(() => {
     router.replace(
@@ -119,7 +123,7 @@ export function DataTable<TData, TValue>({
   // Server-Side Sorting
   const [sorting, setSorting] = useState<SortingState>([
     {
-      id: column ?? "createdAt",
+      id: column ?? "",
       desc: order === "desc",
     },
   ])
@@ -137,28 +141,81 @@ export function DataTable<TData, TValue>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting])
 
-  const debounceSearch = useDebounce(
-    columnFilters.find((f) => f.id === "name")?.value,
-    500
-  )
-
-  // Update route based on debounced search request
-  useEffect(() => {
-    router.replace(
-      `${pathname}?${createQueryString({
-        page: 1,
-        name: typeof debounceSearch === "string" ? debounceSearch : null,
-      })}`
+  // Handle Server-Side Filtering
+  const debouncedSearchableColumnFilters = JSON.parse(
+    useDebounce(
+      JSON.stringify(
+        columnFilters.filter((filter) => {
+          return searchableColumns.find((column) => column.id === filter.id)
+        })
+      ),
+      500
     )
+  ) as ColumnFiltersState
+
+  const filterableColumnFilters = columnFilters.filter((filter) => {
+    return filterableColumns.find((column) => column.id === filter.id)
+  })
+
+  useEffect(() => {
+    for (const column of debouncedSearchableColumnFilters) {
+      if (typeof column.value === "string") {
+        router.push(
+          `${pathname}?${createQueryString({
+            page: 1,
+            [column.id]: typeof column.value === "string" ? column.value : null,
+          })}`
+        )
+      }
+    }
+
+    for (const key of searchParams.keys()) {
+      if (
+        searchableColumns.find((column) => column.id === key) &&
+        !debouncedSearchableColumnFilters.find((column) => column.id === key)
+      ) {
+        router.push(
+          `${pathname}?${createQueryString({
+            page: 1,
+            [key]: null,
+          })}`
+        )
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounceSearch])
+  }, [JSON.stringify(debouncedSearchableColumnFilters)])
+
+  useEffect(() => {
+    for (const column of filterableColumnFilters) {
+      if (typeof column.value === "object" && Array.isArray(column.value)) {
+        router.push(
+          `${pathname}?${createQueryString({
+            page: 1,
+            [column.id]: column.value.join("."),
+          })}`
+        )
+      }
+    }
+
+    for (const key of searchParams.keys()) {
+      if (
+        filterableColumns.find((column) => column.id === key) &&
+        !filterableColumnFilters.find((column) => column.id === key)
+      ) {
+        router.push(
+          `${pathname}?${createQueryString({
+            page: 1,
+            [key]: null,
+          })}`
+        )
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(filterableColumnFilters)])
 
   const table = useReactTable({
     data,
     columns,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
     pageCount: count ?? -1,
     state: {
       pagination,
@@ -185,8 +242,14 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="space-y-3 p-1">
-      <DataTableToolbar table={table} />
+    <div className="w-full space-y-4 overflow-auto p-1">
+      <DataTableToolbar
+        table={table}
+        filterableColumns={filterableColumns}
+        searchableColumns={searchableColumns}
+        newRowLink={newRowLink}
+        deleteRowsAction={deleteRowsAction}
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

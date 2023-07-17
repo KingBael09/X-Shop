@@ -1,13 +1,13 @@
 "use client"
 
-import { useMemo, useTransition } from "react"
+import { useMemo, useState, useTransition } from "react"
 import Link from "next/link"
 import type { ColumnDef } from "@tanstack/react-table"
 import { toast } from "sonner"
 
 import { deleteProductAction } from "@/lib/actions/product"
-import type { Product } from "@/lib/db/schema"
-import { formatDate, formatPrice } from "@/lib/utils"
+import type { Category, Product } from "@/lib/db/schema"
+import { catchError, formatDate, formatPrice } from "@/lib/utils"
 
 import { DataTable } from "../data-table/data-table"
 import { DataTableColumnHeader } from "../data-table/data-table-column-head"
@@ -19,6 +19,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { Icons } from "../util/icons"
@@ -28,28 +29,34 @@ type Data = Product & { category: { name: string } }
 interface ProductTableShellProps {
   data: Data[]
   count: number
-  id: number
+  storeId: number
+  categories: Omit<Category, "subcategories">[]
 }
 
 export function ProductsTableShell({
   data,
   count,
-  id,
+  storeId,
+  categories,
 }: ProductTableShellProps) {
   const [isPending, startTransition] = useTransition()
+  const [selectedRowIds, setSelectedRowIds] = useState<number[]>([])
 
   const columns = useMemo<ColumnDef<Data, unknown>[]>(
     () => [
       {
-        // Column for row selection
         id: "select",
         header: ({ table }) => (
           <Checkbox
             checked={table.getIsAllPageRowsSelected()}
             onCheckedChange={(value) => {
               table.toggleAllPageRowsSelected(!!value)
+              setSelectedRowIds((prev) =>
+                prev.length === data.length ? [] : data.map((row) => row.id)
+              )
             }}
             aria-label="Select all"
+            className="translate-y-[2px]"
           />
         ),
         cell: ({ row }) => (
@@ -57,8 +64,14 @@ export function ProductsTableShell({
             checked={row.getIsSelected()}
             onCheckedChange={(value) => {
               row.toggleSelected(!!value)
+              setSelectedRowIds((prev) =>
+                value
+                  ? [...prev, row.original.id]
+                  : prev.filter((id) => id !== row.original.id)
+              )
             }}
             aria-label="Select row"
+            className="translate-y-[2px]"
           />
         ),
         // Disable column sorting for this column
@@ -117,59 +130,57 @@ export function ProductsTableShell({
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-          const product = row.original
-
           return (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   aria-label="Open menu"
                   variant="ghost"
-                  className="h-8 w-8 p-0"
+                  className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
                 >
-                  <Icons.verticalThreeDots
+                  <Icons.horizontalThreeDots
                     className="h-4 w-4"
                     aria-hidden="true"
                   />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-[150px]">
+              <DropdownMenuContent align="end" className="w-[160px]">
                 <DropdownMenuItem asChild>
-                  <Link href={`/dashboard/stores/${id}/products/${product.id}`}>
-                    <Icons.edit
-                      className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-                      aria-hidden="true"
-                    />
+                  <Link
+                    href={`/dashboard/stores/${storeId}/products/${row.original.id}`}
+                  >
                     Edit
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href={`/product/${product.id}`}>
-                    <Icons.view
-                      className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-                      aria-hidden="true"
-                    />
-                    View
-                  </Link>
+                  <Link href={`/product/${row.original.id}`}>View</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                  disabled={isPending}
                   onClick={() => {
-                    startTransition(async () => {
-                      await deleteProductAction({
-                        storeId: id,
-                        id: product.id,
-                      })
-                      toast.success("Product deleted")
+                    startTransition(() => {
+                      row.toggleSelected(false)
+
+                      toast.promise(
+                        deleteProductAction({
+                          id: row.original.id,
+                          storeId,
+                        }),
+                        {
+                          loading: "Deleting...",
+                          success: () => "Product deleted successfully.",
+                          error: (err: unknown) => {
+                            catchError(err)
+                            return null
+                          },
+                        }
+                      )
                     })
                   }}
+                  disabled={isPending}
                 >
-                  <Icons.trash
-                    className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-                    aria-hidden="true"
-                  />
                   Delete
+                  <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -177,8 +188,62 @@ export function ProductsTableShell({
         },
       },
     ],
-    [id] // idk maybe isPending should be added but...
+    [data, isPending, storeId]
   )
 
-  return <DataTable columns={columns} data={data} count={count} />
+  function deleteSelectedRows() {
+    toast.promise(
+      Promise.all(
+        selectedRowIds.map((id) =>
+          deleteProductAction({
+            id,
+            storeId,
+          })
+        )
+      ),
+      {
+        loading: "Deleting...",
+        success: () => {
+          setSelectedRowIds([])
+          return "Products deleted successfully."
+        },
+        error: (err: unknown) => {
+          setSelectedRowIds([])
+          catchError(err)
+          return null
+        },
+      }
+    )
+  }
+
+  const categoryList = categories?.map((category) => {
+    const name = category.name
+    return {
+      label: `${name.charAt(0).toUpperCase()}${name.slice(1)}`,
+      value: name,
+    }
+  })
+
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      count={count}
+      filterableColumns={[
+        {
+          id: "category",
+          title: "Category",
+          options: categoryList,
+        },
+      ]}
+      searchableColumns={[
+        {
+          id: "name",
+          title: "Name",
+        },
+      ]}
+      newRowLink={`/dashboard/stores/${storeId}/products/create`}
+      deleteRowsAction={deleteSelectedRows}
+    />
+  )
 }

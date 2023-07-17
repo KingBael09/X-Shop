@@ -57,7 +57,7 @@ export function DataTableColumnHeader<TData, TValue>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem
-            aria-label="Sort column ascending"
+            aria-label="Sort ascending"
             onClick={() => column.toggleSorting(false)}
           >
             <Icons.arrowUp
@@ -67,7 +67,7 @@ export function DataTableColumnHeader<TData, TValue>({
             Asc
           </DropdownMenuItem>
           <DropdownMenuItem
-            aria-label="Sort column descending"
+            aria-label="Sort descending"
             onClick={() => column.toggleSorting(true)}
           >
             <Icons.arrowDown
@@ -78,7 +78,7 @@ export function DataTableColumnHeader<TData, TValue>({
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            aria-label="Remove sorting"
+            aria-label="Hide Column"
             onClick={() => column.toggleVisibility(false)}
           >
             <Icons.hide
