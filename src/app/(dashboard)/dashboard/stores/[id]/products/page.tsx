@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { and, asc, desc, eq, inArray, like, sql } from "drizzle-orm"
 
@@ -12,6 +13,11 @@ interface ProductsPageProps {
   searchParams: {
     [key: string]: string | string[] | undefined
   }
+}
+
+export const metadata: Metadata = {
+  title: "Products",
+  description: "See all products in the store",
 }
 
 export default async function ProductsPage({

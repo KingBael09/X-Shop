@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useTransition } from "react"
+import { useEffect, useRef, useState, useTransition } from "react"
 import type { FileWithPreview } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { generateReactHelpers } from "@uploadthing/react/hooks"
@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { addProductAction, checkProductAction } from "@/lib/actions/product"
-import type { Category } from "@/lib/db/schema"
+import type { Category, Product } from "@/lib/db/schema"
 import { catchError, cn, isArrayOfFile } from "@/lib/utils"
 import { productSchema, type ZProductSchema } from "@/lib/validations/product"
 import { Button } from "@/components/ui/button"
@@ -40,67 +40,57 @@ import type { OurFileRouter } from "@/app/api/uploadthing/core"
 import { FileDialog } from "../file-dialog"
 import { Icons } from "../util/icons"
 import { ExtraModals } from "./add-category-form"
+import type { DialogState } from "./add-product-form"
 
-interface AddProductFormProps {
-  storeId: number
+interface UpdateProductFormProps {
+  product: Product
   categories: Category[]
-}
-
-export interface DialogState {
-  target: "" | "category" | "subcategory"
-  state: boolean
 }
 
 const { useUploadThing } = generateReactHelpers<OurFileRouter>()
 
-export function AddProductForm({ storeId, categories }: AddProductFormProps) {
-  const [isPending, startTransition] = useTransition()
+export function UpdateProductForm({
+  product,
+  categories,
+}: UpdateProductFormProps) {
+  const [isUpdating, startUpdating] = useTransition()
+  const [isDeleting, startDeletion] = useTransition()
   const [files, setFiles] = useState<FileWithPreview[] | null>(null)
 
   const { isUploading, startUpload } = useUploadThing("productImage")
 
   const ref = useRef<HTMLButtonElement>(null)
 
+  useEffect(() => {
+    if (product.images && product.images.length > 0) {
+      const filesWithPreview = product.images.map((image) => {
+        const file = new File([], image.name, { type: "image" })
+        return Object.assign(file, { preview: image.url })
+      })
+      setFiles(filesWithPreview)
+    }
+  }, [product])
+
   const form = useForm<ZProductSchema>({
     resolver: zodResolver(productSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      price: "",
-      inventory: "",
+      name: product.name,
+      description: product.description ?? "",
+      price: String(product.price),
+      inventory: String(product.inventory),
+      categoryId: String(product.categoryId),
+      subcategory: product.subcategory ?? "",
+      images: undefined,
     },
   })
 
+  const isFormUpdated = !form.formState.isDirty
+
+  // TODO: For some fked up reasons isDirty isn't catching change in categories and subcategories at first step but if i change other field and reset then then it catches on that categories or subcategories has changed
+
   function onSubmit(values: ZProductSchema) {
-    startTransition(async () => {
-      try {
-        // checking if product is available already so that we don't upload the image to server
-        await checkProductAction({ name: values.name })
-
-        const images = isArrayOfFile(values.images)
-          ? await startUpload(values.images).then(
-              (res) =>
-                res?.map((image) => ({
-                  id: image.fileKey,
-                  name: image.fileKey.split("_")[1] ?? image.fileKey,
-                  url: image.fileUrl,
-                }))
-            )
-          : null
-
-        await addProductAction({ ...values, storeId, images })
-        toast.success("Product added successfully!")
-
-        // reseting form and other files
-        form.reset()
-        setFiles(null)
-      } catch (error) {
-        catchError(error)
-      }
-    })
+    console.log(values)
   }
-
-  // TODO: Think of a better way than two useStates to manage Popover opening and closing -> otherwise it doesn't close
 
   const [categoryOpen, setCategoryOpen] = useState(false)
   const [subcategoryOpen, setSubcategoryOpen] = useState(false)
@@ -378,7 +368,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                         files={files}
                         setFiles={setFiles}
                         isUploading={isUploading}
-                        disabled={isPending}
+                        disabled={isUpdating || isDeleting}
                       />
                     </FormControl>
                   </div>
@@ -387,16 +377,28 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
               )
             }}
           />
-          <Button className="w-fit" disabled={isPending}>
-            {isPending && (
-              <Icons.spinner
-                className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden="true"
-              />
-            )}
-            Add Product
-            <span className="sr-only">Add Product</span>
-          </Button>
+          <div className="flex gap-4">
+            <Button className="w-fit" disabled={isUpdating || isFormUpdated}>
+              {isUpdating && (
+                <Icons.spinner
+                  className="mr-2 h-4 w-4 animate-spin"
+                  aria-hidden="true"
+                />
+              )}
+              Update Product
+              <span className="sr-only">Update Product</span>
+            </Button>
+            <Button variant="destructive">
+              {isDeleting && (
+                <Icons.spinner
+                  className="mr-2 h-4 w-4 animate-spin"
+                  aria-hidden="true"
+                />
+              )}
+              Delete Product
+              <span className="sr-only">Delete Product</span>
+            </Button>
+          </div>
         </form>
       </Form>
     </>

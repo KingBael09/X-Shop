@@ -1,4 +1,6 @@
+import { Metadata, ResolvingMetadata } from "next"
 import { notFound, redirect } from "next/navigation"
+import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
 import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
@@ -7,14 +9,38 @@ import { db } from "@/lib/db"
 import { stores } from "@/lib/db/schema"
 import { BackButton } from "@/components/back-button"
 import { Header } from "@/components/header"
+import StorePager from "@/components/pagers/store-pager"
 import { Shell } from "@/components/shells/shell"
-import StorePager from "@/components/store-pager"
 import { StoreTabs } from "@/components/store-tabs"
 
-export interface StoreLayoutProps extends LayoutProps {
+interface PageParams {
   params: {
     id: string
   }
+}
+
+export type StoreLayoutProps = LayoutProps & PageParams
+
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
+  const storeId = Number(params.id)
+  const store = await db.query.stores.findFirst({
+    where: eq(stores.id, storeId),
+  })
+
+  const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+    title: {
+      default: store?.name || "Your Store",
+      template: `%s | ${store?.name || "Your Store"}`,
+    },
+    description: `${store?.name || "Your Store"}${
+      store?.description ? ` - ${store.description}` : ""
+    }`,
+  }
+
+  return metadata
 }
 
 export default async function StoreLayout({

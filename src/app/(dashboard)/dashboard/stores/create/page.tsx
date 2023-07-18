@@ -1,3 +1,6 @@
+import type { Metadata } from "next"
+import { env } from "@/env.mjs"
+
 import {
   Card,
   CardContent,
@@ -9,6 +12,12 @@ import { BackButton } from "@/components/back-button"
 import { AddStoreForm } from "@/components/forms/add-store-form"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
+
+export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  title: "Create Store",
+  description: "Create a new store",
+}
 
 export default function CreateStorePage() {
   // TODO: This should mostly work because middleware will not allow to visit the page

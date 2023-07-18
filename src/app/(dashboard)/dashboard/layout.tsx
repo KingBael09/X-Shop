@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { SidebarNav } from "@/components/layouts/nav"
 import { SiteFooter } from "@/components/layouts/site-footer"
 import { SiteHeader } from "@/components/layouts/site-header"
+import { Breadcrumbs } from "@/components/pagers/breadcrumbs"
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -31,6 +32,7 @@ export default async function DashboardLayout({ children }: LayoutProps) {
           </ScrollArea>
         </aside>
         <main className="min-h-[calc(var(--navbar-page-offset))] flex-1">
+          <Breadcrumbs className="mt-6 md:mt-8" />
           {children}
         </main>
       </div>

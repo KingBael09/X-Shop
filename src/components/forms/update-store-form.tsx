@@ -52,9 +52,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
     })
   }
 
-  const updateCondition =
-    JSON.stringify(form.getValues()) ===
-    JSON.stringify({ name: store.name, description: store.description })
+  const isChanged = !form.formState.isDirty
 
   function handleDeleteStore() {
     startDeleting(async () => {
@@ -108,7 +106,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
           <Button
             className="w-fit"
             type="submit"
-            disabled={isUpdating || updateCondition || isDeleting}
+            disabled={isUpdating || isChanged || isDeleting}
           >
             {isUpdating && (
               <Icons.spinner

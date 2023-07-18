@@ -372,3 +372,5 @@ function FileCard<TFieldValues extends FieldValues>({
     </div>
   )
 }
+
+// TODO: Add loader image when the file is loading

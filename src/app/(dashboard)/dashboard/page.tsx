@@ -14,7 +14,7 @@ export default function DashboardPage() {
     <div className="absolute inset-0 z-20 bg-background">
       <div className="grid grid-cols-1 gap-4 p-6 sm:grid-cols-2 md:grid-cols-3">
         <Link href="/dashboard">
-          <Card className="hover:bg-accent">
+          <Card className="bg-accent/50 hover:bg-accent">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Icons.dashboard className="h-6 w-6" />

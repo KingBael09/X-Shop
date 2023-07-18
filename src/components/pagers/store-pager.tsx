@@ -1,46 +1,15 @@
-import Link, { type LinkProps } from "next/link"
-
-import { cn } from "@/lib/utils"
-
-import type { Store } from "../lib/db/schema"
-import { Button, buttonVariants } from "./ui/button"
-import { Icons } from "./util/icons"
+import type { Store } from "../../lib/db/schema"
+import { ModLink } from "../mod-link"
+import { Icons } from "../util/icons"
 
 interface StorePagerProps {
   current: Pick<Store, "id" | "name">
   stores: Pick<Store, "id" | "name">[]
 }
 
-interface ModLinkProps extends LinkProps {
-  disabled: boolean
-  children: React.ReactNode
-  className?: string
-}
-
-function ModLink({ disabled, children, className, ...props }: ModLinkProps) {
-  if (disabled)
-    return (
-      <Button variant="secondary" size="sm" disabled>
-        {children}
-      </Button>
-    )
-
-  return (
-    <Link
-      className={cn(
-        buttonVariants({ variant: "secondary", size: "sm" }),
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </Link>
-  )
-}
-
+//
 export default function StorePager({ current, stores }: StorePagerProps) {
   const currentIndex = stores.findIndex((store) => store.id === current.id)
-
   const lowerFail = 0 > currentIndex - 1
   const upperFail = currentIndex + 1 >= stores.length
 

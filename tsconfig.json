@@ -13,6 +13,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "moduleDetection": "force", // idk why i did this
     "jsx": "preserve",
     "incremental": true,
     "noUncheckedIndexedAccess": true,
