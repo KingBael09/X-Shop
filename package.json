@@ -20,7 +20,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.22.0",
+    "@clerk/nextjs": "^4.22.1",
     "@clerk/themes": "^1.7.5",
     "@hookform/resolvers": "^3.1.1",
     "@libsql/client": "^0.3.0",
@@ -43,7 +43,7 @@
     "@tanstack/react-table": "^8.9.3",
     "@uploadthing/react": "^5.2.0",
     "@vercel/analytics": "^1.0.1",
-    "better-sqlite3": "^8.4.0",
+    "better-sqlite3": "^8.5.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
@@ -67,7 +67,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@clerk/types": "^3.47.0",
+    "@clerk/types": "^3.48.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.9",
@@ -80,7 +80,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "10.4.14",
     "dotenv": "^16.3.1",
-    "drizzle-kit": "^0.19.8",
+    "drizzle-kit": "^0.19.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "eslint-config-prettier": "^8.8.0",

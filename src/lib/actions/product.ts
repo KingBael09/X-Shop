@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import type { StoredFile } from "@/types"
-import { and, eq } from "drizzle-orm"
+import { and, eq, not } from "drizzle-orm"
 import { utapi } from "uploadthing/server"
 
 import { db } from "../db"
@@ -37,9 +37,11 @@ export async function deleteProductAction({
   revalidatePath(`/dashboard/stores/${storeId}/products`)
 }
 
-export async function checkProductAction(input: { name: string }) {
+export async function checkProductAction(input: { name: string; id?: number }) {
   const isProductExist = await db.query.products.findFirst({
-    where: eq(products.name, input.name),
+    where: input.id
+      ? and(not(eq(products.id, input.id)), eq(products.name, input.name))
+      : eq(products.name, input.name),
   })
 
   if (isProductExist) {
@@ -74,4 +76,49 @@ export async function addProductAction({
     .run()
 
   revalidatePath(`/dashboard/stores/${rest.storeId}/products.`)
+}
+
+interface UpdateProductActionInterface extends ZProductSchema {
+  id: number
+  storeId: number
+  images?: StoredFile[] | null
+  isImageUpdated: boolean
+}
+
+export async function updateProductAction({
+  id,
+  price,
+  categoryId,
+  inventory,
+  isImageUpdated,
+  ...rest
+}: UpdateProductActionInterface) {
+  const orignalProductData = await db.query.products.findFirst({
+    where: and(eq(products.id, id), eq(products.storeId, rest.storeId)),
+  })
+
+  if (!orignalProductData) {
+    throw new Error("Product not found")
+  }
+
+  await db
+    .update(products)
+    .set({
+      id,
+      price: Number(price),
+      categoryId: Number(categoryId),
+      inventory: Number(inventory),
+      ...rest,
+    })
+    .where(eq(products.id, id))
+    .run()
+
+  if (isImageUpdated) {
+    const imageList = orignalProductData.images?.map((image) => image.id)
+    if (imageList && imageList.length > 0) {
+      await utapi.deleteFiles(imageList)
+    }
+  }
+
+  revalidatePath(`/dashboard/stores/${rest.storeId}/products`)
 }

@@ -26,6 +26,7 @@ import {
   Filter,
   Footprints,
   HardHat,
+  Heart,
   Image,
   LayoutDashboard,
   Loader2,
@@ -128,6 +129,7 @@ export const Icons = {
   logo: Snowflake,
   scroll: Mouse,
   dashboard: LayoutDashboard,
+  heart: Heart,
   // logo: (props: LucideProps) => (
   //   <svg
   //     xmlns="http://www.w3.org/2000/svg"

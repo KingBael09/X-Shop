@@ -16,7 +16,7 @@ export const primeCategories = [
   },
   {
     title: "See More...",
-    link: "categories",
+    link: "",
     image: "/categories/extra.webp",
   },
 ]

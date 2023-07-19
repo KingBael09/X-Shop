@@ -153,7 +153,7 @@ export function ProductsTableShell({
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href={`/product/${row.original.id}`}>View</Link>
+                  <Link href={`/products/${row.original.id}`}>View</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem

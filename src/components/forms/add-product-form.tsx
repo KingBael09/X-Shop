@@ -70,6 +70,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
       inventory: "",
     },
   })
+  // TODO:What am i sending upwards if subcategory is empty
 
   function onSubmit(values: ZProductSchema) {
     startTransition(async () => {

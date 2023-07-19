@@ -1,13 +1,18 @@
 "use client"
 
 import { useEffect, useRef, useState, useTransition } from "react"
+import { useRouter } from "next/navigation"
 import type { FileWithPreview } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { generateReactHelpers } from "@uploadthing/react/hooks"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { addProductAction, checkProductAction } from "@/lib/actions/product"
+import {
+  checkProductAction,
+  deleteProductAction,
+  updateProductAction,
+} from "@/lib/actions/product"
 import type { Category, Product } from "@/lib/db/schema"
 import { catchError, cn, isArrayOfFile } from "@/lib/utils"
 import { productSchema, type ZProductSchema } from "@/lib/validations/product"
@@ -53,6 +58,7 @@ export function UpdateProductForm({
   product,
   categories,
 }: UpdateProductFormProps) {
+  const router = useRouter()
   const [isUpdating, startUpdating] = useTransition()
   const [isDeleting, startDeletion] = useTransition()
   const [files, setFiles] = useState<FileWithPreview[] | null>(null)
@@ -80,16 +86,80 @@ export function UpdateProductForm({
       inventory: String(product.inventory),
       categoryId: String(product.categoryId),
       subcategory: product.subcategory ?? "",
-      images: undefined,
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      // images: product.images as {} | undefined,
     },
   })
 
-  const isFormUpdated = !form.formState.isDirty
+  const isCatUpdated =
+    form.watch("categoryId") !== form.formState.defaultValues?.categoryId
+  const isSubCatUpdated =
+    form.watch("subcategory") !== form.formState.defaultValues?.subcategory
 
-  // TODO: For some fked up reasons isDirty isn't catching change in categories and subcategories at first step but if i change other field and reset then then it catches on that categories or subcategories has changed
+  const isImageUpdated =
+    JSON.stringify(form.watch("images")) !==
+    JSON.stringify(form.formState.defaultValues?.images)
+
+  const isFormUpdated =
+    form.formState.isDirty || isCatUpdated || isSubCatUpdated || isImageUpdated
+
+  // TODO: For some fked up reasons isDirty isn't catching change in categories and subcategories at  first step but if i change other field and reset then then it catches on that categories or subcategories has changed
+  // TODO:  Uploading file is also not counted in above wtf
 
   function onSubmit(values: ZProductSchema) {
-    console.log(values)
+    // TODO : Filter out subcategory
+    startUpdating(async () => {
+      try {
+        // Check if product already exists in the store
+        await checkProductAction({ name: values.name, id: product.id })
+
+        // Upload images if data.images is an array of files
+        const images =
+          isArrayOfFile(values.images) && isImageUpdated
+            ? await startUpload(values.images).then((res) => {
+                const formattedImages = res?.map((image) => ({
+                  id: image.fileKey,
+                  name: image.fileKey.split("_")[1] ?? image.fileKey,
+                  url: image.fileUrl,
+                }))
+                return formattedImages ?? null
+              })
+            : null
+
+        await updateProductAction({
+          ...values,
+          isImageUpdated,
+          id: product.id,
+          storeId: product.storeId,
+          images: isImageUpdated
+            ? images && images.length > 0
+              ? images
+              : null
+            : product.images,
+        })
+
+        toast.success("Product updated successfully.")
+        router.push(`/dashboard/stores/${product.storeId}/products`)
+        setFiles(null)
+
+        // TODO Chekc if the new uploaded images is same as previous if any
+      } catch (error) {
+        catchError(error)
+      }
+    })
+  }
+
+  function handleDelete() {
+    // startDeletion
+    startDeletion(async () => {
+      try {
+        await deleteProductAction({ id: product.id, storeId: product.storeId })
+        toast.success("Product deleted successfully")
+        router.push(`/dashboard/stores/${product.storeId}/products`)
+      } catch (error) {
+        catchError(error)
+      }
+    })
   }
 
   const [categoryOpen, setCategoryOpen] = useState(false)
@@ -191,6 +261,12 @@ export function UpdateProductForm({
                                       "categoryId",
                                       String(category.id)
                                     )
+                                    if (
+                                      form.formState.defaultValues
+                                        ?.categoryId !== String(category.id)
+                                    ) {
+                                      form.setValue("subcategory", "") //setting subcategory empty if category is changed
+                                    }
                                     setCategoryOpen(false)
                                   }}
                                 >
@@ -378,7 +454,11 @@ export function UpdateProductForm({
             }}
           />
           <div className="flex gap-4">
-            <Button className="w-fit" disabled={isUpdating || isFormUpdated}>
+            <Button
+              className="w-fit"
+              type="submit"
+              disabled={isUpdating || !isFormUpdated || isDeleting}
+            >
               {isUpdating && (
                 <Icons.spinner
                   className="mr-2 h-4 w-4 animate-spin"
@@ -388,7 +468,12 @@ export function UpdateProductForm({
               Update Product
               <span className="sr-only">Update Product</span>
             </Button>
-            <Button variant="destructive">
+            <Button
+              onClick={handleDelete}
+              variant="destructive"
+              type="button"
+              disabled={isDeleting || isUpdating}
+            >
               {isDeleting && (
                 <Icons.spinner
                   className="mr-2 h-4 w-4 animate-spin"

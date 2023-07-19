@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { and, eq } from "drizzle-orm"
 
@@ -12,6 +13,11 @@ export interface EditProductPageProps {
   }
 }
 
+export const metadata: Metadata = {
+  title: "Update Product",
+  description: "Update your product",
+}
+
 export default async function EditProductPage({
   params,
 }: EditProductPageProps) {
@@ -22,7 +28,7 @@ export default async function EditProductPage({
     where: and(eq(products.id, productId), eq(products.storeId, storeId)),
   })
 
-  const categories = await db.query.categories.findMany() //Think of a way to not refetch this call
+  const categories = await db.query.categories.findMany() // TODO: Think of a way to not refetch this call
 
   if (!product) return notFound()
 

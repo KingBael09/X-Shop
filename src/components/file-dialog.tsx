@@ -297,6 +297,7 @@ function FileCard<TFieldValues extends FieldValues>({
                   initialAspectRatio={1 / 1}
                   preview=".img-preview"
                   src={file.preview}
+                  alt="image"
                   viewMode={1}
                   minCropBoxHeight={10}
                   minCropBoxWidth={10}
@@ -373,4 +374,7 @@ function FileCard<TFieldValues extends FieldValues>({
   )
 }
 
-// TODO: Add loader image when the file is loading
+// TODO: Add loader image when the file is loading -> UPDATE: loading works now but its static and doesn't work with transparent image -> UPDATE: removed stateic loading
+// TODO: THis throws with local file /* setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL()) */
+
+// TODO: Change file name incase of crop

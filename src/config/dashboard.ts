@@ -21,10 +21,10 @@ export const dashboardConfig: DashboardConfig = {
       //   items: [],
     },
     {
-      title: "Billing",
-      href: "/dashboard/billing",
-      icon: "billing",
-      description: "Manage your Bills",
+      title: "Wishlist",
+      href: "/dashboard/wishlist",
+      icon: "heart",
+      description: "Manage your Wishlist",
       //   items: [],
     },
     {

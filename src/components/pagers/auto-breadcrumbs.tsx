@@ -1,30 +1,41 @@
-import { Fragment } from "react"
-import Link from "next/link"
+"use client"
 
-import { cn } from "@/lib/utils"
+import { Fragment, type HtmlHTMLAttributes } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+import { cn, toTitleCase } from "@/lib/utils"
 
 import { Icons } from "../util/icons"
 
-export interface BreadSegment {
-  title: string
-  href: string
-}
-
-interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
-  segments: BreadSegment[]
+interface AutoBreadCrumbProps extends HtmlHTMLAttributes<HTMLElement> {
   separator?: React.ComponentType<{ className?: string }>
 }
 
 /**
- * Note that this is a server side component unlike auto-breadcrumbs
+ * Note that this is a client side component unlike breadcrumbs
  */
-export function Breadcrumbs({
-  segments,
-  className,
+export function AutoBreadCrumbs({
   separator,
+  className,
   ...props
-}: BreadcrumbProps) {
+}: AutoBreadCrumbProps) {
+  const pathName = usePathname()
   const SeparatorIcon = separator ?? Icons.chevronRight
+
+  const segments: { title: string; href: string }[] = []
+
+  const pathObjects = pathName.split("/").filter((e) => e.length > 0)
+
+  pathObjects.forEach((e, i) => {
+    if (!Number(e) && e.length > 0) {
+      const link = pathObjects.slice(0, i + 1).join("/")
+      segments.push({
+        title: toTitleCase(e),
+        href: `/${link}`,
+      })
+    }
+  })
 
   return (
     <nav
