@@ -44,14 +44,11 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <span>{title}</span>
             {column.getIsSorted() === "desc" ? (
-              <Icons.arrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
+              <Icons.arrowDown className="ml-2 h-4 w-4" aria-hidden />
             ) : column.getIsSorted() === "asc" ? (
-              <Icons.arrowUp className="ml-2 h-4 w-4" aria-hidden="true" />
+              <Icons.arrowUp className="ml-2 h-4 w-4" aria-hidden />
             ) : (
-              <Icons.chevronUpDown
-                className="ml-2 h-4 w-4"
-                aria-hidden="true"
-              />
+              <Icons.chevronUpDown className="ml-2 h-4 w-4" aria-hidden />
             )}
           </Button>
         </DropdownMenuTrigger>
@@ -62,7 +59,7 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <Icons.arrowUp
               className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-              aria-hidden="true"
+              aria-hidden
             />
             Asc
           </DropdownMenuItem>
@@ -72,7 +69,7 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <Icons.arrowDown
               className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-              aria-hidden="true"
+              aria-hidden
             />
             Desc
           </DropdownMenuItem>
@@ -83,7 +80,7 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <Icons.hide
               className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
-              aria-hidden="true"
+              aria-hidden
             />
             Hide
           </DropdownMenuItem>

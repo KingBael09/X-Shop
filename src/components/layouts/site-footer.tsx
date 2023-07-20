@@ -26,7 +26,7 @@ export function SiteFooter() {
               href="/"
               className="flex items-center space-x-2"
             >
-              <Icons.logo className="h-6 w-6" aria-hidden="true" />
+              <Icons.logo className="h-6 w-6" aria-hidden />
               <span className="font-bold">{siteConfig.name}</span>
             </Link>
           </section>
@@ -119,7 +119,7 @@ export function SiteFooter() {
                   })
                 )}
               >
-                <Icons.gitHub className="h-4 w-4" aria-hidden="true" />
+                <Icons.gitHub className="h-4 w-4" aria-hidden />
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>

@@ -462,7 +462,7 @@ export function UpdateProductForm({
               {isUpdating && (
                 <Icons.spinner
                   className="mr-2 h-4 w-4 animate-spin"
-                  aria-hidden="true"
+                  aria-hidden
                 />
               )}
               Update Product
@@ -477,7 +477,7 @@ export function UpdateProductForm({
               {isDeleting && (
                 <Icons.spinner
                   className="mr-2 h-4 w-4 animate-spin"
-                  aria-hidden="true"
+                  aria-hidden
                 />
               )}
               Delete Product

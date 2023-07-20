@@ -392,7 +392,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
             {isPending && (
               <Icons.spinner
                 className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden="true"
+                aria-hidden
               />
             )}
             Add Product

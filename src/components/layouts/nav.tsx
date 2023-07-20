@@ -22,7 +22,7 @@ export function MainNav() {
         href="/"
         className="hidden items-center space-x-2 lg:flex"
       >
-        <Icons.logo className="h-6 w-6" aria-hidden="true" />
+        <Icons.logo className="h-6 w-6" aria-hidden />
         <span className="hidden font-bold lg:inline-block">
           {siteConfig.name}
         </span>
@@ -56,7 +56,7 @@ export function MobileNav() {
             className="flex items-center"
             onClick={() => setIsOpen(false)}
           >
-            <Icons.logo className="mr-2 h-4 w-4" aria-hidden="true" />
+            <Icons.logo className="mr-2 h-4 w-4" aria-hidden />
             <span className="font-bold">{siteConfig.name}</span>
           </Link>
         </div>
@@ -111,7 +111,7 @@ export function SidebarNav({ items }: SideBarProps) {
                 item.disabled && "pointer-events-none opacity-60"
               )}
             >
-              <Icon className="mr-2 h-4 w-4" aria-hidden="true" />
+              <Icon className="mr-2 h-4 w-4" aria-hidden />
               <span>{item.title}</span>
             </span>
           </Link>

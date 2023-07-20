@@ -140,14 +140,14 @@ export function FileDialog<TFieldValues extends FieldValues>({
             <div className="group grid w-full place-items-center gap-1 sm:px-10">
               <Icons.upload
                 className="h-9 w-9 animate-pulse text-muted-foreground"
-                aria-hidden="true"
+                aria-hidden
               />
             </div>
           ) : isDragActive ? (
             <div className="grid place-items-center gap-2 text-muted-foreground sm:px-5">
               <Icons.upload
                 className={cn("h-8 w-8", isDragActive && "animate-bounce")}
-                aria-hidden="true"
+                aria-hidden
               />
               <p className="text-base font-medium">Drop the file here</p>
             </div>
@@ -155,7 +155,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
             <div className="grid place-items-center gap-1 sm:px-5">
               <Icons.upload
                 className="h-8 w-8 text-muted-foreground"
-                aria-hidden="true"
+                aria-hidden
               />
               <p className="mt-2 text-base font-medium text-muted-foreground">
                 Drag {`'n'`} drop file here, or click to select file
@@ -201,7 +201,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
             }}
             className="mt-2.5 w-full"
           >
-            <Icons.trash className="mr-2 h-4 w-4" aria-hidden="true" />
+            <Icons.trash className="mr-2 h-4 w-4" aria-hidden />
             Remove All
             <span className="sr-only">Remove All</span>
           </Button>
@@ -281,7 +281,7 @@ function FileCard<TFieldValues extends FieldValues>({
                 size="sm"
                 className="h-7 w-7 p-0"
               >
-                <Icons.crop className="h-4 w-4 text-white" aria-hidden="true" />
+                <Icons.crop className="h-4 w-4 text-white" aria-hidden />
                 <span className="sr-only">Crop image</span>
               </Button>
             </DialogTrigger>
@@ -318,10 +318,7 @@ function FileCard<TFieldValues extends FieldValues>({
                       setIsOpen(false)
                     }}
                   >
-                    <Icons.crop
-                      className="mr-2 h-3.5 w-3.5"
-                      aria-hidden="true"
-                    />
+                    <Icons.crop className="mr-2 h-3.5 w-3.5" aria-hidden />
                     Crop Image
                   </Button>
                   <Button
@@ -335,10 +332,7 @@ function FileCard<TFieldValues extends FieldValues>({
                       setCropData(null)
                     }}
                   >
-                    <Icons.reset
-                      className="mr-2 h-3.5 w-3.5"
-                      aria-hidden="true"
-                    />
+                    <Icons.reset className="mr-2 h-3.5 w-3.5" aria-hidden />
                     Reset Crop
                   </Button>
                 </div>
@@ -366,7 +360,7 @@ function FileCard<TFieldValues extends FieldValues>({
             )
           }}
         >
-          <Icons.close className="h-4 w-4 text-white" aria-hidden="true" />
+          <Icons.close className="h-4 w-4 text-white" aria-hidden />
           <span className="sr-only">Remove file</span>
         </Button>
       </div>

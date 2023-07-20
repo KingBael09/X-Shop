@@ -92,10 +92,7 @@ export function SignInForm() {
         />
         <Button disabled={isPending}>
           {isPending && (
-            <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
           )}
           Sign in
           <span className="sr-only">Sign in</span>

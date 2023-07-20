@@ -29,7 +29,7 @@ export function CartSheet() {
               {itemCount}
             </Badge>
           )}
-          <Icons.cart className="h-4 w-4" aria-hidden="true" />
+          <Icons.cart className="h-4 w-4" aria-hidden />
         </Button>
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
@@ -43,7 +43,7 @@ export function CartSheet() {
           <div className="flex h-full flex-col items-center justify-center space-y-2">
             <Icons.cart
               className="h-12 w-12 text-muted-foreground"
-              aria-hidden="true"
+              aria-hidden
             />
             <span className="text-lg font-medium text-muted-foreground">
               Your cart is empty

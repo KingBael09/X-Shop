@@ -60,7 +60,7 @@ export function DataTablePagination<TData>({
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
-            <Icons.chevronsLeft className="h-4 w-4" aria-hidden="true" />
+            <Icons.chevronsLeft className="h-4 w-4" aria-hidden />
           </Button>
           <Button
             aria-label="Go to previous page"
@@ -69,7 +69,7 @@ export function DataTablePagination<TData>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <Icons.chevronLeft className="h-4 w-4" aria-hidden="true" />
+            <Icons.chevronLeft className="h-4 w-4" aria-hidden />
           </Button>
           <Button
             aria-label="Go to next page"
@@ -78,7 +78,7 @@ export function DataTablePagination<TData>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <Icons.chevronRight className="h-4 w-4" aria-hidden="true" />
+            <Icons.chevronRight className="h-4 w-4" aria-hidden />
           </Button>
           <Button
             aria-label="Go to last page"
@@ -87,7 +87,7 @@ export function DataTablePagination<TData>({
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
-            <Icons.chevronsRight className="h-4 w-4" aria-hidden="true" />
+            <Icons.chevronsRight className="h-4 w-4" aria-hidden />
           </Button>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import { type FileWithPath } from "react-dropzone"
 
+import type { ZCartItemSchema } from "@/lib/validations/cart"
+
 export interface LayoutProps {
   children: React.ReactNode
 }
@@ -12,11 +14,7 @@ export interface StoredFile {
 
 export type Rating = 0 | 1 | 2 | 3 | 4 | 5
 
-export interface CartItem {
-  productId: string
-  quantity: number
-  productSubCatagory?: string | null
-}
+export type CartItem = ZCartItemSchema
 
 export type FileWithPreview = FileWithPath & {
   preview: string

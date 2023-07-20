@@ -95,10 +95,7 @@ export function SignUpForm() {
         />
         <Button disabled={isPending}>
           {isPending && (
-            <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
           )}
           Continue
           <span className="sr-only">Continue to email verification page</span>

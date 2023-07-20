@@ -165,7 +165,7 @@ export const Icons = {
   ),
   google: ({ ...props }: LucideProps) => (
     <svg
-      aria-hidden="true"
+      aria-hidden
       focusable="false"
       data-prefix="fab"
       data-icon="discord"

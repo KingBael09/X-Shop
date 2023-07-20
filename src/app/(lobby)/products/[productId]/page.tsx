@@ -3,8 +3,18 @@ import { and, eq, not } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { products } from "@/lib/db/schema"
-import { toTitleCase } from "@/lib/utils"
+import { formatPrice, toTitleCase } from "@/lib/utils"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Separator } from "@/components/ui/separator"
+import { AddToCartForm } from "@/components/forms/add-to-cart-form"
+import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
+import { ProductImageCarousel } from "@/components/product-image-carousel"
 import { Shell } from "@/components/shells/shell"
 
 interface ProductPageParams {
@@ -27,9 +37,7 @@ export default async function ProductPage({ params }: ProductPageParams) {
     },
   })
 
-  if (!product) {
-    notFound()
-  }
+  if (!product) return notFound()
 
   const productWithSameStore = await db.query.products.findMany({
     where: and(
@@ -57,7 +65,51 @@ export default async function ProductPage({ params }: ProductPageParams) {
   return (
     <Shell>
       <Breadcrumbs segments={segments} />
-      <div>lol</div>
+      <div className="flex flex-col gap-8 md:flex-row md:gap-16">
+        <ProductImageCarousel
+          className="w-full md:w-1/2"
+          images={product.images ?? []}
+          options={{
+            loop: true,
+          }}
+        />
+        <div className="flex w-full flex-col gap-4 md:w-1/2">
+          <div className="space-y-2">
+            <h2 className="line-clamp-1 text-2xl font-bold">{product.name}</h2>
+            <p className="text-muted-foreground">
+              {formatPrice(product.price)}
+            </p>
+
+            <ModLink
+              disabled={productWithSameStore.length < 0}
+              variant="link"
+              href={`/products?store_ids=${product.storeId}`}
+              className="h-auto p-0 text-base font-normal text-muted-foreground"
+            >
+              {product.store.name}
+            </ModLink>
+          </div>
+          <Separator className="my-1.5" />
+          <AddToCartForm productId={product.id} />
+          <Separator className="my-1.5" />
+          <Accordion
+            defaultValue={product.description ? "description" : undefined}
+            type="single"
+            collapsible
+            className="w-full"
+          >
+            <AccordionItem value="description">
+              <AccordionTrigger>Description</AccordionTrigger>
+              <AccordionContent>
+                {product.description && product.description.length > 0
+                  ? product.description
+                  : "No description available"}
+                {/* //TODO: This would not have happened if the form didn't have default description as "" */}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
       {productWithSameStore.length > 0 && (
         <div className="overflow-hidden">
           <h2 className="line-clamp-1 text-2xl font-bold">

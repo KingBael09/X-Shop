@@ -111,7 +111,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
             {isUpdating && (
               <Icons.spinner
                 className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden="true"
+                aria-hidden
               />
             )}
             Update Store
@@ -127,7 +127,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
             {isDeleting && (
               <Icons.spinner
                 className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden="true"
+                aria-hidden
               />
             )}
             Delete Store

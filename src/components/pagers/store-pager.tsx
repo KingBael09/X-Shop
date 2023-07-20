@@ -20,7 +20,7 @@ export default function StorePager({ current, stores }: StorePagerProps) {
         replace
         href={`/dashboard/stores/${stores[currentIndex - 1]?.id as number}`}
       >
-        <Icons.chevronLeft className="h-5 w-5" aria-hidden="true" />
+        <Icons.chevronLeft className="h-5 w-5" aria-hidden />
         <span className="sr-only">Previous store</span>
       </ModLink>
       <ModLink
@@ -28,7 +28,7 @@ export default function StorePager({ current, stores }: StorePagerProps) {
         replace
         href={`/dashboard/stores/${stores[currentIndex + 1]?.id as number}`}
       >
-        <Icons.chevronRight className="h-5 w-5" aria-hidden="true" />
+        <Icons.chevronRight className="h-5 w-5" aria-hidden />
         <span className="sr-only">Next store</span>
       </ModLink>
     </div>

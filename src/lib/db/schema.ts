@@ -63,7 +63,7 @@ export const categoryRelations = relations(categories, ({ many }) => ({
 
 export const carts = sqliteTable("carts", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  userId: text("userId").notNull(),
+  userId: text("userId").notNull().unique(),
   items: blob("items", { mode: "json" })
     .$type<CartItem[] | null>()
     .default(null),

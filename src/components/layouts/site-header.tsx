@@ -69,20 +69,14 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                         href="/dashboard/account"
                         className="cursor-pointer"
                       >
-                        <Icons.user
-                          className="mr-2 h-4 w-4"
-                          aria-hidden="true"
-                        />
+                        <Icons.user className="mr-2 h-4 w-4" aria-hidden />
                         Account
                         <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link href="/dashboard/stores" className="cursor-pointer">
-                        <Icons.terminal
-                          className="mr-2 h-4 w-4"
-                          aria-hidden="true"
-                        />
+                        <Icons.terminal className="mr-2 h-4 w-4" aria-hidden />
                         Dashboard
                         <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
                       </Link>
@@ -92,10 +86,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                         href="/dashboard/settings"
                         className="cursor-pointer"
                       >
-                        <Icons.settings
-                          className="mr-2 h-4 w-4"
-                          aria-hidden="true"
-                        />
+                        <Icons.settings className="mr-2 h-4 w-4" aria-hidden />
                         Settings
                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                       </Link>
@@ -104,10 +95,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
                     <Link href="/signout" className="cursor-pointer">
-                      <Icons.logout
-                        className="mr-2 h-4 w-4"
-                        aria-hidden="true"
-                      />
+                      <Icons.logout className="mr-2 h-4 w-4" aria-hidden />
                       Log out
                       <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </Link>

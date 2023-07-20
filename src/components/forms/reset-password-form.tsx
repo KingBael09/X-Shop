@@ -84,10 +84,7 @@ export function ResetPasswordForm() {
         />
         <Button disabled={isPending}>
           {isPending && (
-            <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
           )}
           Continue
           <span className="sr-only">
@@ -195,10 +192,7 @@ export function ResetPasswordStep2Form() {
         />
         <Button disabled={isPending}>
           {isPending && (
-            <Icons.spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
           )}
           Reset password
           <span className="sr-only">Reset password</span>
