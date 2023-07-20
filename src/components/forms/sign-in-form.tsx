@@ -2,15 +2,7 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { useSignIn } from "@clerk/nextjs"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-
-import { catchClerkError } from "@/lib/utils"
-import { authSchema, type ZAuthSchema } from "@/lib/validations/auth"
-
-import { PasswordInput } from "../password-input"
-import { Button } from "../ui/button"
+import { Button } from "@/ui/button"
 import {
   Form,
   FormControl,
@@ -18,9 +10,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
-import { Icons } from "../util/icons"
+} from "@/ui/form"
+import { Input } from "@/ui/input"
+import { useSignIn } from "@clerk/nextjs"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+
+import { catchClerkError } from "@/lib/utils"
+import { authSchema, type ZAuthSchema } from "@/lib/validations/auth"
+import { Icons } from "@/components/util/icons"
+
+import { PasswordInput } from "../password-input"
 
 export function SignInForm() {
   const router = useRouter()

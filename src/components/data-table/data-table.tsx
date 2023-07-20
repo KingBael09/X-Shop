@@ -7,6 +7,14 @@ import type {
   DataTableSearchableColumn,
 } from "@/types"
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/ui/table"
+import {
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -24,14 +32,6 @@ import {
 
 import { useDebounce } from "@/hooks/use-debounce"
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../ui/table"
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
 

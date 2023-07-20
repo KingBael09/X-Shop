@@ -1,14 +1,15 @@
-import { Badge } from "../ui/badge"
-import { Button } from "../ui/button"
-import { Separator } from "../ui/separator"
+import { Badge } from "@/ui/badge"
+import { Button } from "@/ui/button"
+import { Separator } from "@/ui/separator"
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../ui/sheet"
-import { Icons } from "../util/icons"
+} from "@/ui/sheet"
+
+import { Icons } from "@/components/util/icons"
 
 export function CartSheet() {
   const itemCount = 5

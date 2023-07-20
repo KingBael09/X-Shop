@@ -5,8 +5,8 @@ export default function ProductsLoading() {
     <DataTableLoading
       columnCount={6}
       rowCount={5}
-      isNewRowCreatable={true}
-      isRowsDeletable={true}
+      isNewRowCreatable
+      isRowsDeletable
     />
   )
 }

@@ -1,10 +1,7 @@
 import * as React from "react"
 import type { Option } from "@/types"
-import { type Column } from "@tanstack/react-table"
-
-import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/ui/badge"
+import { Button } from "@/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -13,15 +10,13 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
+} from "@/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
+import { Separator } from "@/ui/separator"
+import { type Column } from "@tanstack/react-table"
 
-import { Icons } from "../util/icons"
+import { cn } from "@/lib/utils"
+import { Icons } from "@/components/util/icons"
 
 interface DataTableFacetedFilter<TData, TValue> {
   column?: Column<TData, TValue>

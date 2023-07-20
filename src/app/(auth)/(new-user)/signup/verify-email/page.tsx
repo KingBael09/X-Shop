@@ -1,13 +1,13 @@
 import { type Metadata } from "next"
 import { env } from "@/env.mjs"
-
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+
 import { VerifyEmailForm } from "@/components/forms/verify-email-form"
 
 export const metadata: Metadata = {

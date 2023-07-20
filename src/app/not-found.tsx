@@ -1,6 +1,5 @@
+import { ErrorCard } from "@/components/error-card"
 import { Shell } from "@/components/shells/shell"
-
-import { ErrorCard } from "../components/error-card"
 
 export default function NotFound() {
   return (

@@ -3,16 +3,15 @@
 import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import type { StoredFile } from "@/types"
+import { AspectRatio } from "@/ui/aspect-ratio"
+import { Button } from "@/ui/button"
 import useEmblaCarousel, {
   type EmblaCarouselType,
   type EmblaOptionsType,
 } from "embla-carousel-react"
 
 import { cn } from "@/lib/utils"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-
-import { Button } from "./ui/button"
-import { Icons } from "./util/icons"
+import { Icons } from "@/components/util/icons"
 
 //? See: https://www.embla-carousel.com
 
@@ -128,10 +127,7 @@ export function ProductImageCarousel({
             className="mr-0.5 aspect-square h-7 w-7 rounded-none sm:mr-2 sm:h-8 sm:w-8"
             onClick={scrollPrev}
           >
-            <Icons.chevronLeft
-              className="h-3 w-3 sm:h-4 sm:w-4"
-              aria-hidden="true"
-            />
+            <Icons.chevronLeft className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
             <span className="sr-only">Previous slide</span>
           </Button>
           {images.map((image, i) => (
@@ -164,10 +160,7 @@ export function ProductImageCarousel({
             className="ml-0.5 aspect-square h-7 w-7 rounded-none sm:ml-2 sm:h-8 sm:w-8"
             onClick={scrollNext}
           >
-            <Icons.chevronRight
-              className="h-3 w-3 sm:h-4 sm:w-4"
-              aria-hidden="true"
-            />
+            <Icons.chevronRight className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
             <span className="sr-only">Next slide</span>
           </Button>
         </div>

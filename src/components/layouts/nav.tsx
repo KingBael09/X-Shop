@@ -3,16 +3,15 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Accordion } from "@/ui/accordion"
+import { Button } from "@/ui/button"
+import { NavigationMenu, NavigationMenuList } from "@/ui/navigation-menu"
+import { ScrollArea } from "@/ui/scroll-area"
+import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-
-import { Accordion } from "../ui/accordion"
-import { Button } from "../ui/button"
-import { NavigationMenu, NavigationMenuList } from "../ui/navigation-menu"
-import { ScrollArea } from "../ui/scroll-area"
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
-import { Icons } from "../util/icons"
+import { Icons } from "@/components/util/icons"
 
 export function MainNav() {
   return (

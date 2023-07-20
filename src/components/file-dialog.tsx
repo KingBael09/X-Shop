@@ -5,6 +5,8 @@ import "cropperjs/dist/cropper.css"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import type { FileWithPreview } from "@/types"
+import { Button } from "@/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog"
 import Cropper, { type ReactCropperElement } from "react-cropper"
 import {
   useDropzone,
@@ -21,10 +23,7 @@ import type {
 import { toast } from "sonner"
 
 import { cn, formatBytes } from "@/lib/utils"
-
-import { Button } from "./ui/button"
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
-import { Icons } from "./util/icons"
+import { Icons } from "@/components/util/icons"
 
 interface FileDialogProps<TFieldValues extends FieldValues>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -302,10 +301,10 @@ function FileCard<TFieldValues extends FieldValues>({
                   minCropBoxHeight={10}
                   minCropBoxWidth={10}
                   background={false}
-                  responsive={true}
+                  responsive
                   autoCropArea={1}
                   checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
-                  guides={true}
+                  guides
                 />
                 <div className="flex items-center justify-center space-x-2">
                   <Button

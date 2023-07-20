@@ -1,9 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { env } from "@/env.mjs"
-
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/ui/button"
 import {
   Card,
   CardContent,
@@ -11,7 +9,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+
+import { cn } from "@/lib/utils"
 import { OAuthSignIn } from "@/components/auth/oauth-signin"
 import { SignUpForm } from "@/components/forms/sign-up-form"
 

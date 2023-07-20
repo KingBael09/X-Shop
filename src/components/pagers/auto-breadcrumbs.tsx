@@ -5,8 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 import { cn, toTitleCase } from "@/lib/utils"
-
-import { Icons } from "../util/icons"
+import { Icons } from "@/components/util/icons"
 
 interface AutoBreadCrumbProps extends HtmlHTMLAttributes<HTMLElement> {
   separator?: React.ComponentType<{ className?: string }>

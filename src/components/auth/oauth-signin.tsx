@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { Button } from "@/ui/button"
 import { isClerkAPIResponseError, useSignIn } from "@clerk/nextjs"
 import { type OAuthStrategy } from "@clerk/types"
 import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/util/icons"
 
 interface OAuthProviders {

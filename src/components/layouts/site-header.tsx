@@ -1,9 +1,5 @@
 import Link from "next/link"
-import type { User } from "@clerk/nextjs/dist/types/server"
-
-import { CartSheet } from "../cart/cart-sheet"
-import { ComboBox } from "../combo-box"
-import { Button, buttonVariants } from "../ui/button"
+import { Button, buttonVariants } from "@/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
+} from "@/ui/dropdown-menu"
+import type { User } from "@clerk/nextjs/dist/types/server"
+
+import { Icons } from "@/components/util/icons"
+
+import { CartSheet } from "../cart/cart-sheet"
+import { ComboBox } from "../combo-box"
 import UserAvatar from "../user-avatar"
-import { Icons } from "../util/icons"
 import { MainNav, MobileNav } from "./nav"
 
 interface SiteHeaderProps {

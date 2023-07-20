@@ -4,9 +4,10 @@ import { revalidatePath } from "next/cache"
 import { auth } from "@clerk/nextjs"
 import { and, eq, not } from "drizzle-orm"
 
+import { slugify } from "@/lib/utils"
+
 import { db } from "../db"
 import { products, stores } from "../db/schema"
-import { slugify } from "../utils"
 import type { ZStoreSchema } from "../validations/store"
 
 export async function addStoreAction(input: ZStoreSchema) {

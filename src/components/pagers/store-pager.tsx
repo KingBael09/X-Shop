@@ -1,6 +1,7 @@
+import { Icons } from "@/components/util/icons"
+
 import type { Store } from "../../lib/db/schema"
 import { ModLink } from "../mod-link"
-import { Icons } from "../util/icons"
 
 interface StorePagerProps {
   current: Pick<Store, "id" | "name">

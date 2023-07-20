@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation"
-import { and, eq, not } from "drizzle-orm"
-
-import { db } from "@/lib/db"
-import { products } from "@/lib/db/schema"
-import { formatPrice, toTitleCase } from "@/lib/utils"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Separator } from "@/components/ui/separator"
+} from "@/ui/accordion"
+import { Separator } from "@/ui/separator"
+import { and, eq, not } from "drizzle-orm"
+
+import { db } from "@/lib/db"
+import { products } from "@/lib/db/schema"
+import { formatPrice, toTitleCase } from "@/lib/utils"
 import { AddToCartForm } from "@/components/forms/add-to-cart-form"
 import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"

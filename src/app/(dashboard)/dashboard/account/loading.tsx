@@ -1,4 +1,5 @@
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/ui/skeleton"
+
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
 

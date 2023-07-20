@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
-
-import { Icons } from "./util/icons"
+import { Icons } from "@/components/util/icons"
 
 type ScrollIndicatorProps = React.HTMLAttributes<HTMLDivElement>
 

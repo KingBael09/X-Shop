@@ -1,15 +1,15 @@
 import { notFound } from "next/navigation"
-import { eq } from "drizzle-orm"
-
-import { db } from "@/lib/db"
-import { stores } from "@/lib/db/schema"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+import { eq } from "drizzle-orm"
+
+import { db } from "@/lib/db"
+import { stores } from "@/lib/db/schema"
 import { UpdateStoreForm } from "@/components/forms/update-store-form"
 
 interface StorePageProps {

@@ -1,16 +1,16 @@
 "use client"
 
-import type { Table } from "@tanstack/react-table"
-
-import { Button } from "../ui/button"
+import { Button } from "@/ui/button"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select"
-import { Icons } from "../util/icons"
+} from "@/ui/select"
+import type { Table } from "@tanstack/react-table"
+
+import { Icons } from "@/components/util/icons"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>

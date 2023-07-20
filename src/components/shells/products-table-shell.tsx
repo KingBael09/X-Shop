@@ -2,18 +2,9 @@
 
 import { useMemo, useState, useTransition } from "react"
 import Link from "next/link"
-import type { ColumnDef } from "@tanstack/react-table"
-import { toast } from "sonner"
-
-import { deleteProductAction } from "@/lib/actions/product"
-import type { Category, Product } from "@/lib/db/schema"
-import { catchError, formatDate, formatPrice } from "@/lib/utils"
-
-import { DataTable } from "../data-table/data-table"
-import { DataTableColumnHeader } from "../data-table/data-table-column-head"
-import { Badge } from "../ui/badge"
-import { Button } from "../ui/button"
-import { Checkbox } from "../ui/checkbox"
+import { Badge } from "@/ui/badge"
+import { Button } from "@/ui/button"
+import { Checkbox } from "@/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +12,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
-import { Icons } from "../util/icons"
+} from "@/ui/dropdown-menu"
+import type { ColumnDef } from "@tanstack/react-table"
+import { toast } from "sonner"
+
+import { deleteProductAction } from "@/lib/actions/product"
+import type { Category, Product } from "@/lib/db/schema"
+import { catchError, formatDate, formatPrice } from "@/lib/utils"
+import { Icons } from "@/components/util/icons"
+
+import { DataTable } from "../data-table/data-table"
+import { DataTableColumnHeader } from "../data-table/data-table-column-head"
 
 type Data = Product & { category: { name: string } }
 

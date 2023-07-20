@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import { env } from "@/env.mjs"
-
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+
 import { BackButton } from "@/components/back-button"
 import { AddStoreForm } from "@/components/forms/add-store-form"
 import { Header } from "@/components/header"

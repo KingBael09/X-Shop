@@ -1,6 +1,5 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/ui/avatar"
 import type { User } from "@clerk/nextjs/dist/types/server"
-
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 interface AvatarProps {
   user: User | null

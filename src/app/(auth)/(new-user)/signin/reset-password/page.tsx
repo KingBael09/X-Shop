@@ -1,13 +1,13 @@
 import { type Metadata } from "next"
 import { env } from "@/env.mjs"
-
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+
 import { ResetPasswordForm } from "@/components/forms/reset-password-form"
 
 export const metadata: Metadata = {

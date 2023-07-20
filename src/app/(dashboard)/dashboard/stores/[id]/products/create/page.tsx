@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
 import { env } from "@/env.mjs"
-
-import { db } from "@/lib/db"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+
+import { db } from "@/lib/db"
 import { AddProductForm } from "@/components/forms/add-product-form"
 
 interface NewProductPageProps {

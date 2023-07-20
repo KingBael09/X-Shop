@@ -1,4 +1,4 @@
-import { Metadata, ResolvingMetadata } from "next"
+import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"

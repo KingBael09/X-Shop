@@ -2,15 +2,7 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-
-import { addStoreAction } from "@/lib/actions/store"
-import { catchError } from "@/lib/utils"
-import { storeSchema, type ZStoreSchema } from "@/lib/validations/store"
-
-import { Button } from "../ui/button"
+import { Button } from "@/ui/button"
 import {
   Form,
   FormControl,
@@ -18,10 +10,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
-import { Textarea } from "../ui/textarea"
-import { Icons } from "../util/icons"
+} from "@/ui/form"
+import { Input } from "@/ui/input"
+import { Textarea } from "@/ui/textarea"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+
+import { addStoreAction } from "@/lib/actions/store"
+import { catchError } from "@/lib/utils"
+import { storeSchema, type ZStoreSchema } from "@/lib/validations/store"
+import { Icons } from "@/components/util/icons"
 
 export function AddStoreForm() {
   const router = useRouter()

@@ -2,6 +2,17 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { Button } from "@/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/ui/form"
+import { Input } from "@/ui/input"
+import { Textarea } from "@/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -10,19 +21,7 @@ import { deleteStoreAction, updateStoreAction } from "@/lib/actions/store"
 import type { Store } from "@/lib/db/schema"
 import { catchError } from "@/lib/utils"
 import { storeSchema, type ZStoreSchema } from "@/lib/validations/store"
-
-import { Button } from "../ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
-import { Textarea } from "../ui/textarea"
-import { Icons } from "../util/icons"
+import { Icons } from "@/components/util/icons"
 
 interface UpdateStoreProps {
   store: Pick<Store, "id" | "name" | "description">

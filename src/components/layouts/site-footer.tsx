@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { buttonVariants } from "@/ui/button"
 
 import { footerNav, siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -6,7 +7,6 @@ import { Shell } from "@/components/shells/shell"
 import { Icons } from "@/components/util/icons"
 
 import { ThemeToggle } from "../theme-toggle"
-import { buttonVariants } from "../ui/button"
 
 export function SiteFooter() {
   return (

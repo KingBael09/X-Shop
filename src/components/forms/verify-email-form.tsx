@@ -2,6 +2,16 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { Button } from "@/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/ui/form"
 import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -11,19 +21,9 @@ import {
   verfifyEmailSchema,
   type ZVerifyEmailSchema,
 } from "@/lib/validations/auth"
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import { Icons } from "@/components/util/icons"
 
 import { PasswordInput } from "../password-input"
-import { Icons } from "../util/icons"
 
 export function VerifyEmailForm() {
   const router = useRouter()

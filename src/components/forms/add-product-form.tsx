@@ -2,6 +2,26 @@
 
 import { useRef, useState, useTransition } from "react"
 import type { FileWithPreview } from "@/types"
+import { Button } from "@/ui/button"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "@/ui/command"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/ui/form"
+import { Input } from "@/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
+import { Separator } from "@/ui/separator"
+import { Textarea } from "@/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { generateReactHelpers } from "@uploadthing/react/hooks"
 import { useForm } from "react-hook-form"
@@ -11,34 +31,10 @@ import { addProductAction, checkProductAction } from "@/lib/actions/product"
 import type { Category } from "@/lib/db/schema"
 import { catchError, cn, isArrayOfFile } from "@/lib/utils"
 import { productSchema, type ZProductSchema } from "@/lib/validations/product"
-import { Button } from "@/components/ui/button"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
+import { Icons } from "@/components/util/icons"
 import type { OurFileRouter } from "@/app/api/uploadthing/core"
 
 import { FileDialog } from "../file-dialog"
-import { Icons } from "../util/icons"
 import { ExtraModals } from "./add-category-form"
 
 interface AddProductFormProps {

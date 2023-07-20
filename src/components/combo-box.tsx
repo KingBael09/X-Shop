@@ -2,12 +2,7 @@
 
 import { useCallback, useEffect, useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
-
-import type { Product } from "@/lib/db/schema"
-import { cn } from "@/lib/utils"
-import { useDebounce } from "@/hooks/use-debounce"
-
-import { Button } from "./ui/button"
+import { Button } from "@/ui/button"
 import {
   CommandDialog,
   CommandEmpty,
@@ -15,9 +10,13 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "./ui/command"
-import { Skeleton } from "./ui/skeleton"
-import { Icons } from "./util/icons"
+} from "@/ui/command"
+import { Skeleton } from "@/ui/skeleton"
+
+import type { Product } from "@/lib/db/schema"
+import { cn } from "@/lib/utils"
+import { useDebounce } from "@/hooks/use-debounce"
+import { Icons } from "@/components/util/icons"
 
 interface SearchResult {
   products: Pick<Product, "id" | "name">[]
