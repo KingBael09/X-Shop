@@ -40,3 +40,30 @@ export const productSchema = z.object({
 })
 
 export type ZProductSchema = z.infer<typeof productSchema>
+
+export const getProductSchema = z.object({
+  limit: z.number().min(0).default(10),
+  offset: z.number().min(0).default(0),
+  category_ids: z
+    .string()
+    .regex(/^\d+.\d+$/)
+    .optional()
+    .nullable(),
+  sort: z
+    .string()
+    .regex(/^\w+.(asc|desc)$/)
+    .optional()
+    .nullable(),
+  price_range: z
+    .string()
+    .regex(/^\d+-\d+$/)
+    .optional()
+    .nullable(),
+  store_ids: z
+    .string()
+    .regex(/^\d+.\d+$/)
+    .optional()
+    .nullable(),
+})
+
+export type ZGetProductSchema = z.infer<typeof getProductSchema>

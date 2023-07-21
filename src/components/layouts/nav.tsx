@@ -3,14 +3,14 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { Accordion } from "@/ui/accordion"
 import { Button } from "@/ui/button"
 import { NavigationMenu, NavigationMenuList } from "@/ui/navigation-menu"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet"
-
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
 import { Icons } from "@/components/util/icons"
 
 export function MainNav() {
@@ -104,7 +104,7 @@ export function SidebarNav({ items }: SideBarProps) {
             <span
               className={cn(
                 "group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:bg-muted hover:text-foreground",
-                pathname === item.href
+                pathname.startsWith(item.href)
                   ? "bg-muted font-medium text-foreground"
                   : "text-muted-foreground",
                 item.disabled && "pointer-events-none opacity-60"

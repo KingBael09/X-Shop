@@ -1,14 +1,25 @@
 import Image from "next/image"
 import Link from "next/link"
-import { AspectRatio } from "@/ui/aspect-ratio"
-import { buttonVariants } from "@/ui/button"
+import { desc, eq, sql } from "drizzle-orm"
 import { Balancer } from "react-wrap-balancer"
 
 import { primeCategories } from "@/config/products"
 import { siteConfig } from "@/config/site"
+import { db } from "@/lib/db"
+import { products, stores } from "@/lib/db/schema"
 import { cn } from "@/lib/utils"
+import { AspectRatio } from "@/ui/aspect-ratio"
+import { buttonVariants } from "@/ui/button"
+import { ProductCard } from "@/components/product-card"
 import { Scrollable } from "@/components/scrollable"
 import { Shell } from "@/components/shells/shell"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 function HeroSection() {
   return (
@@ -112,7 +123,27 @@ function CategoriesSection() {
   )
 }
 
-export default function LobbyPage() {
+export default async function LobbyPage() {
+  const allProducts = await db.query.products.findMany({
+    limit: 8,
+    orderBy: desc(products.categoryId),
+  })
+
+  const allStoresWithCount = await db
+    .select({
+      id: stores.id,
+      name: stores.name,
+      description: stores.description,
+      productCount: sql<number>`count(${products.id})`,
+    })
+    .from(stores)
+    .limit(4)
+    .leftJoin(products, eq(products.storeId, stores.id))
+    .having(sql`count(${products.id}) > 0`)
+    .groupBy(stores.id)
+    .orderBy(desc(sql<number>`count(${products.id})`))
+    .all()
+
   return (
     <Shell as="div" className="gap-12">
       <HeroSection />
@@ -149,12 +180,41 @@ export default function LobbyPage() {
             <span className="sr-only">View all products</span>
           </Link>
         </div>
-        <div>{/* Products Here */}</div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {allProducts.map((product) => (
+            <ProductCard enableAction key={product.id} product={product} />
+          ))}
+        </div>
       </section>
       <section aria-labelledby="featured-stores-heading" className="space-y-6">
         <h2 className="text-2xl font-medium sm:text-3xl">Featured stores</h2>
-        <div>{/* Stores Here */}</div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {allStoresWithCount.map((store) => (
+            <Card key={store.id}>
+              <CardHeader className="p-4">
+                <CardTitle>{store.name}</CardTitle>
+                {store.description && (
+                  <CardDescription>{store.description}</CardDescription>
+                )}
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <Link
+                  href={`/products?store_ids=${store.id}`}
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "w-full",
+                  })}
+                >
+                  View products ({store.productCount})
+                  <span className="sr-only">{`${store.name} store products`}</span>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
     </Shell>
   )
 }
+
+// TODO: radix/Slot is having problems related to aria-controls

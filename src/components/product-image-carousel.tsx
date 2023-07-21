@@ -3,15 +3,17 @@
 import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import type { StoredFile } from "@/types"
-import { AspectRatio } from "@/ui/aspect-ratio"
-import { Button } from "@/ui/button"
 import useEmblaCarousel, {
   type EmblaCarouselType,
   type EmblaOptionsType,
 } from "embla-carousel-react"
 
 import { cn } from "@/lib/utils"
+import { AspectRatio } from "@/ui/aspect-ratio"
+import { Button } from "@/ui/button"
 import { Icons } from "@/components/util/icons"
+
+import { ImagePlaceHolder } from "./no-image"
 
 //? See: https://www.embla-carousel.com
 
@@ -27,7 +29,7 @@ export function ProductImageCarousel({
   className,
   ...props
 }: ProductImageCarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ ...options, loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const scrollPrev = useCallback(
@@ -72,19 +74,7 @@ export function ProductImageCarousel({
   }, [emblaApi, onSelect])
 
   if (images.length === 0) {
-    return (
-      <div
-        aria-label="Product Placeholder"
-        role="img"
-        aria-roledescription="placeholder"
-        className="flex aspect-square h-full w-full flex-1 items-center justify-center bg-secondary"
-      >
-        <Icons.placeholder
-          className="h-9 w-9 text-muted-foreground"
-          aria-hidden
-        />
-      </div>
-    )
+    return <ImagePlaceHolder className="aspect-square md:w-[50%]" />
   }
   return (
     <div
@@ -103,16 +93,16 @@ export function ProductImageCarousel({
             <div className="relative min-w-0 flex-full pl-4" key={index}>
               <AspectRatio ratio={1}>
                 <Image
-                  aria-label={`Slide ${index + 1} of ${images.length}`}
-                  role="group"
+                  fill
                   key={index}
-                  aria-roledescription="slide"
+                  role="group"
                   src={image.url}
                   alt={image.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover"
                   priority={index === 0}
+                  className="object-cover"
+                  aria-label={`Slide ${index + 1} of ${images.length}`}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  aria-roledescription="slide"
                 />
               </AspectRatio>
             </div>
@@ -147,6 +137,7 @@ export function ProductImageCarousel({
                 src={image.url}
                 alt={image.name}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
                 fill
               />
               <span className="sr-only">

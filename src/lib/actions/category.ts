@@ -6,7 +6,7 @@ import { db } from "../db"
 import { categories } from "../db/schema"
 import type { ZCategorySchema } from "../validations/category"
 
-export async function AddCategoryAction(input: ZCategorySchema) {
+export async function addCategoryAction(input: ZCategorySchema) {
   const sameName = await db.query.categories.findFirst({
     where: eq(categories.name, input.name),
   })
@@ -26,7 +26,7 @@ interface AddSubCategoryActionInterface {
   subcategories: string[]
 }
 
-export async function AddSubCategoryAction(
+export async function addSubCategoryAction(
   input: AddSubCategoryActionInterface
 ) {
   await db

@@ -3,6 +3,19 @@
 import { useRef, useState, useTransition } from "react"
 // import { useRef, useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+
+import { addCategoryAction, addSubCategoryAction } from "@/lib/actions/category"
+import type { Category } from "@/lib/db/schema"
+import { catchError, cn } from "@/lib/utils"
+import {
+  categorySchema,
+  subCategorySchema,
+  type ZCategorySchema,
+  type ZSubCategorySchema,
+} from "@/lib/validations/category"
 import { Button } from "@/ui/button"
 import {
   Card,
@@ -29,19 +42,6 @@ import {
 } from "@/ui/form"
 import { Input } from "@/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-
-import { AddCategoryAction, AddSubCategoryAction } from "@/lib/actions/category"
-import type { Category } from "@/lib/db/schema"
-import { catchError, cn } from "@/lib/utils"
-import {
-  categorySchema,
-  subCategorySchema,
-  type ZCategorySchema,
-  type ZSubCategorySchema,
-} from "@/lib/validations/category"
 import { Icons } from "@/components/util/icons"
 
 import type { DialogState } from "./add-product-form"
@@ -106,7 +106,7 @@ export function AddCategoryForm({ setter }: AddCategoryFormProps) {
   function onSubmit(values: ZCategorySchema) {
     startTransition(async () => {
       try {
-        await AddCategoryAction(values)
+        await addCategoryAction(values)
         form.reset()
         router.refresh()
         toast.success("Category added successfully")
@@ -174,7 +174,7 @@ export function AddSubCategoryForm({
 
     startTransition(async () => {
       try {
-        await AddSubCategoryAction({
+        await addSubCategoryAction({
           categoryId,
           subcategories,
         })

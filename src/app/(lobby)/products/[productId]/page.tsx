@@ -1,4 +1,9 @@
 import { notFound } from "next/navigation"
+import { and, desc, eq, not } from "drizzle-orm"
+
+import { db } from "@/lib/db"
+import { products } from "@/lib/db/schema"
+import { formatPrice, toTitleCase } from "@/lib/utils"
 import {
   Accordion,
   AccordionContent,
@@ -6,14 +11,10 @@ import {
   AccordionTrigger,
 } from "@/ui/accordion"
 import { Separator } from "@/ui/separator"
-import { and, eq, not } from "drizzle-orm"
-
-import { db } from "@/lib/db"
-import { products } from "@/lib/db/schema"
-import { formatPrice, toTitleCase } from "@/lib/utils"
 import { AddToCartForm } from "@/components/forms/add-to-cart-form"
 import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
+import { ProductCard } from "@/components/product-card"
 import { ProductImageCarousel } from "@/components/product-image-carousel"
 import { Shell } from "@/components/shells/shell"
 
@@ -45,6 +46,7 @@ export default async function ProductPage({ params }: ProductPageParams) {
       not(eq(products.id, product.id))
     ),
     limit: 5,
+    orderBy: desc(products.createdAt),
   })
 
   const segments: BreadSegment[] = [
@@ -69,9 +71,6 @@ export default async function ProductPage({ params }: ProductPageParams) {
         <ProductImageCarousel
           className="w-full md:w-1/2"
           images={product.images ?? []}
-          options={{
-            loop: true,
-          }}
         />
         <div className="flex w-full flex-col gap-4 md:w-1/2">
           <div className="space-y-2">
@@ -111,14 +110,18 @@ export default async function ProductPage({ params }: ProductPageParams) {
         </div>
       </div>
       {productWithSameStore.length > 0 && (
-        <div className="overflow-hidden">
+        <div className="space-y-6 overflow-hidden">
           <h2 className="line-clamp-1 text-2xl font-bold">
             More products from {product.store.name}
           </h2>
           <div className="overflow-x-auto">
             <div className="flex gap-4">
               {productWithSameStore.map((prod) => (
-                <div key={prod.id}>{prod.name}</div>
+                <ProductCard
+                  key={prod.id}
+                  product={prod}
+                  className="min-w-[260px]"
+                />
               ))}
             </div>
           </div>

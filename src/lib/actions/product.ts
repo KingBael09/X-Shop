@@ -2,12 +2,59 @@
 
 import { revalidatePath } from "next/cache"
 import type { StoredFile } from "@/types"
-import { and, eq, not } from "drizzle-orm"
+import { and, asc, desc, eq, gte, inArray, lte, not, sql } from "drizzle-orm"
 import { utapi } from "uploadthing/server"
 
 import { db } from "../db"
-import { products } from "../db/schema"
-import type { ZProductSchema } from "../validations/product"
+import { products, type Product } from "../db/schema"
+import type { ZGetProductSchema, ZProductSchema } from "../validations/product"
+
+export async function getProductAction(input: ZGetProductSchema) {
+  const [column, order] =
+    (input.sort?.split(".") as [
+      keyof Product | undefined,
+      "asc" | "desc" | undefined,
+    ]) ?? []
+
+  const [minPrice, maxPrice] = input.price_range?.split("-") ?? []
+  const category_ids = input.category_ids?.split(".").map(Number) ?? []
+  const storeIds = input.store_ids?.split(".").map(Number) ?? []
+
+  const filter = and(
+    category_ids.length
+      ? inArray(products.categoryId, category_ids)
+      : undefined,
+    minPrice ? gte(products.price, Number(minPrice)) : undefined,
+    maxPrice ? lte(products.price, Number(maxPrice)) : undefined,
+    storeIds.length ? inArray(products.storeId, storeIds) : undefined
+  )
+
+  const { items, total } = await db.transaction(async (tx) => {
+    const items = await tx.query.products.findMany({
+      limit: input.limit,
+      offset: input.offset,
+      where: filter,
+      orderBy:
+        column && column in products
+          ? order === "asc"
+            ? asc(products[column])
+            : desc(products[column])
+          : desc(products.createdAt),
+    })
+
+    const total = await tx
+      .select({
+        count: sql<number>`count(${products.id})`,
+      })
+      .from(products)
+      .where(filter)
+      .all()
+
+    return { items, total: Number(total[0]?.count) ?? 0 }
+  })
+
+  return { items, total }
+}
 
 interface DeleteProductionActionInterface {
   id: number

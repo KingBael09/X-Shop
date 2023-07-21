@@ -1,0 +1,80 @@
+import { ImagePlaceHolder } from "@/components/no-image"
+import { Shell } from "@/components/shells/shell"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
+
+export default function ProductLoading() {
+  return (
+    <Shell>
+      <div className="flex items-center space-x-2">
+        <Skeleton className="h-6 w-14" />
+        <Skeleton className="h-6 w-14" />
+        <Skeleton className="h-6 w-14" />
+      </div>
+      <div className="flex flex-col gap-8 md:flex-row md:gap-16">
+        <div className="w-full md:w-1/2">
+          <div className="flex flex-col gap-2">
+            <ImagePlaceHolder className="aspect-square" />
+            <div className="flex w-full items-center justify-center gap-2">
+              <Skeleton className="h-7 w-7 rounded-none" />
+              {Array.from({ length: 3 }).map((_, i) => (
+                <Skeleton
+                  key={i}
+                  className="aspect-square h-full w-full max-w-[100px] rounded-none"
+                />
+              ))}
+              <Skeleton className="h-7 w-7 rounded-none" />
+            </div>
+          </div>
+        </div>
+        <div className="flex w-full flex-col gap-4 md:w-1/2">
+          <div className="space-y-2">
+            <Skeleton className="h-9 w-[50%]" />
+            <Skeleton className="h-6 w-14" />
+            <Skeleton className="h-6 w-[25%]" />
+          </div>
+          <Separator className="my-1.5" />
+          <div className="grid gap-4 sm:max-w-[240px]">
+            <div className="grid space-y-2">
+              <Skeleton className="h-5 w-12" />
+              <Skeleton className="h-9 w-full" />
+            </div>
+            <Skeleton className="h-9 w-full" />
+          </div>
+          <Separator className="mb-2.5 mt-5" />
+          <div className="flex items-center">
+            <Skeleton className="h-7 w-[25%]" />
+            <Skeleton className="ml-auto h-4 w-4" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+          </div>
+          <Separator className="mt-2.5" />
+        </div>
+      </div>
+      <div className="overflow-hidden md:pt-6">
+        <Skeleton className="h-9 w-14" />
+        <div className="overflow-x-auto pb-2 pt-6">
+          <div className="flex gap-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Card key={i} className="min-w-[260px] rounded-sm">
+                <CardHeader className="border-b p-0">
+                  <AspectRatio ratio={1}>
+                    <ImagePlaceHolder />
+                  </AspectRatio>
+                </CardHeader>
+                <CardContent className="grid gap-2.5 p-4">
+                  <Skeleton className="h-4 w-1/2" />
+                  <Skeleton className="h-4 w-1/4" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Shell>
+  )
+}

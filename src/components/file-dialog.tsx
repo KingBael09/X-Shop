@@ -5,8 +5,6 @@ import "cropperjs/dist/cropper.css"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import type { FileWithPreview } from "@/types"
-import { Button } from "@/ui/button"
-import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog"
 import Cropper, { type ReactCropperElement } from "react-cropper"
 import {
   useDropzone,
@@ -23,6 +21,8 @@ import type {
 import { toast } from "sonner"
 
 import { cn, formatBytes } from "@/lib/utils"
+import { Button } from "@/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog"
 import { Icons } from "@/components/util/icons"
 
 interface FileDialogProps<TFieldValues extends FieldValues>
@@ -280,7 +280,7 @@ function FileCard<TFieldValues extends FieldValues>({
                 size="sm"
                 className="h-7 w-7 p-0"
               >
-                <Icons.crop className="h-4 w-4 text-white" aria-hidden />
+                <Icons.crop className="h-4 w-4" aria-hidden />
                 <span className="sr-only">Crop image</span>
               </Button>
             </DialogTrigger>
@@ -359,7 +359,7 @@ function FileCard<TFieldValues extends FieldValues>({
             )
           }}
         >
-          <Icons.close className="h-4 w-4 text-white" aria-hidden />
+          <Icons.close className="h-4 w-4" aria-hidden />
           <span className="sr-only">Remove file</span>
         </Button>
       </div>

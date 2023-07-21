@@ -1,22 +1,31 @@
 import { forwardRef } from "react"
+import { Slot } from "@radix-ui/react-slot"
 
 import { cn } from "@/lib/utils"
 
+interface ExtraCardProps {
+  asChild?: boolean
+  as?: "div" | "section" | "article"
+}
+
 const Card = forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    as?: "div" | "section" | "article"
-  }
->(({ className, as: Comp = "div", ...props }, ref) => (
-  <Comp
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
+  React.HTMLAttributes<HTMLDivElement> & ExtraCardProps
+>(
+  (
+    { className, asChild = false, as: Comp = asChild ? Slot : "div", ...props },
+    ref
+  ) => (
+    <Comp
+      ref={ref}
+      className={cn(
+        "rounded-lg border bg-card text-card-foreground shadow-sm",
+        className
+      )}
+      {...props}
+    />
+  )
+)
 Card.displayName = "Card"
 
 const CardHeader = forwardRef<
