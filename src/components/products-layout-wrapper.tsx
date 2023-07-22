@@ -10,9 +10,6 @@ import { sortOptions } from "@/config/products"
 import { type Category } from "@/lib/db/schema"
 import { cn } from "@/lib/utils"
 import { useDebounce } from "@/hooks/use-debounce"
-
-import { PaginationButton } from "./pagination-button"
-import { Button } from "./ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,17 +17,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
-import { Input } from "./ui/input"
-import { Separator } from "./ui/separator"
+} from "@/ui/dropdown-menu"
+import { Input } from "@/ui/input"
+import { Separator } from "@/ui/separator"
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet"
-import { Slider } from "./ui/slider"
+} from "@/ui/sheet"
+import { Slider } from "@/ui/slider"
+
+import { PaginationButton } from "./pagination-button"
+import { Button } from "./ui/button"
+import { Checkbox } from "./ui/checkbox"
+import { Label } from "./ui/label"
+import { Popover, PopoverTrigger } from "./ui/popover"
+import { ScrollArea } from "./ui/scroll-area"
 import { Icons } from "./util/icons"
 
 interface ProductsLayoutWrapperProps extends LayoutProps {
@@ -42,6 +47,7 @@ interface ProductsLayoutWrapperProps extends LayoutProps {
     name: string
     productCount: number
   }[]
+  storePageCount?: number
 }
 
 export type Params = Record<string, string | number | null>
@@ -52,6 +58,7 @@ export function ProductsLayoutWrapper({
   pageCount,
   categories,
   stores,
+  storePageCount,
 }: ProductsLayoutWrapperProps) {
   const router = useRouter()
   const pathname = usePathname()
@@ -139,59 +146,171 @@ export function ProductsLayoutWrapper({
             </SheetHeader>
             <Separator />
             <div className="flex flex-1 flex-col gap-5 overflow-hidden px-1">
-              <h3 className="text-sm font-medium tracking-wide text-foreground">
-                Price range (₹)
-              </h3>
-              <Slider
-                variant="range"
-                thickness="thin"
-                defaultValue={[0, 10000]}
-                max={10000}
-                step={500}
-                value={priceRange}
-                onValueChange={(value: typeof priceRange) => {
-                  setPriceRange(value)
-                }}
-              />
-              <div className="flex items-center space-x-4">
-                <Input
-                  type="number"
-                  inputMode="numeric"
-                  min={0}
-                  max={priceRange[1]}
-                  className="h-9"
-                  value={priceRange[0]}
-                  onChange={(e) => {
-                    const value = Number(e.target.value)
-                    setPriceRange([value, priceRange[1]])
+              <div className="space-y-4">
+                <h3 className="text-sm font-medium tracking-wide text-foreground">
+                  Price range (₹)
+                </h3>
+                <Slider
+                  variant="range"
+                  thickness="thin"
+                  defaultValue={[0, 10000]}
+                  max={10000}
+                  step={500}
+                  value={priceRange}
+                  onValueChange={(value: typeof priceRange) => {
+                    setPriceRange(value)
                   }}
                 />
-                <span className="text-muted-foreground">-</span>
-                <Input
-                  type="number"
-                  inputMode="numeric"
-                  min={priceRange[0]}
-                  max={500}
-                  className="h-9"
-                  value={priceRange[1]}
-                  onChange={(e) => {
-                    const value = Number(e.target.value)
-                    setPriceRange([priceRange[0], value])
-                  }}
-                />
+                <div className="flex items-center space-x-4">
+                  <Input
+                    type="number"
+                    inputMode="numeric"
+                    min={0}
+                    max={priceRange[1]}
+                    className="h-9"
+                    value={priceRange[0]}
+                    onChange={(e) => {
+                      const value = Number(e.target.value)
+                      setPriceRange([value, priceRange[1]])
+                    }}
+                  />
+                  <span className="text-muted-foreground">-</span>
+                  <Input
+                    type="number"
+                    inputMode="numeric"
+                    min={priceRange[0]}
+                    max={500}
+                    className="h-9"
+                    value={priceRange[1]}
+                    onChange={(e) => {
+                      const value = Number(e.target.value)
+                      setPriceRange([priceRange[0], value])
+                    }}
+                  />
+                </div>
               </div>
+              {categories.length ? (
+                <div className="space-y-4">
+                  <h3 className="text-sm font-medium tracking-wide text-foreground">
+                    Categories
+                  </h3>
+                  {/* // TODO: Category multiselect here */}
+                </div>
+              ) : null}
+              {stores.length ? (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <h3 className="flex-1 text-sm font-medium tracking-wide text-foreground">
+                      Stores
+                    </h3>
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          startTransition(() => {
+                            router.push(
+                              `${pathname}?${createQueryString({
+                                store_page: Number(store_page) - 1,
+                              })}`
+                            )
+                          })
+                        }}
+                        disabled={Number(store_page) === 1 || isPending}
+                      >
+                        <Icons.chevronLeft
+                          className="h-4 w-4"
+                          aria-hidden="true"
+                        />
+                        <span className="sr-only">Previous store page</span>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          startTransition(() => {
+                            router.push(
+                              `${pathname}?${createQueryString({
+                                store_page: Number(store_page) + 1,
+                              })}`
+                            )
+                          })
+                        }}
+                        disabled={
+                          Number(store_page) === storePageCount || isPending
+                        }
+                      >
+                        <Icons.chevronRight
+                          className="h-4 w-4"
+                          aria-hidden="true"
+                        />
+                        <span className="sr-only">Next store page</span>
+                      </Button>
+                    </div>
+                  </div>
+                  <ScrollArea className="h-96">
+                    <div className="space-y-4">
+                      {stores.map((store) => (
+                        <div
+                          key={store.id}
+                          className="flex items-center space-x-2"
+                        >
+                          <Checkbox
+                            id={`store-${store.id}`}
+                            checked={storeIds?.includes(store.id) ?? false}
+                            onCheckedChange={(value) => {
+                              if (value) {
+                                setStoreIds([...(storeIds ?? []), store.id])
+                              } else {
+                                setStoreIds(
+                                  storeIds?.filter((id) => id !== store.id) ??
+                                    null
+                                )
+                              }
+                            }}
+                          />
+                          <Label
+                            htmlFor={`store-${store.id}`}
+                            className="line-clamp-1 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            {store.name}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </div>
+              ) : null}
             </div>
-            {categories.length ? (
-              // <MultiSelector
-              //   value={categoryIds}
-              //   onSelect={setCategoryIds}
-              //   options={categories.map((c) => ({
-              //     label: toTitleCase(c.name),
-              //     value: String(c.id),
-              //   }))}
-              // />
-              <></>
-            ) : null}
+            <div>
+              <Separator className="my-4" />
+              <SheetFooter>
+                <Button
+                  aria-label="Clear filters"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push(
+                        `${pathname}?${createQueryString({
+                          price_range: 0 - 100,
+                          store_ids: null,
+                          categories: null,
+                          subcategories: null,
+                        })}`
+                      )
+
+                      setPriceRange([0, 100])
+                      setCategoryIds(null)
+                      setStoreIds(null)
+                    })
+                  }}
+                  disabled={isPending}
+                >
+                  Clear Filters
+                </Button>
+              </SheetFooter>
+            </div>
           </SheetContent>
         </Sheet>
         <DropdownMenu>
