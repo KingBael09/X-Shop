@@ -1,5 +1,6 @@
 import { getProductAction } from "@/lib/actions/product"
 import { getStoresAction } from "@/lib/actions/store"
+import { db } from "@/lib/db"
 import { Header } from "@/components/header"
 import { ProductCard } from "@/components/product-card"
 import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
@@ -31,6 +32,8 @@ export default async function AllProductsPage({
 
   const storePageCount = Math.ceil(storeQty / storesLimit)
 
+  const categories = await db.query.categories.findMany()
+
   return (
     <Shell>
       <Header
@@ -38,7 +41,12 @@ export default async function AllProductsPage({
         description="Buy products from our stores"
         size="sm"
       />
-      <ProductsLayoutWrapper items={products.length}>
+      <ProductsLayoutWrapper
+        categories={categories}
+        stores={stores}
+        items={products.length}
+        pageCount={pageCount}
+      >
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <ProductCard enableAction key={product.id} product={product} />
@@ -49,10 +57,12 @@ export default async function AllProductsPage({
   )
 }
 
+// TODO: Clear filter causes layout shift -> set min-h to !nav
+
 /**
  * This requires the follwing params
  * - page
- * - per_page
+ * - per_page -> limit
  * - sort
  * - category_ids
  * - price_range

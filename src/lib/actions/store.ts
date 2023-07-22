@@ -7,7 +7,7 @@ import { and, asc, desc, eq, not, sql } from "drizzle-orm"
 import { slugify } from "@/lib/utils"
 
 import { db } from "../db"
-import { products, Store, stores } from "../db/schema"
+import { products, stores, type Store } from "../db/schema"
 import type { ZStoreSchema } from "../validations/store"
 
 interface GetStoreActionInterface {
