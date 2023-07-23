@@ -79,6 +79,16 @@
   }
 }
 
+@layer components {
+  .zoom-image [data-rmiz-modal-overlay="visible"] {
+    @apply bg-background/10 backdrop-blur;
+  }
+
+  .zoom-image [data-rmiz-modal-img] {
+    @apply cursor-auto rounded-md lg:rounded-2xl;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

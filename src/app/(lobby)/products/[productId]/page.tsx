@@ -56,7 +56,7 @@ export default async function ProductPage({ params }: ProductPageParams) {
     },
     {
       title: toTitleCase(product.store.name),
-      href: `/products?category=${product.category.name}`,
+      href: `/products?store_ids=${product.storeId}`,
     },
     {
       title: product.name,

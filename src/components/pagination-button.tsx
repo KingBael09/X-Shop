@@ -1,12 +1,12 @@
 "use client"
 
 import { useMemo, useTransition } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import { cn } from "@/lib/utils"
+import { useQueryString } from "@/hooks/use-query-string"
 import { Button } from "@/ui/button"
 
-import type { Params } from "./products-layout-wrapper"
 import { Icons } from "./util/icons"
 
 interface PaginationButtonProps
@@ -17,7 +17,6 @@ interface PaginationButtonProps
   pageCount: number
   isPending: boolean
   siblingCount?: number
-  createQueryString: (params: Params) => string
 }
 
 export function PaginationButton({
@@ -25,7 +24,6 @@ export function PaginationButton({
   page,
   per_page,
   pageCount,
-  createQueryString,
   siblingCount = 1,
   isPending: parentPending,
   className,
@@ -33,9 +31,10 @@ export function PaginationButton({
 }: PaginationButtonProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const [isCurrentPending, startTransition] = useTransition()
 
-  const isPending = isCurrentPending || parentPending
+  const createQueryString = useQueryString(searchParams)
 
   //  Memoizing pagination value to avoid rerendering
   const paginationRange = useMemo(() => {
@@ -64,6 +63,9 @@ export function PaginationButton({
 
     return range
   }, [pageCount, page, siblingCount])
+
+  const isPending = isCurrentPending || parentPending
+
   return (
     <div
       className={cn(

@@ -105,3 +105,12 @@ export const footerNav = [
 ] satisfies FooterItem[]
 
 export const FreeTierStoreLimit = 3
+
+/**
+ * This determines the filter price range for the products
+ */
+export const filterPriceRange = {
+  lower: 0,
+  upper: 10000,
+  step: 500, // determines the step size of the slider
+}

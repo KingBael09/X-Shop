@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 
-import { useCallback, useEffect, useState, useTransition } from "react"
+import { useEffect, useState, useTransition } from "react"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import type { LayoutProps } from "@/types"
 
 import { sortOptions } from "@/config/products"
-import { type Category } from "@/lib/db/schema"
+import { filterPriceRange } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { useDebounce } from "@/hooks/use-debounce"
+import { useQueryString } from "@/hooks/use-query-string"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,27 +31,29 @@ import {
 } from "@/ui/sheet"
 import { Slider } from "@/ui/slider"
 
+import { MultiSelect } from "./multi-select"
 import { PaginationButton } from "./pagination-button"
 import { Button } from "./ui/button"
 import { Checkbox } from "./ui/checkbox"
 import { Label } from "./ui/label"
-import { Popover, PopoverTrigger } from "./ui/popover"
 import { ScrollArea } from "./ui/scroll-area"
 import { Icons } from "./util/icons"
 
+interface StoreWithCount {
+  id: number
+  name: string
+  productCount: number
+}
 interface ProductsLayoutWrapperProps extends LayoutProps {
   items: number
   pageCount: number
-  categories: Category[]
-  stores: {
-    id: number
-    name: string
-    productCount: number
+  categories: {
+    label: string
+    value: number
   }[]
+  stores: StoreWithCount[]
   storePageCount?: number
 }
-
-export type Params = Record<string, string | number | null>
 
 export function ProductsLayoutWrapper({
   children,
@@ -72,23 +75,12 @@ export function ProductsLayoutWrapper({
   const store_page = searchParams?.get("store_page") ?? "1"
   const category_ids = searchParams?.get("category_ids")
 
-  const createQueryString = useCallback(
-    (params: Params) => {
-      const newSearchParams = new URLSearchParams(searchParams.toString())
-      for (const [key, value] of Object.entries(params)) {
-        if (value === null) {
-          newSearchParams.delete(key)
-        } else {
-          newSearchParams.set(key, String(value))
-        }
-      }
+  const createQueryString = useQueryString(searchParams)
 
-      return newSearchParams.toString()
-    },
-    [searchParams]
-  )
-
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000])
+  const [priceRange, setPriceRange] = useState<[number, number]>([
+    filterPriceRange.lower,
+    filterPriceRange.upper,
+  ])
   const debouncedPrice = useDebounce(priceRange, 600)
 
   useEffect(() => {
@@ -153,9 +145,12 @@ export function ProductsLayoutWrapper({
                 <Slider
                   variant="range"
                   thickness="thin"
-                  defaultValue={[0, 10000]}
-                  max={10000}
-                  step={500}
+                  defaultValue={[
+                    filterPriceRange.lower,
+                    filterPriceRange.upper,
+                  ]}
+                  max={filterPriceRange.upper}
+                  step={filterPriceRange.step}
                   value={priceRange}
                   onValueChange={(value: typeof priceRange) => {
                     setPriceRange(value)
@@ -194,7 +189,12 @@ export function ProductsLayoutWrapper({
                   <h3 className="text-sm font-medium tracking-wide text-foreground">
                     Categories
                   </h3>
-                  {/* // TODO: Category multiselect here */}
+                  <MultiSelect
+                    value={categoryIds}
+                    onValueChange={setCategoryIds}
+                    options={categories}
+                    placeholder="Select categories"
+                  />
                 </div>
               ) : null}
               {stores.length ? (
@@ -293,14 +293,16 @@ export function ProductsLayoutWrapper({
                     startTransition(() => {
                       router.push(
                         `${pathname}?${createQueryString({
-                          price_range: 0 - 100,
+                          price_range: `${filterPriceRange.lower}-${filterPriceRange.upper}`,
                           store_ids: null,
                           categories: null,
                           subcategories: null,
                         })}`
                       )
-
-                      setPriceRange([0, 100])
+                      setPriceRange([
+                        filterPriceRange.lower,
+                        filterPriceRange.upper,
+                      ])
                       setCategoryIds(null)
                       setStoreIds(null)
                     })
@@ -373,11 +375,8 @@ export function ProductsLayoutWrapper({
           per_page={per_page}
           pageCount={pageCount}
           isPending={isPending}
-          createQueryString={createQueryString}
         />
       ) : null}
     </div>
   )
 }
-
-// TODO : Globalize createQuery hook

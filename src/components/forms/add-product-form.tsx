@@ -1,7 +1,17 @@
 "use client"
 
 import { useRef, useState, useTransition } from "react"
+import Image from "next/image"
 import type { FileWithPreview } from "@/types"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { generateReactHelpers } from "@uploadthing/react/hooks"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+
+import { addProductAction, checkProductAction } from "@/lib/actions/product"
+import type { Category } from "@/lib/db/schema"
+import { catchError, cn, isArrayOfFile, toTitleCase } from "@/lib/utils"
+import { productSchema, type ZProductSchema } from "@/lib/validations/product"
 import { Button } from "@/ui/button"
 import {
   Command,
@@ -22,19 +32,11 @@ import { Input } from "@/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
 import { Separator } from "@/ui/separator"
 import { Textarea } from "@/ui/textarea"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { generateReactHelpers } from "@uploadthing/react/hooks"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-
-import { addProductAction, checkProductAction } from "@/lib/actions/product"
-import type { Category } from "@/lib/db/schema"
-import { catchError, cn, isArrayOfFile } from "@/lib/utils"
-import { productSchema, type ZProductSchema } from "@/lib/validations/product"
 import { Icons } from "@/components/util/icons"
 import type { OurFileRouter } from "@/app/api/uploadthing/core"
 
 import { FileDialog } from "../file-dialog"
+import { Zoom } from "../zoom-image"
 import { ExtraModals } from "./add-category-form"
 
 interface AddProductFormProps {
@@ -106,6 +108,8 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
     categories.find(
       (category) => category.id === Number(form.watch("categoryId"))
     )?.subcategories ?? []
+
+  const previews = form.watch("images") as FileWithPreview[] | null
 
   const [open, setOpen] = useState<DialogState>({
     target: "",
@@ -209,7 +213,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                         : "opacity-0"
                                     )}
                                   />
-                                  {category.name}
+                                  {toTitleCase(category.name)}
                                 </CommandItem>
                               ))}
                             </CommandGroup>
@@ -291,7 +295,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                         : "opacity-0"
                                     )}
                                   />
-                                  {subcategory}
+                                  {toTitleCase(subcategory)}
                                 </CommandItem>
                               ))}
                             </CommandGroup>
@@ -365,20 +369,35 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
               return (
                 <FormItem>
                   <FormLabel>Images</FormLabel>
-                  <div className="w-full">
-                    <FormControl>
-                      <FileDialog
-                        setValue={form.setValue}
-                        name="images"
-                        maxFiles={3}
-                        maxSize={1024 * 1024 * 4}
-                        files={files}
-                        setFiles={setFiles}
-                        isUploading={isUploading}
-                        disabled={isPending}
-                      />
-                    </FormControl>
-                  </div>
+                  {/* <div className="w-full"> */}
+                  {!isUploading && previews?.length ? (
+                    <div className="flex items-center gap-2">
+                      {previews.map((file) => (
+                        <Zoom key={file.name}>
+                          <Image
+                            src={file.preview}
+                            alt={file.name}
+                            className="h-20 w-20 shrink-0 rounded-md object-cover object-center"
+                            width={80}
+                            height={80}
+                          />
+                        </Zoom>
+                      ))}
+                    </div>
+                  ) : null}
+                  <FormControl>
+                    <FileDialog
+                      setValue={form.setValue}
+                      name="images"
+                      maxFiles={3}
+                      maxSize={1024 * 1024 * 4}
+                      files={files}
+                      setFiles={setFiles}
+                      isUploading={isUploading}
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  {/* </div> */}
                   <FormMessage />
                 </FormItem>
               )

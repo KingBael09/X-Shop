@@ -1,6 +1,7 @@
 import { getProductAction } from "@/lib/actions/product"
 import { getStoresAction } from "@/lib/actions/store"
 import { db } from "@/lib/db"
+import { toTitleCase } from "@/lib/utils"
 import { Header } from "@/components/header"
 import { ProductCard } from "@/components/product-card"
 import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
@@ -34,6 +35,11 @@ export default async function AllProductsPage({
 
   const categories = await db.query.categories.findMany()
 
+  const shapedCategories = categories.map((c) => ({
+    label: toTitleCase(c.name),
+    value: c.id,
+  }))
+
   return (
     <Shell>
       <Header
@@ -42,7 +48,7 @@ export default async function AllProductsPage({
         size="sm"
       />
       <ProductsLayoutWrapper
-        categories={categories}
+        categories={shapedCategories}
         stores={stores}
         items={products.length}
         pageCount={pageCount}
@@ -82,7 +88,9 @@ function getParams(searchParams: SearchParams) {
   const sort = typeof searchParams.sort === "string" ? searchParams.sort : null
 
   const category_ids =
-    typeof searchParams.categories === "string" ? searchParams.categories : null
+    typeof searchParams.category_ids === "string"
+      ? searchParams.category_ids
+      : null
   const price_range =
     typeof searchParams.price_range === "string"
       ? searchParams.price_range

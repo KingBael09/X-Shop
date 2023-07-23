@@ -9,7 +9,7 @@ import { toast } from "sonner"
 
 import { addCategoryAction, addSubCategoryAction } from "@/lib/actions/category"
 import type { Category } from "@/lib/db/schema"
-import { catchError, cn } from "@/lib/utils"
+import { catchError, cn, toTitleCase } from "@/lib/utils"
 import {
   categorySchema,
   subCategorySchema,
@@ -245,7 +245,7 @@ export function AddSubCategoryForm({
                                     : "opacity-0"
                                 )}
                               />
-                              {category.name}
+                              {toTitleCase(category.name)}
                             </CommandItem>
                           ))}
                         </CommandGroup>

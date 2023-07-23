@@ -1,12 +1,15 @@
 import { Skeleton } from "@/ui/skeleton"
-
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
 
 export default function AccountLoading() {
   return (
     <Shell variant="sidebar">
-      <Header title="Stores" description="Manage your stores." size="sm" />
+      <Header
+        title="Account"
+        description="Manage your account settings"
+        size="sm"
+      />
       <div className="grid gap-10 rounded-lg border p-4">
         <div className="space-y-2">
           <Skeleton className="h-5 w-20" />

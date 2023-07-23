@@ -23,9 +23,7 @@ export function UserProfile() {
     <ClerkUserProfile
       appearance={{
         ...appearance,
-        baseTheme: (theme === "dark"
-          ? dark
-          : appearance.baseTheme) as BaseThemeTaggedType,
+        baseTheme: theme === "dark" ? dark : appearance.baseTheme,
         variables: {
           colorBackground: "transparent",
         },

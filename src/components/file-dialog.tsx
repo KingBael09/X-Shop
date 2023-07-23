@@ -225,16 +225,27 @@ function FileCard<TFieldValues extends FieldValues>({
   // Crop image
   const onCrop = useCallback(() => {
     if (!files || !cropperRef.current) return
-    setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL())
+    const croppedCanvas = cropperRef.current?.cropper.getCroppedCanvas()
+    setCropData(croppedCanvas.toDataURL())
 
-    cropperRef.current?.cropper.getCroppedCanvas().toBlob((blob) => {
-      if (!blob) return
+    croppedCanvas.toBlob((blob) => {
+      if (!blob) {
+        console.error("Blob creation failed")
+        return
+      }
       const croppedImage = new File([blob], file.name, {
         type: file.type,
         lastModified: Date.now(),
       })
-      files.splice(i, 1, croppedImage as FileWithPreview)
-      setValue(name, files as PathValue<TFieldValues, Path<TFieldValues>>)
+
+      const croppedFileWithPathAndPreview = Object.assign(croppedImage, {
+        preview: URL.createObjectURL(croppedImage),
+        path: file.name,
+      }) satisfies FileWithPreview
+
+      const newFiles = [...files]
+      newFiles.splice(i, 1, croppedFileWithPathAndPreview)
+      setValue(name, newFiles as PathValue<TFieldValues, Path<TFieldValues>>)
     })
   }, [file.name, file.type, files, i, name, setValue])
 
@@ -371,3 +382,5 @@ function FileCard<TFieldValues extends FieldValues>({
 // TODO: THis throws with local file /* setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL()) */
 
 // TODO: Change file name incase of crop
+
+// TODO: FIXME Your proposed upload exceeds the maximum allowed size, this should trigger toast.error too

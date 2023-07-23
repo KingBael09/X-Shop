@@ -1,19 +1,11 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import type {
   DataTableFilterableColumn,
   DataTableSearchableColumn,
 } from "@/types"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/ui/table"
 import {
   flexRender,
   getCoreRowModel,
@@ -31,6 +23,15 @@ import {
 } from "@tanstack/react-table"
 
 import { useDebounce } from "@/hooks/use-debounce"
+import { useQueryString } from "@/hooks/use-query-string"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/ui/table"
 
 import { DataTablePagination } from "./data-table-pagination"
 import { DataTableToolbar } from "./data-table-toolbar"
@@ -44,8 +45,6 @@ interface DataTableProps<TData, TValue> {
   newRowLink?: string
   deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
 }
-
-type QueryParams = Record<string, string | number | null>
 
 export function DataTable<TData, TValue>({
   columns,
@@ -66,23 +65,7 @@ export function DataTable<TData, TValue>({
   const sort = searchParams.get("sort")
   const [column, order] = sort?.split(".") ?? []
 
-  // make queryparam after filtering + wrap in callback, i.e only called if searchParams change
-  const createQueryString = useCallback(
-    (params: QueryParams) => {
-      const newSearchParams = new URLSearchParams(searchParams?.toString())
-
-      for (const [key, value] of Object.entries(params)) {
-        if (value === null) {
-          newSearchParams.delete(key)
-        } else {
-          newSearchParams.set(key, String(value))
-        }
-      }
-
-      return newSearchParams.toString()
-    },
-    [searchParams]
-  )
+  const createQueryString = useQueryString(searchParams)
 
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
