@@ -1,3 +1,5 @@
+import { setTimeout } from "timers/promises"
+
 import { getProductAction } from "@/lib/actions/product"
 import { getStoresAction } from "@/lib/actions/store"
 import { db } from "@/lib/db"

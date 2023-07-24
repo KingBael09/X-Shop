@@ -5,6 +5,7 @@ import type { Product } from "@/lib/db/schema"
 import { cn, formatPrice } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
 
+import { AddToCartButton } from "./cutom/product-add-to-cart-button"
 import { ImagePlaceHolder } from "./no-image"
 import { Button } from "./ui/button"
 import {
@@ -70,7 +71,9 @@ export function ProductCard({
           <Button className="w-full" variant="outline">
             Preview
           </Button>
-          <Button className="w-full">Add to Cart</Button>
+          <AddToCartButton productId={String(product.id)} className="w-full">
+            Add to Cart
+          </AddToCartButton>
         </CardFooter>
       )}
     </Card>

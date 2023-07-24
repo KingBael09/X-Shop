@@ -28,9 +28,8 @@ export const products = sqliteTable("products", {
   price: real("price").notNull().default(0),
   rating: integer("rating").$type<Rating>().notNull().default(0),
   tags: blob("tags", { mode: "json" }).$type<string[] | null>().default(null),
-  categoryId: integer("categoryId")
-    .notNull()
-    .references(() => categories.id),
+  categoryId: integer("categoryId").notNull(),
+  // .references(() => categories.id),
   subcategory: text("subcategory"),
   inventory: integer("inventory").notNull().default(0),
   storeId: integer("storeId").notNull(),

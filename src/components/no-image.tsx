@@ -1,11 +1,17 @@
+import { LucideProps } from "lucide-react"
+
 import { cn } from "@/lib/utils"
 
 import { Icons } from "./util/icons"
 
-type ImagePlaceHolderProps = React.HtmlHTMLAttributes<HTMLDivElement>
+interface ImagePlaceHolderProps
+  extends React.HtmlHTMLAttributes<HTMLDivElement> {
+  iconProps?: LucideProps
+}
 
 export function ImagePlaceHolder({
   className,
+  iconProps,
   ...props
 }: ImagePlaceHolderProps) {
   return (
@@ -20,7 +26,8 @@ export function ImagePlaceHolder({
       {...props}
     >
       <Icons.placeholder
-        className="h-9 w-9 text-muted-foreground"
+        {...iconProps}
+        className={cn("h-9 w-9 text-muted-foreground", iconProps?.className)}
         aria-hidden="true"
       />
     </div>
