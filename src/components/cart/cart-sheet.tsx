@@ -2,7 +2,7 @@ import Image from "next/image"
 import { currentUser } from "@clerk/nextjs"
 
 import { getCartAction } from "@/lib/actions/cart"
-import { cn, formatPrice } from "@/lib/utils"
+import { formatPrice } from "@/lib/utils"
 import { Badge } from "@/ui/badge"
 import { Button } from "@/ui/button"
 import { Separator } from "@/ui/separator"

@@ -4,17 +4,17 @@ import Link from "next/link"
 import type { Product } from "@/lib/db/schema"
 import { cn, formatPrice } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
-
-import { AddToCartButton } from "./cutom/product-add-to-cart-button"
-import { ImagePlaceHolder } from "./no-image"
-import { Button } from "./ui/button"
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card"
+} from "@/ui/card"
+
+import { AddToCartButton } from "./custom/product-add-to-cart-button"
+import { ImagePlaceHolder } from "./no-image"
+import { Button } from "./ui/button"
 import { Icons } from "./util/icons"
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
