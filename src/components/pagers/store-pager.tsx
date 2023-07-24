@@ -1,6 +1,6 @@
+import type { Store } from "@/lib/db/schema"
 import { Icons } from "@/components/util/icons"
 
-import type { Store } from "../../lib/db/schema"
 import { ModLink } from "../mod-link"
 
 interface StorePagerProps {

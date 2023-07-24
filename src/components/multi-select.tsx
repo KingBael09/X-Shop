@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useEffect, useRef, useState, type Key } from "react"
 
 import { cn } from "@/lib/utils"

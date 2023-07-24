@@ -1,4 +1,4 @@
-"use client"
+import type { Table } from "@tanstack/react-table"
 
 import { Button } from "@/ui/button"
 import {
@@ -8,8 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/ui/select"
-import type { Table } from "@tanstack/react-table"
-
 import { Icons } from "@/components/util/icons"
 
 interface DataTablePaginationProps<TData> {

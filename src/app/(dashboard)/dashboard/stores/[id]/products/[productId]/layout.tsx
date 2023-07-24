@@ -1,4 +1,8 @@
 import type { LayoutProps } from "@/types"
+import { eq } from "drizzle-orm"
+
+import { db } from "@/lib/db"
+import { products } from "@/lib/db/schema"
 import {
   Card,
   CardContent,
@@ -6,10 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card"
-import { eq } from "drizzle-orm"
-
-import { db } from "@/lib/db"
-import { products } from "@/lib/db/schema"
 import { ProductPager } from "@/components/pagers/product-pager"
 
 import type { EditProductPageProps } from "./page"

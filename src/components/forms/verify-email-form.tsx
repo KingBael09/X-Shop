@@ -2,6 +2,15 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { useSignUp } from "@clerk/nextjs"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+
+import { catchClerkError } from "@/lib/utils"
+import {
+  verfifyEmailSchema,
+  type ZVerifyEmailSchema,
+} from "@/lib/validations/auth"
 import { Button } from "@/ui/button"
 import {
   Form,
@@ -12,15 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/ui/form"
-import { useSignUp } from "@clerk/nextjs"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-
-import { catchClerkError } from "@/lib/utils"
-import {
-  verfifyEmailSchema,
-  type ZVerifyEmailSchema,
-} from "@/lib/validations/auth"
 import { Icons } from "@/components/util/icons"
 
 import { PasswordInput } from "../password-input"

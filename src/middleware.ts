@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server"
 import { authMiddleware, clerkClient } from "@clerk/nextjs"
 
+const publicRoutes: string[] = [
+  "/",
+  "/signin(.*)",
+  "/signup(.*)",
+  "/sso-callback(.*)",
+  "/products(.*)",
+]
+
 export default authMiddleware({
-  publicRoutes: ["/", "/signin(.*)", "/signup(.*)", "/sso-callback(.*)"],
+  publicRoutes,
   apiRoutes: [],
   afterAuth: async (auth, req) => {
     if (auth.isPublicRoute) {
@@ -37,4 +45,4 @@ export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 
-//   TODO: Set private api routes
+// TODO: Set private api routes

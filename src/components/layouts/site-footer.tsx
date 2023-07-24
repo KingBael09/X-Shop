@@ -1,8 +1,8 @@
 import Link from "next/link"
-import { buttonVariants } from "@/ui/button"
 
 import { footerNav, siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/ui/button"
 import { Shell } from "@/components/shells/shell"
 import { Icons } from "@/components/util/icons"
 

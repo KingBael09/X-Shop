@@ -126,3 +126,6 @@ export function SidebarNav({ items }: SideBarProps) {
     </div>
   )
 }
+
+// TODO: Stuff remaining here
+// TODO: Maybe this could be made into server component

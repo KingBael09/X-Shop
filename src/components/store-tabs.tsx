@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Tabs, TabsList, TabsTrigger } from "@/ui/tabs"
 
 import { cn } from "@/lib/utils"
+import { Tabs, TabsList, TabsTrigger } from "@/ui/tabs"
 
 interface StoreTabsProps extends React.ComponentPropsWithoutRef<typeof Tabs> {
   storeId: number

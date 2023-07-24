@@ -2,6 +2,13 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { env } from "@/env.mjs"
+import { currentUser } from "@clerk/nextjs"
+import { eq } from "drizzle-orm"
+
+import { FreeTierStoreLimit } from "@/config/site"
+import { db } from "@/lib/db"
+import { stores } from "@/lib/db/schema"
+import { cn } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/ui/alert"
 import { buttonVariants } from "@/ui/button"
 import {
@@ -12,13 +19,6 @@ import {
   CardTitle,
 } from "@/ui/card"
 import { Separator } from "@/ui/separator"
-import { currentUser } from "@clerk/nextjs"
-import { eq } from "drizzle-orm"
-
-import { FreeTierStoreLimit } from "@/config/site"
-import { db } from "@/lib/db"
-import { stores } from "@/lib/db/schema"
-import { cn } from "@/lib/utils"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
 import { Icons } from "@/components/util/icons"

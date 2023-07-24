@@ -6,11 +6,11 @@ import type {
   DataTableFilterableColumn,
   DataTableSearchableColumn,
 } from "@/types"
-import { Button, buttonVariants } from "@/ui/button"
-import { Input } from "@/ui/input"
 import type { Table } from "@tanstack/react-table"
 
 import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/ui/button"
+import { Input } from "@/ui/input"
 import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter"
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
 import { Icons } from "@/components/util/icons"

@@ -2,6 +2,13 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { useSignUp } from "@clerk/nextjs"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+
+import { catchClerkError } from "@/lib/utils"
+import { authSchema, type ZAuthSchema } from "@/lib/validations/auth"
 import { Button } from "@/ui/button"
 import {
   Form,
@@ -12,13 +19,6 @@ import {
   FormMessage,
 } from "@/ui/form"
 import { Input } from "@/ui/input"
-import { useSignUp } from "@clerk/nextjs"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-
-import { catchClerkError } from "@/lib/utils"
-import { authSchema, type ZAuthSchema } from "@/lib/validations/auth"
 import { PasswordInput } from "@/components/password-input"
 import { Icons } from "@/components/util/icons"
 

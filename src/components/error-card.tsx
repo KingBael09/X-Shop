@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+
+import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/ui/button"
 import {
   Card,
@@ -11,8 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card"
-
-import { cn } from "@/lib/utils"
 import { Icons } from "@/components/util/icons"
 
 interface ErrorCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -62,7 +62,7 @@ export function ErrorCard({
             <Button
               onClick={() => {
                 router.back()
-                router.refresh()
+                // router.refresh()
               }}
             >
               <Icons.chevronLeft className="h-4 w-4" />

@@ -2,8 +2,6 @@ import { type HandleOAuthCallbackParams } from "@clerk/types"
 
 import SSOCallback from "@/components/auth/sso-callback"
 
-// export const runtime = "edge"
-
 export interface SSOCallbackPageProps {
   searchParams: HandleOAuthCallbackParams
 }

@@ -1,4 +1,4 @@
-"use client"
+import type { Table } from "@tanstack/react-table"
 
 import { Button } from "@/ui/button"
 import {
@@ -9,8 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
-import type { Table } from "@tanstack/react-table"
-
 import { Icons } from "@/components/util/icons"
 
 interface DataTableViewOptions<TData> {

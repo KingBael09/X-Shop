@@ -1,5 +1,4 @@
 import { createContext, forwardRef, useContext, useId } from "react"
-import { Label } from "@/ui/label"
 import type * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
 import {
@@ -12,6 +11,7 @@ import {
 } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
+import { Label } from "@/ui/label"
 
 const Form = FormProvider
 

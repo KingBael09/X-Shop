@@ -16,8 +16,8 @@
     "db:studio": "drizzle-kit studio",
     "shadcn:add": "pnpm dlx shadcn-ui@latest add",
     "typecheck": "tsc --noEmit",
-    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
+    "format:write": "prettier --write \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
+    "format:check": "prettier --check \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.0",

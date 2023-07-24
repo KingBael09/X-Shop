@@ -1,3 +1,6 @@
+import type { Column } from "@tanstack/react-table"
+
+import { cn } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import {
   DropdownMenu,
@@ -6,9 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
-import type { Column } from "@tanstack/react-table"
-
-import { cn } from "@/lib/utils"
 import { Icons } from "@/components/util/icons"
 
 interface DataTableColumnHeaderProps<TData, TValue>

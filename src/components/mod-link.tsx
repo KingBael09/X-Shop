@@ -1,8 +1,8 @@
 import Link, { type LinkProps } from "next/link"
-import { Button, buttonVariants } from "@/ui/button"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/ui/button"
 
 interface ModLinkProps extends LinkProps, VariantProps<typeof buttonVariants> {
   disabled: boolean

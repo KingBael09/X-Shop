@@ -8,7 +8,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/ui/sheet"
-
 import { Icons } from "@/components/util/icons"
 
 export function CartSheet() {
