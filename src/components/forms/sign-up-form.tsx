@@ -2,6 +2,7 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { Icons } from "@/util/icons"
 import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -20,7 +21,6 @@ import {
 } from "@/ui/form"
 import { Input } from "@/ui/input"
 import { PasswordInput } from "@/components/password-input"
-import { Icons } from "@/components/util/icons"
 
 export function SignUpForm() {
   const router = useRouter()

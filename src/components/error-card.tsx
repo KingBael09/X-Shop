@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/ui/button"
@@ -13,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card"
-import { Icons } from "@/components/util/icons"
 
 interface ErrorCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: keyof typeof Icons

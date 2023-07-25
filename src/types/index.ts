@@ -1,4 +1,4 @@
-import { type FileWithPath } from "react-dropzone"
+import type { FileWithPath } from "react-dropzone"
 
 import type { ZCartItemSchema } from "@/lib/validations/cart"
 

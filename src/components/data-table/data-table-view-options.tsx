@@ -1,3 +1,4 @@
+import { Icons } from "@/util/icons"
 import type { Table } from "@tanstack/react-table"
 
 import { Button } from "@/ui/button"
@@ -9,7 +10,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
-import { Icons } from "@/components/util/icons"
 
 interface DataTableViewOptions<TData> {
   table: Table<TData>

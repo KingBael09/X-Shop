@@ -1,20 +1,18 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState, type Key } from "react"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
-import { PopoverContent } from "@/ui/popover"
-
-import { Badge } from "./ui/badge"
+import { Badge } from "@/ui/badge"
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "./ui/command"
-import { Popover, PopoverTrigger } from "./ui/popover"
-import { Icons } from "./util/icons"
+} from "@/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
 
 interface Option<T> {
   label: string

@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useTransition } from "react"
+import { Icons } from "@/util/icons"
 
 import {
   deleteCartAction,
@@ -10,7 +11,6 @@ import {
 import { catchError } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import { Input } from "@/ui/input"
-import { Icons } from "@/components/util/icons"
 
 interface UpdateCartProps {
   item: CustomCartItem

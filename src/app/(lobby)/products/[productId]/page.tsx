@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { AddToCartForm } from "@/forms/add-to-cart-form"
 import { and, desc, eq, not } from "drizzle-orm"
 
 import { db } from "@/lib/db"
@@ -11,7 +12,6 @@ import {
   AccordionTrigger,
 } from "@/ui/accordion"
 import { Separator } from "@/ui/separator"
-import { AddToCartForm } from "@/components/forms/add-to-cart-form"
 import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
 import { ProductCard } from "@/components/product-card"

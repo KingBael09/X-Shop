@@ -140,3 +140,5 @@ export default async function ProductsPage({
     />
   )
 }
+
+// TODO: Globalize searchParam type

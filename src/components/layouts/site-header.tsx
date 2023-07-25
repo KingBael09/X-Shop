@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Icons } from "@/util/icons"
 import type { User } from "@clerk/nextjs/dist/types/server"
 
 import { Button, buttonVariants } from "@/ui/button"
@@ -12,7 +13,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
-import { Icons } from "@/components/util/icons"
 
 import { CartSheet } from "../cart/cart-sheet"
 import { ComboBox } from "../combo-box"

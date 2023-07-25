@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+import { UpdateProductForm } from "@/forms/update-product-form"
 import { and, eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { products } from "@/lib/db/schema"
-import { UpdateProductForm } from "@/components/forms/update-product-form"
 
 export interface EditProductPageProps {
   params: {

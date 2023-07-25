@@ -10,16 +10,16 @@ import { products, stores } from "@/lib/db/schema"
 import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
 import { buttonVariants } from "@/ui/button"
-import { ProductCard } from "@/components/product-card"
-import { Scrollable } from "@/components/scrollable"
-import { Shell } from "@/components/shells/shell"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/ui/card"
+import { ProductCard } from "@/components/product-card"
+import { Scrollable } from "@/components/scrollable"
+import { Shell } from "@/components/shells/shell"
 
 function HeroSection() {
   return (

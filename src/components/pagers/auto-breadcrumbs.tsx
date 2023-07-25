@@ -3,9 +3,11 @@
 import { Fragment, type HtmlHTMLAttributes } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Icons } from "@/util/icons"
 
 import { cn, toTitleCase } from "@/lib/utils"
-import { Icons } from "@/components/util/icons"
+
+import { BackButton } from "../back-button"
 
 interface AutoBreadCrumbProps extends HtmlHTMLAttributes<HTMLElement> {
   separator?: React.ComponentType<{ className?: string }>
@@ -45,6 +47,7 @@ export function AutoBreadCrumbs({
       )}
       {...props}
     >
+      <BackButton className="mr-2 h-auto w-auto p-1 " />
       {segments.map((segment, i) => {
         const isLastSegment = i === segments.length - 1
         return (

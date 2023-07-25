@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Icons } from "@/util/icons"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -11,7 +12,6 @@ import { Button } from "@/ui/button"
 import { NavigationMenu, NavigationMenuList } from "@/ui/navigation-menu"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet"
-import { Icons } from "@/components/util/icons"
 
 export function MainNav() {
   return (

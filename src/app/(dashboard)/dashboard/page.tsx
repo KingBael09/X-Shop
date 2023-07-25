@@ -1,8 +1,8 @@
 import Link from "next/link"
+import { Icons } from "@/util/icons"
 
 import { dashboardConfig } from "@/config/dashboard"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/ui/card"
-import { Icons } from "@/components/util/icons"
 
 export default function DashboardPage() {
   return (

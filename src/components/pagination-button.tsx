@@ -2,12 +2,11 @@
 
 import { useMemo, useTransition } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
 import { useQueryString } from "@/hooks/use-query-string"
 import { Button } from "@/ui/button"
-
-import { Icons } from "./util/icons"
 
 interface PaginationButtonProps
   extends React.HtmlHTMLAttributes<HTMLDivElement> {

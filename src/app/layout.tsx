@@ -1,14 +1,14 @@
 import "@/styles/globals.css"
 
 import type { Metadata } from "next"
+import { TailwindIndicator } from "@/util/tailwind-indicator"
+import { ThemeProvider } from "@/util/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs"
 
 import { siteConfig } from "@/config/site"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/ui/toaster"
-import { TailwindIndicator } from "@/components/util/tailwind-indicator"
-import { ThemeProvider } from "@/components/util/theme-provider"
 
 export const metadata: Metadata = {
   title: {

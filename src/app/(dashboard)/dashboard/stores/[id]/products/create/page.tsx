@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { env } from "@/env.mjs"
+import { AddProductForm } from "@/forms/add-product-form"
 
 import { db } from "@/lib/db"
 import {
@@ -9,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card"
-import { AddProductForm } from "@/components/forms/add-product-form"
 
 interface NewProductPageProps {
   params: {

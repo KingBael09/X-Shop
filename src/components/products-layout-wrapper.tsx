@@ -4,13 +4,15 @@
 import { useEffect, useState, useTransition } from "react"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import type { LayoutProps } from "@/types"
+import { Icons } from "@/util/icons"
 
 import { sortOptions } from "@/config/products"
 import { filterPriceRange } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useQueryString } from "@/hooks/use-query-string"
+import { Button } from "@/ui/button"
+import { Checkbox } from "@/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +22,8 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
 import { Input } from "@/ui/input"
+import { Label } from "@/ui/label"
+import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
 import {
   Sheet,
@@ -33,21 +37,17 @@ import { Slider } from "@/ui/slider"
 
 import { MultiSelect } from "./multi-select"
 import { PaginationButton } from "./pagination-button"
-import { Button } from "./ui/button"
-import { Checkbox } from "./ui/checkbox"
-import { Label } from "./ui/label"
-import { ScrollArea } from "./ui/scroll-area"
-import { Icons } from "./util/icons"
 
 interface StoreWithCount {
   id: number
   name: string
   productCount: number
 }
-interface ProductsLayoutWrapperProps extends LayoutProps {
+interface ProductsLayoutWrapperProps
+  extends React.HtmlHTMLAttributes<HTMLDivElement> {
   items: number
   pageCount: number
-  categories: {
+  categories?: {
     label: string
     value: number
   }[]
@@ -62,6 +62,8 @@ export function ProductsLayoutWrapper({
   categories,
   stores,
   storePageCount,
+  className,
+  ...props
 }: ProductsLayoutWrapperProps) {
   const router = useRouter()
   const pathname = usePathname()
@@ -123,7 +125,7 @@ export function ProductsLayoutWrapper({
   }, [storeIds])
 
   return (
-    <div className="grid space-y-6">
+    <div className={cn("grid space-y-6", className)} {...props}>
       <div className="flex items-center space-x-2">
         <Sheet>
           <SheetTrigger asChild>
@@ -184,7 +186,7 @@ export function ProductsLayoutWrapper({
                   />
                 </div>
               </div>
-              {categories.length ? (
+              {categories && categories.length ? (
                 <div className="space-y-4">
                   <h3 className="text-sm font-medium tracking-wide text-foreground">
                     Categories

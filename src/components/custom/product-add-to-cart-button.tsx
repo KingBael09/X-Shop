@@ -1,11 +1,10 @@
 "use client"
 
 import { useTransition } from "react"
+import { Icons } from "@/util/icons"
 
 import { addToCartAction } from "@/lib/actions/cart"
-
-import { Button, type ButtonProps } from "../ui/button"
-import { Icons } from "../util/icons"
+import { Button, type ButtonProps } from "@/ui/button"
 
 interface AddToCartButtonProps extends ButtonProps {
   productId: string

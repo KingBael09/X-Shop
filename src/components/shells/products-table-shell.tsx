@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react"
 import Link from "next/link"
+import { Icons } from "@/util/icons"
 import type { ColumnDef } from "@tanstack/react-table"
 import { toast } from "sonner"
 
@@ -19,7 +20,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
-import { Icons } from "@/components/util/icons"
 
 import { DataTable } from "../data-table/data-table"
 import { DataTableColumnHeader } from "../data-table/data-table-column-head"

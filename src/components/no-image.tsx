@@ -1,8 +1,7 @@
-import { LucideProps } from "lucide-react"
+import { Icons } from "@/util/icons"
+import type { LucideProps } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-
-import { Icons } from "./util/icons"
 
 interface ImagePlaceHolderProps
   extends React.HtmlHTMLAttributes<HTMLDivElement> {

@@ -1,6 +1,7 @@
 "use client"
 
 import { useTransition } from "react"
+import { Icons } from "@/util/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -18,7 +19,6 @@ import {
   FormMessage,
 } from "@/ui/form"
 import { Input } from "@/ui/input"
-import { Icons } from "@/components/util/icons"
 
 interface AddToCartFormProps {
   productId: number

@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { Icons } from "@/util/icons"
 
-import type { Product } from "@/lib/db/schema"
+import {
+  filterProductAction,
+  type FilteredProductType,
+} from "@/lib/actions/product"
 import { cn } from "@/lib/utils"
 import { useDebounce } from "@/hooks/use-debounce"
 import { Button } from "@/ui/button"
@@ -16,27 +20,22 @@ import {
   CommandList,
 } from "@/ui/command"
 import { Skeleton } from "@/ui/skeleton"
-import { Icons } from "@/components/util/icons"
-
-interface SearchResult {
-  products: Pick<Product, "id" | "name">[]
-}
 
 export function ComboBox() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState("")
   const debounceQuery = useDebounce(query, 400)
-  const [data, setData] = useState<SearchResult | null>(null)
+  const [data, setData] = useState<FilteredProductType>(null)
 
   const [isPending, startTransition] = useTransition()
 
   useEffect(() => {
     if (debounceQuery.length === 0) setData(null)
     if (debounceQuery) {
-      startTransition(() => {
-        // fetch data here
-        // setData(null)
+      startTransition(async () => {
+        const list = await filterProductAction(debounceQuery)
+        setData(list)
       })
     }
   }, [debounceQuery])
@@ -54,6 +53,7 @@ export function ComboBox() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  // TODO: Idk if router.push is cached content is loaded dynamically
   const handleSelect = useCallback((callback: () => unknown) => {
     setIsOpen(false)
     callback()
@@ -98,25 +98,24 @@ export function ComboBox() {
               <Skeleton className="h-8 rounded-sm" />
             </div>
           ) : (
-            // data?.map((group) => (
-            //   <CommandGroup
-            //     key={group.category}
-            //     className="capitalize"
-            //     heading={group.category}
-            //   >
-            //     {group.products.map((item) => (
-            //       <CommandItem
-            //         key={item.id}
-            //         onSelect={() =>
-            //           handleSelect(() => router.push(`/product/${item.id}`))
-            //         }
-            //       >
-            //         {item.name}
-            //       </CommandItem>
-            //     ))}
-            //   </CommandGroup>
-            // ))
-            <></>
+            data?.map((group) => (
+              <CommandGroup
+                key={group.name}
+                className="capitalize"
+                heading={group.name}
+              >
+                {group.product.map((item) => (
+                  <CommandItem
+                    key={item.id}
+                    onSelect={() =>
+                      handleSelect(() => router.push(`/products/${item.id}`))
+                    }
+                  >
+                    {item.name}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))
           )}
         </CommandList>
       </CommandDialog>

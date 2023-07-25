@@ -7,6 +7,7 @@ const publicRoutes: string[] = [
   "/signup(.*)",
   "/sso-callback(.*)",
   "/products(.*)",
+  "/categories(.*)",
 ]
 
 export default authMiddleware({

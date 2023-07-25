@@ -2,6 +2,7 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { Icons } from "@/util/icons"
 import { useSignUp } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -21,7 +22,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/ui/form"
-import { Icons } from "@/components/util/icons"
 
 import { PasswordInput } from "../password-input"
 

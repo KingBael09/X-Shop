@@ -1,8 +1,8 @@
 import { Fragment } from "react"
 import Link from "next/link"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
-import { Icons } from "@/components/util/icons"
 
 export interface BreadSegment {
   title: string

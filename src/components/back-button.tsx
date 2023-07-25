@@ -1,10 +1,10 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
 import { Button, type ButtonProps } from "@/ui/button"
-import { Icons } from "@/components/util/icons"
 
 export function BackButton({ className, ...props }: ButtonProps) {
   const router = useRouter()
@@ -13,7 +13,6 @@ export function BackButton({ className, ...props }: ButtonProps) {
     <Button
       onClick={() => {
         router.back()
-        // router.refresh()
       }}
       className={cn(className)}
       variant="ghost"

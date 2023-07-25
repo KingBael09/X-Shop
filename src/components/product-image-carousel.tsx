@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import type { StoredFile } from "@/types"
+import { Icons } from "@/util/icons"
 import useEmblaCarousel, {
   type EmblaCarouselType,
   type EmblaOptionsType,
@@ -11,7 +12,6 @@ import useEmblaCarousel, {
 import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
 import { Button } from "@/ui/button"
-import { Icons } from "@/components/util/icons"
 
 import { ImagePlaceHolder } from "./no-image"
 import { Zoom } from "./zoom-image"

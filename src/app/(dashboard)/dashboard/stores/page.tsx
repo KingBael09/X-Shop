@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { env } from "@/env.mjs"
+import { Icons } from "@/util/icons"
 import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
@@ -21,7 +22,6 @@ import {
 import { Separator } from "@/ui/separator"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
-import { Icons } from "@/components/util/icons"
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),

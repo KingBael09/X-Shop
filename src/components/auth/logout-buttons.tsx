@@ -2,13 +2,13 @@
 
 import { useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { Icons } from "@/util/icons"
 import { SignOutButton } from "@clerk/nextjs"
 
 import { cn } from "@/lib/utils"
 import { useMounted } from "@/hooks/use-mounted"
 import { Button, buttonVariants } from "@/ui/button"
 import { Skeleton } from "@/ui/skeleton"
-import { Icons } from "@/components/util/icons"
 
 export function LogOutButtons() {
   const router = useRouter()

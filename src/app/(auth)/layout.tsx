@@ -1,12 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import type { LayoutProps } from "@/types"
+import { Icons } from "@/util/icons"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
 import { buttonVariants } from "@/ui/button"
-import { Icons } from "@/components/util/icons"
 
 export default function AuthLayout({ children }: LayoutProps) {
   return (

@@ -1,5 +1,3 @@
-import { setTimeout } from "timers/promises"
-
 import { getProductAction } from "@/lib/actions/product"
 import { getStoresAction } from "@/lib/actions/store"
 import { db } from "@/lib/db"
@@ -9,7 +7,7 @@ import { ProductCard } from "@/components/product-card"
 import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
 import { Shell } from "@/components/shells/shell"
 
-interface SearchParams {
+export interface SearchParams {
   [key: string]: string | string[] | undefined
 }
 interface AllProductsPageProps {
@@ -78,11 +76,11 @@ export default async function AllProductsPage({
  * - store_ids
  * - store_page
  */
-function getParams(searchParams: SearchParams) {
+export function getParams(searchParams: SearchParams, defaultLimit = 8) {
   const limit =
     typeof searchParams.per_page === "string"
       ? parseInt(searchParams.per_page)
-      : 8
+      : defaultLimit
   const offset =
     typeof searchParams.page === "string"
       ? (parseInt(searchParams.page) - 1) * limit

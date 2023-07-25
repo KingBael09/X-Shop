@@ -1,9 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
+import { Icons } from "@/util/icons"
 
 import type { Product } from "@/lib/db/schema"
 import { cn, formatPrice } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
+import { Button } from "@/ui/button"
 import {
   Card,
   CardDescription,
@@ -14,8 +16,6 @@ import {
 
 import { AddToCartButton } from "./custom/product-add-to-cart-button"
 import { ImagePlaceHolder } from "./no-image"
-import { Button } from "./ui/button"
-import { Icons } from "./util/icons"
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product

@@ -1,5 +1,6 @@
+import { Icons } from "@/util/icons"
+
 import type { Store } from "@/lib/db/schema"
-import { Icons } from "@/components/util/icons"
 
 import { ModLink } from "../mod-link"
 
@@ -17,16 +18,16 @@ export default function StorePager({ current, stores }: StorePagerProps) {
   return (
     <div className="flex gap-2 pr-1">
       <ModLink
-        disabled={lowerFail}
         replace
+        disabled={lowerFail}
         href={`/dashboard/stores/${stores[currentIndex - 1]?.id as number}`}
       >
         <Icons.chevronLeft className="h-5 w-5" aria-hidden />
         <span className="sr-only">Previous store</span>
       </ModLink>
       <ModLink
-        disabled={upperFail}
         replace
+        disabled={upperFail}
         href={`/dashboard/stores/${stores[currentIndex + 1]?.id as number}`}
       >
         <Icons.chevronRight className="h-5 w-5" aria-hidden />

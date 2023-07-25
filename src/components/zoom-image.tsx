@@ -12,7 +12,8 @@ interface ZoomProps extends LayoutProps {
 }
 
 /**
- * This is a client component
+ * This is a client component,
+ * pass images to be able to zoom in on them
  */
 export function Zoom({ children, margin }: ZoomProps) {
   return (

@@ -1,10 +1,12 @@
 import Image from "next/image"
+import { Icons } from "@/util/icons"
 import { currentUser } from "@clerk/nextjs"
 
 import { getCartAction } from "@/lib/actions/cart"
 import { formatPrice } from "@/lib/utils"
 import { Badge } from "@/ui/badge"
 import { Button } from "@/ui/button"
+import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
 import {
   Sheet,
@@ -14,10 +16,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/ui/sheet"
-import { Icons } from "@/components/util/icons"
 
 import { ImagePlaceHolder } from "../no-image"
-import { ScrollArea } from "../ui/scroll-area"
 import { UpdateCart } from "./update-cart"
 
 export async function CartSheet() {

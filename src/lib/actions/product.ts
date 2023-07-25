@@ -2,7 +2,18 @@
 
 import { revalidatePath } from "next/cache"
 import type { StoredFile } from "@/types"
-import { and, asc, desc, eq, gte, inArray, lte, not, sql } from "drizzle-orm"
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  gte,
+  inArray,
+  like,
+  lte,
+  not,
+  sql,
+} from "drizzle-orm"
 import { utapi } from "uploadthing/server"
 
 import { db } from "../db"
@@ -168,4 +179,40 @@ export async function updateProductAction({
   }
 
   revalidatePath(`/dashboard/stores/${rest.storeId}/products`)
+}
+
+export type FilteredProductType = Awaited<
+  ReturnType<typeof filterProductAction>
+>
+
+export async function filterProductAction(query: string) {
+  if (query.length === 0) return null
+
+  const filteredProducts = await db.query.products.findMany({
+    columns: {
+      id: true,
+      name: true,
+      subcategory: true,
+      images: true,
+    },
+    where: like(products.name, query),
+    limit: 10,
+    with: {
+      category: {
+        columns: { name: true },
+      },
+    },
+  })
+
+  // Make set here to remove duplicate values
+  const categoryList = [
+    ...new Set(filteredProducts.map((p) => p.category.name)),
+  ]
+
+  const productByCategory = categoryList.map((c) => ({
+    name: c,
+    product: filteredProducts.filter((p) => p.category.name === c),
+  }))
+
+  return productByCategory
 }

@@ -1,5 +1,6 @@
+import { Icons } from "@/util/icons"
+
 import type { Product } from "@/lib/db/schema"
-import { Icons } from "@/components/util/icons"
 
 import { ModLink } from "../mod-link"
 

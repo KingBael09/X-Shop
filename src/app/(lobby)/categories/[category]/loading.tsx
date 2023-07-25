@@ -2,11 +2,10 @@ import { AspectRatio } from "@/ui/aspect-ratio"
 import { Card, CardContent, CardFooter, CardHeader } from "@/ui/card"
 import { Skeleton } from "@/ui/skeleton"
 import { ImagePlaceHolder } from "@/components/no-image"
-import { Shell } from "@/components/shells/shell"
 
-export default function ProductsLoading() {
+export default function CategoryLoading() {
   return (
-    <Shell>
+    <div className="flex flex-1 flex-col gap-8 px-0 py-8">
       <div className="space-y-2">
         <Skeleton className="h-10 w-28" />
         <Skeleton className="h-4 w-48" />
@@ -16,8 +15,8 @@ export default function ProductsLoading() {
           <Skeleton className="h-9 w-20" />
           <Skeleton className="h-9 w-20" />
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 9 }).map((_, i) => (
             <Card key={i} className="overflow-hidden">
               <CardHeader className="border-b p-0">
                 <AspectRatio ratio={1}>
@@ -38,6 +37,6 @@ export default function ProductsLoading() {
           ))}
         </div>
       </div>
-    </Shell>
+    </div>
   )
 }

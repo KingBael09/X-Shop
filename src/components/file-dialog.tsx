@@ -5,6 +5,7 @@ import "cropperjs/dist/cropper.css"
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import type { FileWithPreview } from "@/types"
+import { Icons } from "@/util/icons"
 import Cropper, { type ReactCropperElement } from "react-cropper"
 import {
   useDropzone,
@@ -23,7 +24,6 @@ import { toast } from "sonner"
 import { cn, formatBytes } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog"
-import { Icons } from "@/components/util/icons"
 
 interface FileDialogProps<TFieldValues extends FieldValues>
   extends React.HTMLAttributes<HTMLDivElement> {

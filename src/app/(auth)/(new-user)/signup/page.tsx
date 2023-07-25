@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { env } from "@/env.mjs"
+import { SignUpForm } from "@/forms/sign-up-form"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/ui/button"
@@ -13,7 +14,6 @@ import {
   CardTitle,
 } from "@/ui/card"
 import { OAuthSignIn } from "@/components/auth/oauth-signin"
-import { SignUpForm } from "@/components/forms/sign-up-form"
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),

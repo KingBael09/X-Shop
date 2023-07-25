@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
-import { Icons } from "@/components/util/icons"
 
 type ScrollIndicatorProps = React.HTMLAttributes<HTMLDivElement>
 

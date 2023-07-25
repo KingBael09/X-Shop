@@ -1,9 +1,9 @@
+import { AspectRatio } from "@/ui/aspect-ratio"
+import { Card, CardContent, CardHeader } from "@/ui/card"
+import { Separator } from "@/ui/separator"
+import { Skeleton } from "@/ui/skeleton"
 import { ImagePlaceHolder } from "@/components/no-image"
 import { Shell } from "@/components/shells/shell"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Skeleton } from "@/components/ui/skeleton"
 
 export default function ProductLoading() {
   return (
