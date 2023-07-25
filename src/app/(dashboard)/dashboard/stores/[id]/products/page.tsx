@@ -4,15 +4,14 @@ import { and, asc, desc, eq, inArray, like, sql } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { products, stores, type Product } from "@/lib/db/schema"
+import type { SearchParams } from "@/lib/helpers/products"
 import { ProductsTableShell } from "@/components/shells/products-table-shell"
 
 interface ProductsPageProps {
   params: {
     id: string
   }
-  searchParams: {
-    [key: string]: string | string[] | undefined
-  }
+  searchParams: SearchParams
 }
 
 export const metadata: Metadata = {

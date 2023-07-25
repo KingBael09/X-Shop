@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { UpdateProductForm } from "@/forms/update-product-form"
 import { and, eq } from "drizzle-orm"
 
+import { getAllCategoriesAction } from "@/lib/actions/category"
 import { db } from "@/lib/db"
 import { products } from "@/lib/db/schema"
 
@@ -28,7 +29,7 @@ export default async function EditProductPage({
     where: and(eq(products.id, productId), eq(products.storeId, storeId)),
   })
 
-  const categories = await db.query.categories.findMany() // TODO: Think of a way to not refetch this call
+  const categories = await getAllCategoriesAction()
 
   if (!product) return notFound()
 

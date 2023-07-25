@@ -65,7 +65,7 @@ export function UpdateCart({ item }: UpdateCartProps) {
           readOnly
           disabled={isPending}
           value={item.quantity}
-          //   TODO: Debounce request
+          // TODO: Debounce request
         />
         <Button
           variant="outline"

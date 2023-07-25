@@ -1,12 +1,12 @@
 import type { LayoutProps } from "@/types"
 
-import { db } from "@/lib/db"
+import { getAllCategoriesAction } from "@/lib/actions/category"
 import { ScrollArea } from "@/ui/scroll-area"
 import { CategorySideBar } from "@/components/category-sidebar"
 import { AutoBreadCrumbs } from "@/components/pagers/auto-breadcrumbs"
 
 export default async function CategoriesLayout({ children }: LayoutProps) {
-  const allCategories = await db.query.categories.findMany()
+  const allCategories = await getAllCategoriesAction()
 
   return (
     <div className="container relative flex min-h-[calc(var(--navbar-page-offset))] gap-6">

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { AddToCartForm } from "@/forms/add-to-cart-form"
 import { and, desc, eq, not } from "drizzle-orm"
@@ -17,6 +18,8 @@ import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
 import { ProductCard } from "@/components/product-card"
 import { ProductImageCarousel } from "@/components/product-image-carousel"
 import { Shell } from "@/components/shells/shell"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Zoom } from "@/components/zoom-image"
 
 interface ProductPageParams {
   params: {
@@ -71,7 +74,30 @@ export default async function ProductPage({ params }: ProductPageParams) {
         <ProductImageCarousel
           className="w-full md:w-1/2"
           images={product.images ?? []}
-        />
+        >
+          {product.images?.map((image, index) => (
+            <div className="relative min-w-0 flex-full pl-4" key={index}>
+              <Zoom margin={10}>
+                <AspectRatio ratio={1}>
+                  <Image
+                    fill
+                    key={index}
+                    role="group"
+                    src={image.url}
+                    alt={image.name}
+                    priority={index === 0}
+                    className="!cursor-default object-cover md:object-contain"
+                    aria-label={`Slide ${index + 1} of ${
+                      product.images?.length as number
+                    }`}
+                    sizes="100vw"
+                    aria-roledescription="slide"
+                  />
+                </AspectRatio>
+              </Zoom>
+            </div>
+          ))}
+        </ProductImageCarousel>
         <div className="flex w-full flex-col gap-4 md:w-1/2">
           <div className="space-y-2">
             <h2 className="line-clamp-1 text-2xl font-bold">{product.name}</h2>
@@ -130,5 +156,3 @@ export default async function ProductPage({ params }: ProductPageParams) {
     </Shell>
   )
 }
-
-// TODO: Not Found throws error -> Error: invariant expected app router to be mounted

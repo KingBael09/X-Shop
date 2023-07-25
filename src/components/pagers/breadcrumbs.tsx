@@ -4,6 +4,8 @@ import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
 
+import { BackButton } from "../back-button"
+
 export interface BreadSegment {
   title: string
   href: string
@@ -34,6 +36,7 @@ export function Breadcrumbs({
       )}
       {...props}
     >
+      <BackButton className="mr-2 h-auto w-auto p-1 " />
       {segments.map((segment, i) => {
         const isLastSegment = i === segments.length - 1
         return (

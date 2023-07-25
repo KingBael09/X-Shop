@@ -43,5 +43,3 @@ export default function CreateStorePage() {
     </Shell>
   )
 }
-
-// TODO: Remind me to add back button to auto breadcrumbs

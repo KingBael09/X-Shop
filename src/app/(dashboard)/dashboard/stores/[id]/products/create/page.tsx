@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { env } from "@/env.mjs"
 import { AddProductForm } from "@/forms/add-product-form"
 
-import { db } from "@/lib/db"
+import { getAllCategoriesAction } from "@/lib/actions/category"
 import {
   Card,
   CardContent,
@@ -28,8 +28,7 @@ export default async function CreateProductPage({
 }: NewProductPageProps) {
   const storeId = Number(params.id)
 
-  const categories = await db.query.categories.findMany()
-  // TODO: UKW this shit can be cached
+  const categories = await getAllCategoriesAction()
 
   return (
     <Card>

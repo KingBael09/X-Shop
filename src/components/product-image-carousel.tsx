@@ -10,11 +10,9 @@ import useEmblaCarousel, {
 } from "embla-carousel-react"
 
 import { cn } from "@/lib/utils"
-import { AspectRatio } from "@/ui/aspect-ratio"
 import { Button } from "@/ui/button"
 
 import { ImagePlaceHolder } from "./no-image"
-import { Zoom } from "./zoom-image"
 
 //? See: https://www.embla-carousel.com
 
@@ -28,6 +26,7 @@ export function ProductImageCarousel({
   images,
   options,
   className,
+  children,
   ...props
 }: ProductImageCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ ...options, loop: true })
@@ -90,7 +89,7 @@ export function ProductImageCarousel({
             backfaceVisibility: "hidden",
           }}
         >
-          {images.map((image, index) => (
+          {/* {images.map((image, index) => (
             <div className="relative min-w-0 flex-full pl-4" key={index}>
               <Zoom margin={10}>
                 <AspectRatio ratio={1}>
@@ -110,7 +109,8 @@ export function ProductImageCarousel({
                 </AspectRatio>
               </Zoom>
             </div>
-          ))}
+          ))} */}
+          {children}
         </div>
       </div>
       {images.length > 1 ? (

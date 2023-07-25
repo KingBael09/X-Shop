@@ -27,5 +27,3 @@ export default function StoreLoading() {
     </Card>
   )
 }
-
-// TODO:  This causes another fallback to previous loading state of prev level

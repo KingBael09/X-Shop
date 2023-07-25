@@ -6,6 +6,11 @@ import { db } from "../db"
 import { categories } from "../db/schema"
 import type { ZCategorySchema } from "../validations/category"
 
+export async function getAllCategoriesAction() {
+  return await db.query.categories.findMany()
+  // TODO: use a prepared statement from drizzle
+}
+
 export async function addCategoryAction(input: ZCategorySchema) {
   const sameName = await db.query.categories.findFirst({
     where: eq(categories.name, input.name),

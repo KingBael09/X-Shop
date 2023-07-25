@@ -370,7 +370,8 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                 <FormItem>
                   <FormLabel>Images</FormLabel>
                   {/* <div className="w-full"> */}
-                  {!isUploading && previews?.length ? (
+                  {/* {!isUploading && previews?.length ? ( */}
+                  {previews?.length ? (
                     <div className="flex items-center gap-2">
                       {previews.map((file) => (
                         <Zoom key={file.name}>

@@ -1,13 +1,13 @@
 import Link from "next/link"
 
-import { db } from "@/lib/db"
+import { getAllCategoriesAction } from "@/lib/actions/category"
 import { toTitleCase } from "@/lib/utils"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/ui/card"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
 
 export default async function AllCategoriesPage() {
-  const allCategories = await db.query.categories.findMany()
+  const allCategories = await getAllCategoriesAction()
 
   return (
     <div className="absolute inset-0 z-10 bg-background">

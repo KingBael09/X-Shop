@@ -5,12 +5,14 @@ import { getProductAction } from "@/lib/actions/product"
 import { getStoresAction } from "@/lib/actions/store"
 import { db } from "@/lib/db"
 import { categories } from "@/lib/db/schema"
+import {
+  getProductSearchParams,
+  type SearchParams,
+} from "@/lib/helpers/products"
 import { toTitleCase } from "@/lib/utils"
 import { Header } from "@/components/header"
 import { ProductCard } from "@/components/product-card"
 import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
-
-import { getParams, type SearchParams } from "../../products/page"
 
 interface CategoryPageProps {
   params: {
@@ -31,7 +33,7 @@ export default async function CategoryPage({
     notFound()
   }
 
-  const { store_page, ...rest } = getParams(searchParams, 9)
+  const { store_page, ...rest } = getProductSearchParams(searchParams, 9)
   const { items: products, total } = await getProductAction({
     ...rest,
     category_ids: String(category.id),
@@ -72,5 +74,3 @@ export default async function CategoryPage({
     </div>
   )
 }
-
-// TODO: Remind me to refactor getParam -> getProductSearchParams

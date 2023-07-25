@@ -95,7 +95,6 @@ export function ProductsLayoutWrapper({
     })
   }, [debouncedPrice])
 
-  // TODO: Category selection remaining
   const [categoryIds, setCategoryIds] = useState<number[] | null>(
     category_ids?.split(".").map(Number) ?? null
   )
