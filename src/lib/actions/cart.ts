@@ -14,6 +14,9 @@ import type { ZCartItemSchema } from "../validations/cart"
 export type CustomCartItem = Awaited<ReturnType<typeof getCartAction>>[0]
 // TODO: Maybe I could have extracted this logic as a helper but I don't know how to!
 
+/**
+ * This function internally check for user and if there is no user then it throws an error
+ */
 export async function getCartAction() {
   const user = await currentUser()
 

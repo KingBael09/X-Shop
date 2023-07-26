@@ -74,3 +74,5 @@ export default async function CategoryPage({
     </div>
   )
 }
+
+// FIXME: 210kb first load size

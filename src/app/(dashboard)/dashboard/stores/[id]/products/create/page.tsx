@@ -42,3 +42,5 @@ export default async function CreateProductPage({
     </Card>
   )
 }
+
+// FIXME: 248kb first load size

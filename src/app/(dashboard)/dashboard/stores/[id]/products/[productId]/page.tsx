@@ -35,3 +35,5 @@ export default async function EditProductPage({
 
   return <UpdateProductForm product={product} categories={categories} />
 }
+
+// FIXME: 241kb first load size

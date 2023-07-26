@@ -8,15 +8,15 @@ import {
   updateCartAction,
   type CustomCartItem,
 } from "@/lib/actions/cart"
-import { catchError } from "@/lib/utils"
+import { catchError, cn } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import { Input } from "@/ui/input"
 
-interface UpdateCartProps {
+interface UpdateCartProps extends React.HTMLAttributes<HTMLDivElement> {
   item: CustomCartItem
 }
 
-export function UpdateCart({ item }: UpdateCartProps) {
+export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
   const [isPending, startTransition] = useTransition()
 
   function deleteItem() {
@@ -45,7 +45,7 @@ export function UpdateCart({ item }: UpdateCartProps) {
   }
 
   return (
-    <div className="flex items-center space-x-1">
+    <div className={cn("flex items-center space-x-1", className)} {...props}>
       <div className="flex flex-1 items-center space-x-1">
         <Button
           variant="outline"
