@@ -12,7 +12,6 @@ import { ImagePlaceHolder } from "@/components/no-image"
 import { Shell } from "@/components/shells/shell"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/util/icons"
 
 export default async function CheckOutPage() {

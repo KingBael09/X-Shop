@@ -2,7 +2,8 @@
 
 import { Fragment, useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { OrderItem } from "@/types"
+import type { OrderItem } from "@/types"
+import { Icons } from "@/util/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -26,8 +27,6 @@ import {
 import { Input } from "@/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/ui/radio-group"
 import { Textarea } from "@/ui/textarea"
-
-import { Icons } from "../util/icons"
 
 interface CheckoutFormProps {
   cart: OrderItem[]
@@ -130,7 +129,11 @@ export function CheckoutForm({ cart, storeIds }: CheckoutFormProps) {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Textarea placeholder="Enter your address here!" {...field} />
+                <Textarea
+                  rows={4}
+                  placeholder="Enter your address here!"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

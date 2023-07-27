@@ -8,15 +8,7 @@ import { cn } from "@/lib/utils"
 
 import { Badge } from "../ui/badge"
 import { Button, buttonVariants } from "../ui/button"
-import { Separator } from "../ui/separator"
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet"
+import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "../ui/sheet"
 import { Icons } from "../util/icons"
 
 interface CartSheetWrapperProps extends LayoutProps {
@@ -24,7 +16,7 @@ interface CartSheetWrapperProps extends LayoutProps {
 }
 
 /**
- * This is a custom cart-sheet wrapper which controllable input
+ * This is a custom cart-sheet wrapper which controllable state
  */
 export function CartSheetWrapper({ count, children }: CartSheetWrapperProps) {
   const [open, setOpen] = useState(false)

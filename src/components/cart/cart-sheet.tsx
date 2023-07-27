@@ -1,23 +1,13 @@
 import { Fragment } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Icons } from "@/util/icons"
 import { currentUser } from "@clerk/nextjs"
 
 import { getCartAction } from "@/lib/actions/cart"
-import { cn, formatPrice } from "@/lib/utils"
-import { Badge } from "@/ui/badge"
-import { Button, buttonVariants } from "@/ui/button"
+import { formatPrice } from "@/lib/utils"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/ui/sheet"
+import { SheetHeader, SheetTitle } from "@/ui/sheet"
 
 import { ImagePlaceHolder } from "../no-image"
 import { CartSheetWrapper } from "./cart-sheet-wrapper"
