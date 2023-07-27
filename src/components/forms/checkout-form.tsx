@@ -1,9 +1,11 @@
 "use client"
 
-import { Fragment } from "react"
+import { Fragment, useTransition } from "react"
+import { useRouter } from "next/navigation"
+import { OrderItem } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SelectContent } from "@radix-ui/react-select"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
 import type { CustomCartItem } from "@/lib/actions/cart"
 import {
@@ -11,6 +13,8 @@ import {
   paymentMethods,
   type ZCheckoutSchema,
 } from "@/lib/actions/checkout"
+import { placeOrderAction } from "@/lib/actions/order"
+import { catchError } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import {
   Form,
@@ -24,11 +28,16 @@ import { Input } from "@/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/ui/radio-group"
 import { Textarea } from "@/ui/textarea"
 
+import { Icons } from "../util/icons"
+
 interface CheckoutFormProps {
-  cart: CustomCartItem[]
+  cart: OrderItem[]
+  storeIds: number[]
 }
 
-export function CheckoutForm({}: CheckoutFormProps) {
+export function CheckoutForm({ cart, storeIds }: CheckoutFormProps) {
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const form = useForm<ZCheckoutSchema>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
@@ -39,8 +48,16 @@ export function CheckoutForm({}: CheckoutFormProps) {
     },
   })
 
-  function onSubmit(values: ZCheckoutSchema) {
-    console.log(values)
+  function onSubmit(data: ZCheckoutSchema) {
+    startTransition(async () => {
+      try {
+        await placeOrderAction(data, cart, storeIds)
+        toast.success("Order Placed Successfully")
+        router.push("/")
+      } catch (error) {
+        catchError(error)
+      }
+    })
   }
 
   return (
@@ -120,7 +137,13 @@ export function CheckoutForm({}: CheckoutFormProps) {
             </FormItem>
           )}
         />
-        <Button>Place order</Button>
+        <Button>
+          {isPending && (
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+          )}
+          Place Order
+          <span className="sr-only">Place Orders</span>
+        </Button>
       </form>
     </Form>
   )

@@ -1,14 +1,18 @@
 import Image from "next/image"
+import Link from "next/link"
+import { OrderItem } from "@/types"
 
 import { getCartAction } from "@/lib/actions/cart"
-import { formatPrice } from "@/lib/utils"
+import { cn, formatPrice } from "@/lib/utils"
 import { CardContent, CardDescription } from "@/ui/card"
 import { UpdateCart } from "@/components/cart/update-cart"
 import { CheckoutForm } from "@/components/forms/checkout-form"
 import { Header } from "@/components/header"
 import { ImagePlaceHolder } from "@/components/no-image"
 import { Shell } from "@/components/shells/shell"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Icons } from "@/components/util/icons"
 
 export default async function CheckOutPage() {
   const cartItems = await getCartAction()
@@ -23,6 +27,31 @@ export default async function CheckOutPage() {
     0
   )
 
+  const storeIds = [...new Set(cartItems.map((item) => item.storeId))]
+
+  const items = cartItems.map((i) => ({
+    productId: String(i.id),
+    quantity: Number(i.quantity),
+  })) satisfies OrderItem[]
+
+  if (count === 0) {
+    return (
+      <div className="my-auto flex flex-col items-center justify-center space-y-2">
+        <Icons.cart className="h-12 w-12 text-muted-foreground" aria-hidden />
+        <span className="text-lg font-medium text-muted-foreground">
+          Your cart is empty
+        </span>
+
+        <Link
+          href="/products"
+          className={cn(buttonVariants({ variant: "outline" }), "h-auto")}
+        >
+          Browse Products
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <Shell>
       <Header
@@ -32,7 +61,7 @@ export default async function CheckOutPage() {
       />
       <div className="flex flex-col-reverse gap-6 md:flex-row">
         <div className="flex-1">
-          <CheckoutForm cart={cartItems} />
+          <CheckoutForm cart={items} storeIds={storeIds} />
         </div>
         <div className="grid flex-1 gap-2">
           {cartItems.map((item) => (

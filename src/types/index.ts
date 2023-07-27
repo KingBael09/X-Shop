@@ -16,6 +16,8 @@ export type Rating = 0 | 1 | 2 | 3 | 4 | 5
 
 export type CartItem = ZCartItemSchema
 
+export type OrderItem = Omit<CartItem, "productSubcategory">
+
 export type FileWithPreview = FileWithPath & {
   preview: string
 }

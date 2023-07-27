@@ -40,6 +40,17 @@ export async function getCartAction() {
 
   const productsInCart = await db.query.products.findMany({
     where: inArray(products.id, productIds),
+    columns: {
+      id: true,
+      name: true,
+      images: true,
+      price: true,
+      description: true,
+      createdAt: true,
+      categoryId: true,
+      subcategory: true,
+      storeId: true,
+    },
     with: {
       store: true,
       category: {

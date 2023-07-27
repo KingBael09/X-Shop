@@ -1,6 +1,8 @@
-import type { CartItem, Rating, StoredFile } from "@/types"
+import type { CartItem, OrderItem, Rating, StoredFile } from "@/types"
 import { relations, type InferModel } from "drizzle-orm"
 import { blob, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
+
+import type { PaymentType } from "../actions/checkout"
 
 export const stores = sqliteTable("stores", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
@@ -29,7 +31,6 @@ export const products = sqliteTable("products", {
   rating: integer("rating").$type<Rating>().notNull().default(0),
   tags: blob("tags", { mode: "json" }).$type<string[] | null>().default(null),
   categoryId: integer("categoryId").notNull(),
-  // .references(() => categories.id),
   subcategory: text("subcategory"),
   inventory: integer("inventory").notNull().default(0),
   storeId: integer("storeId").notNull(),
@@ -70,3 +71,17 @@ export const carts = sqliteTable("carts", {
 })
 
 export type Cart = InferModel<typeof carts>
+
+export const orders = sqliteTable("orders", {
+  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  userId: text("userId").notNull(),
+  items: blob("items", { mode: "json" }).$type<OrderItem[]>().notNull(),
+  storeIds: blob("storeIds", { mode: "json" }).$type<number[]>().notNull(),
+  username: text("username").notNull(),
+  mail: text("mail").notNull(),
+  paymentMode: text("paymentMode").$type<PaymentType>().notNull(),
+  address: text("address").notNull(),
+  createdAt: integer("createdAt", { mode: "timestamp" }),
+})
+
+export type Order = InferModel<typeof orders>

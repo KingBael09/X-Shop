@@ -18,3 +18,5 @@ export const checkoutSchema = z.object({
 })
 
 export type ZCheckoutSchema = z.infer<typeof checkoutSchema>
+
+export type PaymentType = z.infer<typeof paymentMethods>

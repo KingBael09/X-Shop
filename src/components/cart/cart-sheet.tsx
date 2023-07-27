@@ -1,11 +1,12 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Icons } from "@/util/icons"
 import { currentUser } from "@clerk/nextjs"
 
 import { getCartAction } from "@/lib/actions/cart"
-import { formatPrice } from "@/lib/utils"
+import { cn, formatPrice } from "@/lib/utils"
 import { Badge } from "@/ui/badge"
-import { Button } from "@/ui/button"
+import { Button, buttonVariants } from "@/ui/button"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
 import {
@@ -134,13 +135,13 @@ export async function CartSheet() {
                 <span>{formatPrice(total.toFixed(2))}</span>
               </div>
               <SheetFooter className="mt-1.5">
-                <Button
+                <Link
+                  href="/checkout"
                   aria-label="Proceed to checkout"
-                  size="sm"
-                  className="w-full"
+                  className={cn(buttonVariants({ size: "sm" }), "w-full")}
                 >
                   Proceed to Checkout
-                </Button>
+                </Link>
               </SheetFooter>
             </div>
           </>
