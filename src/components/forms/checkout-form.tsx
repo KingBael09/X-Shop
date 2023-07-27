@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import type { CustomCartItem } from "@/lib/actions/cart"
 import {
   checkoutSchema,
   paymentMethods,
@@ -63,7 +62,7 @@ export function CheckoutForm({ cart, storeIds }: CheckoutFormProps) {
   return (
     <Form {...form}>
       <form
-        className="grid w-full max-w-xl gap-5"
+        className="grid w-full gap-5"
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
         <FormField
@@ -137,7 +136,7 @@ export function CheckoutForm({ cart, storeIds }: CheckoutFormProps) {
             </FormItem>
           )}
         />
-        <Button>
+        <Button disabled={isPending}>
           {isPending && (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
           )}

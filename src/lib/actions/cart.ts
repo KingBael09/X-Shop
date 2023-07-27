@@ -100,6 +100,8 @@ export async function addToCartAction(inputs: ZCartItemSchema) {
       })
       .run()
 
+    revalidatePath("/")
+
     return
   }
 

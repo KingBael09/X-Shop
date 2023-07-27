@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { OrderItem } from "@/types"
+import type { OrderItem } from "@/types"
 
 import { getCartAction } from "@/lib/actions/cart"
 import { cn, formatPrice } from "@/lib/utils"
@@ -10,8 +10,9 @@ import { CheckoutForm } from "@/components/forms/checkout-form"
 import { Header } from "@/components/header"
 import { ImagePlaceHolder } from "@/components/no-image"
 import { Shell } from "@/components/shells/shell"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { Icons } from "@/components/util/icons"
 
 export default async function CheckOutPage() {
@@ -59,14 +60,14 @@ export default async function CheckOutPage() {
         description="Fill information to place your order"
         size="sm"
       />
-      <div className="flex flex-col-reverse gap-6 md:flex-row">
-        <div className="flex-1">
+      <div className="flex flex-col-reverse gap-6 lg:flex-row">
+        <div className="flex-1 lg:border-r lg:border-accent lg:pr-6">
           <CheckoutForm cart={items} storeIds={storeIds} />
         </div>
-        <div className="grid flex-1 gap-2">
+        <div className="flex flex-1 flex-col gap-2">
           {cartItems.map((item) => (
             <Card key={item.id} className="flex">
-              <div className="relative h-full w-32 overflow-hidden rounded">
+              <div className="relative w-32 overflow-hidden rounded">
                 {item?.images?.length ? (
                   <Image
                     fill
@@ -74,7 +75,7 @@ export default async function CheckOutPage() {
                       item.images[0]?.url ?? "/images/product-placeholder.webp"
                     }
                     alt={item.images[0]?.name ?? item.name}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="33vw"
                     className="absolute object-cover"
                   />
                 ) : (
