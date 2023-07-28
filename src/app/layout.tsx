@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { TailwindIndicator } from "@/util/tailwind-indicator"
 import { ThemeProvider } from "@/util/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs"
+import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
 import { fontMono, fontSans } from "@/lib/fonts"
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <TailwindIndicator />
           </ThemeProvider>
           <Toaster />
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
