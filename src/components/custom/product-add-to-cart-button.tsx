@@ -4,6 +4,7 @@ import { useTransition } from "react"
 import { Icons } from "@/util/icons"
 
 import { addToCartAction } from "@/lib/actions/cart"
+import { catchError } from "@/lib/utils"
 import { Button, type ButtonProps } from "@/ui/button"
 
 interface AddToCartButtonProps extends ButtonProps {
@@ -22,7 +23,11 @@ export function AddToCartButton({
 
   function addToCart() {
     startTransition(async () => {
-      await addToCartAction({ productId, quantity: 1 })
+      try {
+        await addToCartAction({ productId, quantity: 1 })
+      } catch (error) {
+        catchError(error)
+      }
     })
   }
   return (
@@ -32,3 +37,5 @@ export function AddToCartButton({
     </Button>
   )
 }
+
+// TODO: try catch

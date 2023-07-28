@@ -6,18 +6,23 @@ dotenv.config()
 const config = {
   schema: "./src/lib/db/schema.ts",
   out: "./.drizzle",
-  ...(process.env.DATABASE_AUTH_TOKEN && process.env.NODE_ENV == "production"
-    ? {
-        driver: "turso",
+  // ...(process.env.DATABASE_AUTH_TOKEN && process.env.NODE_ENV == "production"
+  //   ? {
+  //       driver: "turso",
+  //       dbCredentials: {
+  //         url: process.env.DATABASE_URL ?? "",
+  //         authToken: process.env.DATABASE_AUTH_TOKEN,
+  //       },
+  //     }
+  //   : {
+  //       driver: "libsql",
+  //       dbCredentials: { url: process.env.DATABASE_URL ?? "" },
+  //     }),
+  driver: "turso",
         dbCredentials: {
           url: process.env.DATABASE_URL ?? "",
           authToken: process.env.DATABASE_AUTH_TOKEN,
         },
-      }
-    : {
-        driver: "libsql",
-        dbCredentials: { url: process.env.DATABASE_URL ?? "" },
-      }),
   verbose: true,
   strict: true,
 } satisfies Config

@@ -280,3 +280,9 @@ export function AddSubCategoryForm({
 }
 
 // TODO: There seem to so some sort of limitation if i take out ExtraModal out of this file
+
+// TODO: slugify the input
+
+// TODO: sub-category toast is with wrong msg
+
+// TODO: There seems to be a problem with clerk/themes in account page
