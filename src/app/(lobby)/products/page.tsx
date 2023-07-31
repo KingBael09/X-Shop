@@ -9,7 +9,8 @@ import { toTitleCase } from "@/lib/utils"
 import { Header } from "@/components/header"
 import { ProductCard } from "@/components/product-card"
 import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
-import { Shell } from "@/components/shells/shell"
+
+// import { Shell } from "@/components/shells/shell"
 
 interface AllProductsPageProps {
   searchParams: SearchParams
@@ -42,7 +43,7 @@ export default async function AllProductsPage({
   }))
 
   return (
-    <Shell>
+    <>
       <Header
         title="Products"
         description="Buy products from our stores"
@@ -61,7 +62,7 @@ export default async function AllProductsPage({
           ))}
         </div>
       </ProductsLayoutWrapper>
-    </Shell>
+    </>
   )
 }
 

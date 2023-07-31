@@ -17,7 +17,7 @@ import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
 import { ProductCard } from "@/components/product-card"
 import { ProductImageCarousel } from "@/components/product-image-carousel"
-import { Shell } from "@/components/shells/shell"
+// import { Shell } from "@/components/shells/shell"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Zoom } from "@/components/zoom-image"
 
@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: ProductPageParams) {
   ]
 
   return (
-    <Shell>
+    <>
       <Breadcrumbs segments={segments} />
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
         <ProductImageCarousel
@@ -153,6 +153,6 @@ export default async function ProductPage({ params }: ProductPageParams) {
           </div>
         </div>
       )}
-    </Shell>
+    </>
   )
 }
