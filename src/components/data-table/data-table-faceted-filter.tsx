@@ -1,6 +1,6 @@
 import type { Option } from "@/types"
 import { Icons } from "@/util/icons"
-import { type Column } from "@tanstack/react-table"
+import type { Column } from "@tanstack/react-table"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/ui/badge"

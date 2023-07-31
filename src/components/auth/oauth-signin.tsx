@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Icons } from "@/util/icons"
 import { isClerkAPIResponseError, useSignIn } from "@clerk/nextjs"
-import { type OAuthStrategy } from "@clerk/types"
+import type { OAuthStrategy } from "@clerk/types"
 import { toast } from "sonner"
 
 import { Button } from "@/ui/button"

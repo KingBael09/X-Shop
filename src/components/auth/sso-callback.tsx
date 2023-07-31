@@ -24,3 +24,5 @@ export default function SSOCallback({ searchParams }: SSOCallbackPageProps) {
     </div>
   )
 }
+
+// TODO: Check if import * as React from "react" has less bundle size than import {...whatevs} from "react"

@@ -218,3 +218,4 @@ export default async function LobbyPage() {
 }
 
 // TODO: radix/Slot is having problems related to aria-controls
+// TODO: Create a suspense boundary around fetchable data

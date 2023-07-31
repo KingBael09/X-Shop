@@ -3,13 +3,12 @@
 import { useState } from "react"
 import Link from "next/link"
 import type { LayoutProps } from "@/types"
+import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
-
-import { Badge } from "../ui/badge"
-import { Button, buttonVariants } from "../ui/button"
-import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "../ui/sheet"
-import { Icons } from "../util/icons"
+import { Badge } from "@/ui/badge"
+import { Button, buttonVariants } from "@/ui/button"
+import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "@/ui/sheet"
 
 interface CartSheetWrapperProps extends LayoutProps {
   count: number

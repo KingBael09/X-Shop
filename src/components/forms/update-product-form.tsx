@@ -1,13 +1,17 @@
 "use client"
 
 import { useEffect, useRef, useState, useTransition } from "react"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import type { FileWithPreview } from "@/types"
 import { Icons } from "@/util/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { generateReactHelpers } from "@uploadthing/react/hooks"
-import { useForm } from "react-hook-form"
+import {
+  useForm,
+  type FieldValues,
+  type UseFormSetValue,
+} from "react-hook-form"
 import { toast } from "sonner"
 
 import {
@@ -16,6 +20,7 @@ import {
   updateProductAction,
 } from "@/lib/actions/product"
 import type { Category, Product } from "@/lib/db/schema"
+import { useUploadThing } from "@/lib/upload"
 import { catchError, cn, isArrayOfFile } from "@/lib/utils"
 import { productSchema, type ZProductSchema } from "@/lib/validations/product"
 import { Button } from "@/ui/button"
@@ -38,11 +43,10 @@ import { Input } from "@/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
 import { Separator } from "@/ui/separator"
 import { Textarea } from "@/ui/textarea"
-import type { OurFileRouter } from "@/app/api/uploadthing/core"
 
-import { FileDialog } from "../file-dialog"
+import { FileDialogPlaceholder } from "../file-dialog-loader"
+import { AspectRatio } from "../ui/aspect-ratio"
 import { Zoom } from "../zoom-image"
-import { ExtraModals } from "./add-category-form"
 import type { DialogState } from "./add-product-form"
 
 interface UpdateProductFormProps {
@@ -50,7 +54,16 @@ interface UpdateProductFormProps {
   categories: Category[]
 }
 
-const { useUploadThing } = generateReactHelpers<OurFileRouter>()
+const ExtraModals = dynamic(() =>
+  import("./add-category-form").then((mod) => mod.ExtraModals)
+)
+
+const FileDialog = dynamic(
+  () => import("../file-dialog").then((mod) => mod.FileDialog),
+  {
+    loading: () => <FileDialogPlaceholder />,
+  }
+)
 
 export function UpdateProductForm({
   product,
@@ -84,8 +97,6 @@ export function UpdateProductForm({
       inventory: String(product.inventory),
       categoryId: String(product.categoryId),
       subcategory: product.subcategory ?? "",
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      // images: product.images as {} | undefined,
     },
   })
 
@@ -168,7 +179,7 @@ export function UpdateProductForm({
       (category) => category.id === Number(form.watch("categoryId"))
     )?.subcategories ?? []
 
-  const previews = form.watch("images") as FileWithPreview[] | null
+  const previews = (form.watch("images") as FileWithPreview[] | null) ?? files
 
   const [open, setOpen] = useState<DialogState>({
     target: "",
@@ -434,25 +445,33 @@ export function UpdateProductForm({
               return (
                 <FormItem>
                   <FormLabel>Images</FormLabel>
-                  {/* <div className="w-full"> */}
-                  {!isUploading && previews?.length ? (
-                    <div className="flex items-center gap-2">
+                  {previews?.length ? (
+                    <div className="flex h-20 items-center gap-2">
                       {previews.map((file) => (
-                        <Zoom key={file.name}>
-                          <Image
-                            src={file.preview}
-                            alt={file.name}
-                            className="h-20 w-20 shrink-0 rounded-md object-cover object-center"
-                            width={80}
-                            height={80}
-                          />
-                        </Zoom>
+                        <div
+                          className="relative max-w-[80px] flex-full"
+                          key={file.name}
+                        >
+                          <Zoom margin={10}>
+                            <AspectRatio ratio={1}>
+                              <Image
+                                src={file.preview}
+                                alt={file.name}
+                                className="rounded-md object-cover"
+                                fill
+                              />
+                            </AspectRatio>
+                          </Zoom>
+                        </div>
                       ))}
                     </div>
                   ) : null}
                   <FormControl>
                     <FileDialog
-                      setValue={form.setValue}
+                      setValue={
+                        // TODO: Dammit Typescript wtf is wrong with dynamic import and generics
+                        form.setValue as unknown as UseFormSetValue<FieldValues>
+                      }
                       name="images"
                       maxFiles={3}
                       maxSize={1024 * 1024 * 4}

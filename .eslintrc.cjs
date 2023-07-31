@@ -50,3 +50,5 @@ const config = {
 }
 
 module.exports = config
+
+// TODO: Bump up the typescript-eslint version

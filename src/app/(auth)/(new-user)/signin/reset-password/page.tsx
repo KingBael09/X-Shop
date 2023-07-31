@@ -1,4 +1,4 @@
-import { type Metadata } from "next"
+import type { Metadata } from "next"
 import { env } from "@/env.mjs"
 import { ResetPasswordForm } from "@/forms/reset-password-form"
 

@@ -1,28 +1,30 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/ui/card"
 import { Skeleton } from "@/ui/skeleton"
 
 export default function CreateProductLoading() {
   return (
-    <Card>
-      <CardHeader className="space-y-2">
-        <Skeleton className="h-6 w-1/4" />
-        <Skeleton className="h-4 w-2/4" />
-      </CardHeader>
-      <CardContent>
-        <div className="grid w-full max-w-xl gap-4">
-          <div className="space-y-2.5">
+    <div className="grid w-full max-w-xl gap-6">
+      <div className="space-y-2.5">
+        <Skeleton className="h-4 w-32" />
+        <Skeleton className="h-10" />
+      </div>
+      <div className="space-y-2.5">
+        <Skeleton className="h-4 w-32" />
+        <Skeleton className="h-20" />
+      </div>
+      {Array.from({ length: 2 }).map((_, i) => (
+        <div key={i} className="flex flex-col gap-6 sm:flex-row">
+          <div className="flex-1 space-y-2.5">
             <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-6" />
+            <Skeleton className="h-10" />
           </div>
-          <div className="space-y-2.5">
+          <div className="flex-1 space-y-2.5">
             <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-20" />
+            <Skeleton className="h-10" />
           </div>
         </div>
-      </CardContent>
-      <CardFooter>
-        <Skeleton className="h-10 w-32" />
-      </CardFooter>
-    </Card>
+      ))}
+
+      <Skeleton className="h-10 space-y-2.5" />
+    </div>
   )
 }

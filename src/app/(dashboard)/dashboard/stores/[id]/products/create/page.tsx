@@ -3,13 +3,6 @@ import { env } from "@/env.mjs"
 import { AddProductForm } from "@/forms/add-product-form"
 
 import { getAllCategoriesAction } from "@/lib/actions/category"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/ui/card"
 
 interface NewProductPageProps {
   params: {
@@ -28,19 +21,9 @@ export default async function CreateProductPage({
 }: NewProductPageProps) {
   const storeId = Number(params.id)
 
-  const categories = await getAllCategoriesAction()
+  const categories = await getAllCategoriesAction() //TODO: We gotta cache this
 
-  return (
-    <Card>
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Add product</CardTitle>
-        <CardDescription>Add a new product to your store</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <AddProductForm storeId={storeId} categories={categories} />
-      </CardContent>
-    </Card>
-  )
+  return <AddProductForm storeId={storeId} categories={categories} />
 }
 
 // FIXME: 248kb first load size

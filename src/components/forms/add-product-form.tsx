@@ -1,16 +1,21 @@
 "use client"
 
 import { useRef, useState, useTransition } from "react"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import type { FileWithPreview } from "@/types"
 import { Icons } from "@/util/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { generateReactHelpers } from "@uploadthing/react/hooks"
-import { useForm } from "react-hook-form"
+import {
+  useForm,
+  type FieldValues,
+  type UseFormSetValue,
+} from "react-hook-form"
 import { toast } from "sonner"
 
 import { addProductAction, checkProductAction } from "@/lib/actions/product"
 import type { Category } from "@/lib/db/schema"
+import { useUploadThing } from "@/lib/upload"
 import { catchError, cn, isArrayOfFile, toTitleCase } from "@/lib/utils"
 import { productSchema, type ZProductSchema } from "@/lib/validations/product"
 import { Button } from "@/ui/button"
@@ -33,11 +38,9 @@ import { Input } from "@/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover"
 import { Separator } from "@/ui/separator"
 import { Textarea } from "@/ui/textarea"
-import type { OurFileRouter } from "@/app/api/uploadthing/core"
 
-import { FileDialog } from "../file-dialog"
+import { FileDialogPlaceholder } from "../file-dialog-loader"
 import { Zoom } from "../zoom-image"
-import { ExtraModals } from "./add-category-form"
 
 interface AddProductFormProps {
   storeId: number
@@ -49,7 +52,16 @@ export interface DialogState {
   state: boolean
 }
 
-const { useUploadThing } = generateReactHelpers<OurFileRouter>()
+const ExtraModals = dynamic(() =>
+  import("./add-category-form").then((mod) => mod.ExtraModals)
+)
+
+const FileDialog = dynamic(
+  () => import("../file-dialog").then((mod) => mod.FileDialog),
+  {
+    loading: () => <FileDialogPlaceholder />,
+  }
+)
 
 export function AddProductForm({ storeId, categories }: AddProductFormProps) {
   const [isPending, startTransition] = useTransition()
@@ -388,7 +400,10 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                   ) : null}
                   <FormControl>
                     <FileDialog
-                      setValue={form.setValue}
+                      setValue={
+                        // TODO: Dammit Typescript wtf is wrong with dynamic import and generics
+                        form.setValue as unknown as UseFormSetValue<FieldValues>
+                      }
                       name="images"
                       maxFiles={3}
                       maxSize={1024 * 1024 * 4}

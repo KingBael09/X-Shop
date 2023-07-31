@@ -1,4 +1,4 @@
-import { type HandleOAuthCallbackParams } from "@clerk/types"
+import type { HandleOAuthCallbackParams } from "@clerk/types"
 
 import SSOCallback from "@/components/auth/sso-callback"
 

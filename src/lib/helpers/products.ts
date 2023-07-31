@@ -10,7 +10,7 @@ export interface SearchParams {
  *
  * This requires the follwing params
  * - page
- * - per_page -> limit
+ * - per_page -> limit `default:8`
  * - sort
  * - category_ids
  * - price_range

@@ -73,3 +73,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </ClerkProvider>
   )
 }
+
+// TODO: Mobile nav remaining
+// TODO: implement resend
+// TODO: think of a way to integrate with tans
+
+// FIXME: Change -> package.json now has sideEffects:false -> this reduces firstload js by 21kbs : Check if that is causing problems any where

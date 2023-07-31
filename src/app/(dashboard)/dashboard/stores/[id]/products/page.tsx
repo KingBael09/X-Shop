@@ -140,5 +140,4 @@ export default async function ProductsPage({
   )
 }
 
-// TODO: Globalize searchParam type
 // FIXME: 210kb first load size
