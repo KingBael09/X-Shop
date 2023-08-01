@@ -1,12 +1,12 @@
 import type { LayoutProps } from "@/types"
 
-import { getAllCategoriesAction } from "@/lib/actions/category"
+import { getCachedCategoriesAction } from "@/lib/helpers/categories"
 import { ScrollArea } from "@/ui/scroll-area"
 import { CategorySideBar } from "@/components/category-sidebar"
 import { AutoBreadCrumbs } from "@/components/pagers/auto-breadcrumbs"
 
 export default async function CategoriesLayout({ children }: LayoutProps) {
-  const allCategories = await getAllCategoriesAction()
+  const allCategories = await getCachedCategoriesAction()
 
   return (
     <div className="container relative flex min-h-[calc(var(--navbar-page-offset))] gap-6">

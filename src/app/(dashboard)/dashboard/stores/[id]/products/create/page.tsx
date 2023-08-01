@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { env } from "@/env.mjs"
 import { AddProductForm } from "@/forms/add-product-form"
 
-import { getAllCategoriesAction } from "@/lib/actions/category"
+import { getCachedCategoriesAction } from "@/lib/helpers/categories"
 
 interface NewProductPageProps {
   params: {
@@ -21,9 +21,7 @@ export default async function CreateProductPage({
 }: NewProductPageProps) {
   const storeId = Number(params.id)
 
-  const categories = await getAllCategoriesAction() //TODO: We gotta cache this
+  const categories = await getCachedCategoriesAction()
 
   return <AddProductForm storeId={storeId} categories={categories} />
 }
-
-// FIXME: 248kb first load size

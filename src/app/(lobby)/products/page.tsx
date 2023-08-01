@@ -1,6 +1,6 @@
-import { getAllCategoriesAction } from "@/lib/actions/category"
 import { getProductAction } from "@/lib/actions/product"
 import { getStoresAction } from "@/lib/actions/store"
+import { getCachedCategoriesAction } from "@/lib/helpers/categories"
 import {
   getProductSearchParams,
   type SearchParams,
@@ -35,7 +35,7 @@ export default async function AllProductsPage({
 
   const storePageCount = Math.ceil(storeQty / storesLimit)
 
-  const categories = await getAllCategoriesAction()
+  const categories = await getCachedCategoriesAction()
 
   const shapedCategories = categories.map((c) => ({
     label: toTitleCase(c.name),

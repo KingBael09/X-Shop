@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { auth, currentUser } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs"
 import { eq, inArray } from "drizzle-orm"
 
 import { db } from "../db"

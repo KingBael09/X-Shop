@@ -6,6 +6,10 @@ import { db } from "../db"
 import { categories } from "../db/schema"
 import type { ZCategorySchema } from "../validations/category"
 
+/**
+ * This call doesn't cache any data
+ * @deprecated use `getCachedCategoriesAction()`
+ */
 export async function getAllCategoriesAction() {
   return await db.query.categories.findMany()
   // TODO: use a prepared statement from drizzle

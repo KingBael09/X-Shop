@@ -3,9 +3,9 @@ import { notFound } from "next/navigation"
 import { UpdateProductForm } from "@/forms/update-product-form"
 import { and, eq } from "drizzle-orm"
 
-import { getAllCategoriesAction } from "@/lib/actions/category"
 import { db } from "@/lib/db"
 import { products } from "@/lib/db/schema"
+import { getCachedCategoriesAction } from "@/lib/helpers/categories"
 
 export interface EditProductPageProps {
   params: {
@@ -29,11 +29,9 @@ export default async function EditProductPage({
     where: and(eq(products.id, productId), eq(products.storeId, storeId)),
   })
 
-  const categories = await getAllCategoriesAction()
+  const categories = await getCachedCategoriesAction()
 
   if (!product) return notFound()
 
   return <UpdateProductForm product={product} categories={categories} />
 }
-
-// FIXME: 241kb first load size
