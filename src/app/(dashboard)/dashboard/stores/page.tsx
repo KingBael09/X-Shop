@@ -3,7 +3,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { env } from "@/env.mjs"
 import { Icons } from "@/util/icons"
-import { currentUser } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { FreeTierStoreLimit } from "@/config/site"
@@ -30,12 +30,12 @@ export const metadata: Metadata = {
 }
 
 export default async function StoresPage() {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) redirect("/signin")
+  if (!userId) redirect("/signin")
 
   const userStores = await db.query.stores.findMany({
-    where: eq(stores.userId, user.id),
+    where: eq(stores.userId, userId),
   })
 
   return (

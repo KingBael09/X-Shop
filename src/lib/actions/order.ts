@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import type { OrderItem } from "@/types"
-import { currentUser } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { db } from "../db"
@@ -14,9 +14,9 @@ export async function placeOrderAction(
   items: OrderItem[],
   storeIds: number[]
 ) {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) {
+  if (!userId) {
     throw new Error("You must be logged in to place an order")
   }
 
@@ -29,7 +29,7 @@ export async function placeOrderAction(
     .values({
       items,
       storeIds,
-      userId: user.id,
+      userId,
       paymentMode,
       username,
       ...rest,
@@ -39,7 +39,7 @@ export async function placeOrderAction(
 
   // delete cart items
 
-  await db.delete(carts).where(eq(carts.userId, user.id)).run()
+  await db.delete(carts).where(eq(carts.userId, userId)).run()
 
   revalidatePath("/")
 }

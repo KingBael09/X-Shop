@@ -1,8 +1,7 @@
-import { AspectRatio } from "@/ui/aspect-ratio"
-import { Card, CardContent, CardHeader } from "@/ui/card"
 import { Separator } from "@/ui/separator"
 import { Skeleton } from "@/ui/skeleton"
 import { ImagePlaceHolder } from "@/components/no-image"
+import { ProductCardLoader } from "@/components/product-card-loader"
 import { Shell } from "@/components/shells/shell"
 
 export default function ProductLoading() {
@@ -60,17 +59,7 @@ export default function ProductLoading() {
         <div className="overflow-x-auto pb-2 pt-6">
           <div className="flex gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <Card key={i} className="min-w-[260px] rounded-sm">
-                <CardHeader className="border-b p-0">
-                  <AspectRatio ratio={1}>
-                    <ImagePlaceHolder />
-                  </AspectRatio>
-                </CardHeader>
-                <CardContent className="grid gap-2.5 p-4">
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-1/4" />
-                </CardContent>
-              </Card>
+              <ProductCardLoader key={i} />
             ))}
           </div>
         </div>

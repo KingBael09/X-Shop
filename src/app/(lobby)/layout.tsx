@@ -4,8 +4,8 @@ import { currentUser } from "@clerk/nextjs"
 import { SiteFooter } from "@/components/layouts/site-footer"
 import { SiteHeader } from "@/components/layouts/site-header"
 
-export default async function LobbyLayout({ children }: LayoutProps) {
-  const user = await currentUser()
+export default function LobbyLayout({ children }: LayoutProps) {
+  const user = currentUser()
 
   return (
     <div className="relative flex min-h-screen flex-col">
@@ -15,3 +15,5 @@ export default async function LobbyLayout({ children }: LayoutProps) {
     </div>
   )
 }
+
+// TODO: Implement base pages with https://nextjs.org/docs/app/api-reference/next-config-js/mdxRs

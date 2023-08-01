@@ -89,27 +89,6 @@ export function ProductImageCarousel({
             backfaceVisibility: "hidden",
           }}
         >
-          {/* {images.map((image, index) => (
-            <div className="relative min-w-0 flex-full pl-4" key={index}>
-              <Zoom margin={10}>
-                <AspectRatio ratio={1}>
-                  <Image
-                    fill
-                    key={index}
-                    // unoptimized
-                    role="group"
-                    src={image.url}
-                    alt={image.name}
-                    priority={index === 0}
-                    className="!cursor-default object-cover md:object-contain"
-                    aria-label={`Slide ${index + 1} of ${images.length}`}
-                    sizes="100vw"
-                    aria-roledescription="slide"
-                  />
-                </AspectRatio>
-              </Zoom>
-            </div>
-          ))} */}
           {children}
         </div>
       </div>

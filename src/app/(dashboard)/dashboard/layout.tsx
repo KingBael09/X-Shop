@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
 import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
 import { currentUser } from "@clerk/nextjs"
@@ -17,10 +16,8 @@ export const metadata: Metadata = {
   description: "Manage your stores",
 }
 
-export default async function DashboardLayout({ children }: LayoutProps) {
-  const user = await currentUser()
-
-  if (!user) redirect("/signin")
+export default function DashboardLayout({ children }: LayoutProps) {
+  const user = currentUser()
 
   return (
     <div className="relative flex min-h-screen flex-col">

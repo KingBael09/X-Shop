@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { currentUser } from "@clerk/nextjs"
+import { auth, currentUser } from "@clerk/nextjs"
 import { eq, inArray } from "drizzle-orm"
 
 import { db } from "../db"
@@ -18,14 +18,14 @@ export type CustomCartItem = Awaited<ReturnType<typeof getCartAction>>[0]
  * This function internally check for user and if there is no user then it throws an error
  */
 export async function getCartAction() {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) {
+  if (!userId) {
     throw new Error("You must be logged in to perform this action")
   }
 
   const userCart = await db.query.carts.findFirst({
-    where: eq(carts.userId, user.id),
+    where: eq(carts.userId, userId),
   })
 
   if (!userCart) {
@@ -78,14 +78,14 @@ export async function getCartAction() {
 }
 
 export async function addToCartAction(inputs: ZCartItemSchema) {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) {
+  if (!userId) {
     throw new Error("You must be signed in to perform this action")
   }
 
   const cart = await db.query.carts.findFirst({
-    where: eq(carts.userId, user.id),
+    where: eq(carts.userId, userId),
   })
 
   // If there are no assigned cart assign one to user
@@ -94,7 +94,7 @@ export async function addToCartAction(inputs: ZCartItemSchema) {
     await db
       .insert(carts)
       .values({
-        userId: user.id,
+        userId,
         createdAt: new Date(),
         items: [inputs],
       })
@@ -125,14 +125,14 @@ export async function addToCartAction(inputs: ZCartItemSchema) {
 }
 
 export async function updateCartAction(inputs: ZCartItemSchema) {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) {
+  if (!userId) {
     throw new Error("You must be logged in to perform this action")
   }
 
   const cart = await db.query.carts.findFirst({
-    where: eq(carts.userId, user.id),
+    where: eq(carts.userId, userId),
   })
 
   if (!cart) {
@@ -168,14 +168,14 @@ interface DeleteCartActionInterface {
 }
 
 export async function deleteCartAction(inputs: DeleteCartActionInterface) {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) {
+  if (!userId) {
     throw new Error("You must be logged in to perform this action")
   }
 
   const cart = await db.query.carts.findFirst({
-    where: eq(carts.userId, user.id),
+    where: eq(carts.userId, userId),
   })
 
   if (!cart) {

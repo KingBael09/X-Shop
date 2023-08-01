@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 import { AddToCartForm } from "@/forms/add-to-cart-form"
@@ -15,7 +16,8 @@ import {
 import { Separator } from "@/ui/separator"
 import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
-import { ProductCard } from "@/components/product-card"
+import { ProductCardLoader } from "@/components/product-card-loader"
+// import { ProductCard } from "@/components/product-card"
 import { ProductImageCarousel } from "@/components/product-image-carousel"
 // import { Shell } from "@/components/shells/shell"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
@@ -26,6 +28,11 @@ interface ProductPageParams {
     productId: string
   }
 }
+
+const ProductCard = dynamic(
+  () => import("@/components/product-card").then((mod) => mod.ProductCard),
+  { loading: () => <ProductCardLoader /> }
+)
 
 export default async function ProductPage({ params }: ProductPageParams) {
   const productId = Number(params.productId)
@@ -104,7 +111,6 @@ export default async function ProductPage({ params }: ProductPageParams) {
             <p className="text-muted-foreground">
               {formatPrice(product.price)}
             </p>
-
             <ModLink
               disabled={productWithSameStore.length < 0}
               variant="link"

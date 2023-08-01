@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import Image from "next/image"
 import { Icons } from "@/util/icons"
-import { currentUser } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs"
 
 import { getCartAction } from "@/lib/actions/cart"
 import { formatPrice } from "@/lib/utils"
@@ -14,9 +14,9 @@ import { CartSheetWrapper } from "./cart-sheet-wrapper"
 import { UpdateCart } from "./update-cart"
 
 export async function CartSheet() {
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) return null
+  if (!userId) return null
 
   const cartItems = await getCartAction()
 

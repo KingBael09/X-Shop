@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
-import { currentUser } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
@@ -49,12 +49,12 @@ export default async function StoreLayout({
 }: StoreLayoutProps) {
   const storeId = Number(params.id)
 
-  const user = await currentUser()
+  const { userId } = auth()
 
-  if (!user) redirect("/signin")
+  if (!userId) redirect("/signin")
 
   const allStores = await db.query.stores.findMany({
-    where: eq(stores.userId, user.id),
+    where: eq(stores.userId, userId),
     columns: {
       id: true,
       name: true,

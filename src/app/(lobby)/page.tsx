@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { desc, eq, sql } from "drizzle-orm"
@@ -17,7 +18,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card"
+import { Skeleton } from "@/ui/skeleton"
 import { ProductCard } from "@/components/product-card"
+import { ProductCardLoader } from "@/components/product-card-loader"
 import { Scrollable } from "@/components/scrollable"
 import { Shell } from "@/components/shells/shell"
 
@@ -123,12 +126,38 @@ function CategoriesSection() {
   )
 }
 
-export default async function LobbyPage() {
+async function FeaturedProducts() {
   const allProducts = await db.query.products.findMany({
     limit: 8,
     orderBy: desc(products.categoryId),
   })
 
+  return allProducts.map((product) => (
+    <ProductCard enableAction key={product.id} product={product} />
+  ))
+}
+
+function FeaturedProductsLoading() {
+  return Array.from({ length: 8 }).map((_, i) => (
+    <ProductCardLoader actions key={i} />
+  ))
+}
+
+function FeaturedStoresLoading() {
+  return Array.from({ length: 8 }).map((_, i) => (
+    <Card key={i}>
+      <div className="space-y-1.5 p-4">
+        <Skeleton className="h-6 w-3/4" />
+        <Skeleton className="h-2 w-full" />
+      </div>
+      <div className="p-4 pt-0">
+        <Skeleton className="h-9 w-full" />
+      </div>
+    </Card>
+  ))
+}
+
+async function FeaturedStores() {
   const allStoresWithCount = await db
     .select({
       id: stores.id,
@@ -144,6 +173,31 @@ export default async function LobbyPage() {
     .orderBy(desc(sql<number>`count(${products.id})`))
     .all()
 
+  return allStoresWithCount.map((store) => (
+    <Card key={store.id}>
+      <CardHeader className="p-4">
+        <CardTitle>{store.name}</CardTitle>
+        {store.description && (
+          <CardDescription>{store.description}</CardDescription>
+        )}
+      </CardHeader>
+      <CardContent className="p-4 pt-0">
+        <Link
+          href={`/products?store_ids=${store.id}`}
+          className={buttonVariants({
+            size: "sm",
+            className: "w-full",
+          })}
+        >
+          View products ({store.productCount})
+          <span className="sr-only">{`${store.name} store products`}</span>
+        </Link>
+      </CardContent>
+    </Card>
+  ))
+}
+
+export default function LobbyPage() {
   return (
     <Shell as="div" className="gap-12">
       <HeroSection />
@@ -181,36 +235,17 @@ export default async function LobbyPage() {
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {allProducts.map((product) => (
-            <ProductCard enableAction key={product.id} product={product} />
-          ))}
+          <Suspense fallback={<FeaturedProductsLoading />}>
+            <FeaturedProducts />
+          </Suspense>
         </div>
       </section>
       <section aria-labelledby="featured-stores-heading" className="space-y-6">
         <h2 className="text-2xl font-medium sm:text-3xl">Featured stores</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {allStoresWithCount.map((store) => (
-            <Card key={store.id}>
-              <CardHeader className="p-4">
-                <CardTitle>{store.name}</CardTitle>
-                {store.description && (
-                  <CardDescription>{store.description}</CardDescription>
-                )}
-              </CardHeader>
-              <CardContent className="p-4 pt-0">
-                <Link
-                  href={`/products?store_ids=${store.id}`}
-                  className={buttonVariants({
-                    size: "sm",
-                    className: "w-full",
-                  })}
-                >
-                  View products ({store.productCount})
-                  <span className="sr-only">{`${store.name} store products`}</span>
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+          <Suspense fallback={<FeaturedStoresLoading />}>
+            <FeaturedStores />
+          </Suspense>
         </div>
       </section>
     </Shell>
@@ -218,4 +253,3 @@ export default async function LobbyPage() {
 }
 
 // TODO: radix/Slot is having problems related to aria-controls
-// TODO: Create a suspense boundary around fetchable data

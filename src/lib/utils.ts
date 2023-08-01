@@ -1,17 +1,13 @@
 import { env } from "@/env.mjs"
 import { isClerkAPIResponseError } from "@clerk/nextjs"
-import { clsx, type ClassValue } from "clsx"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { toast } from "sonner"
-import { twMerge } from "tailwind-merge"
 import { z } from "zod"
 
-dayjs.extend(relativeTime)
+export { twMerge as cn } from "tailwind-merge"
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+dayjs.extend(relativeTime)
 
 export function formatPrice(
   price: number | string,

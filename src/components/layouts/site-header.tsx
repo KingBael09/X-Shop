@@ -1,3 +1,4 @@
+import { use } from "react"
 import Link from "next/link"
 import { Icons } from "@/util/icons"
 import type { User } from "@clerk/nextjs/dist/types/server"
@@ -20,10 +21,12 @@ import UserAvatar from "../user-avatar"
 import { MainNav, MobileNav } from "./nav"
 
 interface SiteHeaderProps {
-  user: User | null
+  user: Promise<User | null>
 }
 
-export function SiteHeader({ user }: SiteHeaderProps) {
+export function SiteHeader({ user: userPromise }: SiteHeaderProps) {
+  const user = use(userPromise)
+
   const email =
     user?.emailAddresses?.find((e) => e.id === user.primaryEmailAddressId)
       ?.emailAddress ?? ""
