@@ -43,5 +43,3 @@ export default authMiddleware({
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 }
-
-// TODO: Set private api routes

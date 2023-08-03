@@ -9,6 +9,5 @@ export const metadata: Metadata = {
 }
 
 export default function CreateStorePage() {
-  // TODO: This should mostly work because middleware will not allow to visit the page
   return <AddStoreForm />
 }

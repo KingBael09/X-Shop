@@ -52,7 +52,9 @@ export async function getCartAction() {
       storeId: true,
     },
     with: {
-      store: true,
+      // store: {
+      //   columns: {},
+      // },
       category: {
         columns: {
           name: true,
@@ -60,8 +62,6 @@ export async function getCartAction() {
       },
     },
   })
-
-  // TODO: amount of data can be reduced in products in array
 
   const cartItems = productsInCart.map((product) => {
     const quantity = userCart.items?.find(

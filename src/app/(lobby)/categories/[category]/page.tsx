@@ -9,8 +9,6 @@ import {
   getProductSearchParams,
   type SearchParams,
 } from "@/lib/helpers/products"
-import { toTitleCase } from "@/lib/utils"
-import { Header } from "@/components/header"
 import { ProductCard } from "@/components/product-card"
 import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
 
@@ -53,26 +51,17 @@ export default async function CategoryPage({
   const storePageCount = Math.ceil(storeQty / storesLimit)
 
   return (
-    <div className="flex flex-1 flex-col gap-8 px-0 py-8">
-      <Header
-        title="Products"
-        description={`See all products in ${toTitleCase(params.category)}`}
-        size="sm"
-      />
-      <ProductsLayoutWrapper
-        stores={stores}
-        items={products.length}
-        pageCount={pageCount}
-        storePageCount={storePageCount}
-      >
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <ProductCard enableAction key={product.id} product={product} />
-          ))}
-        </div>
-      </ProductsLayoutWrapper>
-    </div>
+    <ProductsLayoutWrapper
+      stores={stores}
+      items={products.length}
+      pageCount={pageCount}
+      storePageCount={storePageCount}
+    >
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((product) => (
+          <ProductCard enableAction key={product.id} product={product} />
+        ))}
+      </div>
+    </ProductsLayoutWrapper>
   )
 }
-
-// FIXME: 210kb first load size

@@ -37,5 +37,3 @@ export function AddToCartButton({
     </Button>
   )
 }
-
-// TODO: try catch

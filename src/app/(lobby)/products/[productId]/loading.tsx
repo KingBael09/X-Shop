@@ -2,15 +2,14 @@ import { Separator } from "@/ui/separator"
 import { Skeleton } from "@/ui/skeleton"
 import { ImagePlaceHolder } from "@/components/no-image"
 import { ProductCardLoader } from "@/components/product-card-loader"
-import { Shell } from "@/components/shells/shell"
 
 export default function ProductLoading() {
   return (
-    <Shell>
+    <>
       <div className="flex items-center space-x-2">
-        <Skeleton className="h-6 w-14" />
-        <Skeleton className="h-6 w-14" />
-        <Skeleton className="h-6 w-14" />
+        {Array.from({ length: 3 }).map((_, i) => (
+          <Skeleton key={i} className="h-6 w-14" />
+        ))}
       </div>
       <div className="flex flex-col gap-8 md:flex-row md:gap-16">
         <div className="w-full md:w-1/2">
@@ -64,6 +63,6 @@ export default function ProductLoading() {
           </div>
         </div>
       </div>
-    </Shell>
+    </>
   )
 }

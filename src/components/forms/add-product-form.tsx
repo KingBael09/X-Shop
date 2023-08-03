@@ -381,8 +381,6 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
               return (
                 <FormItem>
                   <FormLabel>Images</FormLabel>
-                  {/* <div className="w-full"> */}
-                  {/* {!isUploading && previews?.length ? ( */}
                   {previews?.length ? (
                     <div className="flex items-center gap-2">
                       {previews.map((file) => (
@@ -426,7 +424,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                 aria-hidden
               />
             )}
-            Add Product
+            {isUploading ? "Uploading.." : "Add Product"}
             <span className="sr-only">Add Product</span>
           </Button>
         </form>

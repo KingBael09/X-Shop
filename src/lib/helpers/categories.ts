@@ -11,13 +11,3 @@ export const getCachedCategoriesAction = cache(async () => {
   const categories = await db.query.categories.findMany()
   return categories
 })
-
-// TODO: Every searchParams with multiple entries should be sorted for better caching
-/**
- * For example,
- *
- * category_ids=7.8 is same as category_id=8.7 but will result in refetch of page
- *
- * check in network tab for product filter
- *
- */

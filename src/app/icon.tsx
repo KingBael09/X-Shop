@@ -27,5 +27,3 @@ export default function Icon() {
     }
   )
 }
-
-// TODO: Replace -> await currentUser() with auth() from clerk where id is required

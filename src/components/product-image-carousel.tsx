@@ -144,4 +144,3 @@ export function ProductImageCarousel({
 }
 
 // TODO:Set a loader while the image is loading
-// TODO: Maybe this could be optimized by taking image renderere outside

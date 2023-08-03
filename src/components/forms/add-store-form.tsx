@@ -41,7 +41,7 @@ export function AddStoreForm() {
         form.reset()
         toast.success("Store added successfully!")
         router.push("/dashboard/stores")
-        router.refresh() // TODO: Workaround for the inconsistency of cache revalidation
+        router.refresh()
       } catch (error) {
         catchError(error)
       }

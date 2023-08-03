@@ -9,7 +9,7 @@ import { toast } from "sonner"
 
 import { addCategoryAction, addSubCategoryAction } from "@/lib/actions/category"
 import type { Category } from "@/lib/db/schema"
-import { catchError, cn, toTitleCase } from "@/lib/utils"
+import { catchError, cn, slugify, toTitleCase } from "@/lib/utils"
 import {
   categorySchema,
   subCategorySchema,
@@ -102,10 +102,10 @@ export function AddCategoryForm({ setter }: AddCategoryFormProps) {
     },
   })
 
-  function onSubmit(values: ZCategorySchema) {
+  function onSubmit({ name }: ZCategorySchema) {
     startTransition(async () => {
       try {
-        await addCategoryAction(values)
+        await addCategoryAction({ name: slugify(name) })
         form.reset()
         router.refresh()
         toast.success("Category added successfully")
@@ -169,7 +169,7 @@ export function AddSubCategoryForm({
       toast.error("Subcategory already exists")
       return
     }
-    subcategories?.push(name)
+    subcategories?.push(slugify(name))
 
     startTransition(async () => {
       try {
@@ -179,7 +179,7 @@ export function AddSubCategoryForm({
         })
         form.reset()
         router.refresh()
-        toast.success("Category added successfully")
+        toast.success("Subcategory added successfully")
         setter({ target: "", state: false })
       } catch (error) {
         catchError(error)
@@ -279,9 +279,5 @@ export function AddSubCategoryForm({
 }
 
 // TODO: There seem to so some sort of limitation if i take out ExtraModal out of this file
-
-// TODO: slugify the input
-
-// TODO: sub-category toast is with wrong msg
 
 // TODO: There seems to be a problem with clerk/themes in account page

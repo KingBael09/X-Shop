@@ -48,4 +48,4 @@ export async function addSubCategoryAction(
 }
 // TODO: Maybe this could fail on some condition but idk where it will fail
 
-// TODO: Maybe Delete functionality for admins?
+// TODO: Maybe Category Delete functionality for admins?

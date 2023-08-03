@@ -1,8 +1,8 @@
 import "@/styles/globals.css"
 
 import type { Metadata } from "next"
+import { Providers } from "@/util/providers"
 import { TailwindIndicator } from "@/util/tailwind-indicator"
-import { ThemeProvider } from "@/util/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/react"
 
@@ -62,10 +62,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontMono.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers attribute="class" defaultTheme="system" enableSystem>
             {children}
             <TailwindIndicator />
-          </ThemeProvider>
+          </Providers>
           <Toaster />
           <Analytics />
         </body>

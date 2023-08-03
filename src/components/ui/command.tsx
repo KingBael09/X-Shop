@@ -4,7 +4,6 @@ import { forwardRef } from "react"
 import { Icons } from "@/util/icons"
 import type { DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
-import { Search } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Dialog, DialogContent, type DialogPosition } from "@/ui/dialog"
@@ -55,7 +54,7 @@ const CommandInput = forwardRef<
     {loading ? (
       <Icons.spinner className="mr-2 h-4 w-4 shrink-0 animate-spin opacity-50" />
     ) : (
-      <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+      <Icons.search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
     )}
 
     <CommandPrimitive.Input

@@ -62,7 +62,6 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
           type="number"
           min="1"
           className="h-8 w-14"
-          readOnly
           disabled={isPending}
           value={item.quantity}
           // TODO: Debounce request
