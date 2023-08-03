@@ -19,10 +19,10 @@ const config = {
   //       dbCredentials: { url: process.env.DATABASE_URL ?? "" },
   //     }),
   driver: "turso",
-        dbCredentials: {
-          url: process.env.DATABASE_URL ?? "",
-          authToken: process.env.DATABASE_AUTH_TOKEN,
-        },
+  dbCredentials: {
+    url: process.env.DATABASE_URL ?? "",
+    authToken: process.env.DATABASE_AUTH_TOKEN,
+  },
   verbose: true,
   strict: true,
 } satisfies Config
