@@ -16,10 +16,8 @@ import {
 import { Separator } from "@/ui/separator"
 import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
-import { ProductCardLoader } from "@/components/product-card-loader"
-// import { ProductCard } from "@/components/product-card"
-import { ProductImageCarousel } from "@/components/product-image-carousel"
-// import { Shell } from "@/components/shells/shell"
+import { ProductCardLoader } from "@/components/product/product-card-loader"
+import { ProductImageCarousel } from "@/components/product/product-image-carousel"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Zoom } from "@/components/zoom-image"
 
@@ -30,7 +28,8 @@ interface ProductPageParams {
 }
 
 const ProductCard = dynamic(
-  () => import("@/components/product-card").then((mod) => mod.ProductCard),
+  () =>
+    import("@/components/product/product-card").then((mod) => mod.ProductCard),
   { loading: () => <ProductCardLoader /> }
 )
 

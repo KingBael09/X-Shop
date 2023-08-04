@@ -12,7 +12,7 @@ import useEmblaCarousel, {
 import { cn } from "@/lib/utils"
 import { Button } from "@/ui/button"
 
-import { ImagePlaceHolder } from "./no-image"
+import { ImagePlaceHolder } from "../no-image"
 
 //? See: https://www.embla-carousel.com
 

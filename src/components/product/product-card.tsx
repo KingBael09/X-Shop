@@ -13,9 +13,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card"
+import { AddToCartButton } from "@/components/custom/product-add-to-cart-button"
 
-import { AddToCartButton } from "./custom/product-add-to-cart-button"
-import { ImagePlaceHolder } from "./no-image"
+import { ImagePlaceHolder } from "../no-image"
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product

@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import Link from "next/link"
 import { Icons } from "@/util/icons"
 
-import { cn } from "@/lib/utils"
+import { cn, truncate as turncateString } from "@/lib/utils"
 
 import { BackButton } from "../back-button"
 
@@ -14,6 +14,7 @@ export interface BreadSegment {
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   segments: BreadSegment[]
   separator?: React.ComponentType<{ className?: string }>
+  turncate?: number
 }
 
 /**
@@ -23,6 +24,7 @@ export function Breadcrumbs({
   segments,
   className,
   separator,
+  turncate = 0,
   ...props
 }: BreadcrumbProps) {
   const SeparatorIcon = separator ?? Icons.chevronRight
@@ -45,13 +47,13 @@ export function Breadcrumbs({
               aria-current={isLastSegment ? "page" : undefined}
               href={segment.href}
               className={cn(
-                "truncate transition-colors hover:text-muted-foreground",
-                isLastSegment
-                  ? "pointer-events-none text-muted-foreground"
-                  : "text-foreground"
+                "truncate transition-colors hover:text-foreground",
+                isLastSegment ? "text-foreground" : "text-muted-foreground"
               )}
             >
-              {segment.title}
+              {turncate > 0 && segment.title
+                ? turncateString(segment.title, turncate)
+                : segment.title}
             </Link>
             {!isLastSegment && <SeparatorIcon className="mx-2 h-4 w-4" />}
           </Fragment>

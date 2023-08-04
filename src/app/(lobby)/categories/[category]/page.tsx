@@ -9,8 +9,8 @@ import {
   getProductSearchParams,
   type SearchParams,
 } from "@/lib/helpers/products"
-import { ProductCard } from "@/components/product-card"
-import { ProductsLayoutWrapper } from "@/components/products-layout-wrapper"
+import { ProductCard } from "@/components/product/product-card"
+import { ProductsLayoutWrapper } from "@/components/product/wrapper/products-layout-wrapper"
 
 interface CategoryPageProps {
   params: {

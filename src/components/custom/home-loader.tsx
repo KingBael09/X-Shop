@@ -1,5 +1,5 @@
 import { Skeleton } from "@/ui/skeleton"
-import { ProductCardLoader } from "@/components/product-card-loader"
+import { ProductCardLoader } from "@/components/product/product-card-loader"
 
 export function FeaturedStoresLoading() {
   return Array.from({ length: 8 }).map((_, i) => (

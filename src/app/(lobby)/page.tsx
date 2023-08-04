@@ -22,7 +22,7 @@ import {
   FeaturedProductsLoading,
   FeaturedStoresLoading,
 } from "@/components/custom/home-loader"
-import { ProductCard } from "@/components/product-card"
+import { ProductCard } from "@/components/product/product-card"
 import { Scrollable } from "@/components/scrollable"
 import { Shell } from "@/components/shells/shell"
 

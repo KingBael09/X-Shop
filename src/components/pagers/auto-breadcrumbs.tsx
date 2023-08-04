@@ -5,12 +5,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icons } from "@/util/icons"
 
-import { cn, toTitleCase } from "@/lib/utils"
+import { cn, toTitleCase, truncate as turncateString } from "@/lib/utils"
 
 import { BackButton } from "../back-button"
 
 interface AutoBreadCrumbProps extends HtmlHTMLAttributes<HTMLElement> {
   separator?: React.ComponentType<{ className?: string }>
+  turncate?: number
 }
 
 /**
@@ -19,6 +20,7 @@ interface AutoBreadCrumbProps extends HtmlHTMLAttributes<HTMLElement> {
 export function AutoBreadCrumbs({
   separator,
   className,
+  turncate = 0,
   ...props
 }: AutoBreadCrumbProps) {
   const pathName = usePathname()
@@ -56,13 +58,13 @@ export function AutoBreadCrumbs({
               aria-current={isLastSegment ? "page" : undefined}
               href={segment.href}
               className={cn(
-                "truncate transition-colors hover:text-muted-foreground",
-                isLastSegment
-                  ? "pointer-events-none text-muted-foreground"
-                  : "text-foreground"
+                "truncate transition-colors hover:text-foreground",
+                isLastSegment ? "text-foreground" : "text-muted-foreground"
               )}
             >
-              {segment.title}
+              {turncate > 0 && segment.title
+                ? turncateString(segment.title, turncate)
+                : segment.title}
             </Link>
             {!isLastSegment && <SeparatorIcon className="mx-2 h-4 w-4" />}
           </Fragment>

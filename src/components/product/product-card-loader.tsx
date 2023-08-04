@@ -1,7 +1,7 @@
-import { ImagePlaceHolder } from "./no-image"
-import { AspectRatio } from "./ui/aspect-ratio"
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card"
-import { Skeleton } from "./ui/skeleton"
+import { ImagePlaceHolder } from "../no-image"
+import { AspectRatio } from "../ui/aspect-ratio"
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
+import { Skeleton } from "../ui/skeleton"
 
 interface ProductCardLoaderProps {
   actions?: boolean

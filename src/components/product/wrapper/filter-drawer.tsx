@@ -2,10 +2,12 @@
 
 import { useEffect, useState, useTransition } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { Icons } from "@/util/icons"
 
 import { filterPriceRange } from "@/config/site"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useQueryString } from "@/hooks/use-query-string"
+import { Button } from "@/ui/button"
 import { Checkbox } from "@/ui/checkbox"
 import { Input } from "@/ui/input"
 import { Label } from "@/ui/label"
@@ -20,13 +22,11 @@ import {
 } from "@/ui/sheet"
 import { Slider } from "@/ui/slider"
 
-import { MultiSelect } from "./multi-select"
+import { MultiSelect } from "../../multi-select"
 import type {
   FilteredCategory,
   StoreWithCount,
 } from "./products-layout-wrapper"
-import { Button } from "./ui/button"
-import { Icons } from "./util/icons"
 
 interface FilterDrawerProps {
   open: boolean

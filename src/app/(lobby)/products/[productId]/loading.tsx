@@ -1,7 +1,7 @@
 import { Separator } from "@/ui/separator"
 import { Skeleton } from "@/ui/skeleton"
 import { ImagePlaceHolder } from "@/components/no-image"
-import { ProductCardLoader } from "@/components/product-card-loader"
+import { ProductCardLoader } from "@/components/product/product-card-loader"
 
 export default function ProductLoading() {
   return (
