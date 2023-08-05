@@ -182,5 +182,3 @@ export function PaginationButton({
     </div>
   )
 }
-
-// TODO: Wrap components using useSearchParams with a Suspense boundary -> https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering#dynamic-functions

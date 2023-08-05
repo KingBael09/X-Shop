@@ -18,7 +18,7 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "strictNullChecks": true,
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true, //appends type in imports
     "baseUrl": ".",
     "plugins": [
       {
