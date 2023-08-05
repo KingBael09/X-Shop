@@ -18,6 +18,7 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true,
     "strictNullChecks": true,
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "plugins": [
       {

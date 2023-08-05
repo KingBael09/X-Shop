@@ -61,7 +61,7 @@
     "react-cropper": "^2.3.3",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-hook-form": "^7.45.2",
+    "react-hook-form": "^7.45.4",
     "react-medium-image-zoom": "^5.1.8",
     "react-wrap-balancer": "^1.0.0",
     "resend": "^0.17.2",
@@ -69,7 +69,7 @@
     "sonner": "^0.6.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
-    "uploadthing": "^5.2.1",
+    "uploadthing": "^5.3.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -78,8 +78,8 @@
     "@next/bundle-analyzer": "^13.4.12",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/eslint": "^8.44.1",
-    "@types/node": "20.4.7",
+    "@types/eslint": "^8.44.2",
+    "@types/node": "20.4.8",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",

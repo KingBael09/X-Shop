@@ -1,18 +1,23 @@
 import Image from "next/image"
 import Link from "next/link"
+import { CheckoutForm } from "@/forms/checkout-form"
 import type { OrderItem } from "@/types"
+import { Icons } from "@/util/icons"
 
 import { getCartAction } from "@/lib/actions/cart"
 import { cn, formatPrice } from "@/lib/utils"
-import { CardContent, CardDescription } from "@/ui/card"
+import { buttonVariants } from "@/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/ui/card"
 import { UpdateCart } from "@/components/cart/update-cart"
-import { CheckoutForm } from "@/components/forms/checkout-form"
 import { Header } from "@/components/header"
 import { ImagePlaceHolder } from "@/components/no-image"
 import { Shell } from "@/components/shells/shell"
-import { buttonVariants } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import { Icons } from "@/components/util/icons"
 
 export default async function CheckOutPage() {
   const cartItems = await getCartAction()
@@ -29,10 +34,10 @@ export default async function CheckOutPage() {
 
   const storeIds = [...new Set(cartItems.map((item) => item.storeId))]
 
-  const items = cartItems.map((i) => ({
+  const items: OrderItem[] = cartItems.map((i) => ({
     productId: String(i.id),
     quantity: Number(i.quantity),
-  })) satisfies OrderItem[]
+  }))
 
   if (count === 0) {
     return (

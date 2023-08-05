@@ -1,39 +1,33 @@
 "use client"
 
-import { useMemo, useTransition } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useMemo } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
-import { useQueryString } from "@/hooks/use-query-string"
 import { Button } from "@/ui/button"
+
+import { useProductLayoutContext } from "./product-layout-provider"
 
 interface PaginationButtonProps
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
-  page: string
-  sort: string
-  per_page?: string
   pageCount: number
-  isPending: boolean
   siblingCount?: number
 }
 
 export function PaginationButton({
-  sort,
-  page,
-  per_page,
   pageCount,
   siblingCount = 1,
-  isPending: parentPending,
   className,
   ...props
 }: PaginationButtonProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const [isCurrentPending, startTransition] = useTransition()
 
-  const createQueryString = useQueryString(searchParams)
+  const { params, isPending, startTransition, createQueryString } =
+    useProductLayoutContext()
+
+  const { per_page, page, sort } = params
 
   //  Memoizing pagination value to avoid rerendering
   const paginationRange = useMemo(() => {
@@ -62,8 +56,6 @@ export function PaginationButton({
 
     return range
   }, [pageCount, page, siblingCount])
-
-  const isPending = isCurrentPending || parentPending
 
   return (
     <div

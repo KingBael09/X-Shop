@@ -5,21 +5,60 @@ import {
   useContext,
   useEffect,
   useState,
-  useTransition,
+  type Dispatch,
+  type SetStateAction,
+  type TransitionStartFunction,
 } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import type { LayoutProps } from "@/types"
 
 import { filterPriceRange } from "@/config/site"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useQueryString } from "@/hooks/use-query-string"
 
-const WrapperContext = createContext({})
+interface WrapperContextInterface {
+  params: {
+    page: string
+    per_page: string
+    sort: string
+    store_ids: string | null
+    store_page: string
+    category_ids: string | null
+  }
+  isPending: boolean
+  startTransition: TransitionStartFunction
 
-export function ProductLayoutWrapperContext() {
+  values: {
+    priceRange: [number, number]
+    categoryIds: number[] | null
+    storeIds: number[] | null
+  }
+
+  pathname: string
+  createQueryString: ReturnType<typeof useQueryString>
+
+  setters: {
+    setPriceRange: Dispatch<SetStateAction<[number, number]>>
+    setCategoryIds: Dispatch<SetStateAction<number[] | null>>
+    setStoreIds: Dispatch<SetStateAction<number[] | null>>
+  }
+}
+
+const WrapperContext = createContext({} as WrapperContextInterface)
+
+interface ProductLayoutWrapperContextProps extends LayoutProps {
+  startTransition: TransitionStartFunction
+  isPending: boolean
+}
+
+export function ProductLayoutWrapperContext({
+  children,
+  isPending,
+  startTransition,
+}: ProductLayoutWrapperContextProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [isPending, startTransition] = useTransition()
 
   const page = searchParams?.get("page") ?? "1"
   const per_page = searchParams?.get("per_page") ?? "8"
@@ -80,7 +119,42 @@ export function ProductLayoutWrapperContext() {
     })
   }, [storeIds])
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const params = {
+    page,
+    per_page,
+    sort,
+    store_ids,
+    store_page,
+    category_ids,
+  }
 
-  return null
+  const setters = {
+    setPriceRange,
+    setCategoryIds,
+    setStoreIds,
+  }
+
+  const values = {
+    priceRange,
+    categoryIds,
+    storeIds,
+  }
+
+  const wrapperValues: WrapperContextInterface = {
+    params,
+    isPending,
+    startTransition,
+    setters,
+    values,
+    pathname,
+    createQueryString,
+  }
+
+  return (
+    <WrapperContext.Provider value={wrapperValues}>
+      {children}
+    </WrapperContext.Provider>
+  )
 }
+
+export const useProductLayoutContext = () => useContext(WrapperContext)

@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { useEffect, useState, useTransition } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
 import { filterPriceRange } from "@/config/site"
-import { useDebounce } from "@/hooks/use-debounce"
-import { useQueryString } from "@/hooks/use-query-string"
 import { Button } from "@/ui/button"
 import { Checkbox } from "@/ui/checkbox"
 import { Input } from "@/ui/input"
@@ -23,6 +20,7 @@ import {
 import { Slider } from "@/ui/slider"
 
 import { MultiSelect } from "../../multi-select"
+import { useProductLayoutContext } from "./product-layout-provider"
 import type {
   FilteredCategory,
   StoreWithCount,
@@ -45,64 +43,19 @@ export function FilterDrawer({
 }: FilterDrawerProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const [isPending, startTransition] = useTransition()
 
-  const createQueryString = useQueryString(searchParams)
+  const {
+    params,
+    values,
+    setters,
+    isPending,
+    startTransition,
+    createQueryString,
+  } = useProductLayoutContext()
 
-  const store_ids = searchParams?.get("store_ids")
-  const store_page = searchParams?.get("store_page") ?? "1"
-  const category_ids = searchParams?.get("category_ids")
-
-  const [priceRange, setPriceRange] = useState<[number, number]>([
-    filterPriceRange.lower,
-    filterPriceRange.upper,
-  ])
-  const debouncedPrice = useDebounce(priceRange, 600)
-
-  useEffect(() => {
-    const [min, max] = debouncedPrice
-
-    startTransition(() => {
-      router.replace(
-        `${pathname}?${createQueryString({ price_range: `${min}-${max}` })}`
-      )
-    })
-  }, [debouncedPrice])
-
-  const [categoryIds, setCategoryIds] = useState<number[] | null>(
-    category_ids?.split(".").map(Number) ?? null
-  )
-
-  useEffect(() => {
-    startTransition(() => {
-      router.replace(
-        `${pathname}?${createQueryString({
-          category_ids: categoryIds?.length
-            ? categoryIds.sort((a, b) => a - b).join(".") // sorting ids so that reverse of same category doesn't refetch page
-            : null,
-        })}`
-      )
-    })
-  }, [categoryIds])
-
-  const [storeIds, setStoreIds] = useState<number[] | null>(
-    store_ids
-      ?.split(".")
-      .map(Number)
-      .sort((a, b) => a - b) ?? null
-    // sorting ids so that reverse of same category doesn't refetch page
-  )
-
-  useEffect(() => {
-    startTransition(() => {
-      router.replace(
-        `${pathname}?${createQueryString({
-          store_ids: storeIds?.length ? storeIds.join(".") : null,
-        })}`
-      )
-    })
-  }, [storeIds])
+  const { store_page } = params
+  const { setCategoryIds, setPriceRange, setStoreIds } = setters
+  const { categoryIds, priceRange, storeIds } = values
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -269,6 +222,7 @@ export function FilterDrawer({
                   ])
                   setCategoryIds(null)
                   setStoreIds(null)
+                  setOpen(false)
                 })
               }}
               disabled={isPending}
@@ -281,5 +235,3 @@ export function FilterDrawer({
     </Sheet>
   )
 }
-
-// TODO: It is better to use a context for useTranstion hook specially
