@@ -30,8 +30,8 @@ export function FileCard<TFieldValues extends FieldValues>({
   i,
   file,
   name,
-  setValue,
   files,
+  setValue,
   setFiles,
 }: FileCardProps<TFieldValues>) {
   const [isOpen, setIsOpen] = useState(false)

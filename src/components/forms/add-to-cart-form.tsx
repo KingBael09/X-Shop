@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 import { addToCartAction } from "@/lib/actions/cart"
-import { catchError } from "@/lib/utils"
+import { catchError, cn } from "@/lib/utils"
 import { cartSchema, type ZCartSchema } from "@/lib/validations/cart"
 import { Button } from "@/ui/button"
 import {
@@ -20,11 +20,15 @@ import {
 } from "@/ui/form"
 import { Input } from "@/ui/input"
 
-interface AddToCartFormProps {
+interface AddToCartFormProps extends React.HTMLAttributes<HTMLFormElement> {
   productId: number
 }
 
-export function AddToCartForm({ productId }: AddToCartFormProps) {
+export function AddToCartForm({
+  productId,
+  className,
+  ...props
+}: AddToCartFormProps) {
   const [isPending, startTransition] = useTransition()
 
   const form = useForm<ZCartSchema>({
@@ -38,7 +42,7 @@ export function AddToCartForm({ productId }: AddToCartFormProps) {
     startTransition(async () => {
       try {
         await addToCartAction({
-          productId: String(productId),
+          productId: productId,
           quantity,
         })
         toast.success("Item added to cart")
@@ -53,8 +57,9 @@ export function AddToCartForm({ productId }: AddToCartFormProps) {
   return (
     <Form {...form}>
       <form
-        className="grid gap-4 sm:max-w-[240px]"
+        className={cn("grid gap-4 sm:max-w-[240px]", className)}
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
+        {...props}
       >
         <FormField
           control={form.control}

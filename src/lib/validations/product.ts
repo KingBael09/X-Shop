@@ -39,6 +39,8 @@ export const productSchema = z.object({
     .default(null),
 })
 
+// TODO: use number instead of string or z.corece
+
 export type ZProductSchema = z.infer<typeof productSchema>
 
 export const getProductSchema = z.object({

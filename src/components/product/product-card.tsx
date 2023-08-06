@@ -5,7 +5,7 @@ import { Icons } from "@/util/icons"
 import type { Product } from "@/lib/db/schema"
 import { cn, formatPrice } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
-import { Button } from "@/ui/button"
+import { Button, buttonVariants } from "@/ui/button"
 import {
   Card,
   CardDescription,
@@ -68,10 +68,13 @@ export function ProductCard({
       )}
       {enableAction && (
         <CardFooter className="flex gap-2 p-4 pt-0">
-          <Button className="w-full" variant="outline">
+          <Link
+            href={`/preview-product/${product.id}`}
+            className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+          >
             Preview
-          </Button>
-          <AddToCartButton productId={String(product.id)} className="w-full">
+          </Link>
+          <AddToCartButton productId={product.id} className="w-full">
             Add to Cart
           </AddToCartButton>
         </CardFooter>

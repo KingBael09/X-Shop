@@ -8,7 +8,7 @@ import { catchError } from "@/lib/utils"
 import { Button, type ButtonProps } from "@/ui/button"
 
 interface AddToCartButtonProps extends ButtonProps {
-  productId: string
+  productId: number
 }
 
 /**

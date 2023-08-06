@@ -65,7 +65,7 @@ export async function getCartAction() {
 
   const cartItems = productsInCart.map((product) => {
     const quantity = userCart.items?.find(
-      (item) => item.productId === String(product.id)
+      (item) => item.productId === product.id
     )?.quantity
 
     return {
@@ -164,7 +164,7 @@ export async function updateCartAction(inputs: ZCartItemSchema) {
 }
 
 interface DeleteCartActionInterface {
-  productId: string
+  productId: number
 }
 
 export async function deleteCartAction(inputs: DeleteCartActionInterface) {

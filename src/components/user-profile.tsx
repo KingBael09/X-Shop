@@ -6,6 +6,7 @@ import type { Theme } from "@clerk/types"
 import { useTheme } from "next-themes"
 
 const appearance: Theme = {
+  baseTheme: undefined,
   elements: {
     card: "shadow-none w-full m-0",
     navbar: "hidden",
@@ -31,3 +32,5 @@ export function UserProfile() {
     />
   )
 }
+
+// TODO: Seems like there is some sort of problem in production

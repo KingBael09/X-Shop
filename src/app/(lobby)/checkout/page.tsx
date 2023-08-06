@@ -35,7 +35,7 @@ export default async function CheckOutPage() {
   const storeIds = [...new Set(cartItems.map((item) => item.storeId))]
 
   const items: OrderItem[] = cartItems.map((i) => ({
-    productId: String(i.id),
+    productId: i.id,
     quantity: Number(i.quantity),
   }))
 

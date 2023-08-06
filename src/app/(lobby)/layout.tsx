@@ -4,12 +4,17 @@ import { currentUser } from "@clerk/nextjs"
 import { SiteFooter } from "@/components/layouts/site-footer"
 import { SiteHeader } from "@/components/layouts/site-header"
 
-export default function LobbyLayout({ children }: LayoutProps) {
+interface LobbyLayoutProps extends LayoutProps {
+  preview: React.ReactNode
+}
+
+export default function LobbyLayout({ children, preview }: LobbyLayoutProps) {
   const user = currentUser()
 
   return (
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader user={user} />
+      {preview}
       <main className="flex flex-1 flex-col">{children}</main>
       <SiteFooter />
     </div>

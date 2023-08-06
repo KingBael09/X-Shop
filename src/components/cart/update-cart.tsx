@@ -22,7 +22,7 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
   function deleteItem() {
     startTransition(async () => {
       try {
-        await deleteCartAction({ productId: String(item.id) })
+        await deleteCartAction({ productId: item.id })
       } catch (error) {
         catchError(error)
       }
@@ -35,7 +35,7 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
     startTransition(async () => {
       try {
         await updateCartAction({
-          productId: String(item.id),
+          productId: item.id,
           quantity: Number(item.quantity) + step,
         })
       } catch (error) {

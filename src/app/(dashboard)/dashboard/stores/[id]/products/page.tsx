@@ -124,7 +124,7 @@ export default async function ProductsPage({
 
     return {
       storeProducts,
-      totalProducts: Number(totalProducts[0]?.count) ?? 0,
+      totalProducts: totalProducts[0]?.count ?? 0,
     }
   })
 

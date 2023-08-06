@@ -7,9 +7,11 @@ export const cartSchema = z.object({
 export type ZCartSchema = z.infer<typeof cartSchema>
 
 export const cartItemSchema = z.object({
-  productId: z.string(),
+  productId: z.coerce.number(),
   quantity: z.number().min(0),
   productSubcategory: z.string().optional().nullable(),
 })
 
 export type ZCartItemSchema = z.infer<typeof cartItemSchema>
+
+// TODO: This could throw somewhere

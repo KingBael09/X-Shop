@@ -15,9 +15,9 @@ interface CategorySideBarProps {
 }
 
 export function CategorySideBar({ categories }: CategorySideBarProps) {
+  const [query, setQuery] = useState("")
   const segment = useSelectedLayoutSegment()
   const ref = useRef<HTMLInputElement>(null)
-  const [query, setQuery] = useState("")
 
   useOnClickOutside(ref, () => setQuery(""))
 
