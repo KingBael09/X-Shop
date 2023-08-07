@@ -7,11 +7,11 @@ interface ModalLinkProps extends LayoutProps {
 }
 
 /**
- * This is an exclusive compoent for intercepting modal
+ * This is an exclusive compoent for intercepting modal intends to close the modal and then route
  *
- * This closes the modal and then routes
+ * Might use `use client` in future
  *
- * Might use use client in future
+ * Currently uses hard route navigation with `<a>` tag
  */
 export function ModalLink({ href, children }: ModalLinkProps) {
   return (

@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 // import { AddToCartForm } from "@/forms/add-to-cart-form"
 import { eq } from "drizzle-orm"
@@ -11,10 +10,8 @@ import { AspectRatio } from "@/ui/aspect-ratio"
 import { Label } from "@/ui/label"
 import { Header } from "@/components/header"
 import { Modal } from "@/components/modal/modal"
+import { ModalLink } from "@/components/modal/modal-link"
 import { ProductImageCarousel } from "@/components/product/product-image-carousel"
-import { buttonVariants } from "@/components/ui/button"
-
-import { ModalLink } from "../../../../../components/modal/modal-link"
 
 export interface ProductPreviewPageProps {
   params: {
@@ -105,3 +102,4 @@ export default async function ProductPreviewPage({
 }
 
 // TODO: replace [key:string]:string --> Record<string, string>
+// TODO: Due to issues in allowing navigating from intercepted route this link hard switches to

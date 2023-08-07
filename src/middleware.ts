@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { authMiddleware, clerkClient } from "@clerk/nextjs"
+import { authMiddleware } from "@clerk/nextjs"
 
 export default authMiddleware({
   publicRoutes: [
@@ -10,8 +10,7 @@ export default authMiddleware({
     "/products(.*)",
     "/categories(.*)",
   ],
-  apiRoutes: [],
-  afterAuth: async (auth, req) => {
+  afterAuth: (auth, req) => {
     if (auth.isPublicRoute) {
       return NextResponse.next()
     }
@@ -23,23 +22,11 @@ export default authMiddleware({
       url.pathname = "/signin"
       return NextResponse.redirect(url)
     }
-
-    const user = await clerkClient.users.getUser(auth.userId)
-
-    if (!user) {
-      throw new Error("User not found")
-    }
-
-    if (!user.privateMetadata.role) {
-      await clerkClient.users.updateUserMetadata(auth.userId, {
-        privateMetadata: {
-          role: "user",
-        },
-      })
-    }
   },
 })
 
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 }
+
+// TODO: For some reason after updating nextjs middleware size shotup from 166kb to 180kb

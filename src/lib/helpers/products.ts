@@ -1,9 +1,11 @@
+// export interface SearchParams {
+//   [key: string]: string | string[] | undefined
+// }
+
 /**
  * This is standard search params type
  */
-export interface SearchParams {
-  [key: string]: string | string[] | undefined
-}
+export type SearchParams = Record<string, string | string[] | undefined>
 
 /**
  * This is default search params getter for product filtering
