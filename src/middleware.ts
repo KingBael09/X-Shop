@@ -8,6 +8,7 @@ export default authMiddleware({
     "/signup(.*)",
     "/sso-callback(.*)",
     "/products(.*)",
+    "/preview-product(.*)",
     "/categories(.*)",
   ],
   afterAuth: (auth, req) => {
