@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
+import { useLockBody } from "@/hooks/use-lock-body"
 import { useOnClickOutside } from "@/hooks/use-onclick-outside"
 import { Button } from "@/ui/button"
 import { ScrollArea } from "@/ui/scroll-area"
@@ -20,6 +21,7 @@ export function ModalBodyWrapper({
   className,
   ...props
 }: ModalBodyWrapper) {
+  useLockBody()
   const router = useRouter()
 
   const ref = useRef<HTMLDivElement>(null)
@@ -53,3 +55,5 @@ export function ModalBodyWrapper({
     </div>
   )
 }
+
+// TODO: Use lockbody while in modal mode

@@ -1,19 +1,15 @@
 "use client"
 
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 import type { LayoutProps } from "@/types"
 
-import { Button, buttonVariants } from "../ui/button"
+import { Button } from "../ui/button"
 
 interface ModalLinkProps extends LayoutProps {
   href: string
 }
 
 /**
- * This is an exclusive compoent for intercepting modal intends to close the modal and then route
- *
- * Might use `use client` in future
+ * This is an exclusive client-compoent for intercepting modal
  *
  * Currently uses hard navigates using
  * ```ts
@@ -45,9 +41,9 @@ export function ModalLink({ href, children }: ModalLinkProps) {
 
 // TODO: Think of a way to route when modal is open
 /**
- * Currently when i link or use useRouter() it makes the page change but the modal doesn't
+ * Currently, link or use useRouter() it makes the page change but the modal doesn't close
  *
- * Current work-around is that i hard route to the page with <a> tag
+ * Current work-around is that i hard route to the page with `window.history.replaceState()` and `window.location.reload()` along with some scrolling hacks
  *
  * In future look for a way to do this with soft navigation using link or useRouter()
  *
