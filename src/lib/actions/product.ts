@@ -195,7 +195,7 @@ export async function filterProductAction(query: string) {
       subcategory: true,
       images: true,
     },
-    where: like(products.name, query),
+    where: like(products.name, `%${query}%`), // Dammit it took me too long to realize that %_% matches all positions
     limit: 10,
     with: {
       category: {

@@ -45,7 +45,7 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@t3-oss/env-nextjs": "^0.6.0",
     "@tanstack/react-table": "^8.9.3",
-    "@uploadthing/react": "^5.2.0",
+    "@uploadthing/react": "^5.2.1",
     "@vercel/analytics": "^1.0.1",
     "better-sqlite3": "^8.5.0",
     "class-variance-authority": "^0.7.0",
@@ -69,7 +69,7 @@
     "sonner": "^0.6.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
-    "uploadthing": "^5.3.1",
+    "uploadthing": "^5.3.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -79,7 +79,7 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.9",
     "@types/eslint": "^8.44.2",
-    "@types/node": "20.4.8",
+    "@types/node": "20.4.9",
     "@types/react": "18.2.19",
     "@types/react-dom": "18.2.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",

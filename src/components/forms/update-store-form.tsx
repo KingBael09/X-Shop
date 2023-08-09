@@ -30,7 +30,7 @@ interface UpdateStoreProps {
 export function UpdateStoreForm({ store }: UpdateStoreProps) {
   const [isDeleting, startDeleting] = useTransition()
   const [isUpdating, startUpdating] = useTransition()
-  //TODO: ikr why two usertransition, cuz if either button is loading both go into loading state
+  //TODO: ikr why two useTransition, cuz if either button is loading both go into loading state
   const router = useRouter()
   const form = useForm<ZStoreSchema>({
     resolver: zodResolver(storeSchema),

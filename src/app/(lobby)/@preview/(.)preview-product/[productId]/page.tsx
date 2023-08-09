@@ -100,6 +100,3 @@ export default async function ProductPreviewPage({
     </Modal>
   )
 }
-
-// TODO: replace [key:string]:string --> Record<string, string>
-// TODO: Due to issues in allowing navigating from intercepted route this link hard switches to

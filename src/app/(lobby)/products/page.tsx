@@ -65,5 +65,3 @@ export default async function AllProductsPage({
     </>
   )
 }
-
-// TODO: Clear filter causes layout shift -> set min-h to !nav

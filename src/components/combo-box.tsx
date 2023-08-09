@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useState, useTransition } from "react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
@@ -106,11 +107,25 @@ export function ComboBox() {
               >
                 {group.product.map((item) => (
                   <CommandItem
+                    className="flex cursor-pointer items-center gap-2"
+                    value={item.name}
                     key={item.id}
                     onSelect={() =>
                       handleSelect(() => router.push(`/products/${item.id}`))
                     }
                   >
+                    <div className="relative aspect-square h-16">
+                      <Image
+                        src={
+                          item.images && item.images.length > 0
+                            ? item.images[0]?.url ?? "/product-placeholder"
+                            : "/product-placeholder"
+                        }
+                        fill
+                        className="rounded-md object-cover"
+                        alt={item.name}
+                      />
+                    </div>
                     {item.name}
                   </CommandItem>
                 ))}

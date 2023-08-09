@@ -139,5 +139,3 @@ export default async function ProductsPage({
     />
   )
 }
-
-// FIXME: 210kb first load size
