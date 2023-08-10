@@ -17,7 +17,7 @@
     "db:introspect": "drizzle-kit introspect:sqlite",
     "db:studio": "drizzle-kit studio",
     "shadcn:add": "pnpm dlx shadcn-ui@latest add",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --allowJs",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
     "check": "pnpm typecheck && pnpm format:check",

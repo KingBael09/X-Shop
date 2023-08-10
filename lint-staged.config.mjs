@@ -20,8 +20,8 @@ const buildEslintCommand = (filenames) =>
 
 const config = {
   // "*.{ts,tsx}": "pnpm typecheck",
-  "**/*.{ts,tsx}?(x)": () => "tsc -p tsconfig.json --noEmit",
-  "*.{ts,tsx,js,cjs,mjs}": [buildEslintCommand],
+  // "**/*.{ts,tsx}?(x)": () => "tsc -p tsconfig.json --noEmit",
+  "*.{ts,tsx,js,cjs,mjs}": [buildEslintCommand, "pnpm typecheck"],
   "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:check",
 }
 
