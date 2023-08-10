@@ -10,7 +10,7 @@ const buildEslintCommand = (filenames) =>
 
 const config = {
   "*.{ts,tsx,js,cjs,mjs}": [buildEslintCommand, "pnpm typecheck"],
-  "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:check",
+  "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:write",
 }
 
 export default config
