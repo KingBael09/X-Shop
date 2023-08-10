@@ -1,13 +1,3 @@
-// "lint-staged": {
-//   "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:check",
-//   "src/**/*.{ts,tsx,js,cjs,mjs}": [
-//     "cross-env SKIP_ENV_VALIDATION=true next lint",
-//     "tsc --noEmit"
-//   ]
-// },
-
-// const path = require('path')
-
 import path from "path"
 
 /**
@@ -19,8 +9,6 @@ const buildEslintCommand = (filenames) =>
     .join(" --file ")}`
 
 const config = {
-  // "*.{ts,tsx}": "pnpm typecheck",
-  // "**/*.{ts,tsx}?(x)": () => "tsc -p tsconfig.json --noEmit",
   "*.{ts,tsx,js,cjs,mjs}": [buildEslintCommand, "pnpm typecheck"],
   "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:check",
 }
