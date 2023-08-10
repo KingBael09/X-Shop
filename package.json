@@ -20,7 +20,6 @@
     "typecheck": "tsc --noEmit --allowJs",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
-    "check": "pnpm typecheck && pnpm format:check",
     "postinstall": "drizzle-kit generate:sqlite",
     "prepare": "husky install",
     "commitlint": "commitlint --edit"
