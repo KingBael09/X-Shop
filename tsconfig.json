@@ -34,7 +34,7 @@
   },
   "include": [
     ".eslintrc.cjs",
-    "prettier.config.mjs",
+    "prettier.config.cjs",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
