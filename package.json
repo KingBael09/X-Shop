@@ -25,6 +25,10 @@
     "prepare": "husky install",
     "commitlint": "commitlint --edit"
   },
+  "lint-staged": {
+    "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:check",
+    "**/*.{ts,tsx,js,cjs,mjs}": "pnpm lint && pnpm typecheck"
+  },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
     "@clerk/themes": "^1.7.5",
@@ -100,6 +104,7 @@
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-tailwindcss": "^3.13.0",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "postcss": "8.4.27",
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.4.1",
