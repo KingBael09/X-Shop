@@ -75,9 +75,7 @@ export default async function CheckOutPage() {
                 {item?.images?.length ? (
                   <Image
                     fill
-                    src={
-                      item.images[0]?.url ?? "/images/product-placeholder.webp"
-                    }
+                    src={item.images[0]?.url ?? "/product-placeholder.webp"}
                     alt={item.images[0]?.name ?? item.name}
                     sizes="33vw"
                     className="absolute object-cover"
@@ -87,7 +85,7 @@ export default async function CheckOutPage() {
                 )}
               </div>
               <div className="flex flex-1 flex-col md:flex-row">
-                <CardHeader>
+                <CardHeader className="flex-[0.5]">
                   <CardTitle>{item.name}</CardTitle>
                   <CardDescription>
                     Price: {formatPrice(item.price)}

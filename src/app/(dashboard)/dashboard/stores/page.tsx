@@ -117,3 +117,5 @@ export default async function StoresPage() {
     </Shell>
   )
 }
+
+// TODO: I think its a good idea to add random svg to store blocks like uploadthing

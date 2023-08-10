@@ -20,8 +20,6 @@ export async function placeOrderAction(
     throw new Error("You must be logged in to place an order")
   }
 
-  console.log({ data, items, storeIds })
-
   const { name: username, mode: paymentMode, ...rest } = data
 
   await db

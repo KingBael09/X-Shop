@@ -195,3 +195,5 @@ export async function deleteCartAction(inputs: DeleteCartActionInterface) {
 
   revalidatePath("/")
 }
+
+// TODO: Delete Action should show notification

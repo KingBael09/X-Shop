@@ -28,10 +28,12 @@ export async function getStoresAction(input: GetStoreActionInterface) {
 
   const orderFilter =
     input.sort === "productCount.asc"
-      ? asc(sql<number>`count(${products.id})`)
-      : input.sort === "productCount.desc"
-      ? desc(sql<number>`count(${products.id})`)
-      : column && column in stores
+      ? asc(sql<number>`count(*})`)
+      : // ? asc(sql<number>`count(${products.id})`)
+      input.sort === "productCount.desc"
+      ? desc(sql<number>`count(*)`)
+      : // ? desc(sql<number>`count(${products.id})`)
+      column && column in stores
       ? order === "asc"
         ? asc(stores[column])
         : desc(stores[column])
@@ -42,7 +44,8 @@ export async function getStoresAction(input: GetStoreActionInterface) {
       .select({
         id: stores.id,
         name: stores.name,
-        productCount: sql<number>`count(${products.id})`,
+        productCount: sql<number>`count(*)`,
+        // productCount: sql<number>`count(${products.id})`,
       })
       .from(stores)
       .limit(limit)
@@ -55,7 +58,8 @@ export async function getStoresAction(input: GetStoreActionInterface) {
 
     const total = await tx
       .select({
-        count: sql<number>`count(${stores.id})`,
+        count: sql<number>`count(*)`,
+        // count: sql<number>`count(${stores.id})`,
       })
       .from(stores)
       .all()
@@ -143,3 +147,5 @@ export async function deleteStoreAction(storeId: number) {
 
   revalidatePath("/dashboard/stores")
 }
+
+// TODO: Configure husy to make precommit msg

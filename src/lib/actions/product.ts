@@ -55,7 +55,8 @@ export async function getProductAction(input: ZGetProductSchema) {
 
     const total = await tx
       .select({
-        count: sql<number>`count(${products.id})`,
+        count: sql<number>`count(*)`,
+        // count: sql<number>`count(${products.id})`,
       })
       .from(products)
       .where(filter)

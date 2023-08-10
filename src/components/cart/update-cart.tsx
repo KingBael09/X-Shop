@@ -2,6 +2,7 @@
 
 import { useTransition } from "react"
 import { Icons } from "@/util/icons"
+import { toast } from "sonner"
 
 import {
   deleteCartAction,
@@ -23,6 +24,7 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
     startTransition(async () => {
       try {
         await deleteCartAction({ productId: item.id })
+        toast.success("Item successfully removed from cart")
       } catch (error) {
         catchError(error)
       }
@@ -59,12 +61,12 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
           <span className="sr-only">Remove one item</span>
         </Button>
         <Input
+          readOnly
           type="number"
           min="1"
-          className="h-8 w-14"
+          className="h-8 w-14 cursor-default focus-visible:ring-transparent"
           disabled={isPending}
-          value={item.quantity}
-          // TODO: Debounce request
+          defaultValue={item.quantity}
         />
         <Button
           variant="outline"
