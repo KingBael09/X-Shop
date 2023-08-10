@@ -25,10 +25,6 @@
     "prepare": "husky install",
     "commitlint": "commitlint --edit"
   },
-  "lint-staged": {
-    "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:check",
-    "**/*.{ts,tsx,js,cjs,mjs}": "pnpm lint && pnpm typecheck"
-  },
   "dependencies": {
     "@clerk/nextjs": "^4.23.2",
     "@clerk/themes": "^1.7.5",

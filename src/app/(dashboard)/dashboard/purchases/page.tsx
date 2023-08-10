@@ -1,21 +1,20 @@
 import { redirect } from "next/navigation"
 import { auth } from "@clerk/nextjs"
+import { eq } from "drizzle-orm"
 
-// import { eq } from "drizzle-orm"
+import { db } from "@/lib/db"
+import { orders } from "@/lib/db/schema"
 
-// import { db } from "@/lib/db"
-// import { orders } from "@/lib/db/schema"
-
-export default function PurchasesPage() {
+export default async function PurchasesPage() {
   const { userId } = auth()
 
   if (!userId) {
     redirect("/signin")
   }
 
-  // const allOrders = await db.query.orders.findMany({
-  //   where: eq(orders.userId, userId),
-  // })
+  const allOrders = await db.query.orders.findMany({
+    where: eq(orders.userId, userId),
+  })
 
   return <div></div>
 }
