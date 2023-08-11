@@ -26,9 +26,9 @@ export function ProductPager({
         replace
         variant="ghost"
         disabled={lowerFail}
-        href={`/dashboard/stores/${storeId}/products/${
-          products[currentIndex - 1]?.id as number
-        }`}
+        href={`/dashboard/stores/${storeId}/products/${products[
+          currentIndex - 1
+        ]?.id}`}
       >
         <Icons.chevronLeft className="h-5 w-5" aria-hidden />
         <span className="sr-only">Previous product</span>
@@ -37,9 +37,9 @@ export function ProductPager({
         replace
         variant="ghost"
         disabled={upperFail}
-        href={`/dashboard/stores/${storeId}/products/${
-          products[currentIndex + 1]?.id as number
-        }`}
+        href={`/dashboard/stores/${storeId}/products/${products[
+          currentIndex + 1
+        ]?.id}`}
       >
         <Icons.chevronRight className="h-5 w-5" aria-hidden />
         <span className="sr-only">Next product</span>

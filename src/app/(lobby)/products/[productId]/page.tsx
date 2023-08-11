@@ -93,9 +93,8 @@ export default async function ProductPage({ params }: ProductPageParams) {
                     alt={image.name}
                     priority={index === 0}
                     className="!cursor-default object-cover md:object-contain"
-                    aria-label={`Slide ${index + 1} of ${
-                      product.images?.length as number
-                    }`}
+                    aria-label={`Slide ${index + 1} of ${product.images
+                      ?.length}`}
                     sizes="100vw"
                     aria-roledescription="slide"
                   />

@@ -9,7 +9,7 @@ const buildEslintCommand = (filenames) =>
     .join(" --file ")}`
 
 const config = {
-  "*.{ts,tsx,js,cjs,mjs}": [buildEslintCommand, "pnpm typecheck"],
+  "*.{ts,tsx,js,cjs,mjs}": [buildEslintCommand, () => "pnpm typecheck"],
   "**/*.{ts,tsx,mdx,js,cjs,mjs}": "pnpm format:write",
 }
 

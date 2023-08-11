@@ -108,7 +108,7 @@ export function FilterDrawer({
               />
             </div>
           </div>
-          {categories && categories.length ? (
+          {categories?.length ? (
             <div className="space-y-4">
               <h3 className="text-sm font-medium tracking-wide text-foreground">
                 Categories

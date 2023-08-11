@@ -64,9 +64,7 @@ export default async function ProductPreviewPage({
                 alt={image.name}
                 priority={index === 0}
                 className="!cursor-default object-cover"
-                aria-label={`Slide ${index + 1} of ${
-                  product.images?.length as number
-                }`}
+                aria-label={`Slide ${index + 1} of ${product.images?.length}`}
                 sizes="100vw"
                 aria-roledescription="slide"
               />

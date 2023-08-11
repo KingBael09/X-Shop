@@ -32,10 +32,10 @@ export async function generateMetadata({
   const metadata: Metadata = {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: {
-      default: store?.name || "Your Store",
-      template: `%s | ${store?.name || "Your Store"}`,
+      default: store?.name ?? "Your Store",
+      template: `%s | ${store?.name ?? "Your Store"}`,
     },
-    description: `${store?.name || "Your Store"}${
+    description: `${store?.name ?? "Your Store"}${
       store?.description ? ` - ${store.description}` : ""
     }`,
   }
