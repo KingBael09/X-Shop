@@ -25,6 +25,7 @@ import {
 import { ProductCard } from "@/components/product/product-card"
 import { Scrollable } from "@/components/scrollable"
 import { Shell } from "@/components/shells/shell"
+import { StoreCard } from "@/components/store-card"
 
 function HeroSection() {
   return (
@@ -156,26 +157,31 @@ async function FeaturedStores() {
     .all()
 
   return allStoresWithCount.map((store) => (
-    <Card key={store.id}>
-      <CardHeader className="p-4">
-        <CardTitle>{store.name}</CardTitle>
-        {store.description && (
-          <CardDescription>{store.description}</CardDescription>
-        )}
-      </CardHeader>
-      <CardContent className="p-4 pt-0">
-        <Link
-          href={`/products?store_ids=${store.id}`}
-          className={buttonVariants({
-            size: "sm",
-            className: "w-full",
-          })}
-        >
-          View products ({store.productCount})
-          <span className="sr-only">{`${store.name} store products`}</span>
-        </Link>
-      </CardContent>
-    </Card>
+    // <Card key={store.id}>
+    //   <CardHeader className="p-4">
+    //     <CardTitle>{store.name}</CardTitle>
+    //     {store.description && (
+    //       <CardDescription>{store.description}</CardDescription>
+    //     )}
+    //   </CardHeader>
+    //   <CardContent className="p-4 pt-0">
+    //     <Link
+    //       href={`/products?store_ids=${store.id}`}
+    //       className={buttonVariants({
+    //         size: "sm",
+    //         className: "w-full",
+    //       })}
+    //     >
+    //       View products ({store.productCount})
+    //       <span className="sr-only">{`${store.name} store products`}</span>
+    //     </Link>
+    //   </CardContent>
+    // </Card>
+    <StoreCard
+      key={store.id}
+      store={store}
+      text={`View Products (${store.productCount})`}
+    />
   ))
 }
 
@@ -205,6 +211,7 @@ export default function LobbyPage() {
             Featured products
           </h2>
           <Link
+            aria-label="Products"
             href="/products"
             className={cn(
               buttonVariants({
@@ -223,7 +230,23 @@ export default function LobbyPage() {
         </div>
       </section>
       <section aria-labelledby="featured-stores-heading" className="space-y-6">
-        <h2 className="text-2xl font-medium sm:text-3xl">Featured stores</h2>
+        <div className="flex items-center">
+          <h2 className="flex-1 text-2xl font-medium sm:text-3xl">
+            Featured stores
+          </h2>
+          <Link
+            aria-label="Stores"
+            href="/stores"
+            className={cn(
+              buttonVariants({
+                size: "sm",
+              })
+            )}
+          >
+            View all
+            <span className="sr-only">View all stores</span>
+          </Link>
+        </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <Suspense fallback={<FeaturedStoresLoading />}>
             <FeaturedStores />
@@ -235,3 +258,5 @@ export default function LobbyPage() {
 }
 
 // TODO: radix/Slot is having problems related to aria-controls
+
+// FIXME:  sql<number>`count(${products.id})` or sql<number>`count(*)`

@@ -25,3 +25,5 @@ export default function AccountPage() {
     </Shell>
   )
 }
+
+// TODO: If i don't have a nested layout then loading and page's shell and header should be moved to layout -> check if other places can have these optimization

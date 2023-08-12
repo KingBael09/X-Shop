@@ -36,3 +36,5 @@ export function Header({
     </div>
   )
 }
+
+// TODO: Implement variants with the help of cva -> page header skateshop
