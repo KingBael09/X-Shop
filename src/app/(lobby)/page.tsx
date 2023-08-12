@@ -12,13 +12,6 @@ import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
 import { buttonVariants } from "@/ui/button"
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/ui/card"
-import {
   FeaturedProductsLoading,
   FeaturedStoresLoading,
 } from "@/components/custom/home-loader"
@@ -157,29 +150,9 @@ async function FeaturedStores() {
     .all()
 
   return allStoresWithCount.map((store) => (
-    // <Card key={store.id}>
-    //   <CardHeader className="p-4">
-    //     <CardTitle>{store.name}</CardTitle>
-    //     {store.description && (
-    //       <CardDescription>{store.description}</CardDescription>
-    //     )}
-    //   </CardHeader>
-    //   <CardContent className="p-4 pt-0">
-    //     <Link
-    //       href={`/products?store_ids=${store.id}`}
-    //       className={buttonVariants({
-    //         size: "sm",
-    //         className: "w-full",
-    //       })}
-    //     >
-    //       View products ({store.productCount})
-    //       <span className="sr-only">{`${store.name} store products`}</span>
-    //     </Link>
-    //   </CardContent>
-    // </Card>
     <StoreCard
-      key={store.id}
       store={store}
+      key={store.id}
       text={`View Products (${store.productCount})`}
     />
   ))

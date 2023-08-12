@@ -1,5 +1,4 @@
 import Link from "next/link"
-import type { LayoutProps } from "@/types"
 
 import type { Store } from "@/lib/db/schema"
 import { getRandomPatternStyle } from "@/lib/svg-patterns"

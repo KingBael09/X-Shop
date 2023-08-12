@@ -12,13 +12,7 @@ import { stores } from "@/lib/db/schema"
 import { cn } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/ui/alert"
 import { buttonVariants } from "@/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card"
 import { Separator } from "@/ui/separator"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shells/shell"
@@ -89,34 +83,15 @@ export default async function StoresPage() {
         </div>
       )}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
-        {userStores.map((store) => (
-          // <Card key={store.id} className="flex h-full flex-col">
-          //   <CardHeader className="flex-1">
-          //     <CardTitle className="line-clamp-1">{store.name}</CardTitle>
-          //     <CardDescription className="line-clamp-2">
-          //       {store.description}
-          //     </CardDescription>
-          //   </CardHeader>
-          //   <CardContent>
-          //     <Link key={store.id} href={`/dashboard/stores/${store.id}`}>
-          //       <div
-          //         className={cn(
-          //           buttonVariants({
-          //             size: "sm",
-          //             className: "h-8 w-full",
-          //           })
-          //         )}
-          //       >
-          //         View store
-          //         <span className="sr-only">View {store.name} store</span>
-          //       </div>
-          //     </Link>
-          //   </CardContent>
-          // </Card>
+        {userStores.map(({ id, description, name }) => (
           <StoreCard
-            store={store}
-            key={store.id}
-            link={`/dashboard/stores/${store.id}`}
+            store={{
+              id,
+              description,
+              name,
+            }}
+            key={id}
+            link={`/dashboard/stores/${id}`}
           />
         ))}
       </div>

@@ -24,18 +24,18 @@ const config = {
     serverComponentsExternalPackages: ["better-sqlite3"],
   },
 
-  // Disable linting and type-checking for analysis
+  /** Seperate CI pipeline for linting and typechecking in github actions */
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
-    ignoreDuringBuilds: process.env.ANALYZE === "true",
+    ignoreDuringBuilds: true,
   },
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
     // your project has type errors.
     // !! WARN !!
-    ignoreBuildErrors: process.env.ANALYZE === "true",
+    ignoreBuildErrors: true,
   },
 }
 
