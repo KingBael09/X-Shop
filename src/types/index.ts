@@ -37,3 +37,12 @@ export interface DataTableFilterableColumn<TData>
   extends DataTableSearchableColumn<TData> {
   options: Option[]
 }
+
+/**
+ * Utility type to extract all inheretances
+ */
+export type Prettify<T> = {
+  [K in keyof T]: T[K]
+} & object
+
+// TODO: Using server actions on a page currently disables static generation for that page
