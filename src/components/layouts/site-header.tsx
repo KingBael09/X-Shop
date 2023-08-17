@@ -17,8 +17,9 @@ import {
 
 import { CartSheet } from "../cart/cart-sheet"
 import { ComboBox } from "../combo-box"
+import { MainNav } from "../navbar/main-nav"
+import { MobileNav } from "../navbar/mobile/mobile-nav"
 import UserAvatar from "../user-avatar"
-import { MainNav, MobileNav } from "./nav"
 
 interface SiteHeaderProps {
   user: Promise<User | null>

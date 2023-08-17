@@ -2,7 +2,7 @@ import type { CartItem, OrderItem, Rating, StoredFile } from "@/types"
 import { relations, type InferModel } from "drizzle-orm"
 import { blob, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-import type { PaymentType } from "../actions/checkout"
+import type { PaymentType } from "../validations/checkout"
 
 export const stores = sqliteTable("stores", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),

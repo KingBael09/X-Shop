@@ -4,11 +4,8 @@ import { useTransition } from "react"
 import { Icons } from "@/util/icons"
 import { toast } from "sonner"
 
-import {
-  deleteCartAction,
-  updateCartAction,
-  type CustomCartItem,
-} from "@/lib/actions/cart"
+import { deleteCartAction, updateCartAction } from "@/lib/actions/cart"
+import type { CustomCartItem } from "@/lib/helpers/cart"
 import { catchError, cn } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import { Input } from "@/ui/input"

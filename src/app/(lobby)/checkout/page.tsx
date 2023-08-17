@@ -4,7 +4,7 @@ import { CheckoutForm } from "@/forms/checkout-form"
 import type { OrderItem } from "@/types"
 import { Icons } from "@/util/icons"
 
-import { getCartAction } from "@/lib/actions/cart"
+import { getCartAction } from "@/lib/helpers/cart"
 import { cn, formatPrice } from "@/lib/utils"
 import { buttonVariants } from "@/ui/button"
 import {

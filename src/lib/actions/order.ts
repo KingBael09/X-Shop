@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm"
 
 import { db } from "../db"
 import { carts, orders } from "../db/schema"
-import type { ZCheckoutSchema } from "./checkout"
+import type { ZCheckoutSchema } from "../validations/checkout"
 
 export async function placeOrderAction(
   data: ZCheckoutSchema,

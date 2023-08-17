@@ -17,7 +17,10 @@ interface CartSheetWrapperProps extends LayoutProps {
 /**
  * This is a custom cart-sheet wrapper which controllable state
  */
-export function CartSheetWrapper({ count, children }: CartSheetWrapperProps) {
+export default function CartSheetWrapper({
+  count,
+  children,
+}: CartSheetWrapperProps) {
   const [open, setOpen] = useState(false)
 
   return (

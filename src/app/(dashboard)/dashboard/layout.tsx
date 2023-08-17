@@ -5,9 +5,9 @@ import { currentUser } from "@clerk/nextjs"
 
 import { dashboardConfig } from "@/config/dashboard"
 import { ScrollArea } from "@/ui/scroll-area"
-import { SidebarNav } from "@/components/layouts/nav"
 import { SiteFooter } from "@/components/layouts/site-footer"
 import { SiteHeader } from "@/components/layouts/site-header"
+import { SidebarNav } from "@/components/navbar/sidebar"
 import { AutoBreadCrumbs } from "@/components/pagers/auto-breadcrumbs"
 
 export const metadata: Metadata = {

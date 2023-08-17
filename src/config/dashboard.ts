@@ -1,4 +1,4 @@
-import type { NavItem } from "@/components/layouts/nav"
+import type { NavItem } from "@/components/navbar/sidebar"
 
 interface DashboardConfig {
   sidebarNav: NavItem[]

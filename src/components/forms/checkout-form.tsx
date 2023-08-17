@@ -8,13 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
+import { placeOrderAction } from "@/lib/actions/order"
+import { catchError } from "@/lib/utils"
 import {
   checkoutSchema,
   paymentMethods,
   type ZCheckoutSchema,
-} from "@/lib/actions/checkout"
-import { placeOrderAction } from "@/lib/actions/order"
-import { catchError } from "@/lib/utils"
+} from "@/lib/validations/checkout"
 import { Button } from "@/ui/button"
 import {
   Form,

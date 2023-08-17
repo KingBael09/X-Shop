@@ -1,17 +1,20 @@
 import { Fragment } from "react"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Icons } from "@/util/icons"
 import { auth } from "@clerk/nextjs"
 
-import { getCartAction } from "@/lib/actions/cart"
+import { getCartAction } from "@/lib/helpers/cart"
 import { formatPrice } from "@/lib/utils"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
 import { SheetHeader, SheetTitle } from "@/ui/sheet"
 
 import { ImagePlaceHolder } from "../no-image"
-import { CartSheetWrapper } from "./cart-sheet-wrapper"
 import { UpdateCart } from "./update-cart"
+
+const CartSheetWrapper = dynamic(() => import("./cart-sheet-wrapper"))
+// IDK Some sort of magic lets nexjts render button of cart which is inside the Warpper but not the whole sheet
 
 export async function CartSheet() {
   const { userId } = auth()
@@ -120,3 +123,7 @@ export async function CartSheet() {
     </CartSheetWrapper>
   )
 }
+
+// TODO: There seem to be a bug when dynamically importing a named component (client-component) into server component
+
+// TODO: Is there no way to not send a component say...mobile nav to client if the device isn't a mobile
