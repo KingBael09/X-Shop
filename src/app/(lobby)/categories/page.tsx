@@ -44,4 +44,4 @@ export default async function AllCategoriesPage() {
 // TODO: Maybe pagination in future
 
 // TODO: Similarly make page for stores and store/[storeId]
-// TODO: if categories/* , stores/* are similary to products/* then there must be a way to redirect maybe and not have to rewrite logic
+// TODO: if categories/* , stores/* are similary to products/* then there must be a way to redirect maybe and not have to rewrite logic -> maybe sort of like mode

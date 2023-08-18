@@ -125,5 +125,6 @@ export async function CartSheet() {
 }
 
 // TODO: There seem to be a bug when dynamically importing a named component (client-component) into server component
+// https://github.com/vercel/next.js/issues/54138
 
 // TODO: Is there no way to not send a component say...mobile nav to client if the device isn't a mobile

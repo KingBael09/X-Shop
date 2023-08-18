@@ -69,6 +69,7 @@ export function ProductCard({
       {enableAction && (
         <CardFooter className="flex gap-2 p-4 pt-0">
           <Link
+            scroll={false}
             href={`/preview-product/${product.id}`}
             className={cn(buttonVariants({ variant: "outline" }), "w-full")}
           >

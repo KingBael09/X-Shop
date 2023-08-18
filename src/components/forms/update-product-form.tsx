@@ -112,8 +112,8 @@ export function UpdateProductForm({
   const isFormUpdated =
     form.formState.isDirty || isCatUpdated || isSubCatUpdated || isImageUpdated
 
-  // TODO: For some fked up reasons isDirty isn't catching change in categories and subcategories at  first step but if i change other field and reset then then it catches on that categories or subcategories has changed
-  // TODO:  Uploading file is also not counted in above wtf
+  // FIXME: For some fked up reasons isDirty isn't catching change in categories and subcategories at  first step but if i change other field and reset then then it catches on that categories or subcategories has changed
+  // FIXME:  Uploading file is also not counted in above wtf
 
   function onSubmit(values: ZProductSchema) {
     // TODO : Filter out subcategory
@@ -127,9 +127,9 @@ export function UpdateProductForm({
           isArrayOfFile(values.images) && isImageUpdated
             ? await startUpload(values.images).then((res) => {
                 const formattedImages = res?.map((image) => ({
-                  id: image.fileKey,
-                  name: image.fileKey.split("_")[1] ?? image.fileKey,
-                  url: image.fileUrl,
+                  id: image.key,
+                  name: image.key.split("_")[1] ?? image.key,
+                  url: image.url,
                 }))
                 return formattedImages ?? null
               })
