@@ -131,6 +131,8 @@ export function UpdateProductForm({
         // Check if product already exists in the store
         await checkProductAction({ name: values.name, id: product.id })
 
+        // TODO: This is mostly untested and will fail in prod.
+
         const inputImages = values.images as HackyType //Typecasting images
 
         const [uploadImages, orignalImages] = inputImages.reduce(
