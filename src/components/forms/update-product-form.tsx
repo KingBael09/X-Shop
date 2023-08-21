@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useTransition } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import type { FileWithPreview } from "@/types"
+import type { FileWithPreview, StoredFile } from "@/types"
 import { Icons } from "@/util/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -53,6 +53,11 @@ interface UpdateProductFormProps {
   product: Product
   categories: Category[]
 }
+
+/**
+ * Do note that this is a workaround to filter local file links with already uploaded links
+ */
+type HackyType = { preview: string }[]
 
 const ExtraModals = dynamic(() =>
   import("./add-category-form").then((mod) => mod.ExtraModals)
@@ -105,9 +110,13 @@ export function UpdateProductForm({
   const isSubCatUpdated =
     form.watch("subcategory") !== form.formState.defaultValues?.subcategory
 
+  // const isImageUpdated =
+  //   JSON.stringify(form.watch("images")) !==
+  //   JSON.stringify(form.formState.defaultValues?.images)
+
   const isImageUpdated =
-    JSON.stringify(form.watch("images")) !==
-    JSON.stringify(form.formState.defaultValues?.images)
+    JSON.stringify(files?.map((item) => item.preview) ?? []) !==
+    JSON.stringify(product.images?.map((item) => item.url) ?? [])
 
   const isFormUpdated =
     form.formState.isDirty || isCatUpdated || isSubCatUpdated || isImageUpdated
@@ -122,10 +131,25 @@ export function UpdateProductForm({
         // Check if product already exists in the store
         await checkProductAction({ name: values.name, id: product.id })
 
+        const inputImages = values.images as HackyType //Typecasting images
+
+        const [uploadImages, orignalImages] = inputImages.reduce(
+          ([p, f], e) => {
+            if (e.preview.startsWith("blob")) return [[...p, e], f]
+            else {
+              const data = product.images?.find(
+                (prod) => prod.url === e.preview
+              ) as unknown as HackyType[0] //TODO: Major L -> very bad logic
+              return [p, [...f, data]]
+            }
+          },
+          [[] as HackyType, [] as HackyType]
+        )
+
         // Upload images if data.images is an array of files
         const images =
-          isArrayOfFile(values.images) && isImageUpdated
-            ? await startUpload(values.images).then((res) => {
+          isArrayOfFile(uploadImages) && isImageUpdated
+            ? await startUpload(uploadImages).then((res) => {
                 const formattedImages = res?.map((image) => ({
                   id: image.key,
                   name: image.key.split("_")[1] ?? image.key,
@@ -142,8 +166,9 @@ export function UpdateProductForm({
           storeId: product.storeId,
           images: isImageUpdated
             ? images && images.length > 0
-              ? images
-              : null
+              ? [...images, ...(orignalImages as unknown as StoredFile[])]
+              : // TODO: Another major L -> maybe i could have thought of a better way
+                null
             : product.images,
         })
 
@@ -178,8 +203,6 @@ export function UpdateProductForm({
     categories.find(
       (category) => category.id === Number(form.watch("categoryId"))
     )?.subcategories ?? []
-
-  const previews = (form.watch("images") as FileWithPreview[] | null) ?? files
 
   const [open, setOpen] = useState<DialogState>({
     target: "",
@@ -445,9 +468,9 @@ export function UpdateProductForm({
               return (
                 <FormItem>
                   <FormLabel>Images</FormLabel>
-                  {previews?.length ? (
+                  {files?.length ? (
                     <div className="flex h-20 items-center gap-2">
-                      {previews.map((file) => (
+                      {files.map((file) => (
                         <div
                           className="relative max-w-[80px] flex-full"
                           key={file.name}
@@ -469,7 +492,7 @@ export function UpdateProductForm({
                   <FormControl>
                     <FileDialog
                       setValue={
-                        // TODO: Dammit Typescript wtf is wrong with dynamic import and generics
+                        // FIXME: Dammit Typescript wtf is wrong with dynamic import and generics
                         form.setValue as unknown as UseFormSetValue<FieldValues>
                       }
                       name="images"
@@ -481,7 +504,6 @@ export function UpdateProductForm({
                       disabled={isUpdating || isDeleting}
                     />
                   </FormControl>
-                  {/* </div> */}
                   <FormMessage />
                 </FormItem>
               )
@@ -523,3 +545,7 @@ export function UpdateProductForm({
     </>
   )
 }
+
+// TODO: Updating image removes existing images
+
+// TODO: Does delete store delete all images of products that it has

@@ -51,6 +51,7 @@ export default async function ProductPreviewPage({
     <Modal title={title}>
       <ProductImageCarousel
         className="w-full px-3"
+        placeHolderProps={{ className: "md:w-full" }}
         images={product.images ?? []}
       >
         {product.images?.map((image, index) => (

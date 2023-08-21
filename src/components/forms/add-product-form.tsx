@@ -91,9 +91,9 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
           ? await startUpload(values.images).then(
               (res) =>
                 res?.map((image) => ({
-                  id: image.fileKey,
-                  name: image.fileKey.split("_")[1] ?? image.fileKey,
-                  url: image.fileUrl,
+                  id: image.key,
+                  name: image.key.split("_")[1] ?? image.key,
+                  url: image.url,
                 }))
             )
           : null
@@ -119,8 +119,6 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
     categories.find(
       (category) => category.id === Number(form.watch("categoryId"))
     )?.subcategories ?? []
-
-  const previews = form.watch("images") as FileWithPreview[] | null
 
   const [open, setOpen] = useState<DialogState>({
     target: "",
@@ -380,9 +378,9 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
               return (
                 <FormItem>
                   <FormLabel>Images</FormLabel>
-                  {previews?.length ? (
+                  {files?.length ? (
                     <div className="flex items-center gap-2">
-                      {previews.map((file) => (
+                      {files.map((file) => (
                         <Zoom key={file.name}>
                           <Image
                             src={file.preview}

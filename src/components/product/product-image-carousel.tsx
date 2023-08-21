@@ -20,6 +20,7 @@ interface ProductImageCarouselProps
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
   images: StoredFile[]
   options?: EmblaOptionsType
+  placeHolderProps?: React.HtmlHTMLAttributes<HTMLDivElement>
 }
 
 export function ProductImageCarousel({
@@ -27,6 +28,7 @@ export function ProductImageCarousel({
   options,
   className,
   children,
+  placeHolderProps,
   ...props
 }: ProductImageCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ ...options, loop: true })
@@ -74,7 +76,12 @@ export function ProductImageCarousel({
   }, [emblaApi, onSelect])
 
   if (images.length === 0) {
-    return <ImagePlaceHolder className="aspect-square md:w-[50%]" />
+    return (
+      <ImagePlaceHolder
+        {...placeHolderProps}
+        className={cn("aspect-square md:w-[50%]", placeHolderProps?.className)}
+      />
+    )
   }
   return (
     <div

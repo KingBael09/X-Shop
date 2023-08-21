@@ -11,6 +11,7 @@ import {
   type FileWithPath,
 } from "react-dropzone"
 import type {
+  FieldPath,
   FieldValues,
   Path,
   PathValue,
@@ -23,15 +24,17 @@ import { Button } from "@/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog"
 import { Skeleton } from "@/ui/skeleton"
 
-interface FileDialogProps<TFieldValues extends FieldValues>
-  extends React.HTMLAttributes<HTMLDivElement> {
-  name: Path<TFieldValues>
+interface FileDialogProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> extends React.HTMLAttributes<HTMLDivElement> {
+  name: TName
   setValue: UseFormSetValue<TFieldValues>
   accept?: Accept
   maxSize?: number
   maxFiles?: number
   files: FileWithPreview[] | null
-  setFiles: (file: FileWithPreview[] | null) => void
+  setFiles: React.Dispatch<React.SetStateAction<FileWithPreview[] | null>>
   isUploading?: boolean
   disabled?: boolean
 }
@@ -74,19 +77,13 @@ export function FileDialog<TFieldValues extends FieldValues>({
 }: FileDialogProps<TFieldValues>) {
   const onDrop = useCallback(
     (acceptedFiles: FileWithPath[], rejectedFiles: FileRejection[]) => {
-      setValue(
-        name,
-        acceptedFiles as PathValue<TFieldValues, Path<TFieldValues>>,
-        {
-          shouldValidate: true,
-        }
-      )
-      const acceptedFileObject = acceptedFiles.map(
-        (file) => Object.assign(file, { preview: URL.createObjectURL(file) }) //i can do that wtf
-      )
-      setFiles(acceptedFileObject)
-
-      // ? Show toast for rejected files if any
+      // ! Untested Logic
+      acceptedFiles.forEach((file) => {
+        const fileWithPreview = Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+        setFiles((prev) => [...(prev ?? []), fileWithPreview])
+      })
 
       if (rejectedFiles.length > 0) {
         rejectedFiles.forEach(({ errors, file }) => {
@@ -100,8 +97,14 @@ export function FileDialog<TFieldValues extends FieldValues>({
         })
       }
     },
-    [maxSize, name, setFiles, setValue]
+    [maxSize, setFiles]
   )
+
+  // Register files to react-hook-form
+  useEffect(() => {
+    setValue(name, files as PathValue<TFieldValues, Path<TFieldValues>>)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [files])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -184,9 +187,6 @@ export function FileDialog<TFieldValues extends FieldValues>({
               <FileCard
                 key={i}
                 i={i}
-                name={name}
-                // TODO: Dammit typescript only in dynamic component are you complaining
-                setValue={setValue as UseFormSetValue<FieldValues>}
                 files={files}
                 setFiles={setFiles}
                 file={file}
@@ -201,13 +201,6 @@ export function FileDialog<TFieldValues extends FieldValues>({
             size="sm"
             onClick={() => {
               setFiles(null)
-              setValue(
-                name,
-                null as PathValue<TFieldValues, Path<TFieldValues>>,
-                {
-                  shouldValidate: true,
-                }
-              )
             }}
             className="mt-2.5 w-full"
           >
@@ -220,9 +213,5 @@ export function FileDialog<TFieldValues extends FieldValues>({
     </Dialog>
   )
 }
-
-// TODO: THis throws with local file /* setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL()) */
-
-// TODO: Change file name incase of crop
 
 // TODO: FIXME Your proposed upload exceeds the maximum allowed size, this should trigger toast.error too

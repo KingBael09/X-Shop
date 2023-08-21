@@ -7,33 +7,18 @@ import Image from "next/image"
 import type { FileWithPreview } from "@/types"
 import { Icons } from "@/util/icons"
 import Cropper, { type ReactCropperElement } from "react-cropper"
-import type {
-  FieldValues,
-  Path,
-  PathValue,
-  UseFormSetValue,
-} from "react-hook-form"
 
 import { Button } from "@/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/ui/dialog"
 
-interface FileCardProps<TFieldValues extends FieldValues> {
+interface FileCardProps {
   i: number
   file: FileWithPreview
-  name: Path<TFieldValues>
-  setValue: UseFormSetValue<TFieldValues>
   files: FileWithPreview[] | null
   setFiles: (file: FileWithPreview[] | null) => void
 }
 
-export function FileCard<TFieldValues extends FieldValues>({
-  i,
-  file,
-  name,
-  files,
-  setValue,
-  setFiles,
-}: FileCardProps<TFieldValues>) {
+export function FileCard({ i, file, files, setFiles }: FileCardProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [cropData, setCropData] = useState<string | null>(null)
   const cropperRef = useRef<ReactCropperElement>(null)
@@ -58,11 +43,12 @@ export function FileCard<TFieldValues extends FieldValues>({
         path: file.name,
       }) satisfies FileWithPreview
 
-      const newFiles = [...files]
-      newFiles.splice(i, 1, croppedFileWithPathAndPreview)
-      setValue(name, newFiles as PathValue<TFieldValues, Path<TFieldValues>>)
+      const newFiles = files.map((file, j) =>
+        j === i ? croppedFileWithPathAndPreview : file
+      )
+      setFiles(newFiles)
     })
-  }, [file.name, file.type, files, i, name, setValue])
+  }, [file.name, file.type, files, i, setFiles])
 
   // Crop image on enter key press
   useEffect(() => {
@@ -102,8 +88,8 @@ export function FileCard<TFieldValues extends FieldValues>({
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
-                className="h-7 w-7 p-0"
+                size="icon"
+                className="h-7 w-7"
               >
                 <Icons.crop className="h-4 w-4" aria-hidden />
                 <span className="sr-only">Crop image</span>
@@ -167,21 +153,11 @@ export function FileCard<TFieldValues extends FieldValues>({
         <Button
           type="button"
           variant="outline"
-          size="sm"
-          className="h-7 w-7 p-0"
+          size="icon"
+          className="h-7 w-7"
           onClick={() => {
             if (!files) return
             setFiles(files.filter((_, j) => j !== i))
-            setValue(
-              name,
-              files.filter((_, j) => j !== i) as PathValue<
-                TFieldValues,
-                Path<TFieldValues>
-              >,
-              {
-                shouldValidate: true,
-              }
-            )
           }}
         >
           <Icons.close className="h-4 w-4" aria-hidden />
