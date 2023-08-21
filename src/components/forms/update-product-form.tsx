@@ -551,3 +551,5 @@ export function UpdateProductForm({
 // TODO: Updating image removes existing images
 
 // TODO: Does delete store delete all images of products that it has
+
+// TODO: Categories after selection appear in lowercase

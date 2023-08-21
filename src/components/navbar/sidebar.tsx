@@ -16,16 +16,16 @@ export interface NavItem {
   description?: string
 }
 
-interface SideBarProps {
+interface SideBarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   items: NavItem[]
 }
 
-export function SidebarNav({ items }: SideBarProps) {
+export function SidebarNav({ items, className, ...props }: SideBarProps) {
   const pathname = usePathname()
   if (!items?.length) return null
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className={cn("flex w-full flex-col gap-2", className)} {...props}>
       {items.map((item, index) => {
         const Icon = Icons[item.icon ?? "chevronLeft"]
 
