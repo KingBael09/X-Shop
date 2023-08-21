@@ -15,6 +15,8 @@ const links = {
   linkedIn: "https://www.linkedin.com/in/singhjayesh/",
 }
 
+export const repo = "https://github.com/KingBael09/X-Shop"
+
 export const siteConfig = {
   name: "X-Shop",
   description: "X-Shop, One shop for all your needs!",

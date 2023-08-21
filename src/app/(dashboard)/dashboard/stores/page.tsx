@@ -15,7 +15,6 @@ import { buttonVariants } from "@/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card"
 import { Separator } from "@/ui/separator"
 import { Header } from "@/components/header"
-import { Shell } from "@/components/shells/shell"
 import { StoreCard } from "@/components/store-card"
 
 export const metadata: Metadata = {
@@ -34,7 +33,7 @@ export default async function StoresPage() {
   })
 
   return (
-    <Shell variant="sidebar">
+    <>
       <Header title="Stores" description="Manage your stores" size="sm" />
       <Alert>
         <Icons.terminal className="h-4 w-4" aria-hidden />
@@ -95,7 +94,7 @@ export default async function StoresPage() {
           />
         ))}
       </div>
-    </Shell>
+    </>
   )
 }
 

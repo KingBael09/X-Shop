@@ -1,10 +1,10 @@
 import "@/styles/globals.css"
 
 import type { Metadata } from "next"
+import { Analytics } from "@/util/analytics"
 import { Providers } from "@/util/providers"
 import { TailwindIndicator } from "@/util/tailwind-indicator"
 import { ClerkProvider } from "@clerk/nextjs"
-import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
 import { fontMono, fontSans } from "@/lib/fonts"

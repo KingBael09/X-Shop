@@ -7,10 +7,8 @@ import { eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { stores } from "@/lib/db/schema"
-import { BackButton } from "@/components/back-button"
 import { Header } from "@/components/header"
 import StorePager from "@/components/pagers/store-pager"
-import { Shell } from "@/components/shells/shell"
 import { StoreTabs } from "@/components/store-tabs"
 
 interface PageParams {
@@ -66,9 +64,9 @@ export default async function StoreLayout({
   if (!store) return notFound()
 
   return (
-    <Shell variant="sidebar" className="gap-4">
+    <>
       <div className="flex items-center space-x-4">
-        <BackButton />
+        {/* <BackButton /> */}
         <Header title={store.name} size="sm" className="flex-1" />
         {allStores.length > 1 ? (
           <StorePager stores={allStores} current={store} />
@@ -78,6 +76,6 @@ export default async function StoreLayout({
         <StoreTabs className="w-full" storeId={storeId} />
         {children}
       </div>
-    </Shell>
+    </>
   )
 }
