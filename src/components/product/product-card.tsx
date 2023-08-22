@@ -40,7 +40,6 @@ export function ProductCard({
           {product.images && product.images?.length > 0 ? (
             <Image
               fill
-              loading="lazy"
               className="object-cover"
               src={product.images[0]?.url ?? "/product-placeholder.webp"}
               alt={product.images[0]?.name ?? product.name}

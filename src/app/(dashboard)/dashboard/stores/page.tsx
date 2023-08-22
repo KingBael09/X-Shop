@@ -97,5 +97,3 @@ export default async function StoresPage() {
     </>
   )
 }
-
-// TODO: I think making a layout with shell as base here wouldn't require shell layout in nested dir

@@ -480,6 +480,7 @@ export function UpdateProductForm({
                           <Zoom margin={10}>
                             <AspectRatio ratio={1}>
                               <Image
+                                sizes="100vw"
                                 src={file.preview}
                                 alt={file.name}
                                 className="rounded-md object-cover"

@@ -383,6 +383,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                       {files.map((file) => (
                         <Zoom key={file.name}>
                           <Image
+                            sizes="100vw"
                             src={file.preview}
                             alt={file.name}
                             className="h-20 w-20 shrink-0 rounded-md object-cover object-center"

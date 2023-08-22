@@ -68,6 +68,7 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
         <Image
           src={cropData ? cropData : file.preview}
           alt={file.name}
+          sizes="100vw"
           className="h-10 w-10 shrink-0 rounded-md object-cover"
           width={40}
           height={40}

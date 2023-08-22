@@ -122,6 +122,7 @@ export function ComboBox() {
                             : "/product-placeholder"
                         }
                         fill
+                        sizes="33vw"
                         className="rounded-md object-cover"
                         alt={item.name}
                       />
