@@ -26,7 +26,6 @@ export async function addToCartAction(inputs: ZCartItemSchema) {
       .insert(carts)
       .values({
         userId,
-        createdAt: new Date(),
         items: [inputs],
       })
       .run()

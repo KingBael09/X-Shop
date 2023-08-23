@@ -7,6 +7,7 @@ import * as schema from "./schema"
 /**
  * In SQLite
  * ```ts
+ * // This can also be used to make in memory database for testing
  * const db = new Database(":memory")
  * ```
  */

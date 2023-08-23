@@ -126,7 +126,6 @@ export async function addProductAction({
     .insert(products)
     .values({
       categoryId: Number(categoryId),
-      createdAt: new Date(),
       inventory: Number(inventory),
       price: Number(price),
       ...rest,

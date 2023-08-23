@@ -31,7 +31,6 @@ export async function placeOrderAction(
       paymentMode,
       username,
       ...rest,
-      createdAt: new Date(),
     })
     .run()
 

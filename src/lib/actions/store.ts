@@ -88,7 +88,6 @@ export async function addStoreAction(input: ZStoreSchema) {
       userId: userId,
       description: input.description,
       slug: slugify(input.name),
-      createdAt: new Date(),
     })
     .run()
 
