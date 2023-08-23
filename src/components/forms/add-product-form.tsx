@@ -3,6 +3,7 @@
 import { useRef, useState, useTransition } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
+import { env } from "@/env.mjs"
 import type { FileWithPreview } from "@/types"
 import { Icons } from "@/util/icons"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -67,7 +68,9 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
   const [isPending, startTransition] = useTransition()
   const [files, setFiles] = useState<FileWithPreview[] | null>(null)
 
-  const { isUploading, startUpload } = useUploadThing("productImage")
+  const { isUploading, startUpload } = useUploadThing(
+    env.NODE_ENV === "production" ? "prodProductImage" : "productImage"
+  )
 
   const ref = useRef<HTMLButtonElement>(null)
 

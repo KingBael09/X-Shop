@@ -1,7 +1,7 @@
 import { use } from "react"
 import Link from "next/link"
 import { Icons } from "@/util/icons"
-import type { User } from "@clerk/nextjs/dist/types/server"
+import type { User } from "@clerk/nextjs/server"
 
 import { Button, buttonVariants } from "@/ui/button"
 import {

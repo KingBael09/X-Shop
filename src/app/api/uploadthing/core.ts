@@ -34,6 +34,26 @@ export const ourFileRouter = {
 
       console.log("file url", file.url)
     }),
+  prodProductImage: f({ image: { maxFileSize: "4MB", maxFileCount: 3 } })
+    // Set permissions and file types for this FileRoute
+    .middleware((_) => {
+      // This code runs on your server before upload
+      // const user = await currentUser()
+      const { userId } = auth()
+
+      // If you throw, the user will not be able to upload
+      if (!userId) throw new Error("Unauthorized")
+
+      // Whatever is returned here is accessible in onUploadComplete as `metadata`
+      return { userId }
+    })
+    // eslint-disable-next-line @typescript-eslint/require-await
+    .onUploadComplete(({ metadata, file }) => {
+      // This code RUNS ON YOUR SERVER after upload
+      console.log("Upload complete for userId:", metadata.userId)
+
+      console.log("file url", file.url)
+    }),
 } satisfies FileRouter
 
 export type OurFileRouter = typeof ourFileRouter
