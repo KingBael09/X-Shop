@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
-import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
 import { auth } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
@@ -28,7 +27,6 @@ export async function generateMetadata({
   })
 
   const metadata: Metadata = {
-    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: {
       default: store?.name ?? "Your Store",
       template: `%s | ${store?.name ?? "Your Store"}`,

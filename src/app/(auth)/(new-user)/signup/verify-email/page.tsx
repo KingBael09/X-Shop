@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { env } from "@/env.mjs"
 import { VerifyEmailForm } from "@/forms/verify-email-form"
 
 import {
@@ -11,7 +10,6 @@ import {
 } from "@/ui/card"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: "Verify Email",
   description: "Verify your email address to continue with your sign up",
 }

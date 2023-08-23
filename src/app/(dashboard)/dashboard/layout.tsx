@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
 import { currentUser } from "@clerk/nextjs"
 
@@ -12,7 +11,6 @@ import { AutoBreadCrumbs } from "@/components/pagers/auto-breadcrumbs"
 import { Shell } from "@/components/shells/shell"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: "Dashboard",
   description: "Manage your stores",
 }

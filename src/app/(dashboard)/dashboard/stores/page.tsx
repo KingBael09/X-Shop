@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { env } from "@/env.mjs"
 import { Icons } from "@/util/icons"
 import { auth } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
@@ -18,7 +17,6 @@ import { Header } from "@/components/header"
 import { StoreCard } from "@/components/store-card"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: "Stores",
   description: "Manage your stores",
 }

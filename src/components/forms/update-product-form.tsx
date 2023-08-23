@@ -270,7 +270,7 @@ export function UpdateProductForm({
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "flex-1 justify-between",
+                              "flex-1 justify-between capitalize",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -360,7 +360,7 @@ export function UpdateProductForm({
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "flex-1 justify-between",
+                              "flex-1 justify-between capitalize",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -527,7 +527,7 @@ export function UpdateProductForm({
                   aria-hidden
                 />
               )}
-              Update Product
+              {isUploading ? "Uploading.." : "Update Product"}
               <span className="sr-only">Update Product</span>
             </Button>
             <Button

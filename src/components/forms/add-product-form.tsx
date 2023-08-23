@@ -3,6 +3,7 @@
 import { useRef, useState, useTransition } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { env } from "@/env.mjs"
 import type { FileWithPreview } from "@/types"
 import { Icons } from "@/util/icons"
@@ -65,6 +66,7 @@ const FileDialog = dynamic(
 )
 
 export function AddProductForm({ storeId, categories }: AddProductFormProps) {
+  const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [files, setFiles] = useState<FileWithPreview[] | null>(null)
 
@@ -107,6 +109,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
         // reseting form and other files
         form.reset()
         setFiles(null)
+        router.push(`/dashboard/stores/${storeId}/products`)
       } catch (error) {
         catchError(error)
       }
@@ -184,7 +187,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "flex-1 justify-between",
+                              "flex-1 justify-between capitalize",
                               !field.value && "text-muted-foreground"
                             )}
                           >
@@ -268,7 +271,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                             variant="outline"
                             role="combobox"
                             className={cn(
-                              "flex-1 justify-between",
+                              "flex-1 justify-between capitalize",
                               !field.value && "text-muted-foreground"
                             )}
                           >

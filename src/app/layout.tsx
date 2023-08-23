@@ -1,6 +1,8 @@
 import "@/styles/globals.css"
 
 import type { Metadata } from "next"
+import { env } from "@/env.mjs"
+import type { LayoutProps } from "@/types"
 import { Analytics } from "@/util/analytics"
 import { Providers } from "@/util/providers"
 import { TailwindIndicator } from "@/util/tailwind-indicator"
@@ -12,6 +14,7 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "@/ui/toaster"
 
 export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -39,19 +42,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og.jpg`],
+    images: [`${siteConfig.url}/opengraph-image.png`],
     creator: siteConfig.author,
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
 }
 
-interface RootLayoutProps {
-  children: React.ReactNode
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
