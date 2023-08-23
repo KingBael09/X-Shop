@@ -142,5 +142,3 @@ export async function deleteStoreAction(storeId: number) {
 
   revalidatePath("/dashboard/stores")
 }
-
-// TODO: Configure husy to make precommit msg

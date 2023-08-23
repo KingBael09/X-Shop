@@ -21,11 +21,11 @@ export function ModalBodyWrapper({
   className,
   ...props
 }: ModalBodyWrapper) {
-  useLockBody()
   const router = useRouter()
 
   const ref = useRef<HTMLDivElement>(null)
 
+  useLockBody()
   useOnClickOutside(ref, () => router.back())
 
   // TODO: Think of a way to debounce or limit click outside event so that in case of slow transition i don't go back more the one
@@ -55,5 +55,3 @@ export function ModalBodyWrapper({
     </div>
   )
 }
-
-// TODO: Use lockbody while in modal mode

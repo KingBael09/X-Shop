@@ -21,4 +21,4 @@ export default function LobbyLayout({ children, preview }: LobbyLayoutProps) {
   )
 }
 
-// TODO: Implement base pages with https://nextjs.org/docs/app/api-reference/next-config-js/mdxRs
+// TODO: Implement base pages with https://nextjs.org/docs/app/api-reference/next-config-js/mdxRs or with ContentLayer

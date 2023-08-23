@@ -73,5 +73,3 @@ export default function RootLayout({ children }: LayoutProps) {
 // TODO: Mobile nav remaining
 // TODO: implement resend
 // TODO: think of a way to integrate with tanstack
-
-// TODO: Use server action only for mutation otherwise fetch which can be cached

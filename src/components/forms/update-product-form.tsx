@@ -498,7 +498,6 @@ export function UpdateProductForm({
                   <FormControl>
                     <FileDialog
                       setValue={
-                        // FIXME: Dammit Typescript wtf is wrong with dynamic import and generics
                         form.setValue as unknown as UseFormSetValue<FieldValues>
                       }
                       name="images"
@@ -552,8 +551,4 @@ export function UpdateProductForm({
   )
 }
 
-// TODO: Updating image removes existing images
-
 // TODO: Does delete store delete all images of products that it has
-
-// TODO: Categories after selection appear in lowercase

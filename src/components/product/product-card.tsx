@@ -83,5 +83,4 @@ export function ProductCard({
   )
 }
 
-// TODO: Give buttons for preview and to add to favaurites
-// TODO: Set next/image sizes to optimize images
+// TODO: Button to add to fav-list only on hover

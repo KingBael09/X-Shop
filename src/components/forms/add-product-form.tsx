@@ -403,7 +403,6 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                   <FormControl>
                     <FileDialog
                       setValue={
-                        // TODO: Dammit Typescript wtf is wrong with dynamic import and generics
                         form.setValue as unknown as UseFormSetValue<FieldValues>
                       }
                       name="images"

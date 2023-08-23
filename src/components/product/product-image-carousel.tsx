@@ -150,4 +150,4 @@ export function ProductImageCarousel({
   )
 }
 
-// TODO:Set a loader while the image is loading
+// TODO:Set a loader while the image is loading -> Plaiceholder? or blur data url

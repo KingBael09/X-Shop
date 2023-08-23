@@ -62,5 +62,4 @@ export function SidebarNav({ items, className, ...props }: SideBarProps) {
   )
 }
 
-// TODO: Stuff remaining here
-// TODO: Maybe this could be made into server component
+// TODO: Hey this could be used to render categories in /categories/[category]

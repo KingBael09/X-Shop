@@ -1,3 +1,4 @@
+import type { PromiseReturnType } from "@/types"
 import { auth } from "@clerk/nextjs"
 import { eq, inArray } from "drizzle-orm"
 
@@ -7,8 +8,7 @@ import { carts, products } from "../db/schema"
 /**
  * This is a custom cart-item type which includes data from category and store
  */
-export type CustomCartItem = Awaited<ReturnType<typeof getCartAction>>[0]
-// TODO: Maybe I could have extracted this logic as a helper but I don't know how to!
+export type CustomCartItem = PromiseReturnType<typeof getCartAction>[number]
 
 /**
  * This function internally check for user and if there is no user then it throws an error
@@ -32,7 +32,7 @@ export async function getCartAction() {
 
   const productIds =
     userCart.items?.map((product) => Number(product.productId)) ?? []
-  // FIXME: Damn if only drizzle suppported cuid's
+  // FIXME: Damn if only drizzle suppported cuid's -> Update: it supports now via `$defaultFn`
 
   if (productIds.length === 0) return []
 

@@ -138,5 +138,3 @@ export function ComboBox() {
     </>
   )
 }
-
-// TODO: IDK maybe add images

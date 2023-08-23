@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import type { StoredFile } from "@/types"
+import type { PromiseReturnType, StoredFile } from "@/types"
 import {
   and,
   asc,
@@ -180,9 +180,7 @@ export async function updateProductAction({
   revalidatePath(`/dashboard/stores/${rest.storeId}/products`)
 }
 
-export type FilteredProductType = Awaited<
-  ReturnType<typeof filterProductAction>
->
+export type FilteredProductType = PromiseReturnType<typeof filterProductAction>
 
 export async function filterProductAction(query: string) {
   if (query.length === 0) return null

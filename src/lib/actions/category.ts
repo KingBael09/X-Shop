@@ -26,6 +26,11 @@ interface AddSubCategoryActionInterface {
   subcategories: string[]
 }
 
+/**
+ * This function (`server-action`) should be used in protected routes only.
+ *
+ * This doesn't check for auth internally
+ */
 export async function addSubCategoryAction(
   input: AddSubCategoryActionInterface
 ) {
@@ -37,6 +42,5 @@ export async function addSubCategoryAction(
     .where(eq(categories.id, Number(input.categoryId)))
     .run()
 }
-// TODO: Maybe this could fail on some condition but idk where it will fail
 
 // TODO: Maybe Category Delete functionality for admins?

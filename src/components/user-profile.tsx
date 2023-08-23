@@ -32,5 +32,3 @@ export function UserProfile() {
     />
   )
 }
-
-// TODO: Seems like there is some sort of problem in production
