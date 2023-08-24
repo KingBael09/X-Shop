@@ -1,0 +1,54 @@
+# https://docs.github.com/en/actions/using-workflows/about-workflows
+
+name: Code Check
+
+on:
+  pull_request:
+    branches: ["master"]
+
+env:
+  SKIP_ENV_VALIDATION: true
+
+jobs:
+  init:
+    name: Init
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # ? https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.4.0
+        with:
+          version: 8.6.12
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+
+      # Hopefully this caches stuff
+
+      - name: Install deps (with cache)
+        run: pnpm install
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: init
+
+    steps:
+      - name: Run Lint
+        run: pnpm run lint
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    needs: init
+
+    steps:
+      - name: Run Typecheck
+        run: pnpm run typecheck

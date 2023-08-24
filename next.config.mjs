@@ -8,6 +8,7 @@ await import("./src/env.mjs")
 
 /** @type {import('next').NextConfig} */
 const config = {
+  reactStrictMode: true,
   // webpack: (config, _) => {
   //   config.externals.push({
   //     "utf-8-validate": "commonjs utf-8-validate",

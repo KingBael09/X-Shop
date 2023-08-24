@@ -13,12 +13,12 @@
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleDetection": "force", // idk why i did this
+    "moduleDetection": "force",
     "jsx": "preserve",
     "incremental": true,
-    "noUncheckedIndexedAccess": true,
     "strictNullChecks": true,
-    "verbatimModuleSyntax": true, //appends type in imports
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "plugins": [
       {
