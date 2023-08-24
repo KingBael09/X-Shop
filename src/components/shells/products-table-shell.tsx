@@ -6,6 +6,7 @@ import { Icons } from "@/util/icons"
 import type { ColumnDef } from "@tanstack/react-table"
 import { toast } from "sonner"
 
+import type { FancyOmit } from "@/types/ts-util"
 import { deleteProductAction } from "@/lib/actions/product"
 import type { Category, Product } from "@/lib/db/schema"
 import { catchError, formatDate, formatPrice } from "@/lib/utils"
@@ -30,7 +31,7 @@ interface ProductTableShellProps {
   data: Data[]
   count: number
   storeId: number
-  categories: Omit<Category, "subcategories">[]
+  categories: FancyOmit<Category, "subcategories">[]
 }
 
 export function ProductsTableShell({

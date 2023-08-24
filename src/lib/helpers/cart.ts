@@ -1,6 +1,7 @@
-import type { PromiseReturnType } from "@/types"
 import { auth } from "@clerk/nextjs"
 import { eq, inArray } from "drizzle-orm"
+
+import type { PromiseReturnType } from "@/types/ts-util"
 
 import { db } from "../db"
 import { carts, products } from "../db/schema"

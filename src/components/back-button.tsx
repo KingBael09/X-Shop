@@ -14,9 +14,10 @@ export function BackButton({ className, ...props }: ButtonProps) {
       onClick={() => {
         router.back()
       }}
+      aria-label="Back Button"
       className={cn(className)}
-      variant="ghost"
       size="icon"
+      variant="ghost"
       {...props}
     >
       <Icons.chevronLeft className="h-6 w-6" />

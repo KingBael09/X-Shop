@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
+import type { FancyOmit } from "@/types/ts-util"
 import { cn } from "@/lib/utils"
 import { useLockBody } from "@/hooks/use-lock-body"
 import { useOnClickOutside } from "@/hooks/use-onclick-outside"
@@ -11,7 +12,7 @@ import { Button } from "@/ui/button"
 import { ScrollArea } from "@/ui/scroll-area"
 
 interface ModalBodyWrapper
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  extends FancyOmit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title?: string | React.ReactNode
 }
 

@@ -1,7 +1,9 @@
+import type { FancyOmit } from "@/types/ts-util"
+
 import { ModalBodyWrapper } from "./modal-body-wrapper"
 
 interface ModalProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  extends FancyOmit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title?: string | React.ReactNode
 }
 

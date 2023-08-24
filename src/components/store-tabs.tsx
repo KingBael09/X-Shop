@@ -40,7 +40,12 @@ export function StoreTabs({ storeId, className, ...props }: StoreTabsProps) {
       <TabsList className="w-full">
         {tabs.map((tab) => (
           <TabsTrigger key={tab.title} value={tab.href} asChild>
-            <Link className="px-4" replace href={tab.href}>
+            <Link
+              replace
+              className="px-4"
+              aria-label={`${tab.title} Tab`}
+              href={tab.href}
+            >
               {tab.title}
             </Link>
           </TabsTrigger>

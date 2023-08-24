@@ -64,7 +64,6 @@ export default async function StoreLayout({
   return (
     <>
       <div className="flex items-center space-x-4">
-        {/* <BackButton /> */}
         <Header title={store.name} size="sm" className="flex-1" />
         {allStores.length > 1 ? (
           <StorePager stores={allStores} current={store} />

@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import type { PromiseReturnType, StoredFile } from "@/types"
+import type { StoredFile } from "@/types"
 import {
   and,
   asc,
@@ -15,6 +15,8 @@ import {
   sql,
 } from "drizzle-orm"
 import { utapi } from "uploadthing/server"
+
+import type { PromiseReturnType } from "@/types/ts-util"
 
 import { db } from "../db"
 import { products, type Product } from "../db/schema"
