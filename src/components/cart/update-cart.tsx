@@ -5,13 +5,13 @@ import { Icons } from "@/util/icons"
 import { toast } from "sonner"
 
 import { deleteCartAction, updateCartAction } from "@/lib/actions/cart"
-import type { CustomCartItem } from "@/lib/helpers/cart"
+import type { CartItem } from "@/lib/helpers/cart"
 import { catchError, cn } from "@/lib/utils"
 import { Button } from "@/ui/button"
 import { Input } from "@/ui/input"
 
 interface UpdateCartProps extends React.HTMLAttributes<HTMLDivElement> {
-  item: CustomCartItem
+  item: CartItem
 }
 
 export function UpdateCart({ item, className, ...props }: UpdateCartProps) {

@@ -1,15 +1,12 @@
 import { auth } from "@clerk/nextjs"
 import { eq, inArray } from "drizzle-orm"
 
-import type { PromiseReturnType } from "@/types/ts-util"
+import type { PromiseReturnType } from "@/types/util"
 
 import { db } from "../db"
 import { carts, products } from "../db/schema"
 
-/**
- * This is a custom cart-item type which includes data from category and store
- */
-export type CustomCartItem = PromiseReturnType<typeof getCartAction>[number]
+export type CartItem = PromiseReturnType<typeof getCartAction>[number]
 
 /**
  * This function internally check for user and if there is no user then it throws an error

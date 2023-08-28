@@ -2,7 +2,7 @@ import type { FileWithPath } from "react-dropzone"
 
 import type { ZCartItemSchema } from "@/lib/validations/cart"
 
-import type { FancyOmit } from "./ts-util"
+import type { FancyOmit } from "./util"
 
 export interface LayoutProps {
   children: React.ReactNode
@@ -39,20 +39,5 @@ export interface DataTableFilterableColumn<TData>
   extends DataTableSearchableColumn<TData> {
   options: Option[]
 }
-
-/**
- * Utility type to extract all inheretances
- */
-// export type Prettify<T> = {
-//   [K in keyof T]: T[K]
-// } & object
-
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// type FunctionType = (...args: any[]) => any
-
-// /**
-//  * Utility type to unwrap return type of an async function
-//  */
-// export type PromiseReturnType<T extends FunctionType> = Awaited<ReturnType<T>>
 
 // TODO: Using server actions on a page currently disables static generation for that page

@@ -6,7 +6,7 @@ import { Icons } from "@/util/icons"
 import type { ColumnDef } from "@tanstack/react-table"
 import { toast } from "sonner"
 
-import type { FancyOmit } from "@/types/ts-util"
+import type { FancyOmit } from "@/types/util"
 import { deleteProductAction } from "@/lib/actions/product"
 import type { Category, Product } from "@/lib/db/schema"
 import { catchError, formatDate, formatPrice } from "@/lib/utils"

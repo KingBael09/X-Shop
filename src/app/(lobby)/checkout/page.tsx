@@ -76,7 +76,7 @@ export default async function CheckOutPage() {
                   <Image
                     fill
                     src={item.images[0]?.url ?? "/product-placeholder.webp"}
-                    alt={item.images[0]?.name ?? item.name}
+                    alt={item.name}
                     sizes="33vw"
                     className="absolute object-cover"
                   />
@@ -115,3 +115,5 @@ export default async function CheckOutPage() {
     </Shell>
   )
 }
+
+// TODO: Maybe I should sort by Shop like OneStopShop

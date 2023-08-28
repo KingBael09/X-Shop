@@ -4,7 +4,7 @@ import { useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
-import type { FancyOmit } from "@/types/ts-util"
+import type { FancyOmit } from "@/types/util"
 import { cn } from "@/lib/utils"
 import { useLockBody } from "@/hooks/use-lock-body"
 import { useOnClickOutside } from "@/hooks/use-onclick-outside"

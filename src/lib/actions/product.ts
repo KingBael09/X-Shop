@@ -16,7 +16,7 @@ import {
 } from "drizzle-orm"
 import { utapi } from "uploadthing/server"
 
-import type { PromiseReturnType } from "@/types/ts-util"
+import type { PromiseReturnType } from "@/types/util"
 
 import { db } from "../db"
 import { products, type Product } from "../db/schema"

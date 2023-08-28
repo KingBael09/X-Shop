@@ -1,4 +1,4 @@
-import type { FancyOmit } from "@/types/ts-util"
+import type { FancyOmit } from "@/types/util"
 
 import { ModalBodyWrapper } from "./modal-body-wrapper"
 
