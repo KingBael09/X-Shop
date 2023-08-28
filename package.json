@@ -76,7 +76,7 @@
     "react-wrap-balancer": "^1.1.0",
     "resend": "^1.0.0",
     "sharp": "^0.32.5",
-    "sonner": "^0.6.2",
+    "sonner": "^0.7.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
     "uploadthing": "^5.3.3",
