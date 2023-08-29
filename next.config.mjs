@@ -21,8 +21,8 @@ const config = {
     domains: ["uploadthing.com", "source.unsplash.com"],
   },
   experimental: {
+    // typedRoutes: true,
     serverActions: true,
-    typedRoutes: true,
     serverComponentsExternalPackages: ["better-sqlite3"],
   },
 

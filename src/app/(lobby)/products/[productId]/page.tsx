@@ -1,4 +1,3 @@
-import type { Route } from "next"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { notFound } from "next/navigation"
@@ -70,7 +69,7 @@ export default async function ProductPage({ params }: ProductPageParams) {
     },
     {
       title: product.name,
-      href: `/products/${product.id}` as Route,
+      href: `/products/${product.id}`,
     },
   ]
 

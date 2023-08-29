@@ -1,7 +1,6 @@
 "use client"
 
 import { Fragment, type HtmlHTMLAttributes } from "react"
-import type { Route } from "next"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icons } from "@/util/icons"
@@ -27,7 +26,7 @@ export function AutoBreadCrumbs({
   const pathName = usePathname()
   const SeparatorIcon = separator ?? Icons.chevronRight
 
-  const segments: { title: string; href: Route }[] = []
+  const segments: { title: string; href: string }[] = []
 
   const pathObjects = pathName.split("/").filter((e) => e.length > 0)
 
@@ -36,7 +35,7 @@ export function AutoBreadCrumbs({
       const link = pathObjects.slice(0, i + 1).join("/")
       segments.push({
         title: toTitleCase(e),
-        href: `/${link}` as Route,
+        href: `/${link}`,
       })
     }
   })

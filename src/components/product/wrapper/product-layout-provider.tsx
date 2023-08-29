@@ -9,7 +9,6 @@ import {
   type SetStateAction,
   type TransitionStartFunction,
 } from "react"
-import type { Route } from "next"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import type { LayoutProps } from "@/types"
 
@@ -83,7 +82,7 @@ export function ProductLayoutWrapperContext({
       router.replace(
         `${pathname}?${createQueryString({
           price_range: `${min}-${max}`,
-        })}` as Route
+        })}`
       )
     })
   }, [debouncedPrice])
@@ -99,7 +98,7 @@ export function ProductLayoutWrapperContext({
           category_ids: categoryIds?.length
             ? categoryIds.sort((a, b) => a - b).join(".") // sorting ids so that reverse of same category doesn't refetch page
             : null,
-        })}` as Route
+        })}`
       )
     })
   }, [categoryIds])
@@ -117,7 +116,7 @@ export function ProductLayoutWrapperContext({
       router.replace(
         `${pathname}?${createQueryString({
           store_ids: storeIds?.length ? storeIds.join(".") : null,
-        })}` as Route
+        })}`
       )
     })
   }, [storeIds])

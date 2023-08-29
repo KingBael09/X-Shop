@@ -1,4 +1,3 @@
-import type { Route } from "next"
 import Link from "next/link"
 
 import type { Store } from "@/lib/db/schema"
@@ -20,7 +19,7 @@ type StoreType = Pick<Store, "id" | "name" | "description">
 interface StoreCardProps {
   store: StoreType
   // count?: number
-  link?: Route
+  link?: string
   text?: string
 }
 

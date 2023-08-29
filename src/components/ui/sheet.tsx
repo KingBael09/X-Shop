@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import type { Route } from "next"
-import Link, { type LinkProps } from "next/link"
+import Link from "next/link"
 import { Icons } from "@/util/icons"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -134,15 +133,18 @@ const SheetDescription = React.forwardRef<
 ))
 SheetDescription.displayName = SheetPrimitive.Description.displayName
 
+interface SheetLinkProps extends React.ComponentProps<typeof Link> {
+  children: React.ReactNode
+}
 /**
  * Custom `next/link` component that closes the sheet and redirects to link
  *
  * Under the hood implements `next/link`
  */
-function SheetLink(props: LinkProps<Route>) {
+function SheetLink({ children, ...props }: SheetLinkProps) {
   return (
     <SheetClose asChild>
-      <Link {...props} />
+      <Link {...props}>{children}</Link>
     </SheetClose>
   )
 }

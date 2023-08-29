@@ -1,7 +1,6 @@
 "use client"
 
 import { useTransition } from "react"
-import type { Route } from "next"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 import { useSignUp } from "@clerk/nextjs"
@@ -55,7 +54,7 @@ export function VerifyEmailForm() {
         if (completeSignUp.status === "complete") {
           await setActive({ session: completeSignUp.createdSessionId })
 
-          router.push(`${window.location.origin}/` as Route)
+          router.push(`${window.location.origin}/`)
         }
       } catch (error) {
         catchClerkError(error)

@@ -1,7 +1,6 @@
 "use client"
 
 import { useTransition } from "react"
-import type { Route } from "next"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 import { useSignIn } from "@clerk/nextjs"
@@ -128,7 +127,7 @@ export function ResetPasswordStep2Form() {
           await setActive({
             session: attemptFirstFactor.createdSessionId,
           })
-          router.push(`${window.location.origin}/` as Route)
+          router.push(`${window.location.origin}/`)
           toast.success("Password reset successfully.")
         } else {
           console.error(attemptFirstFactor)

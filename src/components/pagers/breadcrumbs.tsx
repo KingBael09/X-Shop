@@ -1,5 +1,4 @@
 import { Fragment } from "react"
-import type { Route } from "next"
 import Link from "next/link"
 import { Icons } from "@/util/icons"
 
@@ -9,7 +8,7 @@ import { BackButton } from "../back-button"
 
 export interface BreadSegment {
   title: string
-  href: Route
+  href: string
 }
 
 interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {

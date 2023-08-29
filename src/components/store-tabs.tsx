@@ -1,6 +1,5 @@
 "use client"
 
-import type { Route } from "next"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -30,7 +29,7 @@ export function StoreTabs({ storeId, className, ...props }: StoreTabsProps) {
       title: "Payments",
       href: `/dashboard/stores/${storeId}/payments`,
     },
-  ] as { title: string; href: Route }[]
+  ]
 
   return (
     <Tabs

@@ -1,6 +1,5 @@
 "use client"
 
-import type { Route } from "next"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icons, type AllIcons } from "@/util/icons"
@@ -9,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 export interface NavItem {
   title: string
-  href: Route
+  href: string
   disabled?: boolean
   external?: boolean
   icon?: AllIcons

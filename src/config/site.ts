@@ -1,7 +1,5 @@
-import type { Route } from "next"
 import { env } from "@/env.mjs"
 
-import type { Prettify } from "@/types/util"
 import type { AllIcons } from "@/components/util/icons"
 
 export interface FooterItem {
@@ -33,7 +31,7 @@ export const siteConfig = {
 
 export type MainNavItem = {
   title: string
-  href?: Route
+  href?: string
   icon?: AllIcons
   items?: (MainNavItem & { description: string })[]
 }
@@ -90,9 +88,9 @@ export const mainNav = [
       },
     ],
   },
-  { title: "Clothing", href: "/categories/clothing" as Route },
-  { title: "Shoes", href: "/categories/shoes" as Route },
-  { title: "Accessories", href: "/categories/accessories" as Route },
+  { title: "Clothing", href: "/categories/clothing" },
+  { title: "Shoes", href: "/categories/shoes" },
+  { title: "Accessories", href: "/categories/accessories" },
 ] satisfies MainNavItem[]
 
 export const footerNav = [

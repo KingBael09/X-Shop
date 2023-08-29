@@ -1,7 +1,6 @@
 "use client"
 
 import { useMemo, useState, useTransition } from "react"
-import type { Route } from "next"
 import Link from "next/link"
 import { Icons } from "@/util/icons"
 import type { ColumnDef } from "@tanstack/react-table"
@@ -241,7 +240,7 @@ export function ProductsTableShell({
           title: "Name",
         },
       ]}
-      newRowLink={`/dashboard/stores/${storeId}/products/create` as Route}
+      newRowLink={`/dashboard/stores/${storeId}/products/create`}
       deleteRowsAction={deleteSelectedRows}
     />
   )

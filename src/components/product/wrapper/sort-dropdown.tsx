@@ -1,6 +1,5 @@
 "use client"
 
-import type { Route } from "next"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
@@ -48,7 +47,7 @@ export function SortDropdown() {
                 router.push(
                   `${pathname}?${createQueryString({
                     sort: option.value,
-                  })}` as Route
+                  })}`
                 )
               })
             }}
@@ -60,7 +59,7 @@ export function SortDropdown() {
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href={pathname as Route}>
+              <Link href={pathname}>
                 <Icons.close className="mr-2 h-4 w-4" aria-hidden />
                 Clear Filter
               </Link>

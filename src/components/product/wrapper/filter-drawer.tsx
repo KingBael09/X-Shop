@@ -1,7 +1,6 @@
 "use client"
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import type { Route } from "next"
 import { usePathname, useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
@@ -142,7 +141,7 @@ export function FilterDrawer({
                         router.push(
                           `${pathname}?${createQueryString({
                             store_page: Number(store_page) - 1,
-                          })}` as Route
+                          })}`
                         )
                       })
                     }}
@@ -159,7 +158,7 @@ export function FilterDrawer({
                         router.push(
                           `${pathname}?${createQueryString({
                             store_page: Number(store_page) + 1,
-                          })}` as Route
+                          })}`
                         )
                       })
                     }}
@@ -221,7 +220,7 @@ export function FilterDrawer({
                         store_ids: null,
                         categories: null,
                         subcategories: null,
-                      })}` as Route
+                      })}`
                     )
                     setPriceRange([
                       filterPriceRange.lower,
