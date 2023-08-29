@@ -1,10 +1,13 @@
+import type { Route } from "next"
 import Link, { type LinkProps } from "next/link"
 import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/ui/button"
 
-interface ModLinkProps extends LinkProps, VariantProps<typeof buttonVariants> {
+interface ModLinkProps
+  extends LinkProps<Route>,
+    VariantProps<typeof buttonVariants> {
   disabled: boolean
   children: React.ReactNode
   className?: string

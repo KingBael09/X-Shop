@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import type { Route } from "next"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import type {
   DataTableFilterableColumn,
@@ -42,7 +43,7 @@ interface DataTableProps<TData, TValue> {
   count: number
   filterableColumns?: DataTableFilterableColumn<TData>[]
   searchableColumns?: DataTableSearchableColumn<TData>[]
-  newRowLink?: string
+  newRowLink?: Route
   deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -98,7 +99,7 @@ export function DataTable<TData, TValue>({
       `${pathname}?${createQueryString({
         page: pageIndex + 1,
         per_page: pageSize,
-      })}`
+      })}` as Route
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex, pageSize])
@@ -119,7 +120,7 @@ export function DataTable<TData, TValue>({
         sort: sorting[0]?.id
           ? `${sorting[0]?.id}.${sorting[0]?.desc ? "desc" : "asc"}`
           : null,
-      })}`
+      })}` as Route
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting])
@@ -147,7 +148,7 @@ export function DataTable<TData, TValue>({
           `${pathname}?${createQueryString({
             page: 1,
             [column.id]: typeof column.value === "string" ? column.value : null,
-          })}`
+          })}` as Route
         )
       }
     }
@@ -161,7 +162,7 @@ export function DataTable<TData, TValue>({
           `${pathname}?${createQueryString({
             page: 1,
             [key]: null,
-          })}`
+          })}` as Route
         )
       }
     }
@@ -175,7 +176,7 @@ export function DataTable<TData, TValue>({
           `${pathname}?${createQueryString({
             page: 1,
             [column.id]: column.value.join("."),
-          })}`
+          })}` as Route
         )
       }
     }
@@ -189,7 +190,7 @@ export function DataTable<TData, TValue>({
           `${pathname}?${createQueryString({
             page: 1,
             [key]: null,
-          })}`
+          })}` as Route
         )
       }
     }

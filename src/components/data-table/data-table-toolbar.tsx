@@ -1,6 +1,7 @@
 "use client"
 
 import { useTransition } from "react"
+import type { Route } from "next"
 import Link from "next/link"
 import type {
   DataTableFilterableColumn,
@@ -19,7 +20,7 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>
   filterableColumns?: DataTableFilterableColumn<TData>[]
   searchableColumns?: DataTableSearchableColumn<TData>[]
-  newRowLink?: string
+  newRowLink?: Route
   deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
 }
 

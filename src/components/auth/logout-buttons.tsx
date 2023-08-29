@@ -1,6 +1,7 @@
 "use client"
 
 import { useTransition } from "react"
+import type { Route } from "next"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 import { SignOutButton } from "@clerk/nextjs"
@@ -21,7 +22,7 @@ export function LogOutButtons() {
         <SignOutButton
           signOutCallback={() =>
             startTransition(() => {
-              router.push(`${window.location.origin}/?redirect=false`)
+              router.push(`${window.location.origin}/?redirect=false` as Route)
             })
           }
         >

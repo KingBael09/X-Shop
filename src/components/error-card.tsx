@@ -1,8 +1,9 @@
 "use client"
 
+import type { Route } from "next"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { Icons } from "@/util/icons"
+import { Icons, type AllIcons } from "@/util/icons"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/ui/button"
@@ -16,10 +17,10 @@ import {
 } from "@/ui/card"
 
 interface ErrorCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  icon?: keyof typeof Icons
+  icon?: AllIcons
   title: string
   description: string
-  routeLink?: string
+  routeLink?: Route
   routeName?: string
   fullscreen?: boolean
 }

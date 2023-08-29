@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import type { Route } from "next"
 import { usePathname, useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 
@@ -77,7 +78,7 @@ export function PaginationButton({
                 page: 1,
                 per_page: per_page ?? null,
                 sort,
-              })}`
+              })}` as Route
             )
           })
         }}
@@ -97,7 +98,7 @@ export function PaginationButton({
                 page: Number(page) - 1,
                 per_page: per_page ?? null,
                 sort,
-              })}`
+              })}` as Route
             )
           })
         }}
@@ -131,7 +132,7 @@ export function PaginationButton({
                     page: pageNumber,
                     per_page: per_page ?? null,
                     sort,
-                  })}`
+                  })}` as Route
                 )
               })
             }}
@@ -153,7 +154,7 @@ export function PaginationButton({
                 page: Number(page) + 1,
                 per_page: per_page ?? null,
                 sort,
-              })}`
+              })}` as Route
             )
           })
         }}
@@ -172,7 +173,7 @@ export function PaginationButton({
               page: pageCount ?? 10,
               per_page: per_page ?? null,
               sort,
-            })}`
+            })}` as Route
           )
         }}
         disabled={Number(page) === (pageCount ?? 10) || isPending}

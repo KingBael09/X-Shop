@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Route } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { Icons } from "@/util/icons"
@@ -88,7 +88,7 @@ export default async function StoresPage() {
               name,
             }}
             key={id}
-            link={`/dashboard/stores/${id}`}
+            link={`/dashboard/stores/${id}` as Route}
           />
         ))}
       </div>

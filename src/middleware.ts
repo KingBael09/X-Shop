@@ -31,3 +31,4 @@ export const config = {
 }
 
 // TODO: For some reason after updating nextjs middleware size shotup from 166kb to 180kb
+// TODO: WTF why did it increase again 180kb to 195kb

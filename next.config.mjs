@@ -22,6 +22,7 @@ const config = {
   },
   experimental: {
     serverActions: true,
+    typedRoutes: true,
     serverComponentsExternalPackages: ["better-sqlite3"],
   },
 

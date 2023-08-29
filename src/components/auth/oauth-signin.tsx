@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Icons } from "@/util/icons"
+import { Icons, type AllIcons } from "@/util/icons"
 import { isClerkAPIResponseError, useSignIn } from "@clerk/nextjs"
 import type { OAuthStrategy } from "@clerk/types"
 import { toast } from "sonner"
@@ -10,7 +10,7 @@ import { Button } from "@/ui/button"
 
 interface OAuthProviders {
   name: string
-  icon: keyof typeof Icons
+  icon: AllIcons
   strategy: OAuthStrategy
 }
 

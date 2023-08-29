@@ -68,6 +68,8 @@ import {
 
 export type Icon = LucideIcon
 
+export type AllIcons = keyof typeof Icons
+
 export const Icons = {
   sun: SunMedium,
   moon: Moon,

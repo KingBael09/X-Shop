@@ -1,4 +1,8 @@
+import type { Route } from "next"
 import { env } from "@/env.mjs"
+
+import type { Prettify } from "@/types/util"
+import type { AllIcons } from "@/components/util/icons"
 
 export interface FooterItem {
   heading: string
@@ -26,6 +30,70 @@ export const siteConfig = {
   keywords: ["Next.js", "React", "Tailwind CSS", "Server Components"],
   author: "KingBael",
 }
+
+export type MainNavItem = {
+  title: string
+  href?: Route
+  icon?: AllIcons
+  items?: (MainNavItem & { description: string })[]
+}
+
+// TODO: Better typing could have been done here
+
+export const mainNav = [
+  {
+    title: "Lobby",
+    items: [
+      {
+        title: "Products",
+        href: "/products",
+        description: "All the products we have to offer.",
+      },
+      {
+        title: "Stores",
+        href: "/dashboard/stores",
+        description: "All the stores to buy from.",
+      },
+      {
+        title: "Categories",
+        href: "/categories",
+        description: "Browse products by category",
+      },
+    ],
+  },
+  {
+    title: "Dashboard",
+    items: [
+      {
+        title: "Account",
+        href: "/dashboard/account",
+        description: "Manage your account",
+        icon: "user",
+      },
+      {
+        title: "Wishlist",
+        href: "/dashboard/wishlist",
+        description: "View your wishlist",
+        icon: "heart",
+      },
+      {
+        title: "Purchases",
+        href: "/dashboard/purchases",
+        description: "View your purchases",
+        icon: "dollarSign",
+      },
+      {
+        title: "Stores",
+        href: "/dashboard/stores",
+        description: "Manage your stores",
+        icon: "store",
+      },
+    ],
+  },
+  { title: "Clothing", href: "/categories/clothing" as Route },
+  { title: "Shoes", href: "/categories/shoes" as Route },
+  { title: "Accessories", href: "/categories/accessories" as Route },
+] satisfies MainNavItem[]
 
 export const footerNav = [
   {

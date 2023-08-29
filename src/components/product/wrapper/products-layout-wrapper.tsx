@@ -107,3 +107,5 @@ export function ProductsLayoutWrapper({
 // TODO: Maybe it is better to use context for data-table
 
 // TODO: Wrap components using useSearchParams with a Suspense boundary -> https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering#dynamic-functions
+
+// TODO: Implement Sheet without state by using SheetLink/SheetClose

@@ -144,7 +144,7 @@ export function UpdateProductForm({
             else {
               const data = product.images?.find(
                 (prod) => prod.url === e.preview
-              ) as unknown as HackyType[0] //TODO: Major L -> very bad logic
+              ) as unknown as HackyType[number] //TODO: Major L -> very bad logic
               return [p, [...f, data]]
             }
           },
@@ -163,7 +163,7 @@ export function UpdateProductForm({
                 return formattedImages ?? null
               })
             : null
-
+        // TODO: I really don't know if unused images or changed images are deleted or not
         await updateProductAction({
           ...values,
           isImageUpdated,

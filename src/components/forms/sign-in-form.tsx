@@ -1,6 +1,7 @@
 "use client"
 
 import { useTransition } from "react"
+import type { Route } from "next"
 import { useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
 import { useSignIn } from "@clerk/nextjs"
@@ -47,7 +48,7 @@ export function SignInForm() {
 
         if (result.status === "complete") {
           await setActive({ session: result.createdSessionId })
-          router.push(`${window.location.origin}/`)
+          router.push(`${window.location.origin}/` as Route)
         } else {
           console.info("Something unforseen has happened!")
           console.log(result)

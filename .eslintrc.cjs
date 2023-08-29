@@ -28,7 +28,7 @@ const config = {
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
 
     "@next/next/no-html-link-for-pages": "off",
-    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/classnames-order": "error",
   },
 

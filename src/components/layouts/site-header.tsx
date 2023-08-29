@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Icons } from "@/util/icons"
 import type { User } from "@clerk/nextjs/server"
 
+import { mainNav } from "@/config/site"
 import { Button, buttonVariants } from "@/ui/button"
 import {
   DropdownMenu,
@@ -11,7 +12,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu"
 
@@ -35,8 +35,8 @@ export function SiteHeader({ user: userPromise }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="container flex h-[var(--navbar-height)] items-center">
-        <MainNav />
-        <MobileNav />
+        <MainNav items={mainNav} />
+        <MobileNav items={mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             <ComboBox />
@@ -76,24 +76,18 @@ export function SiteHeader({ user: userPromise }: SiteHeaderProps) {
                       >
                         <Icons.user className="mr-2 h-4 w-4" aria-hidden />
                         Account
-                        <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link href="/dashboard/stores" className="cursor-pointer">
-                        <Icons.terminal className="mr-2 h-4 w-4" aria-hidden />
+                        <Icons.dashboard className="mr-2 h-4 w-4" aria-hidden />
                         Dashboard
-                        <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild disabled>
-                      <Link
-                        href="/dashboard/settings"
-                        className="cursor-pointer"
-                      >
+                      <Link href="/settings" className="cursor-pointer">
                         <Icons.settings className="mr-2 h-4 w-4" aria-hidden />
                         Settings
-                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
@@ -102,7 +96,6 @@ export function SiteHeader({ user: userPromise }: SiteHeaderProps) {
                     <Link href="/signout" className="cursor-pointer">
                       <Icons.logout className="mr-2 h-4 w-4" aria-hidden />
                       Log out
-                      <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

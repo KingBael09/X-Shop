@@ -1,3 +1,4 @@
+import type { Route } from "next"
 import { Icons } from "@/util/icons"
 
 import type { Product } from "@/lib/db/schema"
@@ -26,9 +27,10 @@ export function ProductPager({
         replace
         variant="ghost"
         disabled={lowerFail}
-        href={`/dashboard/stores/${storeId}/products/${products[
-          currentIndex - 1
-        ]?.id}`}
+        href={
+          `/dashboard/stores/${storeId}/products/${products[currentIndex - 1]
+            ?.id}` as Route
+        }
       >
         <Icons.chevronLeft className="h-5 w-5" aria-hidden />
         <span className="sr-only">Previous product</span>
@@ -37,9 +39,10 @@ export function ProductPager({
         replace
         variant="ghost"
         disabled={upperFail}
-        href={`/dashboard/stores/${storeId}/products/${products[
-          currentIndex + 1
-        ]?.id}`}
+        href={
+          `/dashboard/stores/${storeId}/products/${products[currentIndex + 1]
+            ?.id}` as Route
+        }
       >
         <Icons.chevronRight className="h-5 w-5" aria-hidden />
         <span className="sr-only">Next product</span>

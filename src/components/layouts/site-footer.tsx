@@ -45,8 +45,9 @@ export function SiteFooter() {
             .
           </div>
           <div className="flex items-center space-x-1">
-            <Link
+            <a
               href={siteConfig.links.github}
+              // This is an external site
               target="_blank"
               rel="noreferrer"
             >
@@ -61,7 +62,7 @@ export function SiteFooter() {
                 <Icons.gitHub className="h-4 w-4" aria-hidden />
                 <span className="sr-only">GitHub</span>
               </div>
-            </Link>
+            </a>
             <ThemeToggle />
           </div>
         </section>
