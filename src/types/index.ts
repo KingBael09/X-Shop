@@ -39,5 +39,3 @@ export interface DataTableFilterableColumn<TData>
   extends DataTableSearchableColumn<TData> {
   options: Option[]
 }
-
-// TODO: Using server actions on a page currently disables static generation for that page

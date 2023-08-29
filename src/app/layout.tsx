@@ -70,6 +70,5 @@ export default function RootLayout({ children }: LayoutProps) {
   )
 }
 
-// TODO: Mobile nav remaining
 // TODO: implement resend
 // TODO: think of a way to integrate with tanstack

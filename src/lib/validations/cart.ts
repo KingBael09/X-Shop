@@ -13,5 +13,3 @@ export const cartItemSchema = z.object({
 })
 
 export type ZCartItemSchema = z.infer<typeof cartItemSchema>
-
-// TODO: This could throw somewhere
