@@ -1,16 +1,16 @@
-import { Fragment } from "react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Icons } from "@/util/icons"
 import { auth } from "@clerk/nextjs"
 
 import { getCartAction } from "@/lib/helpers/cart"
-import { formatPrice } from "@/lib/utils"
+import { cn, formatPrice } from "@/lib/utils"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
-import { SheetHeader, SheetTitle } from "@/ui/sheet"
+import { SheetFooter, SheetHeader, SheetLink, SheetTitle } from "@/ui/sheet"
 
 import { ImagePlaceHolder } from "../no-image"
+import { buttonVariants } from "../ui/button"
 import { UpdateCart } from "./update-cart"
 
 const CartSheetWrapper = dynamic(() => import("./cart-sheet-wrapper"))
@@ -40,7 +40,7 @@ export async function CartSheet() {
       </SheetHeader>
       <Separator />
       {count > 0 ? (
-        <Fragment>
+        <>
           <div className="flex flex-1 flex-col gap-5 overflow-hidden">
             <ScrollArea className="h-full">
               <div className="flex flex-col gap-5 pr-6">
@@ -111,7 +111,16 @@ export async function CartSheet() {
               <span>{formatPrice(total.toFixed(2))}</span>
             </div>
           </div>
-        </Fragment>
+          <SheetFooter className="mt-1.5 pr-6">
+            <SheetLink
+              href="/checkout"
+              aria-label="Proceed to checkout"
+              className={cn(buttonVariants({ size: "sm" }), "w-full")}
+            >
+              Proceed to Checkout
+            </SheetLink>
+          </SheetFooter>
+        </>
       ) : (
         <div className="flex h-full flex-col items-center justify-center space-y-2">
           <Icons.cart className="h-12 w-12 text-muted-foreground" aria-hidden />

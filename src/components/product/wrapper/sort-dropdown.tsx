@@ -25,8 +25,6 @@ export function SortDropdown() {
   const { params, pathname, isPending, startTransition, createQueryString } =
     useProductLayoutContext()
 
-  const { sort } = params
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -42,7 +40,7 @@ export function SortDropdown() {
           <DropdownMenuItem
             key={option.label}
             className={cn(
-              option.value === sort && "bg-accent font-bold",
+              option.value === params.sort && "bg-accent font-bold",
               "cursor-pointer"
             )}
             onClick={() => {
@@ -58,7 +56,7 @@ export function SortDropdown() {
             {option.label}
           </DropdownMenuItem>
         ))}
-        {sort !== "createdAt.desc" && (
+        {params.sort !== "createdAt.desc" && (
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className="cursor-pointer">

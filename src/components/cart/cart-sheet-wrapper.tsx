@@ -1,14 +1,9 @@
-"use client"
-
-import { useState } from "react"
-import Link from "next/link"
 import type { LayoutProps } from "@/types"
 import { Icons } from "@/util/icons"
 
-import { cn } from "@/lib/utils"
 import { Badge } from "@/ui/badge"
-import { Button, buttonVariants } from "@/ui/button"
-import { Sheet, SheetContent, SheetFooter, SheetTrigger } from "@/ui/sheet"
+import { Button } from "@/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/ui/sheet"
 
 interface CartSheetWrapperProps extends LayoutProps {
   count: number
@@ -21,10 +16,8 @@ export default function CartSheetWrapper({
   count,
   children,
 }: CartSheetWrapperProps) {
-  const [open, setOpen] = useState(false)
-
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet>
       <SheetTrigger asChild>
         <Button
           aria-label="Cart"
@@ -45,18 +38,6 @@ export default function CartSheetWrapper({
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col pr-0 sm:max-w-lg">
         {children}
-        {count > 0 && (
-          <SheetFooter className="mt-1.5 pr-6">
-            <Link
-              onClick={() => setOpen(false)}
-              href="/checkout"
-              aria-label="Proceed to checkout"
-              className={cn(buttonVariants({ size: "sm" }), "w-full")}
-            >
-              Proceed to Checkout
-            </Link>
-          </SheetFooter>
-        )}
       </SheetContent>
     </Sheet>
   )

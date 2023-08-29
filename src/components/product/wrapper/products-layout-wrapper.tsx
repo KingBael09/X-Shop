@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useState, useTransition } from "react"
+import { Suspense, useTransition } from "react"
 import dynamic from "next/dynamic"
 import { Icons } from "@/util/icons"
 
@@ -29,9 +29,19 @@ interface ProductsLayoutWrapperProps
   storePageCount?: number
 }
 
-const FilterDrawer = dynamic(() =>
-  import("./filter-drawer").then((mod) => mod.FilterDrawer)
+const FilterDrawer = dynamic(
+  () => import("./filter-drawer").then((mod) => mod.FilterDrawer),
+  {
+    loading: () => (
+      <Button aria-label="Sort products" size="sm">
+        <Icons.altFilter className="mr-2 h-4 w-4" aria-hidden="true" />
+        Filter
+      </Button>
+    ),
+  }
 )
+
+// TODO: Due to dynamic loading a button element is created which is later filled on so during this loading there is slight layout shift due to space-x-2 -> i.e while loading there are 4 buttons
 
 const SortDropdown = dynamic(
   () => import("./sort-dropdown").then((mod) => mod.SortDropdown),
@@ -55,7 +65,6 @@ export function ProductsLayoutWrapper({
   className,
   ...props
 }: ProductsLayoutWrapperProps) {
-  const [isOpen, setIsOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
 
   // TODO: Haven't seen any issues with fallback so, meh
@@ -67,23 +76,11 @@ export function ProductsLayoutWrapper({
       >
         <div className={cn("grid space-y-6", className)} {...props}>
           <div className="flex items-center space-x-2">
-            <Button
-              ria-label="Filter products"
-              size="sm"
-              onClick={() => setIsOpen((prev) => !prev)}
-              disabled={isPending}
-            >
-              <Icons.altFilter className="mr-2 h-4 w-4" aria-hidden="true" />
-              Filter
-            </Button>
             <FilterDrawer
-              open={isOpen}
               stores={stores}
-              setOpen={setIsOpen}
               categories={categories}
               storePageCount={storePageCount}
             />
-
             <SortDropdown />
           </div>
           {!isPending && !items ? (
@@ -107,5 +104,3 @@ export function ProductsLayoutWrapper({
 // TODO: Maybe it is better to use context for data-table
 
 // TODO: Wrap components using useSearchParams with a Suspense boundary -> https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic-rendering#dynamic-functions
-
-// TODO: Implement Sheet without state by using SheetLink/SheetClose

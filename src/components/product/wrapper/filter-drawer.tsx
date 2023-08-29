@@ -1,5 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+"use client"
 
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { Route } from "next"
 import { usePathname, useRouter } from "next/navigation"
 import { Icons } from "@/util/icons"
@@ -13,10 +14,12 @@ import { ScrollArea } from "@/ui/scroll-area"
 import { Separator } from "@/ui/separator"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
   SheetTitle,
+  SheetTrigger,
 } from "@/ui/sheet"
 import { Slider } from "@/ui/slider"
 
@@ -28,16 +31,12 @@ import type {
 } from "./products-layout-wrapper"
 
 interface FilterDrawerProps {
-  open: boolean
-  setOpen: (open: boolean) => void
   categories?: FilteredCategory[]
   stores: StoreWithCount[]
   storePageCount?: number
 }
 
 export function FilterDrawer({
-  open,
-  setOpen,
   stores,
   categories,
   storePageCount,
@@ -59,7 +58,13 @@ export function FilterDrawer({
   const { categoryIds, priceRange, storeIds } = values
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet>
+      <SheetTrigger>
+        <Button ria-label="Filter products" size="sm" disabled={isPending}>
+          <Icons.altFilter className="mr-2 h-4 w-4" aria-hidden="true" />
+          Filter
+        </Button>
+      </SheetTrigger>
       <SheetContent className="flex flex-col">
         <SheetHeader className="px-1">
           <SheetTitle>Filters</SheetTitle>
@@ -203,33 +208,35 @@ export function FilterDrawer({
         <div>
           <Separator className="my-4" />
           <SheetFooter>
-            <Button
-              aria-label="Clear filters"
-              size="sm"
-              className="w-full"
-              onClick={() => {
-                startTransition(() => {
-                  router.push(
-                    `${pathname}?${createQueryString({
-                      price_range: `${filterPriceRange.lower}-${filterPriceRange.upper}`,
-                      store_ids: null,
-                      categories: null,
-                      subcategories: null,
-                    })}` as Route
-                  )
-                  setPriceRange([
-                    filterPriceRange.lower,
-                    filterPriceRange.upper,
-                  ])
-                  setCategoryIds(null)
-                  setStoreIds(null)
-                  setOpen(false)
-                })
-              }}
-              disabled={isPending}
-            >
-              Clear Filters
-            </Button>
+            <SheetClose asChild>
+              <Button
+                aria-label="Clear filters"
+                size="sm"
+                className="w-full"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push(
+                      `${pathname}?${createQueryString({
+                        price_range: `${filterPriceRange.lower}-${filterPriceRange.upper}`,
+                        store_ids: null,
+                        categories: null,
+                        subcategories: null,
+                      })}` as Route
+                    )
+                    setPriceRange([
+                      filterPriceRange.lower,
+                      filterPriceRange.upper,
+                    ])
+                    setCategoryIds(null)
+                    setStoreIds(null)
+                    // setOpen(false)
+                  })
+                }}
+                disabled={isPending}
+              >
+                Clear Filters
+              </Button>
+            </SheetClose>
           </SheetFooter>
         </div>
       </SheetContent>
