@@ -75,8 +75,8 @@ dependencies:
     specifier: ^8.9.3
     version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
   '@uploadthing/react':
-    specifier: ^5.4.0
-    version: 5.4.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.4.0)(zod@3.22.2)
+    specifier: ^5.5.0
+    version: 5.5.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.5.0)(zod@3.22.2)
   '@vercel/analytics':
     specifier: ^1.0.2
     version: 1.0.2
@@ -147,8 +147,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.3.3)
   uploadthing:
-    specifier: ^5.4.0
-    version: 5.4.0(zod@3.22.2)
+    specifier: ^5.5.0
+    version: 5.5.0(zod@3.22.2)
   zod:
     specifier: ^3.22.2
     version: 3.22.2
@@ -2807,8 +2807,8 @@ packages:
     resolution: {integrity: sha512-UDySsPbdi7wp52WG7mp5CiZwaTvokDubqhm1xhFm73Bqhp0PsGbwSSF5PdCXH4fe8Y4EKGrMyWQ4i1fF9+DVVQ==}
     dev: false
 
-  /@uploadthing/react@5.4.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.4.0)(zod@3.22.2):
-    resolution: {integrity: sha512-nBu8Eg9vCaLtv+NM6+PwlU0cYuX63mJZFlPJ09sNBFkCli7d2VKr43S72xE9205rgxm5/SOPIOam442kM+2nsg==}
+  /@uploadthing/react@5.5.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.5.0)(zod@3.22.2):
+    resolution: {integrity: sha512-50VduVEqDJwEyT9GDxCAzI5V28/5tD9Rddsmwt/ciCJG8J+sg3C9oHAvhEm9MWYf3h0YVi/fgtpYLg64Y8PSAA==}
     peerDependencies:
       react: ^17.0.2 || ^18.0.0
       react-dropzone: ^14.2.3
@@ -2818,7 +2818,7 @@ packages:
       react: 18.2.0
       react-dropzone: 14.2.3(react@18.2.0)
       tailwind-merge: 1.14.0
-      uploadthing: 5.4.0(zod@3.22.2)
+      uploadthing: 5.5.0(zod@3.22.2)
     transitivePeerDependencies:
       - '@uploadthing/mime-types'
       - zod
@@ -2983,8 +2983,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /array.prototype.findlastindex@1.2.2:
-    resolution: {integrity: sha512-tb5thFFlUcp7NdNF6/MpDk/1r/4awWG1FIz3YqDf+/zJSTezBb+/5WViH41obXULHVpDzoiCLpJ/ZO9YbJMsdw==}
+  /array.prototype.findlastindex@1.2.3:
+    resolution: {integrity: sha512-LzLoiOMAxvy+Gd3BAq3B7VeIgPdo+Q8hthvKtXybMvRV0jrXfJM/t8mw7nNlpEcVlVUnCnM2KSX4XU5HmpodOA==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -3078,7 +3078,7 @@ packages:
     dependencies:
       browserslist: 4.21.10
       caniuse-lite: 1.0.30001524
-      fraction.js: 4.3.0
+      fraction.js: 4.3.1
       normalize-range: 0.1.2
       picocolors: 1.0.0
       postcss: 8.4.29
@@ -4158,7 +4158,7 @@ packages:
     dependencies:
       '@typescript-eslint/parser': 6.5.0(eslint@8.48.0)(typescript@5.2.2)
       array-includes: 3.1.6
-      array.prototype.findlastindex: 1.2.2
+      array.prototype.findlastindex: 1.2.3
       array.prototype.flat: 1.3.1
       array.prototype.flatmap: 1.3.1
       debug: 3.2.7
@@ -4501,8 +4501,8 @@ packages:
       mime-types: 2.1.35
     dev: false
 
-  /fraction.js@4.3.0:
-    resolution: {integrity: sha512-btalnXjFelOv2cy86KzHWhUuMb622/AD8ce/MCH9C36xe7QRXjJZA+19fP+G5LT0fdRcbOHErMI3SPM11ZaVDg==}
+  /fraction.js@4.3.1:
+    resolution: {integrity: sha512-nx0cki48JBA6ThPeUpeKCNpdhEl/9bRS+dAEYnRUod+Z1jhFfC3K/mBLorZZntqHM+GTH3/dkkpfoT3QITYe7g==}
     dev: true
 
   /fs-constants@1.0.0:
@@ -7211,8 +7211,8 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
 
-  /uploadthing@5.4.0(zod@3.22.2):
-    resolution: {integrity: sha512-JTOopJ686gvZAdPTyB+40vFL2LhoQlx+uSqx6fWzM4EjvPgQQLkMdFh/aBq0/1xmv1YjFs324kJy6fsqMj3ULg==}
+  /uploadthing@5.5.0(zod@3.22.2):
+    resolution: {integrity: sha512-QwngAsKSbjofRoHaMYEBFRs00N3GXlFjhsNVll3usRntkltOmqkoIiXUhxGfoaC/U2uG76mC+1xwnj1cNSPCMg==}
     dependencies:
       '@uploadthing/mime-types': 0.2.1
       '@uploadthing/shared': 5.2.1(@uploadthing/mime-types@0.2.1)(zod@3.22.2)

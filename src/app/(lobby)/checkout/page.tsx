@@ -117,3 +117,4 @@ export default async function CheckOutPage() {
 }
 
 // TODO: Maybe I should sort by Shop like OneStopShop
+// TODO: Change flow of checkout

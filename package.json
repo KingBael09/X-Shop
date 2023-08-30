@@ -55,7 +55,7 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@t3-oss/env-nextjs": "^0.6.1",
     "@tanstack/react-table": "^8.9.3",
-    "@uploadthing/react": "^5.4.0",
+    "@uploadthing/react": "^5.5.0",
     "@vercel/analytics": "^1.0.2",
     "better-sqlite3": "^8.5.2",
     "class-variance-authority": "^0.7.0",
@@ -79,7 +79,7 @@
     "sonner": "^0.7.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "uploadthing": "^5.4.0",
+    "uploadthing": "^5.5.0",
     "zod": "^3.22.2"
   },
   "devDependencies": {

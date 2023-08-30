@@ -81,7 +81,13 @@ export function UpdateProductForm({
   const [files, setFiles] = useState<FileWithPreview[] | null>(null)
 
   const { isUploading, startUpload } = useUploadThing(
-    env.NODE_ENV === "production" ? "prodProductImage" : "productImage"
+    env.NODE_ENV === "production" ? "prodProductImage" : "productImage",
+    {
+      onUploadError: () => {
+        toast.error("Failed to upload image!")
+        throw new Error("Failed to upload image!") //TODO: Should i really throw here
+      },
+    }
   )
 
   const ref = useRef<HTMLButtonElement>(null)
