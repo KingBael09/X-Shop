@@ -14,5 +14,3 @@ const config = {
 }
 
 export default config
-
-// FIXME: Is this actually typechecking or not
