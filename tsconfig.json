@@ -19,6 +19,10 @@
     "strictNullChecks": true,
     "verbatimModuleSyntax": true,
     "noUncheckedIndexedAccess": true,
+    "removeComments": true,
+    "allowUnreachableCode": false,
+    // "disableSizeLimit": true, //disables upper limit of memory req for ts-server
+    // "noErrorTruncation": true,
     "baseUrl": ".",
     "plugins": [
       {
