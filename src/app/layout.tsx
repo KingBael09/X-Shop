@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
 import { Analytics } from "@/util/analytics"
+import { Plugins } from "@/util/plugins"
 import { Providers } from "@/util/providers"
 import { TailwindIndicator } from "@/util/tailwind-indicator"
 import { ClerkProvider } from "@clerk/nextjs"
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps) {
           )}
         >
           <Providers attribute="class" defaultTheme="system" enableSystem>
+            <Plugins />
             {children}
             <TailwindIndicator />
           </Providers>
