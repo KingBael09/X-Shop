@@ -24,7 +24,7 @@
     "db:introspect": "drizzle-kit introspect:sqlite",
     "db:studio": "drizzle-kit studio --port 5000 --verbose",
     "shadcn:add": "pnpm dlx shadcn-ui@latest add",
-    "typecheck": "tsc -p tsconfig.json --noEmit --listFiles",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx,js,cjs,mjs}\" --cache",
     "postinstall": "drizzle-kit generate:sqlite",
