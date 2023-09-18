@@ -110,3 +110,5 @@ export function catchClerkError(err: unknown) {
     return toast.error(unknownErr)
   }
 }
+
+// TODO: Not-Found pages are not working correctly
