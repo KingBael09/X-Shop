@@ -11,3 +11,5 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: absoluteUrl("/sitemap.xml"),
   }
 }
+
+// TODO: Add a CRON Job to remove dpulicate files/ unwanted files periodically from uploadthing

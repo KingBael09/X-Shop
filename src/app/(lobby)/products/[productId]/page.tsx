@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { notFound } from "next/navigation"
@@ -32,6 +33,30 @@ const ProductCard = dynamic(
     import("@/components/product/product-card").then((mod) => mod.ProductCard),
   { loading: () => <ProductCardLoader /> }
 )
+
+export async function generateMetadata({
+  params,
+}: ProductPageParams): Promise<Metadata> {
+  const productId = Number(params.productId)
+
+  const product = await db.query.products.findFirst({
+    where: eq(products.id, productId),
+    columns: {
+      name: true,
+      description: true,
+      images: true,
+    },
+  })
+
+  if (!product) return {}
+
+  return {
+    title: product.name,
+    description: product.description,
+    openGraph: { images: product.images?.map((e) => e.url) },
+    twitter: { images: product.images?.map((e) => e.url) },
+  }
+}
 
 export default async function ProductPage({ params }: ProductPageParams) {
   const productId = Number(params.productId)

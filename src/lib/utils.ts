@@ -12,7 +12,7 @@ dayjs.extend(relativeTime)
 export function formatPrice(
   price: number | string,
   currency: "USD" | "EUR" | "GBP" | "BDT" | "INR" = "INR",
-  notation: "compact" | "engineering" | "scientific" | "standard" = "standard"
+  notation: Intl.NumberFormatOptions["notation"] = "standard"
 ) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",

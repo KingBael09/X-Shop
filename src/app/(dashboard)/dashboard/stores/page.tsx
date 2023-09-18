@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { redirect } from "next/navigation"
 import { Icons } from "@/util/icons"
 import { auth } from "@clerk/nextjs"
@@ -11,9 +10,9 @@ import { stores } from "@/lib/db/schema"
 import { cn } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/ui/alert"
 import { buttonVariants } from "@/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card"
 import { Separator } from "@/ui/separator"
 import { Header } from "@/components/header"
+import { ModLink } from "@/components/mod-link"
 import { StoreCard } from "@/components/store-card"
 
 export const metadata: Metadata = {
@@ -30,9 +29,31 @@ export default async function StoresPage() {
     where: eq(stores.userId, userId),
   })
 
+  // TODO: Currently links are disabled when user has reached the limit of stores.
+
   return (
     <>
-      <Header title="Stores" description="Manage your stores" size="sm" />
+      <div className="flex items-center gap-2">
+        <Header title="Stores" description="Manage your stores" size="sm" />
+        <ModLink
+          disabled={userStores.length >= FreeTierStoreLimit}
+          href={
+            userStores.length >= FreeTierStoreLimit
+              ? "/dashboard/billing"
+              : "/dashboard/stores/create"
+          }
+          className={cn(
+            "ml-auto",
+            buttonVariants({
+              size: "sm",
+            })
+          )}
+        >
+          {userStores.length >= FreeTierStoreLimit
+            ? "Upgrade Subscription"
+            : "Create a store"}
+        </ModLink>
+      </div>
       <Alert>
         <Icons.terminal className="h-4 w-4" aria-hidden />
         <AlertTitle>Heads up!</AlertTitle>
@@ -40,39 +61,6 @@ export default async function StoresPage() {
           Currently one user can create only {FreeTierStoreLimit} stores
         </AlertDescription>
       </Alert>
-      <Card className="flex h-full items-center">
-        <CardHeader className="flex-1">
-          <CardTitle>
-            {userStores.length >= FreeTierStoreLimit
-              ? "Upgrade Subscription"
-              : "Create a new store"}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-0 pr-6">
-          <Link
-            href={
-              userStores.length >= FreeTierStoreLimit
-                ? "/dashboard/billing"
-                : "/dashboard/stores/create"
-            }
-            className={cn(
-              buttonVariants({
-                size: "sm",
-                // className: "h-8 w-full",
-              })
-            )}
-          >
-            {userStores.length >= FreeTierStoreLimit
-              ? "Upgrade Subscription"
-              : "Create a store"}
-            <span className="sr-only">
-              {userStores.length >= FreeTierStoreLimit
-                ? "Upgrade Subscription"
-                : "Create a store"}
-            </span>
-          </Link>
-        </CardContent>
-      </Card>
       <Separator className="bg-border/50" />
       {userStores.length === 0 && (
         <div className="text-center text-sm text-muted-foreground">

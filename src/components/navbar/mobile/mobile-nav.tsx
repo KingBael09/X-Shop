@@ -54,3 +54,5 @@ export function MobileNav({ items }: MobileNavProps) {
     </MobileSheetWrapper>
   )
 }
+
+// TODO: There is no indicator for active route

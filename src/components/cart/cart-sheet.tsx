@@ -35,10 +35,10 @@ export async function CartSheet() {
 
   return (
     <CartSheetWrapper count={count}>
-      <SheetHeader className="px-1">
+      <SheetHeader className="pr-6">
         <SheetTitle>Cart {count > 0 && `(${count})`}</SheetTitle>
+        <Separator />
       </SheetHeader>
-      <Separator />
       {count > 0 ? (
         <>
           <div className="flex flex-1 flex-col gap-5 overflow-hidden">
@@ -76,6 +76,14 @@ export async function CartSheet() {
                               ).toFixed(2)
                             )}
                           </span>
+                          {/* <span>
+                            {formatPrice(
+                              (
+                                Number(item.price) * Number(item.quantity)
+                              ).toFixed(2)
+                            )}
+                            // TODO : Rethink layout
+                          </span> */}
                           <span className="line-clamp-1 text-xs capitalize text-muted-foreground">
                             {`${item.category.name} ${
                               item.subcategory ? `/ ${item.subcategory}` : ""
@@ -93,10 +101,6 @@ export async function CartSheet() {
           </div>
           <div className="grid gap-1.5 pr-6 text-sm">
             <Separator className="mb-2" />
-            <div className="flex">
-              <span className="flex-1">Subtotal</span>
-              <span>{formatPrice(total.toFixed(2))}</span>
-            </div>
             <div className="flex">
               <span className="flex-1">Shipping</span>
               <span>Free</span>

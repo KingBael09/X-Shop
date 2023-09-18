@@ -7,7 +7,8 @@ import { eq } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { stores } from "@/lib/db/schema"
 import { Header } from "@/components/header"
-import StorePager from "@/components/pagers/store-pager"
+// import StorePager from "@/components/pagers/store-pager"
+import { StoreSwitcher } from "@/components/pagers/store-switcher"
 import { StoreTabs } from "@/components/store-tabs"
 
 interface PageParams {
@@ -64,12 +65,18 @@ export default async function StoreLayout({
   return (
     <>
       <div className="flex items-center space-x-4">
-        <Header title={store.name} size="sm" className="flex-1" />
+        <Header
+          title="Dashboard"
+          description={`Manage ${store.name}`}
+          size="sm"
+          className="flex-1"
+        />
         {allStores.length > 1 ? (
-          <StorePager stores={allStores} current={store} />
+          // <StorePager stores={allStores} current={store} />
+          <StoreSwitcher stores={allStores} current={store} />
         ) : null}
       </div>
-      <div className="space-y-4 overflow-hidden">
+      <div className="space-y-8 overflow-hidden">
         <StoreTabs className="w-full" storeId={storeId} />
         {children}
       </div>

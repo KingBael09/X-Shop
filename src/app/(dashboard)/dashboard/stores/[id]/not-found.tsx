@@ -3,7 +3,7 @@ import { Shell } from "@/components/shells/shell"
 
 export default function StoreNotFound() {
   return (
-    <Shell variant="centered">
+    <Shell>
       <ErrorCard
         title="Store not found"
         description="The store may have expired or you may have already updated your store"
@@ -13,3 +13,5 @@ export default function StoreNotFound() {
     </Shell>
   )
 }
+
+// TODO: This is not actually triggering error

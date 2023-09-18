@@ -59,8 +59,9 @@ export async function getStoresAction(input: GetStoreActionInterface) {
       })
       .from(stores)
       .all()
+      .then((res) => res[0]?.count ?? 0)
 
-    return { items, total: total[0]?.count ?? 0 }
+    return { items, total }
   })
 
   return { items, total }
@@ -142,3 +143,5 @@ export async function deleteStoreAction(storeId: number) {
 
   revalidatePath("/dashboard/stores")
 }
+
+// FIXME: I think it is better to use batch rather than transactions for rollback advantage in drizzle

@@ -9,7 +9,9 @@ interface StorePagerProps {
   stores: Pick<Store, "id" | "name">[]
 }
 
-//
+/**
+ * @deprecated Use `StoreSwitcher`
+ */
 export default function StorePager({ current, stores }: StorePagerProps) {
   const currentIndex = stores.findIndex((store) => store.id === current.id)
   const lowerFail = 0 > currentIndex - 1

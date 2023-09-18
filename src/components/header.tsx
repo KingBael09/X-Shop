@@ -1,7 +1,9 @@
+import type { FancyOmit } from "@/types/util"
 import { cn } from "@/lib/utils"
 
-interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string
+interface HeaderProps
+  extends FancyOmit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  title: string | React.ReactNode
   description?: string | null
   size?: "default" | "sm"
 }

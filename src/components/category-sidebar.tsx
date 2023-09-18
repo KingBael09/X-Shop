@@ -14,6 +14,8 @@ interface CategorySideBarProps {
   categories: Category[]
 }
 
+// TODO: When input is foused border/outline doesn't show completely
+
 export function CategorySideBar({ categories }: CategorySideBarProps) {
   const [query, setQuery] = useState("")
   const segment = useSelectedLayoutSegment()

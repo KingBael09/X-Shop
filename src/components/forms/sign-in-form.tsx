@@ -71,7 +71,11 @@ export function SignInForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="jayesh0071@outlook.com" {...field} />
+                <Input
+                  type="text"
+                  placeholder="jayesh0071@outlook.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +94,7 @@ export function SignInForm() {
             </FormItem>
           )}
         />
-        <Button disabled={isPending}>
+        <Button type="submit" disabled={isPending}>
           {isPending && (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
           )}

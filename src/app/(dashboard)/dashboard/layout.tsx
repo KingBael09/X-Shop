@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
         </aside>
         <main className="min-h-[calc(var(--navbar-page-offset))] flex-1">
           <AutoBreadCrumbs className="mt-6 md:mt-8" />
-          <Shell variant="sidebar" className="lg:ml-4">
+          <Shell variant="sidebar" className="gap-6 lg:ml-4">
             {children}
           </Shell>
         </main>

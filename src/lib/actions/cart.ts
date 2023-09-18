@@ -8,6 +8,7 @@ import { db } from "../db"
 import { carts } from "../db/schema"
 import type { ZCartItemSchema } from "../validations/cart"
 
+// TODO: This currently doesn't account for inventory
 export async function addToCartAction(inputs: ZCartItemSchema) {
   const { userId } = auth()
 

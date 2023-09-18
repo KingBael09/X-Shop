@@ -121,10 +121,11 @@ export default async function ProductsPage({
         )
       )
       .all()
+      .then((res) => res[0]?.count ?? 0)
 
     return {
       storeProducts,
-      totalProducts: totalProducts[0]?.count ?? 0,
+      totalProducts,
     }
   })
 

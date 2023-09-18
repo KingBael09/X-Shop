@@ -5,16 +5,16 @@ import { eq } from "drizzle-orm"
 import { db } from "@/lib/db"
 import { orders } from "@/lib/db/schema"
 
-export default async function PurchasesPage() {
+export default function PurchasesPage() {
   const { userId } = auth()
 
   if (!userId) {
     redirect("/signin")
   }
 
-  const allOrders = await db.query.orders.findMany({
-    where: eq(orders.userId, userId),
-  })
+  // const allOrders = await db.query.orders.findMany({
+  //   where: eq(orders.userId, userId),
+  // })
 
   return <div></div>
 }

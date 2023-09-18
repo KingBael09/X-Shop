@@ -43,7 +43,7 @@ export function ProductCard({
               className="object-cover"
               src={product.images[0]?.url ?? "/product-placeholder.webp"}
               alt={product.images[0]?.name ?? product.name}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
             />
           ) : (
             <ImagePlaceHolder />

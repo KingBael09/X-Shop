@@ -62,8 +62,9 @@ export async function getProductAction(input: ZGetProductSchema) {
       .from(products)
       .where(filter)
       .all()
+      .then((res) => res[0]?.count ?? 0)
 
-    return { items, total: total[0]?.count ?? 0 }
+    return { items, total }
   })
 
   return { items, total }
