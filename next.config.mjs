@@ -48,3 +48,5 @@ const withBundleAnalyzer = BundleAnalyzer({
 })
 
 export default withBundleAnalyzer(config)
+
+// TODO: Integrate MillionJS
