@@ -87,3 +87,11 @@ export function StoreSwitcher({ current, stores }: StorePagerProps) {
 // TODO: Create store page should pre-check if there are already three stores or not
 
 // TODO: Somewhere in codebase I have setup popover content width with refs-> but it turns out that i could just use var(--radix-popover-trigger-width)
+
+// FIXME: Think of a way to implememt the below idea/issue
+/**
+ * If the user is on the `Products` section and then changes the store from the switcher then
+ * what currently happends is that they are naviated to that store's `Store` section
+ * think of a way to implement routing such that the section doesn't get changed but the
+ * store changes
+ */
