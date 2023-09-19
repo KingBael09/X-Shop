@@ -55,3 +55,5 @@ export default function AuthLayout({ children }: LayoutProps) {
     </div>
   )
 }
+
+// TODO: There seems to be problem in static site build in `pnpm build --debug` 's log for auth pages
