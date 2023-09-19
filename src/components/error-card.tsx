@@ -37,6 +37,7 @@ export function ErrorCard({
   const router = useRouter()
   const pathname = usePathname()
   const isHome = pathname === "/"
+  // TODO: This could fail in next 13.5.0 because it strips base path?
   const Icon = Icons[icon ?? "warning"]
   return (
     <Card

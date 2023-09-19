@@ -61,7 +61,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
-    "dayjs": "^1.11.9",
+    "dayjs": "^1.11.10",
     "drizzle-orm": "^0.28.6",
     "embla-carousel-react": "8.0.0-rc13",
     "lucide-react": "^0.279.0",
