@@ -37,4 +37,4 @@ cp .env.example .env.local
 pnpm dev
 ```
 
-[^1]: Prefer pnpm `v8.6.12` or higher to install dependencies
+[^1]: Prefer pnpm `v8.7.6` or higher to install dependencies

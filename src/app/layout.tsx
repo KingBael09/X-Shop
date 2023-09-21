@@ -48,6 +48,9 @@ export const metadata: Metadata = {
   },
 }
 
+export const dynamic = "force-dynamic"
+// TODO: !!! Current workaround for building until i narrow down headers issue
+
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <ClerkProvider>

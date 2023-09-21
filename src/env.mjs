@@ -29,7 +29,9 @@ export const env = createEnv({
    * These are shared across both the server and client.
    */
   shared: {
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    NODE_ENV: z
+      .enum(["development", "test", "production"])
+      .default("development"),
   },
 
   /**
