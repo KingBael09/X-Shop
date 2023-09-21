@@ -50,6 +50,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic"
 // TODO: !!! Current workaround for building until i narrow down headers issue
+// https://clerk.com/docs/quickstarts/nextjs ClerkProvider needs access to headers
 
 export default function RootLayout({ children }: LayoutProps) {
   return (

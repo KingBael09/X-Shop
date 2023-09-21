@@ -21,20 +21,20 @@ Make sure you have Node `v18.0.0` or higher [^1]
 
 1. Install dependencies using pnpm:
 
-```bash
-pnpm install
-```
+    ```bash
+    pnpm install
+    ```
 
 2. Copy `.env.example` to `.env` and update the variables.
 
-```bash
-cp .env.example .env.local
-```
+    ```bash
+    cp .env.example .env.local
+    ```
 
 3. Start the development server:
 
-```bash
-pnpm dev
-```
+    ```bash
+    pnpm dev
+    ```
 
 [^1]: Prefer pnpm `v8.7.6` or higher to install dependencies
