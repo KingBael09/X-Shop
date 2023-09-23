@@ -23,7 +23,8 @@ export function AutoBreadCrumbs({
   turncate = 0,
   ...props
 }: AutoBreadCrumbProps) {
-  const pathName = usePathname() //TODO: This could break in next 13.5.0 #https://nextjs.org/blog/next-13-5
+  const pathName = usePathname()
+
   const SeparatorIcon = separator ?? Icons.chevronRight
 
   const segments: { title: string; href: string }[] = []

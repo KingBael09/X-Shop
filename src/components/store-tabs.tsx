@@ -70,4 +70,4 @@ export function StoreTabs({ storeId, className, ...props }: StoreTabsProps) {
   )
 }
 
-// TODO: Check unlighthouse usage in skateshop
+// TODO: Check unlighthouse usage example in skateshop

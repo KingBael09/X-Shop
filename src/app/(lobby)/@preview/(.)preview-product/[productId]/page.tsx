@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { notFound } from "next/navigation"
-// import { AddToCartForm } from "@/forms/add-to-cart-form"
 import { eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
@@ -18,10 +17,6 @@ export interface ProductPreviewPageProps {
     productId: string
   }
 }
-
-// const AddToCartForm = dynamic(() =>
-//   import("@/forms/add-to-cart-form").then((mod) => mod.AddToCartForm)
-// )
 
 export default async function ProductPreviewPage({
   params,
@@ -88,13 +83,6 @@ export default async function ProductPreviewPage({
           {formatPrice(product.price)}
         </p>
       </div>
-      {/* <Link
-        replace
-        className={buttonVariants()}
-        href={`/products/${product.id}`}
-      >
-        View Product
-      </Link> */}
       <ModalLink href={`/products/${product.id}`}>View Products</ModalLink>
     </Modal>
   )

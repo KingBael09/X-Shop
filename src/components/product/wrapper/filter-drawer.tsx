@@ -58,7 +58,7 @@ export function FilterDrawer({
 
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger asChild>
         <Button ria-label="Filter products" size="sm" disabled={isPending}>
           <Icons.altFilter className="mr-2 h-4 w-4" aria-hidden="true" />
           Filter

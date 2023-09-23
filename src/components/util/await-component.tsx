@@ -4,6 +4,7 @@ interface AwaitedProps<T> {
 }
 
 /**
+ * #### *Must be used in server components*
  * This allows to break promises without the need of creating new component
  *
  * @example
@@ -25,5 +26,3 @@ interface AwaitedProps<T> {
 export async function Await<T>({ promise, children }: AwaitedProps<T>) {
   return children(await promise)
 }
-
-// TODO: Implement Awaited Component

@@ -1,4 +1,4 @@
-// "?use client"
+// ? "use client"
 
 import { useCallback, useEffect } from "react"
 import dynamic from "next/dynamic"
@@ -215,3 +215,4 @@ export function FileDialog<TFieldValues extends FieldValues>({
 }
 
 // FIXME: Your proposed upload exceeds the maximum allowed size, this should trigger toast.error too
+// TODO: Implement nswf-filtering while uploading https://github.com/Nutlope/nsfw-filter

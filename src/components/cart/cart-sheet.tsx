@@ -82,7 +82,7 @@ export async function CartSheet() {
                                 Number(item.price) * Number(item.quantity)
                               ).toFixed(2)
                             )}
-                            // TODO : Rethink layout
+                            // TODO : Rethink layout especially price part
                           </span> */}
                           <span className="line-clamp-1 text-xs capitalize text-muted-foreground">
                             {`${item.category.name} ${

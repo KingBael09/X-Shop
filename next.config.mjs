@@ -9,14 +9,25 @@ await import("./src/env.mjs")
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  // webpack: (config, _) => {
-  //   config.externals.push({
-  //     "utf-8-validate": "commonjs utf-8-validate",
-  //     bufferutil: "commonjs bufferutil",
-  //     encoding: "commonjs encoding",
-  //   })
-  //   return config
-  // },
+
+  /**
+   * Current Workaround #https://github.com/vercel/next.js/issues/44273
+   * @param {Object} config
+   * @param {Object[]} config.externals
+   * @returns {Object}
+   */
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.externals.push({
+        "utf-8-validate": "commonjs utf-8-validate",
+        bufferutil: "commonjs bufferutil",
+        encoding: "commonjs encoding",
+      })
+    }
+
+    return config
+  },
+
   images: {
     domains: ["uploadthing.com", "source.unsplash.com"],
   },

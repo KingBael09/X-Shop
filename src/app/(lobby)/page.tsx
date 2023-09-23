@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { Fragment, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { desc, eq, sql } from "drizzle-orm"
@@ -19,10 +19,11 @@ import { ProductCard } from "@/components/product/product-card"
 import { Scrollable } from "@/components/scrollable"
 import { Shell } from "@/components/shells/shell"
 import { StoreCard } from "@/components/store-card"
+import { Await } from "@/components/util/await-component"
 
 function HeroSection() {
   return (
-    <>
+    <Fragment>
       <div
         aria-labelledby="hero-image"
         className="absolute inset-x-0 top-0 -z-10 w-full md:min-h-screen"
@@ -74,7 +75,7 @@ function HeroSection() {
         </div>
         <Scrollable className="absolute bottom-6" />
       </section>
-    </>
+    </Fragment>
   )
 }
 
@@ -122,19 +123,16 @@ function CategoriesSection() {
   )
 }
 
-async function FeaturedProducts() {
-  const allProducts = await db.query.products.findMany({
+async function getProducts() {
+  return await db.query.products.findMany({
     limit: 8,
     orderBy: desc(products.categoryId),
   })
-
-  return allProducts.map((product) => (
-    <ProductCard enableAction key={product.id} product={product} />
-  ))
 }
 
-async function FeaturedStores() {
-  const allStoresWithCount = await db
+async function getStores() {
+  // return await db.query.stores.findMany({ limit: 4 })
+  return await db
     .select({
       id: stores.id,
       name: stores.name,
@@ -145,17 +143,7 @@ async function FeaturedStores() {
     .limit(4)
     .leftJoin(products, eq(products.storeId, stores.id))
     .having(sql`count(${products.id}) > 0`)
-    .groupBy(stores.id)
-    .orderBy(desc(sql<number>`count(${products.id})`))
     .all()
-
-  return allStoresWithCount.map((store) => (
-    <StoreCard
-      store={store}
-      key={store.id}
-      text={`View Products (${store.productCount})`}
-    />
-  ))
 }
 
 export default function LobbyPage() {
@@ -198,7 +186,19 @@ export default function LobbyPage() {
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <Suspense fallback={<FeaturedProductsLoading />}>
-            <FeaturedProducts />
+            <Await promise={getProducts()}>
+              {(products) => (
+                <Fragment>
+                  {products.map((product) => (
+                    <ProductCard
+                      enableAction
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </Fragment>
+              )}
+            </Await>
           </Suspense>
         </div>
       </section>
@@ -222,14 +222,18 @@ export default function LobbyPage() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           <Suspense fallback={<FeaturedStoresLoading />}>
-            <FeaturedStores />
+            <Await promise={getStores()}>
+              {(stores) => (
+                <Fragment>
+                  {stores.map((store) => (
+                    <StoreCard key={store.id} store={store} />
+                  ))}
+                </Fragment>
+              )}
+            </Await>
           </Suspense>
         </div>
       </section>
     </Shell>
   )
 }
-
-// TODO: radix/Slot is having problems related to aria-controls
-
-// FIXME:  sql<number>`count(${products.id})` or sql<number>`count(*)`

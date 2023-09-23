@@ -13,5 +13,3 @@ export default function StoreNotFound() {
     </Shell>
   )
 }
-
-// TODO: This is not actually triggering error

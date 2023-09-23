@@ -17,7 +17,6 @@ type StoreType = Pick<Store, "id" | "name" | "description">
 interface StoreCardProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   store: StoreType
   link?: string
-  text?: string
 }
 
 export function StoreCard({

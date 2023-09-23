@@ -1,5 +1,7 @@
 # X-Shop
 
+[![X-Shop](./src/app/opengraph-image.png)](https://x-shop-app.vercel.app/)
+
 An open-source e-com application built using all new [NextJS](https://nextjs.org/) with React server components.
 
 > **Warning**
@@ -37,4 +39,17 @@ Make sure you have Node `v18.0.0` or higher [^1]
     pnpm dev
     ```
 
+## Deploy on Vercel
+
+You can easilly depoy with vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FKingBael09%2FX-Shop&project-name=x-shop&repository-name=x-shop)
+
+Note that you'll need to:
+
+- Set up [Uploadthing](https://uploadthing.com)
+- Set up [Clerk Auth](https://clerk.com)
+- Set up [Turso DB](https://turso.tech) [^2]
+
 [^1]: Prefer pnpm `v8.7.6` or higher to install dependencies
+[^2]: For deployment you'll need Turso (not required for local)

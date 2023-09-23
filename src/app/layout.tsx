@@ -49,7 +49,6 @@ export const metadata: Metadata = {
 }
 
 export const dynamic = "force-dynamic"
-// TODO: !!! Current workaround for building until i narrow down headers issue
 // https://clerk.com/docs/quickstarts/nextjs ClerkProvider needs access to headers
 
 export default function RootLayout({ children }: LayoutProps) {
@@ -64,11 +63,11 @@ export default function RootLayout({ children }: LayoutProps) {
           )}
         >
           <Providers attribute="class" defaultTheme="system" enableSystem>
-            <Plugins />
+            <Toaster />
             {children}
             <TailwindIndicator />
           </Providers>
-          <Toaster />
+          <Plugins />
           <Analytics />
         </body>
       </html>
@@ -78,3 +77,6 @@ export default function RootLayout({ children }: LayoutProps) {
 
 // TODO: implement resend
 // TODO: think of a way to integrate with tanstack
+
+// TODO: Scope the ClerkProvider to Dashboard
+// TODO: Make HeroImage & sigin image available locally available with blur effect
