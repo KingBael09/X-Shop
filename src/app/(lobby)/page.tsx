@@ -131,19 +131,8 @@ async function getProducts() {
 }
 
 async function getStores() {
-  // return await db.query.stores.findMany({ limit: 4 })
-  return await db
-    .select({
-      id: stores.id,
-      name: stores.name,
-      description: stores.description,
-      productCount: sql<number>`count(${products.id})`,
-    })
-    .from(stores)
-    .limit(4)
-    .leftJoin(products, eq(products.storeId, stores.id))
-    .having(sql`count(${products.id}) > 0`)
-    .all()
+  return await db.query.stores.findMany({ limit: 4 })
+  // TODO: Change query in future to show stores which has products
 }
 
 export default function LobbyPage() {
