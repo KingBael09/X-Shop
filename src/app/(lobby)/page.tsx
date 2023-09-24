@@ -1,13 +1,13 @@
 import { Fragment, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { desc, eq, sql } from "drizzle-orm"
+import { desc } from "drizzle-orm"
 import { Balancer } from "react-wrap-balancer"
 
 import { primeCategories } from "@/config/products"
 import { siteConfig } from "@/config/site"
 import { db } from "@/lib/db"
-import { products, stores } from "@/lib/db/schema"
+import { products } from "@/lib/db/schema"
 import { cn } from "@/lib/utils"
 import { AspectRatio } from "@/ui/aspect-ratio"
 import { buttonVariants } from "@/ui/button"
@@ -126,7 +126,7 @@ function CategoriesSection() {
 async function getProducts() {
   return await db.query.products.findMany({
     limit: 8,
-    orderBy: desc(products.categoryId),
+    orderBy: desc(products.categoryId), //for different category products
   })
 }
 
