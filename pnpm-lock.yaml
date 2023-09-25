@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.3.1
     version: 3.3.1(react-hook-form@7.46.2)
   '@libsql/client':
-    specifier: ^0.3.4
-    version: 0.3.4
+    specifier: ^0.3.5
+    version: 0.3.5
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
@@ -97,7 +97,7 @@ dependencies:
     version: 1.11.10
   drizzle-orm:
     specifier: ^0.28.6
-    version: 0.28.6(@libsql/client@0.3.4)(better-sqlite3@8.6.0)
+    version: 0.28.6(@libsql/client@0.3.5)(better-sqlite3@8.6.0)
   embla-carousel-react:
     specifier: 8.0.0-rc14
     version: 8.0.0-rc14(react@18.2.0)
@@ -1055,17 +1055,33 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@libsql/client@0.3.4:
-    resolution: {integrity: sha512-b1rpCzm02oQuh1zM1UKdKxhClyMMlgyFagcmsuGTve/AQxubO/FaRgoKXTcGaOqoRjymE1qf0sQM2UoyPvu3lA==}
+  /@libsql/client@0.3.5:
+    resolution: {integrity: sha512-4fZxGh0qKW5dtp1yuQLRvRAtbt02V4jzjM9sHSmz5k25xZTLg7/GlNudKdqKZrjJXEV5PvDNsczupBtedZZovw==}
     dependencies:
       '@libsql/hrana-client': 0.5.5
-      better-sqlite3: 8.6.0
       js-base64: 3.7.5
+      libsql: 0.1.23
     transitivePeerDependencies:
       - bufferutil
       - encoding
       - utf-8-validate
     dev: false
+
+  /@libsql/darwin-arm64@0.1.23:
+    resolution: {integrity: sha512-+V9aoOrZ47iYbY5NrcS0F2bDOCH407QI0wxAtss0CLOcFxlz/T6Nw0ryLK31GabklJQAmOXIyqkumLfz5HT64w==}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@libsql/darwin-x64@0.1.23:
+    resolution: {integrity: sha512-toHo7s0HiMl4VCIfjhGXDe9bGWWo78eP8fxIbwU6RlaLO6MNV9fjHY/GjTWccWOwyxcT+q6X/kUc957HnoW3bg==}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /@libsql/hrana-client@0.5.5:
     resolution: {integrity: sha512-i+hDBpiV719poqEiHupUUZYKJ9YSbCRFe5Q2PQ0v3mHIftePH6gayLjp2u6TXbqbO/Dv6y8yyvYlBXf/kFfRZA==}
@@ -1097,6 +1113,34 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /@libsql/linux-x64-gnu@0.1.23:
+    resolution: {integrity: sha512-U11LdjayakOj0lQCHDYkTgUfe4Q+7AjZZh8MzgEDF/9l0bmKNI3eFLWA3JD2Xm98yz65lUx95om0WKOKu5VW/w==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@libsql/linux-x64-musl@0.1.23:
+    resolution: {integrity: sha512-8UcCK2sPVzcafHsEmcU5IDp/NxjD6F6JFS5giijsMX5iGgxYQiiwTUMOmSxW0AWBeT4VY5U7G6rG5PC8JSFtfg==}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@libsql/win32-x64-msvc@0.1.23:
+    resolution: {integrity: sha512-HAugD66jTmRRRGNMLKRiaFeMOC3mgUsAiuO6NRdRz3nM6saf9e5QqN/Ppuu9yqHHcZfv7VhQ9UGlAvzVK64Itg==}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@neon-rs/load@0.0.4:
+    resolution: {integrity: sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw==}
     dev: false
 
   /@next/bundle-analyzer@13.5.2:
@@ -3678,7 +3722,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.28.6(@libsql/client@0.3.4)(better-sqlite3@8.6.0):
+  /drizzle-orm@0.28.6(@libsql/client@0.3.5)(better-sqlite3@8.6.0):
     resolution: {integrity: sha512-yBe+F9htrlYER7uXgDJUQsTHFoIrI5yMm5A0bg0GiZ/kY5jNXTWoEy4KQtg35cE27sw1VbgzoMWHAgCckUUUww==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -3740,7 +3784,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@libsql/client': 0.3.4
+      '@libsql/client': 0.3.5
       better-sqlite3: 8.6.0
     dev: false
 
@@ -5150,6 +5194,21 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
     dev: true
+
+  /libsql@0.1.23:
+    resolution: {integrity: sha512-Nf/1B2Glxvcnba4jYFhXcaYmicyBA3RRm0LVwBkTl8UWCIDbX+Ad7c1ecrQwixPLPffWOVxKIqyCNTuUHUkVgA==}
+    cpu: [x64, arm64]
+    os: [darwin, linux, win32]
+    dependencies:
+      '@neon-rs/load': 0.0.4
+      detect-libc: 2.0.2
+    optionalDependencies:
+      '@libsql/darwin-arm64': 0.1.23
+      '@libsql/darwin-x64': 0.1.23
+      '@libsql/linux-x64-gnu': 0.1.23
+      '@libsql/linux-x64-musl': 0.1.23
+      '@libsql/win32-x64-msvc': 0.1.23
+    dev: false
 
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
