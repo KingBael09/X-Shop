@@ -15,10 +15,12 @@ const SheetTrigger = SheetPrimitive.Trigger
 const SheetClose = SheetPrimitive.Close
 
 const SheetPortal = ({
-  className,
+  // className,
   ...props
 }: SheetPrimitive.DialogPortalProps) => (
-  <SheetPrimitive.Portal className={cn(className)} {...props} />
+  // <SheetPrimitive.Portal className={cn(className)} {...props} />
+  // radix/primitives 1.0.5 removes classNames from portal
+  <SheetPrimitive.Portal {...props} />
 )
 SheetPortal.displayName = SheetPrimitive.Portal.displayName
 

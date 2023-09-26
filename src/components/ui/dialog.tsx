@@ -16,10 +16,12 @@ const Dialog = DialogPrimitive.Root
 const DialogTrigger = DialogPrimitive.Trigger
 
 const DialogPortal = ({
-  className,
+  // className,
   ...props
 }: DialogPrimitive.DialogPortalProps) => (
-  <DialogPrimitive.Portal className={cn(className)} {...props} />
+  <DialogPrimitive.Portal {...props} />
+  // <DialogPrimitive.Portal className={cn(className)} {...props} />
+  // radix/primitives 1.0.5 removes classNames from portal
 )
 DialogPortal.displayName = DialogPrimitive.Portal.displayName
 
