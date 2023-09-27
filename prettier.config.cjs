@@ -1,4 +1,8 @@
-/** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
+/**
+ * @typedef {import("prettier-plugin-tailwindcss").PluginOptions} TWOptions
+ * @typedef {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} Base
+ * @type {Base & TWOptions}
+ */
 const config = {
   endOfLine: "lf",
   semi: false,
@@ -22,6 +26,8 @@ const config = {
     "",
     "^[./]",
   ],
+  tailwindAttributes: ["tw"],
+  tailwindFunctions: ["cva"],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   importOrderTypeScriptVersion: "5.0.0",
   plugins: [
