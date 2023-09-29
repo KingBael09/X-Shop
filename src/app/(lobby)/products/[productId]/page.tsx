@@ -1,25 +1,28 @@
+import { Suspense } from "react"
 import type { Metadata } from "next"
-import dynamic from "next/dynamic"
 import Image from "next/image"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { AddToCartForm } from "@/forms/add-to-cart-form"
+import { Await } from "@/util/await-component"
 import { and, desc, eq, not } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { products } from "@/lib/db/schema"
-import { formatPrice, toTitleCase } from "@/lib/utils"
+import { cn, formatPrice, toTitleCase } from "@/lib/utils"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/ui/accordion"
+import { AspectRatio } from "@/ui/aspect-ratio"
+import { buttonVariants } from "@/ui/button"
 import { Separator } from "@/ui/separator"
-import { ModLink } from "@/components/mod-link"
 import { Breadcrumbs, type BreadSegment } from "@/components/pagers/breadcrumbs"
+import { ProductCard } from "@/components/product/product-card"
 import { ProductCardLoader } from "@/components/product/product-card-loader"
 import { ProductImageCarousel } from "@/components/product/product-image-carousel"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Zoom } from "@/components/zoom-image"
 
 interface ProductPageParams {
@@ -28,11 +31,30 @@ interface ProductPageParams {
   }
 }
 
-const ProductCard = dynamic(
-  () =>
-    import("@/components/product/product-card").then((mod) => mod.ProductCard),
-  { loading: () => <ProductCardLoader /> }
-)
+async function getRelatedProducts(productId: number, storeId: number) {
+  return await db.query.products.findMany({
+    where: and(eq(products.storeId, storeId), not(eq(products.id, productId))),
+    limit: 5,
+    orderBy: desc(products.createdAt),
+  })
+}
+
+function RelatedProductsLoading() {
+  return (
+    <div className="space-y-6 overflow-hidden">
+      <h2 className="line-clamp-1 text-2xl font-bold">
+        More products from Store
+      </h2>
+      <div className="overflow-x-auto">
+        <div className="flex gap-4">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <ProductCardLoader key={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export async function generateMetadata({
   params,
@@ -73,15 +95,6 @@ export default async function ProductPage({ params }: ProductPageParams) {
   })
 
   if (!product) return notFound()
-
-  const productWithSameStore = await db.query.products.findMany({
-    where: and(
-      eq(products.storeId, product.storeId),
-      not(eq(products.id, product.id))
-    ),
-    limit: 5,
-    orderBy: desc(products.createdAt),
-  })
 
   const segments: BreadSegment[] = [
     {
@@ -134,14 +147,15 @@ export default async function ProductPage({ params }: ProductPageParams) {
             <p className="text-muted-foreground">
               {formatPrice(product.price)}
             </p>
-            <ModLink
-              disabled={productWithSameStore.length < 0}
-              variant="link"
+            <Link
               href={`/products?store_ids=${product.storeId}`}
-              className="h-auto p-0 text-base font-normal text-muted-foreground"
+              className={cn(
+                buttonVariants({ variant: "link", size: "sm" }),
+                "h-auto p-0 text-sm font-normal text-muted-foreground"
+              )}
             >
               {product.store.name}
-            </ModLink>
+            </Link>
           </div>
           <Separator className="my-1.5" />
           <AddToCartForm productId={product.id} />
@@ -164,24 +178,30 @@ export default async function ProductPage({ params }: ProductPageParams) {
           </Accordion>
         </div>
       </div>
-      {productWithSameStore.length > 0 && (
-        <div className="space-y-6 overflow-hidden">
-          <h2 className="line-clamp-1 text-2xl font-bold">
-            More products from {product.store.name}
-          </h2>
-          <div className="overflow-x-auto">
-            <div className="flex gap-4">
-              {productWithSameStore.map((prod) => (
-                <ProductCard
-                  key={prod.id}
-                  product={prod}
-                  className="min-w-[260px]"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      <Suspense fallback={<RelatedProductsLoading />}>
+        <Await promise={getRelatedProducts(product.id, product.storeId)}>
+          {(products) =>
+            products.length > 0 && (
+              <div className="space-y-6 overflow-hidden">
+                <h2 className="line-clamp-1 text-2xl font-bold">
+                  More products from {product.store.name}
+                </h2>
+                <div className="overflow-x-auto">
+                  <div className="flex gap-4">
+                    {products.map((prod) => (
+                      <ProductCard
+                        key={prod.id}
+                        product={prod}
+                        className="min-w-[260px]"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </Await>
+      </Suspense>
     </>
   )
 }

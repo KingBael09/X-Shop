@@ -1,6 +1,6 @@
 interface AwaitedProps<T> {
   promise: Promise<T>
-  children: (value: T) => JSX.Element
+  children: (value: T) => React.JSX.Element | null | boolean
 }
 
 /**
