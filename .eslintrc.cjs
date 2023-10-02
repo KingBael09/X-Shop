@@ -11,6 +11,7 @@ const config = {
     "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:deprecation/recommended",
   ],
   rules: {
     // These opinionated rules are enabled in stylistic-type-checked above.

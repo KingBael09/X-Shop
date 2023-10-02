@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
@@ -30,10 +34,18 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/ui/*": ["./src/components/ui/*"],
-      "@/forms/*": ["./src/components/forms/*"],
-      "@/util/*": ["./src/components/util/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/ui/*": [
+        "./src/components/ui/*"
+      ],
+      "@/forms/*": [
+        "./src/components/forms/*"
+      ],
+      "@/util/*": [
+        "./src/components/util/*"
+      ]
     }
   },
   "include": [
@@ -47,5 +59,7 @@
     "**/*.mjs",
     ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

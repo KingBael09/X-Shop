@@ -27,7 +27,7 @@ export function PaginationButton({
   const { params, isPending, startTransition, createQueryString } =
     useProductLayoutContext()
 
-  const { per_page, page, sort } = params
+  const { per_page, page, sort } = params //TODO: Check types because all of then should be string & undefined
 
   //  Memoizing pagination value to avoid rerendering
   const paginationRange = useMemo(() => {
@@ -76,7 +76,7 @@ export function PaginationButton({
               `${pathname}?${createQueryString({
                 page: 1,
                 per_page: per_page ?? null,
-                sort,
+                sort: sort ?? null,
               })}`
             )
           })
@@ -96,7 +96,7 @@ export function PaginationButton({
               `${pathname}?${createQueryString({
                 page: Number(page) - 1,
                 per_page: per_page ?? null,
-                sort,
+                sort: sort ?? null,
               })}`
             )
           })
@@ -130,7 +130,7 @@ export function PaginationButton({
                   `${pathname}?${createQueryString({
                     page: pageNumber,
                     per_page: per_page ?? null,
-                    sort,
+                    sort: sort ?? null,
                   })}`
                 )
               })
@@ -152,7 +152,7 @@ export function PaginationButton({
               `${pathname}?${createQueryString({
                 page: Number(page) + 1,
                 per_page: per_page ?? null,
-                sort,
+                sort: sort ?? null,
               })}`
             )
           })
@@ -171,7 +171,7 @@ export function PaginationButton({
             `${pathname}?${createQueryString({
               page: pageCount ?? 10,
               per_page: per_page ?? null,
-              sort,
+              sort: sort ?? null,
             })}`
           )
         }}

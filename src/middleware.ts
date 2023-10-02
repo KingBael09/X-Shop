@@ -10,6 +10,7 @@ export default authMiddleware({
     "/products(.*)",
     "/preview-product(.*)",
     "/categories(.*)",
+    "/api(.*)",
   ],
   afterAuth: (auth, req) => {
     if (auth.isPublicRoute) {
@@ -26,8 +27,12 @@ export default authMiddleware({
   },
 })
 
+// export const config = {
+//   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+// }
+
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 }
 
 // TODO: For some reason after updating nextjs middleware size shotup from 166kb to 180kb

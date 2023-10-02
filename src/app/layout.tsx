@@ -80,3 +80,7 @@ export default function RootLayout({ children }: LayoutProps) {
 
 // TODO: Scope the ClerkProvider to Dashboard
 // TODO: Make HeroImage & sigin image available locally available with blur effect
+
+// ! IMPORTANT
+// TODO: UTAPI has been depriciated in v5.7.0 and will be deleted in next major release
+// Why the f is depriciated not noted in tsc or lint
