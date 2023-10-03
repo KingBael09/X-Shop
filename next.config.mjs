@@ -29,7 +29,7 @@ const config = {
   },
 
   images: {
-    domains: ["uploadthing.com", "source.unsplash.com"],
+    domains: ["uploadthing.com", "source.unsplash.com", "utfs.io"],
   },
   experimental: {
     // typedRoutes: true,
