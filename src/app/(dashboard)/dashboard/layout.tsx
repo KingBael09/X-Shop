@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   description: "Manage your stores",
 }
 
-export default function DashboardLayout({ children }: LayoutProps) {
-  const user = currentUser()
+export default async function DashboardLayout({ children }: LayoutProps) {
+  const user = await currentUser()
 
   return (
     <div className="relative flex min-h-screen flex-col">

@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { auth } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { and, asc, desc, eq, not, sql } from "drizzle-orm"
 
 import { slugify } from "@/lib/utils"
@@ -68,9 +68,9 @@ export async function getStoresAction(input: GetStoreActionInterface) {
 }
 
 export async function addStoreAction(input: ZStoreSchema) {
-  const { userId } = auth()
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     throw new Error("Unauthorized, Please sigin")
   }
 
@@ -86,7 +86,7 @@ export async function addStoreAction(input: ZStoreSchema) {
     .insert(stores)
     .values({
       name: input.name,
-      userId: userId,
+      userId: user.id,
       description: input.description,
       slug: slugify(input.name),
     })

@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { createUploadthing, type FileRouter } from "uploadthing/next"
 import { z } from "zod"
 
@@ -16,16 +16,16 @@ export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   productImage: f({ image: { maxFileSize: "4MB", maxFileCount: 3 } })
     // Set permissions and file types for this FileRoute
-    .middleware((_) => {
+    .middleware(async (_) => {
       // This code runs on your server before upload
       // const user = await currentUser()
-      const { userId } = auth()
+      const user = await currentUser()
 
       // If you throw, the user will not be able to upload
-      if (!userId) throw new Error("Unauthorized")
+      if (!user) throw new Error("Unauthorized")
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId }
+      return { userId: user.id }
     })
     // eslint-disable-next-line @typescript-eslint/require-await
     .onUploadComplete(({ metadata, file }) => {
@@ -36,16 +36,16 @@ export const ourFileRouter = {
     }),
   prodProductImage: f({ image: { maxFileSize: "4MB", maxFileCount: 3 } })
     // Set permissions and file types for this FileRoute
-    .middleware((_) => {
+    .middleware(async (_) => {
       // This code runs on your server before upload
       // const user = await currentUser()
-      const { userId } = auth()
+      const user = await currentUser()
 
       // If you throw, the user will not be able to upload
-      if (!userId) throw new Error("Unauthorized")
+      if (!user) throw new Error("Unauthorized")
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId }
+      return { userId: user.id }
     })
     // eslint-disable-next-line @typescript-eslint/require-await
     .onUploadComplete(({ metadata, file }) => {

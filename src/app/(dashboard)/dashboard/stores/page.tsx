@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { Icons } from "@/util/icons"
-import { auth } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { FreeTierStoreLimit } from "@/config/site"
@@ -21,12 +21,12 @@ export const metadata: Metadata = {
 }
 
 export default async function StoresPage() {
-  const { userId } = auth()
+  const user = await currentUser()
 
-  if (!userId) redirect("/signin")
+  if (!user) redirect("/signin")
 
   const userStores = await db.query.stores.findMany({
-    where: eq(stores.userId, userId),
+    where: eq(stores.userId, user.id),
   })
 
   // TODO: Currently links are disabled when user has reached the limit of stores.

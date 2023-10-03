@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { eq, inArray } from "drizzle-orm"
 
 import type { PromiseReturnType } from "@/types/util"
@@ -14,14 +14,14 @@ export type CartItem = PromiseReturnType<typeof getCartAction>[number]
  * @description Note that this is not a `server-action`
  */
 export async function getCartAction() {
-  const { userId } = auth()
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     throw new Error("You must be logged in to perform this action")
   }
 
   const userCart = await db.query.carts.findFirst({
-    where: eq(carts.userId, userId),
+    where: eq(carts.userId, user.id),
   })
 
   if (!userCart) {

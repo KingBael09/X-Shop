@@ -48,9 +48,6 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = "force-dynamic"
-// https://clerk.com/docs/quickstarts/nextjs ClerkProvider needs access to headers
-
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <ClerkProvider>

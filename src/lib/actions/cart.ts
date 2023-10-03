@@ -1,7 +1,7 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { auth } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { db } from "../db"
@@ -10,14 +10,14 @@ import type { ZCartItemSchema } from "../validations/cart"
 
 // TODO: This currently doesn't account for inventory
 export async function addToCartAction(inputs: ZCartItemSchema) {
-  const { userId } = auth()
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     throw new Error("You must be signed in to perform this action")
   }
 
   const cart = await db.query.carts.findFirst({
-    where: eq(carts.userId, userId),
+    where: eq(carts.userId, user.id),
   })
 
   // If there are no assigned cart assign one to user
@@ -26,7 +26,7 @@ export async function addToCartAction(inputs: ZCartItemSchema) {
     await db
       .insert(carts)
       .values({
-        userId,
+        userId: user.id,
         items: [inputs],
       })
       .run()
@@ -56,14 +56,14 @@ export async function addToCartAction(inputs: ZCartItemSchema) {
 }
 
 export async function updateCartAction(inputs: ZCartItemSchema) {
-  const { userId } = auth()
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     throw new Error("You must be logged in to perform this action")
   }
 
   const cart = await db.query.carts.findFirst({
-    where: eq(carts.userId, userId),
+    where: eq(carts.userId, user.id),
   })
 
   if (!cart) {
@@ -99,14 +99,14 @@ interface DeleteCartActionInterface {
 }
 
 export async function deleteCartAction(inputs: DeleteCartActionInterface) {
-  const { userId } = auth()
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     throw new Error("You must be logged in to perform this action")
   }
 
   const cart = await db.query.carts.findFirst({
-    where: eq(carts.userId, userId),
+    where: eq(carts.userId, user.id),
   })
 
   if (!cart) {

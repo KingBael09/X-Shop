@@ -1,14 +1,14 @@
 import { redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { orders } from "@/lib/db/schema"
 
-export default function PurchasesPage() {
-  const { userId } = auth()
+export default async function PurchasesPage() {
+  const user = await currentUser()
 
-  if (!userId) {
+  if (!user) {
     redirect("/signin")
   }
 

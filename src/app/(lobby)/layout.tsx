@@ -8,8 +8,11 @@ interface LobbyLayoutProps extends LayoutProps {
   preview: React.ReactNode
 }
 
-export default function LobbyLayout({ children, preview }: LobbyLayoutProps) {
-  const user = currentUser()
+export default async function LobbyLayout({
+  children,
+  preview,
+}: LobbyLayoutProps) {
+  const user = await currentUser()
 
   return (
     <div className="relative flex min-h-screen flex-col">
