@@ -141,3 +141,7 @@ export async function CartSheet() {
 // https://github.com/vercel/next.js/issues/54138
 
 // TODO: Is there no way to not send a component say...mobile nav to client if the device isn't a mobile
+
+// !IMPORTANT
+// TODO: Do testing weather or not dynamically importing in server component reduce page size or not
+// Check if doing so in client component reduces page size or not

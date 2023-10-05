@@ -1,3 +1,7 @@
+import "server-only"
+
+// ^ This is just to ensure that we don't send this large file to cilent by mistake
+
 // Original source: https://github.com/juliusmarminge/acme-corp/blob/main/apps/nextjs/src/lib/generate-pattern.ts
 
 /**
