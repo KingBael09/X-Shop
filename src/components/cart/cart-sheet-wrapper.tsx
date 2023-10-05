@@ -12,10 +12,7 @@ interface CartSheetWrapperProps extends LayoutProps {
 /**
  * This is a custom cart-sheet wrapper which controllable state
  */
-export default function CartSheetWrapper({
-  count,
-  children,
-}: CartSheetWrapperProps) {
+export function CartSheetWrapper({ count, children }: CartSheetWrapperProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>

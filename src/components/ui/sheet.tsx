@@ -14,15 +14,7 @@ const SheetTrigger = SheetPrimitive.Trigger
 
 const SheetClose = SheetPrimitive.Close
 
-const SheetPortal = ({
-  // className,
-  ...props
-}: SheetPrimitive.DialogPortalProps) => (
-  // <SheetPrimitive.Portal className={cn(className)} {...props} />
-  // radix/primitives 1.0.5 removes classNames from portal
-  <SheetPrimitive.Portal {...props} />
-)
-SheetPortal.displayName = SheetPrimitive.Portal.displayName
+const SheetPortal = SheetPrimitive.Portal
 
 const SheetOverlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,

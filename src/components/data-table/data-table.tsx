@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import type {
@@ -100,7 +101,6 @@ export function DataTable<TData, TValue>({
         per_page: pageSize,
       })}`
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex, pageSize])
 
   // Server-Side Sorting
@@ -121,7 +121,6 @@ export function DataTable<TData, TValue>({
           : null,
       })}`
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting])
 
   // Handle Server-Side Filtering
@@ -165,7 +164,6 @@ export function DataTable<TData, TValue>({
         )
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(debouncedSearchableColumnFilters)])
 
   useEffect(() => {
@@ -193,7 +191,6 @@ export function DataTable<TData, TValue>({
         )
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(filterableColumnFilters)])
 
   const table = useReactTable({

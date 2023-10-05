@@ -6,7 +6,7 @@ import { Button } from "@/ui/button"
 import { ScrollArea } from "@/ui/scroll-area"
 import { Sheet, SheetContent, SheetLink, SheetTrigger } from "@/ui/sheet"
 
-export default function MobileSheetWrapper({ children }: LayoutProps) {
+export function MobileSheetWrapper({ children }: LayoutProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>

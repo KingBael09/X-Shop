@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic"
 import Image from "next/image"
 import { Icons } from "@/util/icons"
 import { currentUser } from "@clerk/nextjs"
@@ -11,10 +10,8 @@ import { SheetFooter, SheetHeader, SheetLink, SheetTitle } from "@/ui/sheet"
 
 import { ImagePlaceHolder } from "../no-image"
 import { buttonVariants } from "../ui/button"
+import { CartSheetWrapper } from "./cart-sheet-wrapper"
 import { UpdateCart } from "./update-cart"
-
-const CartSheetWrapper = dynamic(() => import("./cart-sheet-wrapper"))
-// IDK Some sort of magic lets nexjts render button of cart which is inside the Warpper but not the whole sheet
 
 export async function CartSheet() {
   const user = await currentUser()

@@ -1,4 +1,3 @@
-// import { use } from "react"
 import Link from "next/link"
 import { Icons } from "@/util/icons"
 import type { User } from "@clerk/nextjs/server"
@@ -26,8 +25,6 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
-  // const user = use(userPromise)
-
   const email =
     user?.emailAddresses?.find((e) => e.id === user.primaryEmailAddressId)
       ?.emailAddress ?? ""

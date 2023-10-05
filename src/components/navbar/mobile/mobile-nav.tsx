@@ -1,5 +1,3 @@
-import dynamic from "next/dynamic"
-
 import type { MainNavItem } from "@/config/site"
 import {
   Accordion,
@@ -9,7 +7,7 @@ import {
 } from "@/ui/accordion"
 import { SheetLink } from "@/ui/sheet"
 
-const MobileSheetWrapper = dynamic(() => import("./mobile-sheet-wrapper"))
+import { MobileSheetWrapper } from "./mobile-sheet-wrapper"
 
 interface MobileNavProps {
   items: MainNavItem[]

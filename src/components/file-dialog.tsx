@@ -1,5 +1,6 @@
 // ? "use client"
 
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect } from "react"
 import dynamic from "next/dynamic"
 import type { FileWithPreview } from "@/types"
@@ -103,7 +104,6 @@ export function FileDialog<TFieldValues extends FieldValues>({
   // Register files to react-hook-form
   useEffect(() => {
     setValue(name, files as PathValue<TFieldValues, Path<TFieldValues>>)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -121,7 +121,6 @@ export function FileDialog<TFieldValues extends FieldValues>({
       if (!files) return
       files.forEach((file) => URL.revokeObjectURL(file.preview))
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
