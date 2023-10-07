@@ -1,13 +1,12 @@
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import type { LayoutProps } from "@/types"
-import { auth, currentUser } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 import { eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { stores } from "@/lib/db/schema"
 import { Header } from "@/components/header"
-// import StorePager from "@/components/pagers/store-pager"
 import { StoreSwitcher } from "@/components/pagers/store-switcher"
 import { StoreTabs } from "@/components/store-tabs"
 
@@ -71,10 +70,9 @@ export default async function StoreLayout({
           size="sm"
           className="flex-1"
         />
-        {allStores.length > 1 ? (
-          // <StorePager stores={allStores} current={store} />
+        {allStores.length > 1 && (
           <StoreSwitcher stores={allStores} current={store} />
-        ) : null}
+        )}
       </div>
       <div className="space-y-8 overflow-hidden">
         <StoreTabs className="w-full" storeId={storeId} />
