@@ -9,8 +9,8 @@ dependencies:
     specifier: ^4.25.1
     version: 4.25.1(next@13.5.4)(react-dom@18.2.0)(react@18.2.0)
   '@clerk/themes':
-    specifier: ^1.7.6
-    version: 1.7.6(react@18.2.0)
+    specifier: ^1.7.7
+    version: 1.7.7(react@18.2.0)
   '@hookform/resolvers':
     specifier: ^3.3.1
     version: 3.3.1(react-hook-form@7.47.0)
@@ -508,8 +508,8 @@ packages:
       swr: 2.2.0(react@18.2.0)
     dev: false
 
-  /@clerk/themes@1.7.6(react@18.2.0):
-    resolution: {integrity: sha512-K3nxz3PZX52GmICqKKg/PJ2xtxTOw96Tjxnsb/T4syxMyLmoBBkTnL3Jx96D6zsvSblD+Ujb23z5epSeyQiwtQ==}
+  /@clerk/themes@1.7.7(react@18.2.0):
+    resolution: {integrity: sha512-nQqqaGVwfUK7A4y/STuYBj1Bdxk2PG48ChwxXz/ldC7+VRK3mtY5K7VLe76UGWpqrehrWL/vV6GAYu51K9UFeQ==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16'
