@@ -24,7 +24,7 @@ import {
 } from "@tanstack/react-table"
 
 import { useDebounce } from "@/hooks/use-debounce"
-import { useQueryString } from "@/hooks/use-query-string"
+import { useQueryString } from "@/hooks/use-typed-query-string"
 import {
   Table,
   TableBody,
@@ -47,6 +47,12 @@ interface DataTableProps<TData, TValue> {
   deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
 }
 
+interface PageParams {
+  page?: number
+  per_page?: number
+  sort?: string
+}
+
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -66,7 +72,7 @@ export function DataTable<TData, TValue>({
   const sort = searchParams.get("sort")
   const [column, order] = sort?.split(".") ?? []
 
-  const createQueryString = useQueryString(searchParams)
+  const createQueryString = useQueryString<PageParams>(searchParams)
 
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -115,7 +121,7 @@ export function DataTable<TData, TValue>({
   useEffect(() => {
     router.replace(
       `${pathname}?${createQueryString({
-        page,
+        page: Number(page),
         sort: sorting[0]?.id
           ? `${sorting[0]?.id}.${sorting[0]?.desc ? "desc" : "asc"}`
           : null,

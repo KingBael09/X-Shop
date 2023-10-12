@@ -14,17 +14,24 @@ import type { LayoutProps } from "@/types"
 
 import { filterPriceRange } from "@/config/site"
 import { useDebounce } from "@/hooks/use-debounce"
-import { useQueryString } from "@/hooks/use-query-string"
+import { useQueryString } from "@/hooks/use-typed-query-string"
+
+// import { useQueryString } from "@/hooks/use-query-string"
+
+interface ProductPageParams {
+  page?: string
+  per_page?: string
+  sort?: string
+  store_ids?: string | null
+  store_page?: string
+  category_ids?: string | null
+  price_range?: string
+  categories?: string | null
+  subcategories?: string | null
+}
 
 interface WrapperContextInterface {
-  params: {
-    page: string
-    per_page: string
-    sort: string
-    store_ids: string | null
-    store_page: string
-    category_ids: string | null
-  }
+  params: ProductPageParams
   isPending: boolean
   startTransition: TransitionStartFunction
 
@@ -35,7 +42,7 @@ interface WrapperContextInterface {
   }
 
   pathname: string
-  createQueryString: ReturnType<typeof useQueryString>
+  createQueryString: ReturnType<typeof useQueryString<ProductPageParams>>
 
   setters: {
     setPriceRange: Dispatch<SetStateAction<[number, number]>>
@@ -67,7 +74,7 @@ export function ProductLayoutWrapperContext({
   const store_page = searchParams?.get("store_page") ?? "1"
   const category_ids = searchParams?.get("category_ids")
 
-  const createQueryString = useQueryString(searchParams)
+  const createQueryString = useQueryString<ProductPageParams>(searchParams)
 
   const [priceRange, setPriceRange] = useState<[number, number]>([
     filterPriceRange.lower,

@@ -1,7 +1,9 @@
 import { useCallback } from "react"
 import type { ReadonlyURLSearchParams } from "next/navigation"
 
-type TypedParams<T> = Partial<{ [P in keyof T]: T[P] }>
+type Key = string | number | null | undefined
+
+type TypedParams<T> = Partial<{ [P in keyof T]: Key }>
 
 /**
  * Make sure to pass a generic to the hook
