@@ -4,10 +4,12 @@ const config = {
   parserOptions: {
     project: true,
   },
-  plugins: ["@typescript-eslint", "tailwindcss", "deprecation"],
+  plugins: ["@typescript-eslint", "tailwindcss"],
+  // plugins: ["@typescript-eslint", "tailwindcss", "deprecation"],
   extends: [
     "prettier",
     "next/core-web-vitals",
+    "plugin:deprecation/recommended",
     "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
@@ -30,7 +32,7 @@ const config = {
     "@next/next/no-html-link-for-pages": "off",
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/classnames-order": "error",
-    "deprecation/deprecation": "warn",
+    // "deprecation/deprecation": "warn",
   },
 
   settings: {

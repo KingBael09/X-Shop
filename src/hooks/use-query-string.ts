@@ -3,7 +3,10 @@ import { useCallback } from "react"
 export type QueryParams = Record<string, string | number | null>
 
 /**
- * THis make queryparam after filtering + wrap in callback, i.e only called if searchParams change
+ * This make queryparam after filtering + wrap in callback,
+ * i.e only called if searchParams change
+ *
+ * @deprecated Import from `use-typed-query-string` hook
  */
 export function useQueryString<T>(searchParams: T) {
   const createQueryString = useCallback(
