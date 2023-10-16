@@ -103,7 +103,7 @@
     "dotenv": "^16.3.1",
     "drizzle-kit": "^0.19.13",
     "eslint": "8.51.0",
-    "eslint-config-next": "13.5.4",
+    "eslint-config-next": "13.5.5",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-tailwindcss": "^3.13.0",
