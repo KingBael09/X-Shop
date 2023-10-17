@@ -49,7 +49,7 @@ export function SignInForm() {
           await setActive({ session: result.createdSessionId })
           router.push(`${window.location.origin}/`)
         } else {
-          console.info("Something unforseen has happened!")
+          console.error("Something unforseen has happened!")
           console.log(result)
         }
       } catch (error) {

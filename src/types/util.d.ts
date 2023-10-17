@@ -32,3 +32,9 @@ export type FancyOmit<T, K extends keyof T> = Omit<T, K>
 export type Deconstructed<T> = T[keyof T]
 
 // TODO: Implement UseOptimistic when it is available in stable
+
+// TODO: Learn how to change console.log default depth to infinity by some declaration magik
+/**
+ * console.log(user)
+ * console.dir(user, { depth: Infinity })
+ */

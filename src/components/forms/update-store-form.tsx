@@ -60,7 +60,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
         toast.success("Store deleted successfullly!")
         router.push("/dashboard/stores")
       } catch (error) {
-        console.log(error)
+        console.error(error)
         catchError(error)
       }
     })

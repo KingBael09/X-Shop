@@ -37,6 +37,13 @@ const config = {
     // serverComponentsExternalPackages: ["better-sqlite3"],
   },
 
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "info"] }
+        : false,
+  },
+
   /** Seperate CI pipeline for linting and typechecking in github actions */
   eslint: {
     ignoreDuringBuilds: true,
