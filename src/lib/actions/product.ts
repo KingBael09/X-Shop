@@ -14,13 +14,13 @@ import {
   not,
   sql,
 } from "drizzle-orm"
-import { utapi } from "uploadthing/server"
 
 import type { PromiseReturnType } from "@/types/util"
 
 import { db } from "../db"
 import { products, type Product } from "../db/schema"
 import type { ZGetProductSchema, ZProductSchema } from "../validations/product"
+import { utapi } from "./_server"
 
 export async function getProductAction(input: ZGetProductSchema) {
   const [column, order] =
