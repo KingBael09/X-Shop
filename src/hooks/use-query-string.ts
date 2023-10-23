@@ -1,16 +1,31 @@
 import { useCallback } from "react"
+import type { ReadonlyURLSearchParams } from "next/navigation"
 
-export type QueryParams = Record<string, string | number | null>
+type Key = string | number | null | undefined
+
+type TypedParams<T> = Partial<{ [P in keyof T]: Key }>
 
 /**
- * This make queryparam after filtering + wrap in callback,
- * i.e only called if searchParams change
+ * Make sure to pass a generic to the hook
+ * @example
+ * ```ts
+ * interface MyParams{
+ * date:string // => makes them optional even if not mentioned
+ * name:string
+ * }
+ * const searchParams = useSearchParams()
+ * const createQueryString = useQueryString<MyParams>(searchParams)
+ * ```
+ * By default searchParams will be of type never. `=>` To throw error
  *
- * @deprecated Import from `use-typed-query-string` hook
+ * Makes all keys optional
+ *
  */
-export function useQueryString<T>(searchParams: T) {
+export function useQueryString<K extends TypedParams<K> = never>(
+  searchParams: ReadonlyURLSearchParams
+) {
   const createQueryString = useCallback(
-    (params: QueryParams) => {
+    (params: TypedParams<K>) => {
       const newSearchParams = new URLSearchParams(searchParams?.toString())
 
       for (const [key, value] of Object.entries(params)) {
@@ -28,3 +43,5 @@ export function useQueryString<T>(searchParams: T) {
 
   return createQueryString
 }
+
+// TODO : Instead of typing based on just type make it a zod object

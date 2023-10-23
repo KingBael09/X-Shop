@@ -110,3 +110,5 @@ export function catchClerkError(err: unknown) {
     return toast.error(unknownErr)
   }
 }
+
+// TODO : If i barrel this file will it reduce size

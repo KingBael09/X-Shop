@@ -24,7 +24,7 @@ import {
 } from "@tanstack/react-table"
 
 import { useDebounce } from "@/hooks/use-debounce"
-import { useQueryString } from "@/hooks/use-typed-query-string"
+import { useQueryString } from "@/hooks/use-query-string"
 import {
   Table,
   TableBody,

@@ -216,3 +216,5 @@ export async function filterProductAction(query: string) {
 
   return productByCategory
 }
+
+// TODO : If i barrel this file will it reduce size
