@@ -84,7 +84,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@clerk/types": "^3.54.0",
+    "@clerk/types": "^3.56.1",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",

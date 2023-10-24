@@ -158,8 +158,8 @@ dependencies:
 
 devDependencies:
   '@clerk/types':
-    specifier: ^3.54.0
-    version: 3.54.0
+    specifier: ^3.56.1
+    version: 3.56.1
   '@commitlint/cli':
     specifier: ^18.0.0
     version: 18.0.0
@@ -525,6 +525,14 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       csstype: 3.1.1
+    dev: false
+
+  /@clerk/types@3.56.1:
+    resolution: {integrity: sha512-w/LKUH/PtB0nfQ6xtfh08/HyRLcIhvp1Vl3tx67Rvj7HdgDb5r2a2wbqsVanQZkdhE71WpIG36BRPhNWF4W2Bg==}
+    engines: {node: '>=14'}
+    dependencies:
+      csstype: 3.1.1
+    dev: true
 
   /@commitlint/cli@18.0.0:
     resolution: {integrity: sha512-0HuJB7VfxSqia0r+mZ9VLgTc5gPaRDiQtloLfwCBp63PvpFn2sZsidiZBbym3jDC6+P47HSuIdRRg3/JsCcBwA==}
