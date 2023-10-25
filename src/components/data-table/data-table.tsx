@@ -23,8 +23,13 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table"
 
+import {
+  dataTableSearchParams,
+  type DataTableSearchParams,
+} from "@/lib/validations/search-params"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useQueryString } from "@/hooks/use-query-string"
+import { useValidSearchParams } from "@/hooks/use-valid-search-params"
 import {
   Table,
   TableBody,
@@ -47,12 +52,6 @@ interface DataTableProps<TData, TValue> {
   deleteRowsAction?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-interface PageParams {
-  page?: number
-  per_page?: number
-  sort?: string
-}
-
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -67,12 +66,13 @@ export function DataTable<TData, TValue>({
   const searchParams = useSearchParams()
 
   // Get search params
-  const page = searchParams.get("page") ?? "1"
-  const per_page = searchParams.get("per_page") ?? "10"
-  const sort = searchParams.get("sort")
+  const { page, per_page, sort } = useValidSearchParams(
+    dataTableSearchParams,
+    searchParams
+  )
   const [column, order] = sort?.split(".") ?? []
 
-  const createQueryString = useQueryString<PageParams>(searchParams)
+  const createQueryString = useQueryString<DataTableSearchParams>(searchParams)
 
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -80,8 +80,8 @@ export function DataTable<TData, TValue>({
 
   // Server-Side pagination
   const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
-    pageIndex: Number(page) - 1,
-    pageSize: Number(per_page),
+    pageIndex: page - 1,
+    pageSize: per_page,
   })
 
   const pagination = useMemo(
@@ -94,8 +94,8 @@ export function DataTable<TData, TValue>({
 
   useEffect(() => {
     setPagination({
-      pageIndex: Number(page) - 1,
-      pageSize: Number(per_page),
+      pageIndex: page - 1,
+      pageSize: per_page,
     })
   }, [page, per_page])
 

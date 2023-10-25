@@ -13,25 +13,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import type { LayoutProps } from "@/types"
 
 import { filterPriceRange } from "@/config/site"
+import {
+  productPageSearchParams,
+  type ProductPageSearchParams,
+} from "@/lib/validations/search-params"
 import { useDebounce } from "@/hooks/use-debounce"
 import { useQueryString } from "@/hooks/use-query-string"
-
-// import { useQueryString } from "@/hooks/use-query-string"
-
-interface ProductPageParams {
-  page?: string
-  per_page?: string
-  sort?: string
-  store_ids?: string | null
-  store_page?: string
-  category_ids?: string | null
-  price_range?: string
-  categories?: string | null
-  subcategories?: string | null
-}
+import { useValidSearchParams } from "@/hooks/use-valid-search-params"
 
 interface WrapperContextInterface {
-  params: ProductPageParams
+  params: ProductPageSearchParams
   isPending: boolean
   startTransition: TransitionStartFunction
 
@@ -42,7 +33,7 @@ interface WrapperContextInterface {
   }
 
   pathname: string
-  createQueryString: ReturnType<typeof useQueryString<ProductPageParams>>
+  createQueryString: ReturnType<typeof useQueryString<ProductPageSearchParams>>
 
   setters: {
     setPriceRange: Dispatch<SetStateAction<[number, number]>>
@@ -67,14 +58,11 @@ export function ProductLayoutWrapperContext({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const page = searchParams?.get("page") ?? "1"
-  const per_page = searchParams?.get("per_page") ?? "8"
-  const sort = searchParams?.get("sort") ?? "createdAt.desc"
-  const store_ids = searchParams?.get("store_ids")
-  const store_page = searchParams?.get("store_page") ?? "1"
-  const category_ids = searchParams?.get("category_ids")
+  const { page, per_page, sort, store_ids, store_page, category_ids } =
+    useValidSearchParams(productPageSearchParams, searchParams)
 
-  const createQueryString = useQueryString<ProductPageParams>(searchParams)
+  const createQueryString =
+    useQueryString<ProductPageSearchParams>(searchParams)
 
   const [priceRange, setPriceRange] = useState<[number, number]>([
     filterPriceRange.lower,
