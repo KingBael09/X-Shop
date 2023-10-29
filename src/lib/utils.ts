@@ -1,13 +1,13 @@
 import { env } from "@/env.mjs"
 import { isClerkAPIResponseError } from "@clerk/nextjs"
 import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
+// import relativeTime from "dayjs/plugin/relativeTime"
 import { toast } from "sonner"
 import { z } from "zod"
 
 export { twMerge as cn } from "tailwind-merge"
 
-dayjs.extend(relativeTime)
+// dayjs.extend(relativeTime)
 
 export function formatPrice(
   price: number | string,
@@ -40,9 +40,9 @@ export function formatDate(date: Date | string) {
   return dayjs(date).format("DD MMMM, YYYY")
 }
 
-export function toRelativeTime(date: Date | string) {
-  return dayjs().from(date)
-}
+// export function toRelativeTime(date: Date | string) {
+//   return dayjs().from(date)
+// }
 
 export function slugify(str: string) {
   return str
@@ -52,9 +52,9 @@ export function slugify(str: string) {
     .replace(/--+/g, "-")
 }
 
-export function unslugify(str: string) {
-  return str.replace(/-/g, " ")
-}
+// export function unslugify(str: string) {
+//   return str.replace(/-/g, " ")
+// }
 
 export function toTitleCase(str: string) {
   return str.replace(
@@ -63,11 +63,11 @@ export function toTitleCase(str: string) {
   )
 }
 
-export function toSentenceCase(str: string) {
-  return str
-    .replace(/([A-Z])/g, " $1")
-    .replace(/^./, (str) => str.toUpperCase())
-}
+// export function toSentenceCase(str: string) {
+//   return str
+//     .replace(/([A-Z])/g, " $1")
+//     .replace(/^./, (str) => str.toUpperCase())
+// }
 
 export function truncate(str: string, length: number) {
   return str.length > length ? `${str.substring(0, length)}...` : str
