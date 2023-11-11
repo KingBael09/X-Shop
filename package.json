@@ -22,7 +22,7 @@
     "db:generate": "drizzle-kit generate:sqlite",
     "db:push": "drizzle-kit push:sqlite",
     "db:introspect": "drizzle-kit introspect:sqlite",
-    "db:studio": "drizzle-kit studio --port 5000 --verbose",
+    "db:studio": "drizzle-kit studio",
     "shadcn:add": "pnpm dlx shadcn-ui@latest add",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx,js,jsx,cjs,mjs,json,css}\" --cache",
@@ -32,7 +32,7 @@
     "commitlint": "commitlint --edit"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.26.2",
+    "@clerk/nextjs": "^4.27.1",
     "@clerk/themes": "^1.7.9",
     "@hookform/resolvers": "^3.3.2",
     "@libsql/client": "^0.3.6",
@@ -57,7 +57,7 @@
     "@tanstack/react-table": "^8.10.7",
     "@uploadthing/react": "^5.7.0",
     "@vercel/analytics": "^1.1.1",
-    "better-sqlite3": "^9.0.0",
+    "better-sqlite3": "^9.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
@@ -83,9 +83,9 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@clerk/types": "^3.57.1",
-    "@commitlint/cli": "^18.2.0",
-    "@commitlint/config-conventional": "^18.1.0",
+    "@clerk/types": "^3.58.0",
+    "@commitlint/cli": "^18.4.0",
+    "@commitlint/config-conventional": "^18.4.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@next/bundle-analyzer": "^13.5.6",
     "@tailwindcss/line-clamp": "^0.4.4",
