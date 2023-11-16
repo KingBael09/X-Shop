@@ -30,12 +30,12 @@ export async function getStoresAction(input: GetStoreActionInterface) {
     input.sort === "productCount.asc"
       ? asc(sql<number>`count(${products.id})`)
       : input.sort === "productCount.desc"
-      ? desc(sql<number>`count(${products.id})`)
-      : column && column in stores
-      ? order === "asc"
-        ? asc(stores[column])
-        : desc(stores[column])
-      : desc(stores.createdAt)
+        ? desc(sql<number>`count(${products.id})`)
+        : column && column in stores
+          ? order === "asc"
+            ? asc(stores[column])
+            : desc(stores[column])
+          : desc(stores.createdAt)
 
   const { items, total } = await db.transaction(async (tx) => {
     const items = await tx
