@@ -123,6 +123,7 @@ function CategoriesSection() {
   )
 }
 
+// TODO: We could cache and revalidate to reduce accessing db
 async function getProducts() {
   return await db.query.products.findMany({
     limit: 8,

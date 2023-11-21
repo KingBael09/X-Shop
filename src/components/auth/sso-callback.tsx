@@ -6,7 +6,7 @@ import { useClerk } from "@clerk/nextjs"
 
 import type { SSOCallbackPageProps } from "@/app/(auth)/(new-user)/sso-callback/page"
 
-export default function SSOCallback({ searchParams }: SSOCallbackPageProps) {
+export function SSOCallback({ searchParams }: SSOCallbackPageProps) {
   const { handleRedirectCallback } = useClerk()
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import type { HandleOAuthCallbackParams } from "@clerk/types"
 
-import SSOCallback from "@/components/auth/sso-callback"
+import { SSOCallback } from "@/components/auth/sso-callback"
 
 export interface SSOCallbackPageProps {
   searchParams: HandleOAuthCallbackParams
