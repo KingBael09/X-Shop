@@ -38,7 +38,6 @@
   },
   "include": [
     ".eslintrc.cjs",
-    "./src/types/declarations.d.ts",
     "prettier.config.cjs",
     "lint-staged.config.mjs",
     "next-env.d.ts",

@@ -2,6 +2,7 @@ import { Fragment, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
 /* Image Import starts */
+// ! // TODO: This throws error in github actions
 import Accessories from "@/assets/backpack-one.webp"
 import Clothing from "@/assets/clothing-one.webp"
 import More from "@/assets/extra.webp"
