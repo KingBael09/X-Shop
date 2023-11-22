@@ -1,6 +1,13 @@
 import { Fragment, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
+/* Image Import starts */
+import Accessories from "@/assets/backpack-one.webp"
+import Clothing from "@/assets/clothing-one.webp"
+import More from "@/assets/extra.webp"
+import Shoes from "@/assets/shoe-one.webp"
+/* Image Import ends */
+
 import { desc } from "drizzle-orm"
 import { Balancer } from "react-wrap-balancer"
 
@@ -19,12 +26,6 @@ import { Scrollable } from "@/components/scrollable"
 import { Shell } from "@/components/shells/shell"
 import { StoreCard } from "@/components/store-card"
 import { Await } from "@/components/util/await-component"
-
-// Image Imports
-import Accessories from "/public/categories/backpack-one.webp"
-import Clothing from "/public/categories/clothing-one.webp"
-import More from "/public/categories/extra.webp"
-import Shoes from "/public/categories/shoe-one.webp"
 
 function HeroSection() {
   return (
