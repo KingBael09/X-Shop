@@ -38,3 +38,5 @@ export type Deconstructed<T> = T[keyof T]
  * console.log(user)
  * console.dir(user, { depth: Infinity })
  */
+
+declare module "*.png"
