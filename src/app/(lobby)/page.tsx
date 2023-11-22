@@ -1,10 +1,16 @@
 import { Fragment, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
+/* Image Import starts */
+import Accessories from "@/assets/backpack-one.webp"
+import Clothing from "@/assets/clothing-one.webp"
+import More from "@/assets/extra.webp"
+import Shoes from "@/assets/shoe-one.webp"
+/* Image Import ends */
+
 import { desc } from "drizzle-orm"
 import { Balancer } from "react-wrap-balancer"
 
-import { primeCategories } from "@/config/products"
 import { siteConfig } from "@/config/site"
 import { db } from "@/lib/db"
 import { products } from "@/lib/db/schema"
@@ -33,7 +39,7 @@ function HeroSection() {
           fill
           priority
           src={"https://source.unsplash.com/xeWan2FAboU"}
-          alt={"Hero_Image"}
+          alt="Hero_Image"
           sizes="100vw"
           className="object-cover"
         />
@@ -80,6 +86,29 @@ function HeroSection() {
 }
 
 function CategoriesSection() {
+  const primeCategories = [
+    {
+      title: "Clothing",
+      link: "clothing",
+      src: Clothing,
+    },
+    {
+      title: "Shoes",
+      link: "shoes",
+      src: Shoes,
+    },
+    {
+      title: "Accessories",
+      link: "accessories",
+      src: Accessories,
+    },
+    {
+      title: "See More...",
+      link: "",
+      src: More,
+    },
+  ]
+
   return (
     <section
       aria-labelledby="categories-banner"
@@ -92,7 +121,7 @@ function CategoriesSection() {
         </Balancer>
       </p>
       <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {primeCategories.map(({ title, image, link }) => (
+        {primeCategories.map(({ title, link, src }) => (
           <Link
             aria-label={`Go to ${title}`}
             href={`/categories/${link}`}
@@ -104,7 +133,8 @@ function CategoriesSection() {
                 <Image
                   fill
                   priority
-                  src={image}
+                  src={src}
+                  placeholder="blur"
                   alt={title}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform group-hover:scale-105"
@@ -123,6 +153,7 @@ function CategoriesSection() {
   )
 }
 
+// TODO: We could cache and revalidate to reduce accessing db
 async function getProducts() {
   return await db.query.products.findMany({
     limit: 8,

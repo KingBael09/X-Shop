@@ -1,17 +1,20 @@
 import { NextResponse } from "next/server"
 import { authMiddleware } from "@clerk/nextjs"
 
+const publicRoutes = [
+  "/",
+  "/signin(.*)",
+  "/signup(.*)",
+  "/sso-callback(.*)",
+  "/products(.*)",
+  "/stores(.*)",
+  "/preview-product(.*)",
+  "/categories(.*)",
+  "/api(.*)",
+]
+
 export default authMiddleware({
-  publicRoutes: [
-    "/",
-    "/signin(.*)",
-    "/signup(.*)",
-    "/sso-callback(.*)",
-    "/products(.*)",
-    "/preview-product(.*)",
-    "/categories(.*)",
-    "/api(.*)",
-  ],
+  publicRoutes,
   afterAuth: (auth, req) => {
     if (auth.isPublicRoute) {
       return NextResponse.next()
@@ -32,7 +35,7 @@ export default authMiddleware({
 // }
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/(api|trpc)(.*)"],
 }
 
 // TODO: For some reason after updating nextjs middleware size shotup from 166kb to 180kb

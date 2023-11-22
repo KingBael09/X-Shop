@@ -1,5 +1,4 @@
 import type { LayoutProps } from "@/types"
-import { currentUser } from "@clerk/nextjs"
 
 import { SiteFooter } from "@/components/layouts/site-footer"
 import { SiteHeader } from "@/components/layouts/site-header"
@@ -8,15 +7,10 @@ interface LobbyLayoutProps extends LayoutProps {
   preview: React.ReactNode
 }
 
-export default async function LobbyLayout({
-  children,
-  preview,
-}: LobbyLayoutProps) {
-  const user = await currentUser()
-
+export default function LobbyLayout({ children, preview }: LobbyLayoutProps) {
   return (
     <div className="relative flex min-h-screen flex-col">
-      <SiteHeader user={user} />
+      <SiteHeader />
       {preview}
       <main className="flex flex-1 flex-col">{children}</main>
       <SiteFooter />

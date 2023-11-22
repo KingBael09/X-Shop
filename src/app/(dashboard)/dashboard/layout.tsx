@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import type { LayoutProps } from "@/types"
-import { currentUser } from "@clerk/nextjs"
 
 import { dashboardConfig } from "@/config/dashboard"
 import { ScrollArea } from "@/ui/scroll-area"
@@ -15,12 +14,10 @@ export const metadata: Metadata = {
   description: "Manage your stores",
 }
 
-export default async function DashboardLayout({ children }: LayoutProps) {
-  const user = await currentUser()
-
+export default function DashboardLayout({ children }: LayoutProps) {
   return (
     <div className="relative flex min-h-screen flex-col">
-      <SiteHeader user={user} />
+      <SiteHeader />
       <div className="container relative flex flex-1 gap-2">
         <aside className="sticky top-[calc(var(--navbar-height)_+_1px)] mr-2 hidden max-h-[calc(var(--navbar-page-offset))] flex-[0.2] border-r border-accent pr-1 md:flex">
           <ScrollArea className="w-full py-6 pr-4">

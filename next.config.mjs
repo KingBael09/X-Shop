@@ -30,6 +30,8 @@ const config = {
 
   images: {
     domains: ["uploadthing.com", "source.unsplash.com", "utfs.io"],
+    // formats: ["image/avif", "image/webp"],
+    //smaller encoding in avif but first request is slower
   },
   experimental: {
     // typedRoutes: true,
