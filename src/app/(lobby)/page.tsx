@@ -3,6 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 /* Image Import starts */
 // ! // TODO: This throws error in github actions
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import Accessories from "@/assets/backpack-one.webp"
 import Clothing from "@/assets/clothing-one.webp"
 import More from "@/assets/extra.webp"

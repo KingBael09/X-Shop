@@ -4,21 +4,34 @@ import {
   type InferInsertModel,
   type InferSelectModel,
 } from "drizzle-orm"
-import { blob, integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import {
+  blob,
+  index,
+  integer,
+  real,
+  sqliteTable,
+  text,
+} from "drizzle-orm/sqlite-core"
 
 import type { PaymentType } from "../validations/checkout"
 
-export const stores = sqliteTable("stores", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  userId: text("userId").notNull(),
-  name: text("name").notNull().unique(),
-  description: text("description"),
-  slug: text("slug"),
-  active: integer("active", { mode: "boolean" }).notNull().default(true),
-  createdAt: integer("createdAt", { mode: "timestamp" })
-    .$defaultFn(() => new Date())
-    .notNull(),
-})
+export const stores = sqliteTable(
+  "stores",
+  {
+    id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+    userId: text("userId").notNull(),
+    name: text("name").notNull().unique(),
+    description: text("description"),
+    slug: text("slug"),
+    active: integer("active", { mode: "boolean" }).notNull().default(true),
+    createdAt: integer("createdAt", { mode: "timestamp" })
+      .$defaultFn(() => new Date())
+      .notNull(),
+  },
+  (table) => ({
+    userIdx: index("store_user_idx").on(table.userId),
+  })
+)
 
 export const storeRelations = relations(stores, ({ many }) => ({
   products: many(products),
@@ -27,24 +40,31 @@ export const storeRelations = relations(stores, ({ many }) => ({
 export type Store = InferSelectModel<typeof stores>
 export type InsertStore = InferInsertModel<typeof stores>
 
-export const products = sqliteTable("products", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  name: text("name").notNull().unique(),
-  description: text("description"),
-  images: blob("images", { mode: "json" })
-    .$type<StoredFile[] | null>()
-    .default(null),
-  price: real("price").notNull().default(0),
-  rating: integer("rating").$type<Rating>().notNull().default(0),
-  tags: blob("tags", { mode: "json" }).$type<string[] | null>().default(null),
-  categoryId: integer("categoryId").notNull(),
-  subcategory: text("subcategory"),
-  inventory: integer("inventory").notNull().default(0),
-  storeId: integer("storeId").notNull(),
-  createdAt: integer("createdAt", { mode: "timestamp" })
-    .$defaultFn(() => new Date())
-    .notNull(),
-})
+export const products = sqliteTable(
+  "products",
+  {
+    id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+    name: text("name").notNull().unique(),
+    description: text("description"),
+    images: blob("images", { mode: "json" })
+      .$type<StoredFile[] | null>()
+      .default(null),
+    price: real("price").notNull().default(0),
+    rating: integer("rating").$type<Rating>().notNull().default(0),
+    tags: blob("tags", { mode: "json" }).$type<string[] | null>().default(null),
+    categoryId: integer("categoryId").notNull(),
+    subcategory: text("subcategory"),
+    inventory: integer("inventory").notNull().default(0),
+    storeId: integer("storeId").notNull(),
+    createdAt: integer("createdAt", { mode: "timestamp" })
+      .$defaultFn(() => new Date())
+      .notNull(),
+  },
+  (table) => ({
+    nameIdx: index("product_name_idx").on(table.name),
+    storeIdx: index("product_store_idx").on(table.storeId),
+  })
+)
 
 export type Product = InferSelectModel<typeof products>
 export type InsertProduct = InferInsertModel<typeof products>
@@ -72,16 +92,22 @@ export const categoryRelations = relations(categories, ({ many }) => ({
   products: many(products),
 }))
 
-export const carts = sqliteTable("carts", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  userId: text("userId").notNull().unique(),
-  items: blob("items", { mode: "json" })
-    .$type<CartItem[] | null>()
-    .default(null),
-  createdAt: integer("createdAt", { mode: "timestamp" })
-    .$defaultFn(() => new Date())
-    .notNull(),
-})
+export const carts = sqliteTable(
+  "carts",
+  {
+    id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+    userId: text("userId").notNull().unique(),
+    items: blob("items", { mode: "json" })
+      .$type<CartItem[] | null>()
+      .default(null),
+    createdAt: integer("createdAt", { mode: "timestamp" })
+      .$defaultFn(() => new Date())
+      .notNull(),
+  },
+  (table) => ({
+    userIdx: index("cart_user_idx").on(table.userId),
+  })
+)
 
 export type Cart = InferSelectModel<typeof carts>
 export type InsertCart = InferInsertModel<typeof carts>
