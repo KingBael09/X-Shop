@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Fragment, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
 /* Image Import starts */
-// ! // TODO: This throws error in github actions
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// ! // TODO: This because it throws error in github actions tsc!!
 // @ts-ignore
 import Accessories from "@/assets/backpack-one.webp"
+// @ts-ignore
 import Clothing from "@/assets/clothing-one.webp"
+// @ts-ignore
 import More from "@/assets/extra.webp"
+// @ts-ignore
 import Shoes from "@/assets/shoe-one.webp"
 /* Image Import ends */
 
