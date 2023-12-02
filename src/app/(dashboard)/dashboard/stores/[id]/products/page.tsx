@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { and, asc, desc, eq, inArray, like, sql } from "drizzle-orm"
+import { and, asc, count, desc, eq, inArray, like } from "drizzle-orm"
 
 import { db } from "@/lib/db"
 import { products, stores, type Product } from "@/lib/db/schema"
@@ -104,9 +104,7 @@ export default async function ProductsPage({
     })
 
     const totalProducts = await tx
-      .select({
-        count: sql<number>`count(${products.id})`,
-      })
+      .select({ count: count(products.id) })
       .from(products)
       .where(
         and(
@@ -114,7 +112,6 @@ export default async function ProductsPage({
           typeof name === "string"
             ? like(products.name, `%${name}%`)
             : undefined,
-
           categoriesIds.length > 0
             ? inArray(products.categoryId, categoriesIds)
             : undefined

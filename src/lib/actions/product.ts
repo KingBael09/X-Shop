@@ -5,6 +5,7 @@ import type { StoredFile } from "@/types"
 import {
   and,
   asc,
+  count,
   desc,
   eq,
   gte,
@@ -12,7 +13,6 @@ import {
   like,
   lte,
   not,
-  sql,
 } from "drizzle-orm"
 
 import type { PromiseReturnType } from "@/types/util"
@@ -57,7 +57,7 @@ export async function getProductAction(input: ZGetProductSchema) {
 
     const total = await tx
       .select({
-        count: sql<number>`count(${products.id})`,
+        count: count(products.id),
       })
       .from(products)
       .where(filter)

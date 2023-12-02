@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { currentUser } from "@clerk/nextjs"
-import { and, asc, desc, eq, not, sql } from "drizzle-orm"
+import { and, asc, count, desc, eq, not } from "drizzle-orm"
 
 import { slugify } from "@/lib/utils"
 
@@ -28,9 +28,9 @@ export async function getStoresAction(input: GetStoreActionInterface) {
 
   const orderFilter =
     input.sort === "productCount.asc"
-      ? asc(sql<number>`count(${products.id})`)
+      ? asc(count(products.id))
       : input.sort === "productCount.desc"
-        ? desc(sql<number>`count(${products.id})`)
+        ? desc(count(products.id))
         : column && column in stores
           ? order === "asc"
             ? asc(stores[column])
@@ -42,7 +42,7 @@ export async function getStoresAction(input: GetStoreActionInterface) {
       .select({
         id: stores.id,
         name: stores.name,
-        productCount: sql<number>`count(${products.id})`,
+        productCount: count(products.id),
       })
       .from(stores)
       .limit(limit)
@@ -55,7 +55,7 @@ export async function getStoresAction(input: GetStoreActionInterface) {
 
     const total = await tx
       .select({
-        count: sql<number>`count(${stores.id})`,
+        count: count(stores.id),
       })
       .from(stores)
       .all()

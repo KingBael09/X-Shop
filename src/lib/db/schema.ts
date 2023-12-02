@@ -5,7 +5,6 @@ import {
   type InferSelectModel,
 } from "drizzle-orm"
 import {
-  blob,
   index,
   integer,
   real,
@@ -46,12 +45,12 @@ export const products = sqliteTable(
     id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
     name: text("name").notNull().unique(),
     description: text("description"),
-    images: blob("images", { mode: "json" })
+    images: text("images", { mode: "json" })
       .$type<StoredFile[] | null>()
       .default(null),
     price: real("price").notNull().default(0),
     rating: integer("rating").$type<Rating>().notNull().default(0),
-    tags: blob("tags", { mode: "json" }).$type<string[] | null>().default(null),
+    tags: text("tags", { mode: "json" }).$type<string[] | null>().default(null),
     categoryId: integer("categoryId").notNull(),
     subcategory: text("subcategory"),
     inventory: integer("inventory").notNull().default(0),
@@ -80,7 +79,7 @@ export const productRelations = relations(products, ({ one }) => ({
 export const categories = sqliteTable("categories", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   name: text("name").notNull().unique(),
-  subcategories: blob("subcategories", { mode: "json" })
+  subcategories: text("subcategories", { mode: "json" })
     .$type<string[] | null>()
     .default(null),
 })
@@ -97,7 +96,7 @@ export const carts = sqliteTable(
   {
     id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
     userId: text("userId").notNull().unique(),
-    items: blob("items", { mode: "json" })
+    items: text("items", { mode: "json" })
       .$type<CartItem[] | null>()
       .default(null),
     createdAt: integer("createdAt", { mode: "timestamp" })
@@ -115,8 +114,8 @@ export type InsertCart = InferInsertModel<typeof carts>
 export const orders = sqliteTable("orders", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   userId: text("userId").notNull(),
-  items: blob("items", { mode: "json" }).$type<OrderItem[]>().notNull(),
-  storeIds: blob("storeIds", { mode: "json" }).$type<number[]>().notNull(),
+  items: text("items", { mode: "json" }).$type<OrderItem[]>().notNull(),
+  storeIds: text("storeIds", { mode: "json" }).$type<number[]>().notNull(),
   username: text("username").notNull(),
   mail: text("mail").notNull(),
   paymentMode: text("paymentMode").$type<PaymentType>().notNull(),

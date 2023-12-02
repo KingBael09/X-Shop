@@ -1,9 +1,9 @@
 import * as dotenv from "dotenv"
-import type { Config } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit"
 
 dotenv.config()
 
-const config = {
+export default defineConfig({
   schema: "./src/lib/db/schema.ts",
   out: "./.drizzle",
   driver: "turso",
@@ -14,6 +14,4 @@ const config = {
   // tablesFilter: ["x_shop_*"],
   verbose: true,
   strict: true,
-} satisfies Config
-
-export default config
+})
