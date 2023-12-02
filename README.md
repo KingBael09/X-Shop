@@ -33,7 +33,13 @@ Make sure you have Node `v18.0.0` or higher [^1]
     cp .env.example .env.local
     ```
 
-3. Start the development server:
+3. Create local db
+
+    ```bash
+    pnpm db:push
+    ```
+
+4. Start the development server:
 
     ```bash
     pnpm dev
