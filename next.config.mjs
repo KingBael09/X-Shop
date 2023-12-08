@@ -30,12 +30,17 @@ const config = {
 
   images: {
     domains: ["uploadthing.com", "source.unsplash.com", "utfs.io"],
+    remotePatterns: [
+      { protocol: "https", hostname: "utfs.io" },
+      { protocol: "https", hostname: "uploadthing.com" },
+      { protocol: "https", hostname: "source.unsplash.com" },
+    ],
     // formats: ["image/avif", "image/webp"],
     //smaller encoding in avif but first request is slower
   },
   experimental: {
+    // ppr: true, // throws about not using next@canary
     // typedRoutes: true,
-    serverActions: true,
     // serverComponentsExternalPackages: ["better-sqlite3"],
   },
 

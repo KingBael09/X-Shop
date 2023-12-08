@@ -1,6 +1,6 @@
 import "@/styles/globals.css"
 
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { env } from "@/env.mjs"
 import type { LayoutProps } from "@/types"
 import { Analytics } from "@/util/analytics"
@@ -27,10 +27,6 @@ export const metadata: Metadata = {
     url: siteConfig.links.github,
   },
   creator: siteConfig.author,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   openGraph: {
     type: "website",
     locale: "IN",
@@ -46,6 +42,13 @@ export const metadata: Metadata = {
     images: [`${siteConfig.url}/opengraph-image.png`],
     creator: siteConfig.author,
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
 }
 
 export default function RootLayout({ children }: LayoutProps) {

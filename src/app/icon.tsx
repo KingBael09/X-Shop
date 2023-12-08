@@ -1,6 +1,4 @@
-import { ImageResponse } from "next/server"
-
-// import { ImageResponse } from "next/og"
+import { ImageResponse } from "next/og"
 
 export const runtime = "edge"
 
