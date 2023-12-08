@@ -16,20 +16,20 @@ const config = {
    * @param {Object[]} config.externals
    * @returns {Object}
    */
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push({
-        "utf-8-validate": "commonjs utf-8-validate",
-        bufferutil: "commonjs bufferutil",
-        encoding: "commonjs encoding",
-      })
-    }
+  // webpack: (config, { isServer }) => {
+  //   if (isServer) {
+  //     config.externals.push({
+  //       "utf-8-validate": "commonjs utf-8-validate",
+  //       bufferutil: "commonjs bufferutil",
+  //       encoding: "commonjs encoding",
+  //     })
+  //   }
 
-    return config
-  },
+  //   return config
+  // },
 
   images: {
-    domains: ["uploadthing.com", "source.unsplash.com", "utfs.io"],
+    // domains: ["uploadthing.com", "source.unsplash.com", "utfs.io"],
     remotePatterns: [
       { protocol: "https", hostname: "utfs.io" },
       { protocol: "https", hostname: "uploadthing.com" },
