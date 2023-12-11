@@ -155,8 +155,8 @@ dependencies:
 
 devDependencies:
   '@clerk/types':
-    specifier: ^3.58.1
-    version: 3.58.1
+    specifier: ^3.59.0
+    version: 3.59.0
   '@commitlint/cli':
     specifier: ^18.4.3
     version: 18.4.3(typescript@5.3.3)
@@ -536,6 +536,14 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       csstype: 3.1.1
+    dev: false
+
+  /@clerk/types@3.59.0:
+    resolution: {integrity: sha512-OchGdY3mf+hXql7CPQsuCv1HicPvvz6NdMeo6r0M5FY11INcXGaF4pexido9IThrd31rIum+giWVLaFTwlhzfg==}
+    engines: {node: '>=14'}
+    dependencies:
+      csstype: 3.1.1
+    dev: true
 
   /@cloudflare/kv-asset-handler@0.2.0:
     resolution: {integrity: sha512-MVbXLbTcAotOPUj0pAMhVtJ+3/kFkwJqc5qNOleOZTv6QkZZABDMS21dSrSlVswEHwrpWC03e4fWytjqKvuE2A==}
