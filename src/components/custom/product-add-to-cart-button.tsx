@@ -32,7 +32,7 @@ export function AddToCartButton({
   }
   return (
     <Button {...props} onClick={addToCart} disabled={isPending}>
-      {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
+      {isPending && <Icons.spinner className="mr-2 size-4 animate-spin" />}
       {children}
     </Button>
   )

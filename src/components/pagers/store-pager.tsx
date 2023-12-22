@@ -24,7 +24,7 @@ export default function StorePager({ current, stores }: StorePagerProps) {
         disabled={lowerFail}
         href={`/dashboard/stores/${stores[currentIndex - 1]?.id}`}
       >
-        <Icons.chevronLeft className="h-5 w-5" aria-hidden />
+        <Icons.chevronLeft className="size-5" aria-hidden />
         <span className="sr-only">Previous store</span>
       </ModLink>
       <ModLink
@@ -32,7 +32,7 @@ export default function StorePager({ current, stores }: StorePagerProps) {
         disabled={upperFail}
         href={`/dashboard/stores/${stores[currentIndex + 1]?.id}`}
       >
-        <Icons.chevronRight className="h-5 w-5" aria-hidden />
+        <Icons.chevronRight className="size-5" aria-hidden />
         <span className="sr-only">Next store</span>
       </ModLink>
     </div>

@@ -54,38 +54,38 @@ export function DataTablePagination<TData>({
           <Button
             aria-label="Go to first page"
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden size-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
-            <Icons.chevronsLeft className="h-4 w-4" aria-hidden />
+            <Icons.chevronsLeft className="size-4" aria-hidden />
           </Button>
           <Button
             aria-label="Go to previous page"
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            <Icons.chevronLeft className="h-4 w-4" aria-hidden />
+            <Icons.chevronLeft className="size-4" aria-hidden />
           </Button>
           <Button
             aria-label="Go to next page"
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="size-8 p-0"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            <Icons.chevronRight className="h-4 w-4" aria-hidden />
+            <Icons.chevronRight className="size-4" aria-hidden />
           </Button>
           <Button
             aria-label="Go to last page"
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden size-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
-            <Icons.chevronsRight className="h-4 w-4" aria-hidden />
+            <Icons.chevronsRight className="size-4" aria-hidden />
           </Button>
         </div>
       </div>

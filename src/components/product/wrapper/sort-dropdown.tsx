@@ -29,7 +29,7 @@ export function SortDropdown() {
       <DropdownMenuTrigger asChild>
         <Button aria-label="Sort products" size="sm" disabled={isPending}>
           Sort
-          <Icons.chevronDown className="ml-2 h-4 w-4" aria-hidden="true" />
+          <Icons.chevronDown className="ml-2 size-4" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-48">
@@ -60,7 +60,7 @@ export function SortDropdown() {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className="cursor-pointer">
               <Link href={pathname}>
-                <Icons.close className="mr-2 h-4 w-4" aria-hidden />
+                <Icons.close className="mr-2 size-4" aria-hidden />
                 Clear Filter
               </Link>
             </DropdownMenuItem>

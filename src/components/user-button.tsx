@@ -40,7 +40,7 @@ export async function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="relative h-8 w-8 rounded-full">
+        <Button variant="secondary" className="relative size-8 rounded-full">
           <UserAvatar user={user} />
         </Button>
       </DropdownMenuTrigger>
@@ -64,19 +64,19 @@ export async function UserButton() {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
             <Link href="/dashboard/account" className="cursor-pointer">
-              <Icons.user className="mr-2 h-4 w-4" aria-hidden />
+              <Icons.user className="mr-2 size-4" aria-hidden />
               Account
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/dashboard/stores" className="cursor-pointer">
-              <Icons.dashboard className="mr-2 h-4 w-4" aria-hidden />
+              <Icons.dashboard className="mr-2 size-4" aria-hidden />
               Dashboard
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild disabled>
             <Link href="/settings" className="cursor-pointer">
-              <Icons.settings className="mr-2 h-4 w-4" aria-hidden />
+              <Icons.settings className="mr-2 size-4" aria-hidden />
               Settings
             </Link>
           </DropdownMenuItem>
@@ -84,7 +84,7 @@ export async function UserButton() {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/signout" className="cursor-pointer">
-            <Icons.logout className="mr-2 h-4 w-4" aria-hidden />
+            <Icons.logout className="mr-2 size-4" aria-hidden />
             Log out
           </Link>
         </DropdownMenuItem>

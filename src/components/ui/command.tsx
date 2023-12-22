@@ -52,9 +52,9 @@ const CommandInput = React.forwardRef<
 >(({ className, loading, ...props }, ref) => (
   <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
     {loading ? (
-      <Icons.spinner className="mr-2 h-4 w-4 shrink-0 animate-spin opacity-50" />
+      <Icons.spinner className="mr-2 size-4 shrink-0 animate-spin opacity-50" />
     ) : (
-      <Icons.search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+      <Icons.search className="mr-2 size-4 shrink-0 opacity-50" />
     )}
 
     <CommandPrimitive.Input

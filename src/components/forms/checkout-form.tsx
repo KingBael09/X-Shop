@@ -141,7 +141,7 @@ export function CheckoutForm({ cart, storeIds }: CheckoutFormProps) {
         />
         <Button disabled={isPending}>
           {isPending && (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+            <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
           )}
           Place Order
           <span className="sr-only">Place Orders</span>

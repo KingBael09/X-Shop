@@ -108,10 +108,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
             disabled={isUpdating || isChanged || isDeleting}
           >
             {isUpdating && (
-              <Icons.spinner
-                className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden
-              />
+              <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
             )}
             Update Store
             <span className="sr-only">Update Store</span>
@@ -124,10 +121,7 @@ export function UpdateStoreForm({ store }: UpdateStoreProps) {
             onClick={handleDeleteStore}
           >
             {isDeleting && (
-              <Icons.spinner
-                className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden
-              />
+              <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
             )}
             Delete Store
             <span className="sr-only">Delete Store</span>

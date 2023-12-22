@@ -20,7 +20,7 @@ export function BackButton({ className, ...props }: ButtonProps) {
       variant="ghost"
       {...props}
     >
-      <Icons.chevronLeft className="h-6 w-6" />
+      <Icons.chevronLeft className="size-6" />
     </Button>
   )
 }

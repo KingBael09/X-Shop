@@ -11,7 +11,7 @@ import { UserButton } from "../user-button"
 
 function UserButtonFallback() {
   return (
-    <div className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+    <div className="relative flex size-10 shrink-0 overflow-hidden rounded-full">
       <Skeleton className="absolute inset-0" />
     </div>
   )

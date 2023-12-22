@@ -27,7 +27,7 @@ export function Scrollable({ className, ...props }: ScrollIndicatorProps) {
     <div className={cn("hidden md:block", className)} {...props}>
       <Icons.scroll
         className={cn(
-          "h-10 w-10 animate-fade-out opacity-0",
+          "size-10 animate-fade-out opacity-0",
           !isScrolled ? "block" : "hidden"
         )}
         style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}

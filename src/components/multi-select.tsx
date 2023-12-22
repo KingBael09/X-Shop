@@ -31,7 +31,7 @@ interface MultiSelectProps<T> {
  * - `value` and `onValueChange` must be passed
  */
 export function MultiSelect<T>({
-  placeholder,
+  placeholder = "",
   options,
   value,
   onValueChange,
@@ -85,7 +85,7 @@ export function MultiSelect<T>({
               )
             })}
             <div className="line-clamp-1 min-h-[1.1rem] text-muted-foreground">
-              <p className="p-1">{placeholder ?? ""}</p>
+              <p className="p-1">{placeholder}</p>
             </div>
           </div>
         </div>
@@ -93,6 +93,7 @@ export function MultiSelect<T>({
       <PopoverContent
         className="p-0"
         style={{ width: inputRef.current?.clientWidth ?? "325px" }}
+        // TODO: Could have used w-[var(--radix-popover-trigger-width)]
       >
         <Command>
           <CommandInput placeholder="Search" />
@@ -114,7 +115,7 @@ export function MultiSelect<T>({
                 >
                   <Icons.check
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      "mr-2 size-4",
                       isInc ? "opacity-100" : "opacity-0"
                     )}
                   />

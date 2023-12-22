@@ -42,7 +42,7 @@ export default async function CheckOutPage() {
   if (count === 0) {
     return (
       <div className="my-auto flex flex-col items-center justify-center space-y-2">
-        <Icons.cart className="h-12 w-12 text-muted-foreground" aria-hidden />
+        <Icons.cart className="size-12 text-muted-foreground" aria-hidden />
         <span className="text-lg font-medium text-muted-foreground">
           Your cart is empty
         </span>
@@ -81,7 +81,7 @@ export default async function CheckOutPage() {
                     className="absolute object-cover"
                   />
                 ) : (
-                  <ImagePlaceHolder iconProps={{ className: "h-4 w-4" }} />
+                  <ImagePlaceHolder iconProps={{ className: "size-4" }} />
                 )}
               </div>
               <div className="flex flex-1 flex-col md:flex-row">

@@ -11,7 +11,7 @@ export default function UserAvatar({ user }: AvatarProps) {
     user?.lastName?.charAt(0) ?? ""
   }`
   return (
-    <Avatar className="h-8 w-8">
+    <Avatar className="size-8">
       <AvatarImage src={user?.imageUrl} alt={user?.username ?? "avatar"} />
       <AvatarFallback>{initials}</AvatarFallback>
     </Avatar>

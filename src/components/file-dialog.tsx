@@ -46,15 +46,15 @@ const FileCard = dynamic(
     loading: () => (
       <div className="flex items-center justify-between">
         <div className="flex gap-2">
-          <Skeleton className="h-10 w-10" />
+          <Skeleton className="size-10" />
           <div className="space-y-1">
             <Skeleton className="h-5 w-28" />
             <Skeleton className="h-3 w-16" />
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <Skeleton className="h-8 w-8" />
-          <Skeleton className="h-8 w-8" />
+          <Skeleton className="size-8" />
+          <Skeleton className="size-8" />
         </div>
       </div>
     ),
@@ -150,14 +150,14 @@ export function FileDialog<TFieldValues extends FieldValues>({
           {isUploading ? (
             <div className="group grid w-full place-items-center gap-1 sm:px-10">
               <Icons.upload
-                className="h-9 w-9 animate-pulse text-muted-foreground"
+                className="size-9 animate-pulse text-muted-foreground"
                 aria-hidden
               />
             </div>
           ) : isDragActive ? (
             <div className="grid place-items-center gap-2 text-muted-foreground sm:px-5">
               <Icons.upload
-                className={cn("h-8 w-8", isDragActive && "animate-bounce")}
+                className={cn("size-8", isDragActive && "animate-bounce")}
                 aria-hidden
               />
               <p className="text-base font-medium">Drop the file here</p>
@@ -165,7 +165,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
           ) : (
             <div className="grid place-items-center gap-1 sm:px-5">
               <Icons.upload
-                className="h-8 w-8 text-muted-foreground"
+                className="size-8 text-muted-foreground"
                 aria-hidden
               />
               <p className="mt-2 text-base font-medium text-muted-foreground">
@@ -203,7 +203,7 @@ export function FileDialog<TFieldValues extends FieldValues>({
             }}
             className="mt-2.5 w-full"
           >
-            <Icons.trash className="mr-2 h-4 w-4" aria-hidden />
+            <Icons.trash className="mr-2 size-4" aria-hidden />
             Remove All
             <span className="sr-only">Remove All</span>
           </Button>

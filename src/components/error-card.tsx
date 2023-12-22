@@ -50,7 +50,7 @@ export function ErrorCard({
     >
       <CardHeader>
         <div className="grid place-items-center rounded-full bg-muted">
-          <Icon className="h-10 w-10" aria-hidden />
+          <Icon className="size-10" aria-hidden />
         </div>
       </CardHeader>
       <CardContent className="grid place-items-center space-y-3">
@@ -66,7 +66,7 @@ export function ErrorCard({
                 // router.refresh()
               }}
             >
-              <Icons.chevronLeft className="h-4 w-4" />
+              <Icons.chevronLeft className="size-4" />
               Back
             </Button>
           )}

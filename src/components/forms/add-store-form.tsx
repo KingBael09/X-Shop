@@ -85,7 +85,7 @@ export function AddStoreForm() {
         />
         <Button className="w-fit" disabled={isPending}>
           {isPending && (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+            <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
           )}
           Add Store
           <span className="sr-only">Add Store</span>

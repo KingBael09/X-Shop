@@ -216,7 +216,7 @@ export function AddSubCategoryForm({
                               (category) => String(category.id) === field.value
                             )?.name
                           : "Select category"}
-                        <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent
@@ -238,7 +238,7 @@ export function AddSubCategoryForm({
                             >
                               <Icons.check
                                 className={cn(
-                                  "mr-2 h-4 w-4",
+                                  "mr-2 size-4",
                                   String(category.id) === field.value
                                     ? "opacity-100"
                                     : "opacity-0"

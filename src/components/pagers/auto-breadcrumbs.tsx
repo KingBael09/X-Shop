@@ -67,7 +67,7 @@ export function AutoBreadCrumbs({
                 ? turncateString(segment.title, turncate)
                 : segment.title}
             </Link>
-            {!isLastSegment && <SeparatorIcon className="mx-2 h-4 w-4" />}
+            {!isLastSegment && <SeparatorIcon className="mx-2 size-4" />}
           </Fragment>
         )
       })}

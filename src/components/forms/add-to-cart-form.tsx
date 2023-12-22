@@ -84,7 +84,7 @@ export function AddToCartForm({
         />
         <Button disabled={isPending || !isMinValid}>
           {isPending && (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+            <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
           )}
           Add to cart
           <span className="sr-only">Add to cart</span>

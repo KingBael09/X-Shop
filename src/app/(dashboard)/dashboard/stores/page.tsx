@@ -55,7 +55,7 @@ export default async function StoresPage() {
         </ModLink>
       </div>
       <Alert>
-        <Icons.terminal className="h-4 w-4" aria-hidden />
+        <Icons.terminal className="size-4" aria-hidden />
         <AlertTitle>Heads up!</AlertTitle>
         <AlertDescription>
           Currently one user can create only {FreeTierStoreLimit} stores

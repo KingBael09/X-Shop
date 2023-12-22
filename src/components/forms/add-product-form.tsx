@@ -203,7 +203,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                     String(category.id) === field.value
                                 )?.name
                               : "Select category"}
-                            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent
@@ -228,7 +228,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                 >
                                   <Icons.check
                                     className={cn(
-                                      "mr-2 h-4 w-4",
+                                      "mr-2 size-4",
                                       String(category.id) === field.value
                                         ? "opacity-100"
                                         : "opacity-0"
@@ -245,7 +245,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                   setOpen({ target: "category", state: true })
                                 }
                               >
-                                <Icons.addCircle className="mr-2 h-4 w-4" />
+                                <Icons.addCircle className="mr-2 size-4" />
                                 Create Category?
                               </CommandItem>
                             </CommandGroup>
@@ -286,7 +286,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                   (subcategory) => subcategory === field.value
                                 )
                               : "Select sub-category"}
-                            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent
@@ -310,7 +310,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                 >
                                   <Icons.check
                                     className={cn(
-                                      "mr-2 h-4 w-4",
+                                      "mr-2 size-4",
                                       String(subcategory) === field.value
                                         ? "opacity-100"
                                         : "opacity-0"
@@ -330,7 +330,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                                   })
                                 }
                               >
-                                <Icons.addCircle className="mr-2 h-4 w-4" />
+                                <Icons.addCircle className="mr-2 size-4" />
                                 Create Subcategory?
                               </CommandItem>
                             </CommandGroup>
@@ -398,7 +398,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
                             sizes="100vw"
                             src={file.preview}
                             alt={file.name}
-                            className="h-20 w-20 shrink-0 rounded-md object-cover object-center"
+                            className="size-20 shrink-0 rounded-md object-cover object-center"
                             width={80}
                             height={80}
                           />
@@ -428,10 +428,7 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
           />
           <Button className="w-fit" disabled={isPending}>
             {isPending && (
-              <Icons.spinner
-                className="mr-2 h-4 w-4 animate-spin"
-                aria-hidden
-              />
+              <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
             )}
             {isUploading ? "Uploading.." : "Add Product"}
             <span className="sr-only">Add Product</span>

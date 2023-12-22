@@ -60,7 +60,7 @@ export function FilterDrawer({
     <Sheet>
       <SheetTrigger asChild>
         <Button ria-label="Filter products" size="sm" disabled={isPending}>
-          <Icons.altFilter className="mr-2 h-4 w-4" aria-hidden="true" />
+          <Icons.altFilter className="mr-2 size-4" aria-hidden="true" />
           Filter
         </Button>
       </SheetTrigger>
@@ -147,7 +147,7 @@ export function FilterDrawer({
                     }}
                     disabled={Number(store_page) === 1 || isPending}
                   >
-                    <Icons.chevronLeft className="h-4 w-4" aria-hidden="true" />
+                    <Icons.chevronLeft className="size-4" aria-hidden="true" />
                     <span className="sr-only">Previous store page</span>
                   </Button>
                   <Button
@@ -166,10 +166,7 @@ export function FilterDrawer({
                       Number(store_page) === storePageCount || isPending
                     }
                   >
-                    <Icons.chevronRight
-                      className="h-4 w-4"
-                      aria-hidden="true"
-                    />
+                    <Icons.chevronRight className="size-4" aria-hidden="true" />
                     <span className="sr-only">Next store page</span>
                   </Button>
                 </div>

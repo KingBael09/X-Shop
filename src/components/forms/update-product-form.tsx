@@ -284,7 +284,7 @@ export function UpdateProductForm({
                                     String(category.id) === field.value
                                 )?.name
                               : "Select category"}
-                            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent
@@ -315,7 +315,7 @@ export function UpdateProductForm({
                                 >
                                   <Icons.check
                                     className={cn(
-                                      "mr-2 h-4 w-4",
+                                      "mr-2 size-4",
                                       String(category.id) === field.value
                                         ? "opacity-100"
                                         : "opacity-0"
@@ -332,7 +332,7 @@ export function UpdateProductForm({
                                   setOpen({ target: "category", state: true })
                                 }
                               >
-                                <Icons.addCircle className="mr-2 h-4 w-4" />
+                                <Icons.addCircle className="mr-2 size-4" />
                                 Create Category?
                               </CommandItem>
                             </CommandGroup>
@@ -373,7 +373,7 @@ export function UpdateProductForm({
                                   (subcategory) => subcategory === field.value
                                 )
                               : "Select sub-category"}
-                            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            <Icons.chevronUpDown className="ml-2 size-4 shrink-0 opacity-50" />
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent
@@ -397,7 +397,7 @@ export function UpdateProductForm({
                                 >
                                   <Icons.check
                                     className={cn(
-                                      "mr-2 h-4 w-4",
+                                      "mr-2 size-4",
                                       String(subcategory) === field.value
                                         ? "opacity-100"
                                         : "opacity-0"
@@ -417,7 +417,7 @@ export function UpdateProductForm({
                                   })
                                 }
                               >
-                                <Icons.addCircle className="mr-2 h-4 w-4" />
+                                <Icons.addCircle className="mr-2 size-4" />
                                 Create Subcategory?
                               </CommandItem>
                             </CommandGroup>
@@ -526,7 +526,7 @@ export function UpdateProductForm({
             >
               {isUpdating && (
                 <Icons.spinner
-                  className="mr-2 h-4 w-4 animate-spin"
+                  className="mr-2 size-4 animate-spin"
                   aria-hidden
                 />
               )}
@@ -541,7 +541,7 @@ export function UpdateProductForm({
             >
               {isDeleting && (
                 <Icons.spinner
-                  className="mr-2 h-4 w-4 animate-spin"
+                  className="mr-2 size-4 animate-spin"
                   aria-hidden
                 />
               )}

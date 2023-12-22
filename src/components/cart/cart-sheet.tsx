@@ -44,7 +44,7 @@ export async function CartSheet() {
                 {cartItems.map((item) => (
                   <div key={item.id} className="space-y-3">
                     <div className="flex items-center space-x-4">
-                      <div className="relative h-16 w-16 overflow-hidden rounded">
+                      <div className="relative size-16 overflow-hidden rounded">
                         {item?.images?.length ? (
                           <Image
                             fill
@@ -58,7 +58,7 @@ export async function CartSheet() {
                           />
                         ) : (
                           <ImagePlaceHolder
-                            iconProps={{ className: "h-4 w-4" }}
+                            iconProps={{ className: "size-4" }}
                           />
                         )}
                       </div>
@@ -124,7 +124,7 @@ export async function CartSheet() {
         </>
       ) : (
         <div className="flex h-full flex-col items-center justify-center space-y-2">
-          <Icons.cart className="h-12 w-12 text-muted-foreground" aria-hidden />
+          <Icons.cart className="size-12 text-muted-foreground" aria-hidden />
           <span className="text-lg font-medium text-muted-foreground">
             Your cart is empty
           </span>

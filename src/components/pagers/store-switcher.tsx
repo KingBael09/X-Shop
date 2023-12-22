@@ -30,12 +30,12 @@ export function StoreSwitcher({ current, stores }: StorePagerProps) {
           className="justify-between md:w-[200px]"
         >
           <Icons.circle
-            className="mr-2 hidden h-4 w-4 md:block"
+            className="mr-2 hidden size-4 md:block"
             aria-hidden="true"
           />
           <span className="mr-2 line-clamp-1">{current.name}</span>
           <Icons.chevronUpDown
-            className="ml-auto h-4 w-4 shrink-0 opacity-50"
+            className="ml-auto size-4 shrink-0 opacity-50"
             aria-hidden="true"
           />
         </Button>
@@ -52,11 +52,11 @@ export function StoreSwitcher({ current, stores }: StorePagerProps) {
               {stores.map((store) => (
                 <Link key={store.id} href={`/dashboard/stores/${store.id}`}>
                   <CommandItem key={store.id} value={store.name}>
-                    <Icons.circle className="mr-2 h-4 w-4" aria-hidden="true" />
+                    <Icons.circle className="mr-2 size-4" aria-hidden="true" />
                     <span className="line-clamp-1">{store.name}</span>
                     <Icons.check
                       className={cn(
-                        "ml-auto h-4 w-4",
+                        "ml-auto size-4",
                         current.id === store.id ? "opacity-100" : "opacity-0"
                       )}
                       aria-hidden="true"
@@ -69,10 +69,7 @@ export function StoreSwitcher({ current, stores }: StorePagerProps) {
             <CommandGroup>
               <Link href="/dashboard/stores/create">
                 <CommandItem>
-                  <Icons.addCircle
-                    className="mr-2 h-4 w-4"
-                    aria-hidden="true"
-                  />
+                  <Icons.addCircle className="mr-2 size-4" aria-hidden="true" />
                   Create Store
                 </CommandItem>
               </Link>

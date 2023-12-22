@@ -69,7 +69,7 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
           src={cropData ? cropData : file.preview}
           alt={file.name}
           sizes="100vw"
-          className="h-10 w-10 shrink-0 rounded-md object-cover"
+          className="size-10 shrink-0 rounded-md object-cover"
           width={40}
           height={40}
         />
@@ -90,9 +90,9 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
                 type="button"
                 variant="outline"
                 size="icon"
-                className="h-7 w-7"
+                className="size-7"
               >
-                <Icons.crop className="h-4 w-4" aria-hidden />
+                <Icons.crop className="size-4" aria-hidden />
                 <span className="sr-only">Crop image</span>
               </Button>
             </DialogTrigger>
@@ -155,13 +155,13 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
           type="button"
           variant="outline"
           size="icon"
-          className="h-7 w-7"
+          className="size-7"
           onClick={() => {
             if (!files) return
             setFiles(files.filter((_, j) => j !== i))
           }}
         >
-          <Icons.close className="h-4 w-4" aria-hidden />
+          <Icons.close className="size-4" aria-hidden />
           <span className="sr-only">Remove file</span>
         </Button>
       </div>

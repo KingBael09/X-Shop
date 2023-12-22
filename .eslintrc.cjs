@@ -9,6 +9,7 @@ const config = {
   extends: [
     "prettier",
     "next/core-web-vitals",
+    "plugin:@next/next/recommended",
     "plugin:deprecation/recommended",
     "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
@@ -29,7 +30,7 @@ const config = {
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
 
-    "@next/next/no-html-link-for-pages": "off",
+    // "@next/next/no-html-link-for-pages": "off",
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/classnames-order": "error",
     // "deprecation/deprecation": "warn",

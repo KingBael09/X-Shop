@@ -96,7 +96,7 @@ export function ProductImageCarousel({
     return (
       <ImagePlaceHolder
         {...placeHolderProps}
-        className={cn("aspect-square md:w-[50%]", placeHolderProps?.className)}
+        className={cn("aspect-square md:w-1/2", placeHolderProps?.className)}
       />
     )
   }
@@ -121,10 +121,10 @@ export function ProductImageCarousel({
           <Button
             variant="outline"
             size="icon"
-            className="mr-0.5 aspect-square h-7 w-7 rounded-none sm:mr-2 sm:h-8 sm:w-8"
+            className="mr-0.5 aspect-square size-7 rounded-none sm:mr-2 sm:h-8 sm:w-8"
             onClick={scrollPrev}
           >
-            <Icons.chevronLeft className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
+            <Icons.chevronLeft className="size-3 sm:h-4 sm:w-4" aria-hidden />
             <span className="sr-only">Previous slide</span>
           </Button>
           {images.map((image, i) => (
@@ -155,10 +155,10 @@ export function ProductImageCarousel({
           <Button
             variant="outline"
             size="icon"
-            className="ml-0.5 aspect-square h-7 w-7 rounded-none sm:ml-2 sm:h-8 sm:w-8"
+            className="ml-0.5 aspect-square size-7 rounded-none sm:ml-2 sm:h-8 sm:w-8"
             onClick={scrollNext}
           >
-            <Icons.chevronRight className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden />
+            <Icons.chevronRight className="size-3 sm:h-4 sm:w-4" aria-hidden />
             <span className="sr-only">Next slide</span>
           </Button>
         </div>

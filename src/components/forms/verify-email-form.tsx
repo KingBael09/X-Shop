@@ -93,7 +93,7 @@ export function VerifyEmailForm() {
         />
         <Button disabled={isPending}>
           {isPending && (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+            <Icons.spinner className="mr-2 size-4 animate-spin" aria-hidden />
           )}
           Create account
           <span className="sr-only">Create account</span>

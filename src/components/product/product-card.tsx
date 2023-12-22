@@ -62,7 +62,7 @@ export function ProductCard({
           size="icon"
           variant="outline"
         >
-          <Icons.heart className="h-5 w-5" />
+          <Icons.heart className="size-5" />
         </Button>
       )}
       {enableAction && (

@@ -49,12 +49,12 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
         <Button
           variant="outline"
           size="icon"
-          className="h-8 w-8"
+          className="size-8"
           name="decrease"
           onClick={updateItem}
           disabled={isPending}
         >
-          <Icons.remove className="h-3 w-3" aria-hidden="true" />
+          <Icons.remove className="size-3" aria-hidden="true" />
           <span className="sr-only">Remove one item</span>
         </Button>
         <Input
@@ -68,23 +68,23 @@ export function UpdateCart({ item, className, ...props }: UpdateCartProps) {
         <Button
           variant="outline"
           size="icon"
-          className="h-8 w-8"
+          className="size-8"
           name="increase"
           onClick={updateItem}
           disabled={isPending}
         >
-          <Icons.add className="h-3 w-3" aria-hidden="true" />
+          <Icons.add className="size-3" aria-hidden="true" />
           <span className="sr-only">Add one item</span>
         </Button>
       </div>
       <Button
         variant="outline"
         size="icon"
-        className="h-8 w-8"
+        className="size-8"
         onClick={deleteItem}
         disabled={isPending}
       >
-        <Icons.trash className="h-3 w-3" aria-hidden="true" />
+        <Icons.trash className="size-3" aria-hidden="true" />
         <span className="sr-only">Delete item</span>
       </Button>
     </div>

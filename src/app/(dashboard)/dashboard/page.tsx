@@ -12,7 +12,7 @@ export default function DashboardPage() {
           <Card className="bg-accent/50 hover:bg-accent">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Icons.dashboard className="h-6 w-6" />
+                <Icons.dashboard className="size-6" />
                 Dashboard
               </CardTitle>
               <CardDescription>Your Dashboard</CardDescription>
@@ -26,7 +26,7 @@ export default function DashboardPage() {
               <Card className="hover:bg-accent">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Icon className="h-6 w-6" />
+                    <Icon className="size-6" />
                     {item.title}
                   </CardTitle>
                   <CardDescription>{item.description}</CardDescription>

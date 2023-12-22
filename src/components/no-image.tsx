@@ -26,7 +26,7 @@ export function ImagePlaceHolder({
     >
       <Icons.placeholder
         {...iconProps}
-        className={cn("h-9 w-9 text-muted-foreground", iconProps?.className)}
+        className={cn("size-9 text-muted-foreground", iconProps?.className)}
         aria-hidden="true"
       />
     </div>

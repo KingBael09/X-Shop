@@ -34,7 +34,7 @@ const FilterDrawer = dynamic(
   {
     loading: () => (
       <Button aria-label="Sort products" size="sm">
-        <Icons.altFilter className="mr-2 h-4 w-4" aria-hidden="true" />
+        <Icons.altFilter className="mr-2 size-4" aria-hidden="true" />
         Filter
       </Button>
     ),
@@ -49,7 +49,7 @@ const SortDropdown = dynamic(
     loading: () => (
       <Button aria-label="Sort products" size="sm">
         Sort
-        <Icons.chevronDown className="ml-2 h-4 w-4" aria-hidden="true" />
+        <Icons.chevronDown className="ml-2 size-4" aria-hidden="true" />
       </Button>
     ),
   }

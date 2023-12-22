@@ -44,10 +44,10 @@ export function ModalBodyWrapper({
         {title && <div className="flex-1">{title}</div>}
         <Button
           variant="ghost"
-          className="ml-auto h-6 w-6 rounded-md p-0"
+          className="ml-auto size-6 rounded-md p-0"
           onClick={() => router.back()}
         >
-          <Icons.close aria-label="close modal" className="h-4 w-4" />
+          <Icons.close aria-label="close modal" className="size-4" />
         </Button>
       </div>
       <ScrollArea className="max-h-[80vh] overflow-y-auto pb-4 pl-4 [scrollbar-gutter:stable]">
