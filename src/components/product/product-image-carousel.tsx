@@ -4,12 +4,8 @@ import { useCallback, useEffect, useState } from "react"
 import Image from "next/image"
 import type { StoredFile } from "@/types"
 import { Icons } from "@/util/icons"
+import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel"
 import useEmblaCarousel from "embla-carousel-react"
-
-// import useEmblaCarousel, {
-//   type EmblaCarouselType,
-//   type EmblaOptionsType,
-// } from "embla-carousel-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/ui/button"
@@ -18,24 +14,12 @@ import { ImagePlaceHolder } from "../no-image"
 
 //? See: https://www.embla-carousel.com
 
-type TempEmblaOptionsType = Parameters<typeof useEmblaCarousel>[0]
-type TempEmblaCarouselType = NonNullable<ReturnType<typeof useEmblaCarousel>[1]>
-
 interface ProductImageCarouselProps
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
   images: StoredFile[]
-  // options?: EmblaOptionsType
-  options?: TempEmblaOptionsType
+  options?: EmblaOptionsType
   placeHolderProps?: React.HtmlHTMLAttributes<HTMLDivElement>
 }
-
-/**
-// TODO: Recent changes from rc14 -> rc15 broke type module in imports it should be `import {} from ../Options`
- * instead is resolved to `import {} from ../Options.ts` 
- * https://github.com/davidjerleke/embla-carousel/compare/v8.0.0-rc14...v8.0.0-rc15
- * 
- * This leads to EmblaOptionsTypea and other imports to any type
- */
 
 export function ProductImageCarousel({
   images,
@@ -73,10 +57,7 @@ export function ProductImageCarousel({
     [scrollNext, scrollPrev]
   )
 
-  // const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-  //   setSelectedIndex(emblaApi.selectedScrollSnap())
-  // }, [])
-  const onSelect = useCallback((emblaApi: TempEmblaCarouselType) => {
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedScrollSnap())
   }, [])
 
