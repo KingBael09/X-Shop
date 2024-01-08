@@ -99,8 +99,8 @@ dependencies:
     specifier: ^1.11.10
     version: 1.11.10
   drizzle-orm:
-    specifier: ^0.29.1
-    version: 0.29.1(@libsql/client@0.4.0-pre.5)(better-sqlite3@9.2.2)
+    specifier: ^0.29.3
+    version: 0.29.3(@libsql/client@0.4.0-pre.5)(@types/react@18.2.45)(better-sqlite3@9.2.2)(react@18.2.0)
   embla-carousel-react:
     specifier: 8.0.0-rc17
     version: 8.0.0-rc17(react@18.2.0)
@@ -4478,8 +4478,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /drizzle-orm@0.29.1(@libsql/client@0.4.0-pre.5)(better-sqlite3@9.2.2):
-    resolution: {integrity: sha512-yItc4unfHnk8XkDD3/bdC63vdboTY7e7I03lCF1OJYABXSIfQYU9BFTQJXMMovVeb3T1/OJWwfW/70T1XPnuUA==}
+  /drizzle-orm@0.29.3(@libsql/client@0.4.0-pre.5)(@types/react@18.2.45)(better-sqlite3@9.2.2)(react@18.2.0):
+    resolution: {integrity: sha512-uSE027csliGSGYD0pqtM+SAQATMREb3eSM/U8s6r+Y0RFwTKwftnwwSkqx3oS65UBgqDOM0gMTl5UGNpt6lW0A==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -4489,15 +4489,18 @@ packages:
       '@planetscale/database': '>=1'
       '@types/better-sqlite3': '*'
       '@types/pg': '*'
+      '@types/react': '>=18'
       '@types/sql.js': '*'
       '@vercel/postgres': '*'
       better-sqlite3: '>=7'
       bun-types: '*'
+      expo-sqlite: '>=13.2.0'
       knex: '*'
       kysely: '*'
       mysql2: '>=2'
       pg: '>=8'
       postgres: '>=3'
+      react: '>=18'
       sql.js: '>=1'
       sqlite3: '>=5'
     peerDependenciesMeta:
@@ -4517,6 +4520,8 @@ packages:
         optional: true
       '@types/pg':
         optional: true
+      '@types/react':
+        optional: true
       '@types/sql.js':
         optional: true
       '@vercel/postgres':
@@ -4524,6 +4529,8 @@ packages:
       better-sqlite3:
         optional: true
       bun-types:
+        optional: true
+      expo-sqlite:
         optional: true
       knex:
         optional: true
@@ -4535,13 +4542,17 @@ packages:
         optional: true
       postgres:
         optional: true
+      react:
+        optional: true
       sql.js:
         optional: true
       sqlite3:
         optional: true
     dependencies:
       '@libsql/client': 0.4.0-pre.5
+      '@types/react': 18.2.45
       better-sqlite3: 9.2.2
+      react: 18.2.0
     dev: false
 
   /duplexer@0.1.2:
