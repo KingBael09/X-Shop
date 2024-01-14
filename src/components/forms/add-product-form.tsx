@@ -99,13 +99,12 @@ export function AddProductForm({ storeId, categories }: AddProductFormProps) {
         await checkProductAction({ name: values.name })
 
         const images = isArrayOfFile(values.images)
-          ? await startUpload(values.images).then(
-              (res) =>
-                res?.map((image) => ({
-                  id: image.key,
-                  name: image.key.split("_")[1] ?? image.key,
-                  url: image.url,
-                }))
+          ? await startUpload(values.images).then((res) =>
+              res?.map((image) => ({
+                id: image.key,
+                name: image.key.split("_")[1] ?? image.key,
+                url: image.url,
+              }))
             )
           : null
 
