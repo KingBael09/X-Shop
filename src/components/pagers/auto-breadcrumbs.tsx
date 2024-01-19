@@ -50,7 +50,7 @@ export function AutoBreadCrumbs({
       )}
       {...props}
     >
-      <BackButton className="mr-2 h-auto w-auto p-1" />
+      <BackButton className="mr-2 size-auto p-1" />
       {segments.map((segment, i) => {
         const isLastSegment = i === segments.length - 1
         return (

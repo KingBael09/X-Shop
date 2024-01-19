@@ -57,7 +57,7 @@ export function DataTableColumnHeader<TData, TValue>({
             onClick={() => column.toggleSorting(false)}
           >
             <Icons.arrowUp
-              className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+              className="mr-2 size-3.5 text-muted-foreground/70"
               aria-hidden
             />
             Asc
@@ -67,7 +67,7 @@ export function DataTableColumnHeader<TData, TValue>({
             onClick={() => column.toggleSorting(true)}
           >
             <Icons.arrowDown
-              className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+              className="mr-2 size-3.5 text-muted-foreground/70"
               aria-hidden
             />
             Desc
@@ -78,7 +78,7 @@ export function DataTableColumnHeader<TData, TValue>({
             onClick={() => column.toggleVisibility(false)}
           >
             <Icons.hide
-              className="mr-2 h-3.5 w-3.5 text-muted-foreground/70"
+              className="mr-2 size-3.5 text-muted-foreground/70"
               aria-hidden
             />
             Hide

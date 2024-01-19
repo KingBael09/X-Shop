@@ -16,14 +16,14 @@ export default function ProductPreviewLoading() {
         <div className="flex flex-col gap-2">
           <ImagePlaceHolder className="aspect-square" />
           <div className="flex w-full items-center justify-center gap-2">
-            <Skeleton className="h-7 w-7 rounded-none" />
+            <Skeleton className="size-7 rounded-none" />
             {Array.from({ length: 3 }).map((_, i) => (
               <Skeleton
                 key={i}
-                className="aspect-square h-full w-full max-w-[100px] rounded-none"
+                className="aspect-square size-full max-w-[100px] rounded-none"
               />
             ))}
-            <Skeleton className="h-7 w-7 rounded-none" />
+            <Skeleton className="size-7 rounded-none" />
           </div>
         </div>
       </div>

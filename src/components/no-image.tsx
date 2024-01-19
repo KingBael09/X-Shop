@@ -19,7 +19,7 @@ export function ImagePlaceHolder({
       role="img"
       aria-roledescription="placeholder"
       className={cn(
-        "flex h-full w-full items-center justify-center bg-secondary",
+        "flex size-full items-center justify-center bg-secondary",
         className
       )}
       {...props}

@@ -103,7 +103,7 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
               <div className="mt-8 grid place-items-center space-y-5">
                 <Cropper
                   ref={cropperRef}
-                  className="h-[450px] w-[450px] object-cover"
+                  className="size-[450px] object-cover"
                   zoomTo={0.5}
                   initialAspectRatio={1}
                   preview=".img-preview"
@@ -129,7 +129,7 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
                       setIsOpen(false)
                     }}
                   >
-                    <Icons.crop className="mr-2 h-3.5 w-3.5" aria-hidden />
+                    <Icons.crop className="mr-2 size-3.5" aria-hidden />
                     Crop Image
                   </Button>
                   <Button
@@ -143,7 +143,7 @@ export function FileCard({ i, file, files, setFiles }: FileCardProps) {
                       setCropData(null)
                     }}
                   >
-                    <Icons.reset className="mr-2 h-3.5 w-3.5" aria-hidden />
+                    <Icons.reset className="mr-2 size-3.5" aria-hidden />
                     Reset Crop
                   </Button>
                 </div>

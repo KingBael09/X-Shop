@@ -58,7 +58,7 @@ export function ProductCard({
       </Link>
       {enableAction && enableFav && (
         <Button
-          className="absolute right-1 top-1 h-auto w-auto rounded-full p-2"
+          className="absolute right-1 top-1 size-auto rounded-full p-2"
           size="icon"
           variant="outline"
         >
