@@ -1,3 +1,4 @@
+import { vercel } from "@t3-oss/env-core/presets"
 import { createEnv } from "@t3-oss/env-nextjs"
 import { z } from "zod"
 
@@ -49,6 +50,10 @@ export const env = createEnv({
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
   },
+  /**
+   * Extends with premade configuration
+   */
+  extends: [vercel],
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
    * This is especially useful for Docker builds.
