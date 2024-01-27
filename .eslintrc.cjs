@@ -34,6 +34,12 @@ const config = {
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/classnames-order": "error",
     // "deprecation/deprecation": "warn",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        checksVoidReturn: { attributes: false },
+      },
+    ],
   },
 
   settings: {
