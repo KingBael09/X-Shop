@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.49.3)
   '@libsql/client':
-    specifier: 0.4.0
-    version: 0.4.0
+    specifier: 0.4.3
+    version: 0.4.3
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
@@ -103,7 +103,7 @@ dependencies:
     version: 1.11.10
   drizzle-orm:
     specifier: ^0.29.3
-    version: 0.29.3(@libsql/client@0.4.0)(@types/react@18.2.48)(better-sqlite3@9.3.0)(react@18.2.0)
+    version: 0.29.3(@libsql/client@0.4.3)(@types/react@18.2.48)(better-sqlite3@9.3.0)(react@18.2.0)
   embla-carousel-react:
     specifier: 8.0.0-rc21
     version: 8.0.0-rc21(react@18.2.0)
@@ -1492,12 +1492,13 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@libsql/client@0.4.0:
-    resolution: {integrity: sha512-GjBHHxRMKomG2rLx6K8BYsDhk9jNcKXpkEOO7luPTCje4z41ogD0sCaBRcGbJw9h3HMVysCW5v70WmjQ4/FWpg==}
+  /@libsql/client@0.4.3:
+    resolution: {integrity: sha512-AUYKnSPqAsFBVWBvmtrb4dG3pQlvTKT92eztAest9wQU2iJkabH8WzHLDb3dKFWKql7/kiCqvBQUVpozDwhekQ==}
     dependencies:
-      '@libsql/core': 0.4.0
+      '@libsql/core': 0.4.3
       '@libsql/hrana-client': 0.5.6
       js-base64: 3.7.6
+    optionalDependencies:
       libsql: 0.2.0
     transitivePeerDependencies:
       - bufferutil
@@ -1505,8 +1506,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@libsql/core@0.4.0:
-    resolution: {integrity: sha512-pQHyZI0aTBlBm08dpB+/SEqLDe5wlgiUY+VNXbCD8yZhXo30AGinyrDlKrtGW7luo0As4Y9v1befurJdLKbC0Q==}
+  /@libsql/core@0.4.3:
+    resolution: {integrity: sha512-r28iYBtaLBW9RRgXPFh6cGCsVI/rwRlOzSOpAu/1PVTm6EJ3t233pUf97jETVHU0vjdr1d8VvV6fKAvJkokqCw==}
     dependencies:
       js-base64: 3.7.6
     dev: false
@@ -1601,7 +1602,9 @@ packages:
 
   /@neon-rs/load@0.0.4:
     resolution: {integrity: sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw==}
+    requiresBuild: true
     dev: false
+    optional: true
 
   /@next/bundle-analyzer@14.1.0:
     resolution: {integrity: sha512-RJWjnlMp/1WSW0ahAdawV22WgJiC6BVaFS5Xfhw6gP7NJEX3cAJjh4JqSHKGr8GnLNRaFCVTQdDPoX84E421BA==}
@@ -4290,7 +4293,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.29.3(@libsql/client@0.4.0)(@types/react@18.2.48)(better-sqlite3@9.3.0)(react@18.2.0):
+  /drizzle-orm@0.29.3(@libsql/client@0.4.3)(@types/react@18.2.48)(better-sqlite3@9.3.0)(react@18.2.0):
     resolution: {integrity: sha512-uSE027csliGSGYD0pqtM+SAQATMREb3eSM/U8s6r+Y0RFwTKwftnwwSkqx3oS65UBgqDOM0gMTl5UGNpt6lW0A==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -4361,7 +4364,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@libsql/client': 0.4.0
+      '@libsql/client': 0.4.3
       '@types/react': 18.2.48
       better-sqlite3: 9.3.0
       react: 18.2.0
@@ -5846,6 +5849,7 @@ packages:
     resolution: {integrity: sha512-ELBRqhpJx5Dap0187zKQnntZyk4EjlDHSrjIVL8t+fQ5e8IxbQTeYgZgigMjB1EvrETdkm0Y0VxBGhzPQ+t0Jg==}
     cpu: [x64, arm64]
     os: [darwin, linux, win32]
+    requiresBuild: true
     dependencies:
       '@neon-rs/load': 0.0.4
       detect-libc: 2.0.2
@@ -5858,6 +5862,7 @@ packages:
       '@libsql/linux-x64-musl': 0.2.0
       '@libsql/win32-x64-msvc': 0.2.0
     dev: false
+    optional: true
 
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
