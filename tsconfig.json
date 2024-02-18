@@ -26,15 +26,15 @@
     "baseUrl": ".",
     "plugins": [
       {
-        "name": "next",
-      },
+        "name": "next"
+      }
     ],
     "paths": {
       "@/*": ["./src/*"],
       "@/ui/*": ["./src/components/ui/*"],
       "@/forms/*": ["./src/components/forms/*"],
-      "@/util/*": ["./src/components/util/*"],
-    },
+      "@/util/*": ["./src/components/util/*"]
+    }
   },
   "include": [
     ".eslintrc.cjs",
@@ -45,7 +45,7 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    ".next/types/**/*.ts",
+    ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }
